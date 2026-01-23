@@ -1,6 +1,6 @@
 package fr.eni.springboot.repository;
 
-import fr.eni.springboot.bo.Utilisateur;
+import fr.eni.springboot.bo.User;
 import fr.eni.springboot.repository.rowMapper.UtilisateurRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.Objects;
 
 @Repository
-public class UtilisateurRepositorySql implements UtilisateurRepository {
+public class UserRepositorySql implements UserRepository {
 
     JdbcTemplate jdbcTemplate;
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    public UtilisateurRepositorySql(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+    public UserRepositorySql(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
@@ -25,31 +25,31 @@ public class UtilisateurRepositorySql implements UtilisateurRepository {
     //CRUD de l'utilisateur :
 
     @Override
-    public void createUtilisateur(Utilisateur utilisateur) {
+    public void createUser(User user) {
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
 
-        String sql = "INSERT INTO utilisateur (username, lastname, firstname, email, numPhone, street, postalCode, ville,password,credit,admin) values(:username,:lastName,:firstName,:email,:numPhone,:street,:postalCode,:ville,:pasword,:credit,:admin)";
+        String sql = "INSERT INTO user (username, lastname, firstname, email, numPhone, street, postalCode, ville,password,credit,admin) values(:username,:lastName,:firstName,:email,:numPhone,:street,:postalCode,:ville,:pasword,:credit,:admin)";
 
-        BeanPropertySqlParameterSource map = new BeanPropertySqlParameterSource(utilisateur);
+        BeanPropertySqlParameterSource map = new BeanPropertySqlParameterSource(user);
 
         namedParameterJdbcTemplate.update(sql, map, keyHolder);
 
-        utilisateur.setId(Objects.requireNonNull(keyHolder.getKey()).longValue());
+        user.setId(Objects.requireNonNull(keyHolder.getKey()).longValue());
 
     }
 
     @Override
-    public List<Utilisateur> readUtilisateur() {
+    public List<User> readUser() {
         String sql = "SELECT username, lastname, firstname, email, numPhone, street, postalCode, ville,password,credit,admin from utilisateur";
 
        return jdbcTemplate.query(sql, new UtilisateurRowMapper());
     }
 
     @Override
-    public void updateUtilisateur(){
+    public void updateUser(){
 
-        String sql =" update utilsateur set "
+        String sql =" update user set "
 
     }
 }

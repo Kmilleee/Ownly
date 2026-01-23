@@ -1,31 +1,30 @@
 package fr.eni.springboot.repository.rowMapper;
 
-import fr.eni.springboot.bo.Utilisateur;
+import fr.eni.springboot.bo.User;
 import org.springframework.jdbc.core.RowMapper;
 
-import javax.swing.tree.TreePath;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UtilisateurRowMapper implements RowMapper<Utilisateur> {
+public class UtilisateurRowMapper implements RowMapper<User> {
 
     @Override
-    public Utilisateur mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Utilisateur utilisateur = new Utilisateur();
+    public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+        User user = new User();
 
-        utilisateur.setId(rs.getInt("id"));
-        utilisateur.setPasword(rs.getString("pasword"));
-        utilisateur.setUsername(rs.getString("username"));
-        utilisateur.setEmail(rs.getString("email"));
-        utilisateur.setFristName(rs.getString("fristName"));
-        utilisateur.setLastName(rs.getString("lastName"));
-        utilisateur.setNumPhone(rs.getString("numPhone"));
-        utilisateur.setVille(rs.getString("ville"));
-        utilisateur.setStreet((rs.getString("street")));
-        utilisateur.setCredit(rs.getInt("credit"));
-        utilisateur.setPostalCode(rs.getInt("postalCode"));
+        user.setId(rs.getInt("id"));
+        user.setPasword(rs.getString("pasword"));
+        user.setUsername(rs.getString("username"));
+        user.setEmail(rs.getString("email"));
+        user.setFristName(rs.getString("fristName"));
+        user.setLastName(rs.getString("lastName"));
+        user.setNumPhone(rs.getString("numPhone"));
+        user.setVille(rs.getString("ville"));
+        user.setStreet((rs.getString("street")));
+        user.setCredit(rs.getInt("credit"));
+        user.setPostalCode(rs.getInt("postalCode"));
 
-        return utilisateur;
+        return user;
 
 
     }

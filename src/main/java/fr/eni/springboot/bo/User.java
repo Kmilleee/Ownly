@@ -2,7 +2,7 @@ package fr.eni.springboot.bo;
 
 import java.util.Objects;
 
-public class Utilisateur {
+public class User {
     private long id;
     private String username;
     private String lastName;
@@ -16,7 +16,7 @@ public class Utilisateur {
     private long credit;
     private boolean admin;
 
-    public Utilisateur(long id, String username, String lastName, String fristName, String email, String numPhone, String street, int postalCode, String ville, String pasword, long credit, boolean admin) {
+    public User(long id, String username, String lastName, String fristName, String email, String numPhone, String street, int postalCode, String ville, String pasword, long credit, boolean admin) {
         this.id = id;
         this.username = username;
         this.lastName = lastName;
@@ -31,7 +31,7 @@ public class Utilisateur {
         this.admin = admin;
     }
 
-    public Utilisateur(String username, String lastName, String fristName, String email, String numPhone, String street, int postalCode, String ville, String pasword, long credit, boolean admin) {
+    public User(String username, String lastName, String fristName, String email, String numPhone, String street, int postalCode, String ville, String pasword, long credit, boolean admin) {
         this.username = username;
         this.lastName = lastName;
         this.fristName = fristName;
@@ -45,7 +45,7 @@ public class Utilisateur {
         this.admin = admin;
     }
 
-    public Utilisateur() {
+    public User() {
     }
 
     public long getId() {
@@ -166,7 +166,7 @@ public class Utilisateur {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Utilisateur that = (Utilisateur) o;
+        User that = (User) o;
         return id == that.id && postalCode == that.postalCode && credit == that.credit && admin == that.admin && Objects.equals(username, that.username) && Objects.equals(lastName, that.lastName) && Objects.equals(fristName, that.fristName) && Objects.equals(email, that.email) && Objects.equals(numPhone, that.numPhone) && Objects.equals(street, that.street) && Objects.equals(ville, that.ville) && Objects.equals(pasword, that.pasword);
     }
 
