@@ -2,6 +2,7 @@ package fr.eni.springboot.bo;
 
 public class Withdrawal {
 
+    private long id;
     private String street;
     private String Postcode;
     private String city;
