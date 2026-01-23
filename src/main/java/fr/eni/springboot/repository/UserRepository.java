@@ -10,5 +10,7 @@ public interface UserRepository {
 
     List<User> readUser();
 
-    void updateUser();
+    void updateUser(User user);
+
+    void deleteUser(long user_id);
 }
