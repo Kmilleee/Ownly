@@ -49,7 +49,7 @@ public class UserRepositorySql implements UserRepository {
     @Override
     public void updateUser(){
 
-        String sql =" update user set "
+        String sql =" update user set ";
 
     }
 }
