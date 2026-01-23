@@ -2,10 +2,26 @@ package fr.eni.springboot.bo;
 
 public class Withdrawal {
 
-    private long id;
+    private long withdrawal_id;
     private String street;
-    private String Postcode;
+    private String postalCode;
     private String city;
+
+    public long getWithdrawal_id() {
+        return withdrawal_id;
+    }
+
+    public void setWithdrawal_id(long withdrawal_id) {
+        this.withdrawal_id = withdrawal_id;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
 
     public String getStreet() {
         return street;
@@ -13,14 +29,6 @@ public class Withdrawal {
 
     public void setStreet(String street) {
         this.street = street;
-    }
-
-    public String getPostcode() {
-        return Postcode;
-    }
-
-    public void setPostcode(String postcode) {
-        Postcode = postcode;
     }
 
     public String getCity() {
@@ -34,9 +42,9 @@ public class Withdrawal {
     public Withdrawal() {
     }
 
-    public Withdrawal(String street, String postcode, String city) {
+    public Withdrawal(String street, String postalCode, String city) {
         this.street = street;
-        Postcode = postcode;
+        this.postalCode = postalCode;
         this.city = city;
     }
 }

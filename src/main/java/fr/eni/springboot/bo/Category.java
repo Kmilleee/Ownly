@@ -1,34 +1,34 @@
 package fr.eni.springboot.bo;
 
 public class Category {
-    private int idCategory;
-    private String libelle;
+    private long category_id;
+    private String name;
 
     public Category() {
     }
 
-    public Category(String libelle) {
-        this.libelle = libelle;
+    public Category(String name) {
+        this.name = name;
     }
 
-    public Category(int idCategory, String libelle) {
-        this.idCategory = idCategory;
-        this.libelle = libelle;
+    public Category(long category_id, String name) {
+        this.category_id = category_id;
+        this.name = name;
     }
 
-    public int getIdCategory() {
-        return idCategory;
+    public long getIdCategory() {
+        return category_id;
     }
 
-    public void setIdCategory(int idCategory) {
-        this.idCategory = idCategory;
+    public void setIdCategory(long category_id) {
+        this.category_id = category_id;
     }
 
-    public String getLibelle() {
-        return libelle;
+    public String getName() {
+        return name;
     }
 
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
+    public void setName(String name) {
+        this.name = name;
     }
 }
