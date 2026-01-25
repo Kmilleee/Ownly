@@ -5,7 +5,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>Title</title>
 </head>
-<body>
+<body class="bg-black text-white min-h-screen flex flex-col">
 <header> <div class="flex items-center mb-10 p-4">
 
     <h1 class="text-xl font-bold ">logo + nom </h1>
@@ -13,24 +13,26 @@
     <nav class="flex-1 flex justify-center">
         <ul class="flex gap-2 justify-center items-center">
 
-            <li><a th:href="@{/}" class="hover:text-red-500">Accueil</a></li>
-            <li><a th:href="@{/test}" class="hover:text-red-500">Test</a></li>
+            <li><a th:href="@{/}" class="hover:text-red-500">Home</a></li>
+            <li><a th:href="@{/test}" class="hover:text-red-500">Auction</a></li>
+            <li><a th:href="@{/test}" class="hover:text-red-500">Sell</a></li>
+            <li><a th:href="@{/test}" class="hover:text-red-500">Profile</a></li>
 
-            <li th:if="${#authorization.expression('hasRole(''EMPLOYE'')')}">
-                <a th:href="@{/barbie}" class="hover:text-red-500">Barbies</a>
-            </li>
+<!--            <li th:if="${#authorization.expression('hasRole(''EMPLOYE'')')}">-->
+<!--                <a th:href="@{/barbie}" class="hover:text-red-500">Barbies</a>-->
+<!--            </li>-->
 
-            <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-                <a th:href="@{/addBarbie}" class="hover:text-red-500">Ajout barbies</a>
-            </li>
+<!--            <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">-->
+<!--                <a th:href="@{/addBarbie}" class="hover:text-red-500">Ajout barbies</a>-->
+<!--            </li>-->
 
-            <li th:if="${#authorization.expression('hasRole(''EMPLOYE'')')}">
-                <a th:href="@{/types}" class="hover:text-red-500">Types</a>
-            </li>
+<!--            <li th:if="${#authorization.expression('hasRole(''EMPLOYE'')')}">-->
+<!--                <a th:href="@{/types}" class="hover:text-red-500">Types</a>-->
+<!--            </li>-->
 
-            <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-                <a th:href="@{/addTypes}" class="hover:text-red-500">Ajout Type</a>
-            </li>
+<!--            <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">-->
+<!--                <a th:href="@{/addTypes}" class="hover:text-red-500">Ajout Type</a>-->
+<!--            </li>-->
 
             <li th:if="${!#authorization.expression('isAuthenticated()')}">
                 <a th:href="@{/login}" class="font-bold text-blue-600">Connexion</a>
@@ -48,125 +50,106 @@
 </div>
 </header>
 
-<main data-th-replace="${content}"></main>
-<footer>
-    <div class="flex items-end w-full min-h-screen bg-white">
+<main class="flex-1 container mx-auto p-4" data-th-replace="${content}"></main>
 
-        <footer class="w-full text-gray-700 bg-gray-100 body-font">
-            <div
-                    class="container flex flex-col flex-wrap px-5 py-24 mx-auto md:items-center lg:items-start md:flex-row md:flex-no-wrap">
-                <div class="flex-shrink-0 w-64 mx-auto text-center md:mx-0 md:text-left">
-                    <a class="flex items-center justify-center font-medium text-gray-900 title-font md:justify-start">
-                        <svg class="w-auto h-5 text-gray-900 fill-current" viewBox="0 0 202 69"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                    d="M57.44.672s6.656 1.872 6.656 5.72c0 0-1.56 2.6-3.744 6.552 8.424 1.248 16.744 1.248 23.816-1.976-1.352 7.904-12.688 8.008-26.208 6.136-7.696 13.624-19.656 36.192-19.656 42.848 0 .416.208.624.52.624 4.576 0 17.888-14.352 21.112-18.824 1.144-1.456 4.264.728 3.12 2.392C56.608 53.088 42.152 69 36.432 69c-4.472 0-8.216-5.928-8.216-10.4 0-6.552 11.752-28.08 20.28-42.952-9.984-1.664-20.176-3.64-27.976-3.848-13.936 0-16.64 3.536-17.576 6.032-.104.312-.52.52-.832.312-3.744-7.072-1.456-14.56 14.144-14.56 9.36 0 22.048 4.576 34.944 7.592C54.736 5.04 57.44.672 57.44.672zm46.124 41.08c1.144-1.456 4.264.728 3.016 2.392C100.236 53.088 85.78 69 80.06 69c-4.576 0-8.32-5.928-8.32-10.4v-.208C67.58 64.32 63.524 69 61.34 69c-4.472 0-8.944-4.992-8.944-11.856 0-10.608 15.704-33.072 24.96-33.072 4.992 0 7.384 2.392 8.528 4.576l2.6-4.576s6.656 1.976 6.656 5.824c0 0-13.312 24.336-13.312 30.056 0 .208 0 .624.52.624 4.472 0 17.888-14.352 21.216-18.824zm-40.56 18.72c2.184 0 11.752-13.312 17.368-22.048l4.16-7.488c-8.008-7.904-27.248 29.536-21.528 29.536zm57.564-38.168c-2.184 0-4.992-2.808-4.992-4.784 0-2.912 5.824-14.872 7.28-14.872 2.6 0 6.136 2.808 6.136 6.344 0 2.08-7.176 12.064-8.424 13.312zm-17.68 46.592c-4.472 0-8.216-5.928-8.216-10.4 0-6.656 16.744-34.528 16.744-34.528s6.552 1.976 6.552 5.824c0 0-13.312 24.336-13.312 30.056 0 .208.104.624.624.624 4.472 0 17.888-14.352 21.112-18.824 1.144-1.456 4.264.728 3.12 2.392-6.448 8.944-20.904 24.856-26.624 24.856zM147.244.672s6.656 1.872 6.656 5.72c0 0-25.792 43.784-25.792 53.56 0 .416.208.624.52.624 4.576 0 17.888-14.352 21.112-18.824 1.144-1.456 4.264.728 3.12 2.392C146.412 53.088 131.956 69 126.236 69c-4.472 0-8.216-5.928-8.216-10.4 0-10.4 29.224-57.928 29.224-57.928zM169.7 60.16c3.848-2.392 7.904-6.864 10.816-10.92 6.656-9.464 11.544-20.696 10.504-27.352-.312-3.432-.104-4.056 3.12-2.704 5.2 2.392 11.336 8.632 2.184 22.88-5.2 8.008-12.48 15.288-19.344 19.76-2.704 1.768-6.344 3.328-9.984 4.16-.52.416-1.04.728-1.456.936-1.872 1.352-4.264 2.08-7.592 2.08-14.664 0-16.848-12.272-16.848-16.016 0-2.392 3.224-4.68 4.784-3.744.208.104.312.416.312.624 0 2.808 1.872 13.104 9.984 13.104 7.904 0 3.432-18.304 2.288-27.144-1.456 2.288-3.432 4.992-5.616 8.32-2.6 3.744-5.72 1.456-4.784 0 5.824-8.424 9.152-13.832 11.856-18.616 1.248-2.08 3.328-3.328 6.448-3.328 2.704 0 5.824 3.016 6.864 4.784.312.52 0 1.04-.52 1.144a5.44 5.44 0 00-4.368 5.408c0 6.968 2.6 17.16 1.664 24.856l-.312 1.768z"
-                                    fill-rule="nonzero" /></svg>
-                    </a>
-                    <p class="mt-2 text-sm text-gray-500">Design, Code and Ship!</p>
-                    <div class="mt-4">
-                    <span class="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start">
-                        <a class="text-gray-500 cursor-pointer hover:text-gray-700">
-                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                 class="w-5 h-5" viewBox="0 0 24 24">
-                                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-                            </svg>
-                        </a>
-                        <a class="ml-3 text-gray-500 cursor-pointer hover:text-gray-700">
-                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                 class="w-5 h-5" viewBox="0 0 24 24">
-                                <path
-                                        d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
-                                </path>
-                            </svg>
-                        </a>
-                        <a class="ml-3 text-gray-500 cursor-pointer hover:text-gray-700">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                 stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
-                            </svg>
-                        </a>
-                        <a class="ml-3 text-gray-500 cursor-pointer hover:text-gray-700">
-                            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round"
-                                 stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
-                                <path stroke="none"
-                                      d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z">
-                                </path>
-                                <circle cx="4" cy="4" r="2" stroke="none"></circle>
-                            </svg>
-                        </a>
-                    </span>
-                    </div>
-                </div>
-                <div class="flex flex-wrap flex-grow mt-10 -mb-10 text-center md:pl-20 md:mt-0 md:text-left">
-                    <div class="w-full px-4 lg:w-1/4 md:w-1/2">
-                        <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 uppercase title-font">About</h2>
-                        <nav class="mb-10 list-none">
-                            <li class="mt-3">
-                                <a class="text-gray-500 cursor-pointer hover:text-gray-900">Company</a>
-                            </li>
-                            <li class="mt-3">
-                                <a class="text-gray-500 cursor-pointer hover:text-gray-900">Careers</a>
-                            </li>
-                            <li class="mt-3">
-                                <a class="text-gray-500 cursor-pointer hover:text-gray-900">Blog</a>
-                            </li>
-                        </nav>
-                    </div>
-                    <div class="w-full px-4 lg:w-1/4 md:w-1/2">
-                        <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 uppercase title-font">Support</h2>
-                        <nav class="mb-10 list-none">
-                            <li class="mt-3">
-                                <a class="text-gray-500 cursor-pointer hover:text-gray-900">Contact Support</a>
-                            </li>
-                            <li class="mt-3">
-                                <a class="text-gray-500 cursor-pointer hover:text-gray-900">Help Resources</a>
-                            </li>
-                            <li class="mt-3">
-                                <a class="text-gray-500 cursor-pointer hover:text-gray-900">Release Updates</a>
-                            </li>
-                        </nav>
-                    </div>
-                    <div class="w-full px-4 lg:w-1/4 md:w-1/2">
-                        <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 uppercase title-font">Platform
-                        </h2>
-                        <nav class="mb-10 list-none">
-                            <li class="mt-3">
-                                <a class="text-gray-500 cursor-pointer hover:text-gray-900">Terms &amp; Privacy</a>
-                            </li>
-                            <li class="mt-3">
-                                <a class="text-gray-500 cursor-pointer hover:text-gray-900">Pricing</a>
-                            </li>
-                            <li class="mt-3">
-                                <a class="text-gray-500 cursor-pointer hover:text-gray-900">FAQ</a>
-                            </li>
-                        </nav>
-                    </div>
-                    <div class="w-full px-4 lg:w-1/4 md:w-1/2">
-                        <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 uppercase title-font">Contact</h2>
-                        <nav class="mb-10 list-none">
-                            <li class="mt-3">
-                                <a class="text-gray-500 cursor-pointer hover:text-gray-900">Send a Message</a>
-                            </li>
-                            <li class="mt-3">
-                                <a class="text-gray-500 cursor-pointer hover:text-gray-900">Request a Quote</a>
-                            </li>
-                            <li class="mt-3">
-                                <a class="text-gray-500 cursor-pointer hover:text-gray-900">+123-456-7890</a>
-                            </li>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-gray-300">
-                <div class="container px-5 py-4 mx-auto">
-                    <p class="text-sm text-gray-700 capitalize xl:text-center">© 2020 All rights reserved </p>
-                </div>
-            </div>
-        </footer>
 
+<footer class=" border-t text-center p-4">
+    <div class="mx-auto w-full max-w-screen-xl">
+        <div class="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
+            <div>
+                <h2 class="mb-6 text-sm font-semibold text-heading uppercase">Company</h2>
+                <ul class="text-body font-medium">
+                    <li class="mb-4">
+                        <a href="#" class=" hover:underline">About</a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="#" class="hover:underline">Careers</a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="#" class="hover:underline">Brand Center</a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="#" class="hover:underline">Blog</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h2 class="mb-6 text-sm font-semibold text-heading uppercase">Help center</h2>
+                <ul class="text-body font-medium">
+                    <li class="mb-4">
+                        <a href="#" class="hover:underline">Discord Server</a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="#" class="hover:underline">Twitter</a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="#" class="hover:underline">Facebook</a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="#" class="hover:underline">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h2 class="mb-6 text-sm font-semibold text-heading uppercase">Legal</h2>
+                <ul class="text-body font-medium">
+                    <li class="mb-4">
+                        <a href="#" class="hover:underline">Privacy Policy</a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="#" class="hover:underline">Licensing</a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="#" class="hover:underline">Terms &amp; Conditions</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h2 class="mb-6 text-sm font-semibold text-heading uppercase">Download</h2>
+                <ul class="text-body font-medium">
+                    <li class="mb-4">
+                        <a href="#" class="hover:underline">iOS</a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="#" class="hover:underline">Android</a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="#" class="hover:underline">Windows</a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="#" class="hover:underline">MacOS</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="px-4 py-6 bg-neutral-secondary-soft md:flex md:items-center md:justify-between">
+        <span class="text-sm text-body sm:text-center">© 2023 <a href="https://flowbite.com/">Flowbite™</a>. All Rights Reserved.
+        </span>
+            <div class="flex mt-4 sm:justify-center md:mt-0 space-x-2 rtl:space-x-reverse">
+                <a href="#" class="text-body hover:text-heading">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z" clip-rule="evenodd"/></svg>
+                    <span class="sr-only">Facebook page</span>
+                </a>
+                <a href="#" class="text-body hover:text-heading ms-5">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M18.942 5.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.586 11.586 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3 17.392 17.392 0 0 0-2.868 11.662 15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.638 10.638 0 0 1-1.706-.83c.143-.106.283-.217.418-.331a11.664 11.664 0 0 0 10.118 0c.137.114.277.225.418.331-.544.328-1.116.606-1.71.832a12.58 12.58 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM8.678 14.813a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.929 1.929 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z"/></svg>
+                    <span class="sr-only">Discord community</span>
+                </a>
+                <a href="#" class="text-body hover:text-heading ms-5">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M13.795 10.533 20.68 2h-3.073l-5.255 6.517L7.69 2H1l7.806 10.91L1.47 22h3.074l5.705-7.07L15.31 22H22l-8.205-11.467Zm-2.38 2.95L9.97 11.464 4.36 3.627h2.31l4.528 6.317 1.443 2.02 6.018 8.409h-2.31l-4.934-6.89Z"/></svg>
+                    <span class="sr-only">Twitter page</span>
+                </a>
+                <a href="#" class="text-body hover:text-heading ms-5">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12.006 2a9.847 9.847 0 0 0-6.484 2.44 10.32 10.32 0 0 0-3.393 6.17 10.48 10.48 0 0 0 1.317 6.955 10.045 10.045 0 0 0 5.4 4.418c.504.095.683-.223.683-.494 0-.245-.01-1.052-.014-1.908-2.78.62-3.366-1.21-3.366-1.21a2.711 2.711 0 0 0-1.11-1.5c-.907-.637.07-.621.07-.621.317.044.62.163.885.346.266.183.487.426.647.71.135.253.318.476.538.655a2.079 2.079 0 0 0 2.37.196c.045-.52.27-1.006.635-1.37-2.219-.259-4.554-1.138-4.554-5.07a4.022 4.022 0 0 1 1.031-2.75 3.77 3.77 0 0 1 .096-2.713s.839-.275 2.749 1.05a9.26 9.26 0 0 1 5.004 0c1.906-1.325 2.74-1.05 2.74-1.05.37.858.406 1.828.101 2.713a4.017 4.017 0 0 1 1.029 2.75c0 3.939-2.339 4.805-4.564 5.058a2.471 2.471 0 0 1 .679 1.897c0 1.372-.012 2.477-.012 2.814 0 .272.18.592.687.492a10.05 10.05 0 0 0 5.388-4.421 10.473 10.473 0 0 0 1.313-6.948 10.32 10.32 0 0 0-3.39-6.165A9.847 9.847 0 0 0 12.007 2Z" clip-rule="evenodd"/></svg>
+                    <span class="sr-only">GitHub account</span>
+                </a>
+                <a href="#" class="text-body hover:text-heading ms-5">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2a10 10 0 1 0 10 10A10.009 10.009 0 0 0 12 2Zm6.613 4.614a8.523 8.523 0 0 1 1.93 5.32 20.093 20.093 0 0 0-5.949-.274c-.059-.149-.122-.292-.184-.441a23.879 23.879 0 0 0-.566-1.239 11.41 11.41 0 0 0 4.769-3.366ZM10 3.707a8.82 8.82 0 0 1 2-.238 8.5 8.5 0 0 1 5.664 2.152 9.608 9.608 0 0 1-4.476 3.087A45.755 45.755 0 0 0 10 3.707Zm-6.358 6.555a8.57 8.57 0 0 1 4.73-5.981 53.99 53.99 0 0 1 3.168 4.941 32.078 32.078 0 0 1-7.9 1.04h.002Zm2.01 7.46a8.51 8.51 0 0 1-2.2-5.707v-.262a31.641 31.641 0 0 0 8.777-1.219c.243.477.477.964.692 1.449-.114.032-.227.067-.336.1a13.569 13.569 0 0 0-6.942 5.636l.009.003ZM12 20.556a8.508 8.508 0 0 1-5.243-1.8 11.717 11.717 0 0 1 6.7-5.332.509.509 0 0 1 .055-.02 35.65 35.65 0 0 1 1.819 6.476 8.476 8.476 0 0 1-3.331.676Zm4.772-1.462A37.232 37.232 0 0 0 15.113 13a12.513 12.513 0 0 1 5.321.364 8.56 8.56 0 0 1-3.66 5.73h-.002Z" clip-rule="evenodd"/></svg>
+                    <span class="sr-only">Dribbble account</span>
+                </a>
+            </div>
+        </div>
     </div>
 </footer>
+
 </body>
 </html>
