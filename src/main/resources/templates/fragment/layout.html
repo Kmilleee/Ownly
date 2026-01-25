@@ -2,15 +2,17 @@
 <html data-th-fragment="frag_layout(content)" lang="fr" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>Title</title>
 </head>
 <body>
 <header>
-    <h1 id="nav-title">ENCHERE TEST</h1>
+    <h1 class="text-red-500">ENCHERE TEST</h1>
     <!--    <img src="/image/barbie.jpg" />-->
     <nav>
         <ul>
             <li><a th:href="@{/}">Accueil</a></li>
+            <li><a th:href="@{/test}">test</a></li>
             <li th:if="${#authorization.expression('hasRole(''EMPLOYE'')')}"><a th:href="@{/barbie}">Barbies</a></li>
             <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/addBarbie}">Ajout barbies</a>
             </li>

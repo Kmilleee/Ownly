@@ -1,7 +1,6 @@
 package fr.eni.springboot.controller;
 
 import fr.eni.springboot.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -19,6 +18,10 @@ import org.springframework.web.bind.annotation.GetMapping;
             return "index";
         }
 
-
+        //test tailwinds
+        @GetMapping("/test")
+        public String displaytest(){
+            return "test";
+        }
 
     }
