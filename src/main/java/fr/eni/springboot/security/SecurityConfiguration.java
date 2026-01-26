@@ -64,6 +64,7 @@ public class SecurityConfiguration {
                     .requestMatchers("/ventes/createSale").hasRole("ADMIN")
                     .requestMatchers("/addUser").hasRole("ADMIN")
                     .requestMatchers("/addWithdrawal").hasRole("ADMIN")
+                    .requestMatchers("/admin/**").hasRole("ADMIN")
 
 
                     //tous ce qui n'est pas spécifié n'est pas accessible
@@ -75,7 +76,7 @@ public class SecurityConfiguration {
 
         /*** pas touche *****/
         //gestion du login
-        http.formLogin( form -> {
+        http.formLogin(form -> {
                     //donne l'accès à la page de login à tous
                     form.loginPage("/login").permitAll();
                     //redirige après le login sur la page d'accueil
@@ -83,18 +84,15 @@ public class SecurityConfiguration {
                 }
         );
 
-        http.logout( logout -> {
-                    //déterminer la page à utiliser pour le logout
-                    logout.logoutUrl("/logout")
+        http.logout(logout -> {
+            //déterminer la page à utiliser pour le logout
+            logout.logoutUrl("/logout")
                     //redirige après le logout sur la page d'accueil
                     .logoutSuccessUrl("/");
         });
 
 
         return http.build();
-
-
-
 
 
     }
