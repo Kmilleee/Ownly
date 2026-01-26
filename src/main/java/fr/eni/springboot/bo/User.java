@@ -10,13 +10,13 @@ public class User {
     private String email;
     private String numPhone;
     private String street;
-    private int postalCode;
+    private String postalCode;
     private String city;
     private String pasword;
     private long credit;
     private boolean admin;
 
-    public User(long user_id, String username, String lastName, String fristName, String email, String numPhone, String street, int postalCode, String city, String pasword, long credit, boolean admin) {
+    public User(long user_id, String username, String lastName, String fristName, String email, String numPhone, String street, String postalCode, String city, String pasword, long credit, boolean admin) {
         this.user_id = user_id;
         this.username = username;
         this.lastName = lastName;
@@ -31,7 +31,7 @@ public class User {
         this.admin = admin;
     }
 
-    public User(String username, String lastName, String fristName, String email, String numPhone, String street, int postalCode, String city, String pasword, long credit, boolean admin) {
+    public User(String username, String lastName, String fristName, String email, String numPhone, String street, String postalCode, String city, String pasword, long credit, boolean admin) {
         this.username = username;
         this.lastName = lastName;
         this.fristName = fristName;
@@ -104,11 +104,11 @@ public class User {
         this.street = street;
     }
 
-    public int getPostalCode() {
+    public String getPostalCode() {
         return postalCode;
     }
 
-    public void setPostalCode(int postalCode) {
+    public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
 
