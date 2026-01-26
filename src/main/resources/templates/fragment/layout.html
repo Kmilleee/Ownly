@@ -32,6 +32,14 @@
                                                                                   class="hover:text-red-500">Add
                     User</a>
                 </li>
+                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/categoryList}"
+                                                                                  class="hover:text-red-500">
+                    Categories</a>
+                </li>
+                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/createCat}"
+                                                                                  class="hover:text-red-500">
+                    Add Categories</a>
+                </li>
                 <li th:if="${#authorization.expression('hasRole(''USER'')')}"><a th:href="@{/withdrawal}"
                                                                                  class="hover:text-red-500">withdrawal</a>
                 </li>
