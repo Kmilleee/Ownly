@@ -34,15 +34,17 @@ public class UserRepositorySql implements UserRepository {
 
         BeanPropertySqlParameterSource map = new BeanPropertySqlParameterSource(user);
 
-        namedParameterJdbcTemplate.update(sql, map, keyHolder);
 
         user.setUser_id(Objects.requireNonNull(keyHolder.getKey()).longValue());
+
+        namedParameterJdbcTemplate.update(sql, map, keyHolder);
+
 
     }
 
     @Override
     public List<User> readUser() {
-        String sql = "SELECT username, lastname, firstname, email, numPhone, street, postalCode, city,password,credit,admin from USERS";
+        String sql = "SELECT user_id, username, lastname, firstname, email, numPhone, street, postalCode, city,password,credit,admin from USERS";
 
        return jdbcTemplate.query(sql, new UtilisateurRowMapper());
     }
