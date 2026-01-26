@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html data-th-replace="~{fragment/layout :: frag_layout(content= ~{::main})}" lang="fr">
+
+<body>
+<main>
+    <table>
+        <thead>
+            <tr>
+                <td>Username</td>
+                <td>Last Name</td>
+                <td>Frist Name</td>
+                <td>Email</td>
+                <td>Phone</td>
+                <td>Street</td>
+                <td>Postal Code</td>
+                <td>City</td>
+                <td>Password</td>
+                <td>Credit</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="u : ${userList}" >
+                <th th:text="${u.getUsername()}" ></th>
+                <th th:text="${u.getLastName()}" ></th>
+                <th th:text="${u.getFirstName()}" ></th>
+                <th th:text="${u.getEmail()}" ></th>
+                <th th:text="${u.getNumPhone()}" ></th>
+                <th th:text="${u.getStreet()}" ></th>
+                <th th:text="${u.getPostalCode()}" ></th>
+                <th th:text="${u.getCity()}" ></th>
+                <th th:text="${u.getPassword()}" ></th>
+                <th th:text="${u.getCredit()}" ></th>
+            </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

@@ -6,46 +6,57 @@ public class User {
     private long user_id;
     private String username;
     private String lastName;
-    private String fristName;
+    private String firstName;
     private String email;
     private String numPhone;
     private String street;
     private String postalCode;
     private String city;
-    private String pasword;
+    private String password;
     private long credit;
     private boolean admin;
+    private boolean active;
 
-    public User(long user_id, String username, String lastName, String fristName, String email, String numPhone, String street, String postalCode, String city, String pasword, long credit, boolean admin) {
+    public User(long user_id, String username, String lastName, String firstName, String email, String numPhone, String street, String postalCode, String city, String password, long credit, boolean admin, boolean active) {
         this.user_id = user_id;
         this.username = username;
         this.lastName = lastName;
-        this.fristName = fristName;
+        this.firstName = firstName;
         this.email = email;
         this.numPhone = numPhone;
         this.street = street;
         this.postalCode = postalCode;
         this.city = city;
-        this.pasword = pasword;
+        this.password = password;
         this.credit = credit;
         this.admin = admin;
+        this.active = active;
     }
 
-    public User(String username, String lastName, String fristName, String email, String numPhone, String street, String postalCode, String city, String pasword, long credit, boolean admin) {
+    public User(String username, String lastName, String firstName, String email, String numPhone, String street, String postalCode, String city, String password, long credit, boolean admin, boolean active) {
         this.username = username;
         this.lastName = lastName;
-        this.fristName = fristName;
+        this.firstName = firstName;
         this.email = email;
         this.numPhone = numPhone;
         this.street = street;
         this.postalCode = postalCode;
         this.city = city;
-        this.pasword = pasword;
+        this.password = password;
         this.credit = credit;
         this.admin = admin;
+        this.active = active;
     }
 
     public User() {
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public long getUser_id() {
@@ -72,12 +83,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getFristName() {
-        return fristName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFristName(String fristName) {
-        this.fristName = fristName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getEmail() {
@@ -120,12 +131,12 @@ public class User {
         this.city = city;
     }
 
-    public String getPasword() {
-        return pasword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasword(String pasword) {
-        this.pasword = pasword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public long getCredit() {
@@ -150,13 +161,13 @@ public class User {
         sb.append("id=").append(user_id);
         sb.append(", username='").append(username).append('\'');
         sb.append(", lastName='").append(lastName).append('\'');
-        sb.append(", fristName='").append(fristName).append('\'');
+        sb.append(", firstName='").append(firstName).append('\'');
         sb.append(", email='").append(email).append('\'');
         sb.append(", numPhone='").append(numPhone).append('\'');
         sb.append(", street='").append(street).append('\'');
         sb.append(", postalCode=").append(postalCode);
         sb.append(", city='").append(city).append('\'');
-        sb.append(", pasword='").append(pasword).append('\'');
+        sb.append(", password='").append(password).append('\'');
         sb.append(", credit=").append(credit);
         sb.append(", admin=").append(admin);
         sb.append('}');
@@ -167,11 +178,11 @@ public class User {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         User that = (User) o;
-        return user_id == that.user_id && postalCode == that.postalCode && credit == that.credit && admin == that.admin && Objects.equals(username, that.username) && Objects.equals(lastName, that.lastName) && Objects.equals(fristName, that.fristName) && Objects.equals(email, that.email) && Objects.equals(numPhone, that.numPhone) && Objects.equals(street, that.street) && Objects.equals(city, that.city) && Objects.equals(pasword, that.pasword);
+        return user_id == that.user_id && postalCode == that.postalCode && credit == that.credit && admin == that.admin && Objects.equals(username, that.username) && Objects.equals(lastName, that.lastName) && Objects.equals(firstName, that.firstName) && Objects.equals(email, that.email) && Objects.equals(numPhone, that.numPhone) && Objects.equals(street, that.street) && Objects.equals(city, that.city) && Objects.equals(password, that.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user_id, username, lastName, fristName, email, numPhone, street, postalCode, city, pasword, credit, admin);
+        return Objects.hash(user_id, username, lastName, firstName, email, numPhone, street, postalCode, city, password, credit, admin);
     }
 }

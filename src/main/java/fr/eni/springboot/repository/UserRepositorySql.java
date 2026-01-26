@@ -30,14 +30,14 @@ public class UserRepositorySql implements UserRepository {
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
 
-        String sql = "INSERT INTO USERS (username, lastName, firstName, email, numPhone, street, postalCode, city,password,credit,admin) values(:username,:lastName,:firstName,:email,:numPhone,:street,:postalCode,:city,:pasword,:credit,:admin)";
+        String sql = "INSERT INTO USERS (username, lastName, firstName, email, numPhone, street, postalCode, city,password,credit,admin, active) values(:username,:lastName,:firstName,:email,:numPhone,:street,:postalCode,:city,:password,:credit,:admin,:active)";
 
         BeanPropertySqlParameterSource map = new BeanPropertySqlParameterSource(user);
 
 
-        user.setUser_id(Objects.requireNonNull(keyHolder.getKey()).longValue());
-
         namedParameterJdbcTemplate.update(sql, map, keyHolder);
+
+        user.setUser_id(Objects.requireNonNull(keyHolder.getKey()).longValue());
 
 
     }

@@ -13,10 +13,10 @@ public class UtilisateurRowMapper implements RowMapper<User> {
         User user = new User();
 
         user.setUser_id(rs.getInt("user_id"));
-        user.setPasword(rs.getString("password"));
+        user.setPassword(rs.getString("password"));
         user.setUsername(rs.getString("username"));
         user.setEmail(rs.getString("email"));
-        user.setFristName(rs.getString("firstName"));
+        user.setFirstName(rs.getString("firstName"));
         user.setLastName(rs.getString("lastName"));
         user.setNumPhone(rs.getString("numPhone"));
         user.setCity(rs.getString("city"));
