@@ -59,7 +59,7 @@ public class SecurityConfiguration {
                     //donner acces au css
                     .requestMatchers("/css/*").permitAll()
                     //donner acces au image
-                    .requestMatchers("/image/*").permitAll()
+                    .requestMatchers("/img/*").permitAll()
 
                     .requestMatchers("/ventes/createSale").hasRole("ADMIN")
                     .requestMatchers("/addUser").hasRole("ADMIN")
