@@ -1,7 +1,6 @@
 package fr.eni.springboot.controller;
 
 
-import fr.eni.springboot.bo.User;
 import fr.eni.springboot.bo.Withdrawal;
 import fr.eni.springboot.service.WithdrawalService;
 import org.springframework.stereotype.Controller;
@@ -26,14 +25,14 @@ public class WithdrawalController {
         return "withdrawal";
     }
 
-    @GetMapping("/addWithdrawal")
+    @GetMapping("/admin/addWithdrawal")
     public String displayAddWithdrawal(Model model){
 
         model.addAttribute("withdrawalOBJ", new Withdrawal());
-        return "addWithdrawal";
+        return "admin/addWithdrawal";
     }
 
-    @PostMapping("/addWithdrawal")
+    @PostMapping("/admin/addWithdrawal")
     public String createWithdrawal(@ModelAttribute("userOBJ") Withdrawal withdrawal){
         service.createWithdrawal(withdrawal);
         service.readWithdrawal().forEach(System.out::println);

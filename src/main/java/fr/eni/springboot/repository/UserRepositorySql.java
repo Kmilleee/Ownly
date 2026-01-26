@@ -1,6 +1,7 @@
 package fr.eni.springboot.repository;
 
 import fr.eni.springboot.bo.User;
+import fr.eni.springboot.repository.exception.TestException;
 import fr.eni.springboot.repository.rowMapper.UtilisateurRowMapper;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -33,6 +34,11 @@ public class UserRepositorySql implements UserRepository {
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
 
         String sql = "INSERT INTO USERS (username, lastName, firstName, email, numPhone, street, postalCode, city,password,credit,admin, active) values(:username,:lastName,:firstName,:email,:numPhone,:street,:postalCode,:city,:password,:credit,:admin,:active)";
+
+        if("jermie".equalsIgnoreCase(user.getFirstName())){
+            throw new TestException("impossible que le nom soit jeremie");
+        }
+
 
         BeanPropertySqlParameterSource map = new BeanPropertySqlParameterSource(user);
 
