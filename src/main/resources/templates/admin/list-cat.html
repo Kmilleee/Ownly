@@ -22,7 +22,7 @@
             <td>
                 <form th:action="@{/admin/delete(id=${item.category_id})}" method="post">
 
-                    <input type="hidden" name="category_id" th:value="${item.category_id}"/>
+                    <input type="hidden" name="_method" value="delete"/>
 
                     <button type="submit" class="btn-danger">Supprimer</button>
                 </form>
