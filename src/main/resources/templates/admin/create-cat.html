@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html data-th-replace="~{fragment/layout :: frag_layout(content= ~{::main})}" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main>
+    <h1>Création cat</h1>
+    <form th:action="@{createCat}" method="POST" th:object="${category}">
+
+        <ul>
+            <li>
+                <label for="name">Name :</label>
+                <input id="name" type="text" th:field="*{name}">
+            </li>
+        </ul>
+<button></button>
+
+    </form>
+
+</main>
+</body>
+</html>

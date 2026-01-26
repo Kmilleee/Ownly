@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CategoryServiceImpl implements CategoryService{
+public class CategoryServiceImpl implements CategoryService {
 
     CategoryRepository categoryRepository;
 
@@ -22,6 +22,22 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public List<Category> findAll() {
-       return categoryRepository.findAll();
+        return categoryRepository.findAll();
+    }
+
+    @Override
+    public Category readCatById(long category_id) {
+        return categoryRepository.readCatById(category_id);
+    }
+
+    @Override
+    public void updateCat(Category category) {
+        categoryRepository.updateCat(category);
+    }
+
+    @Override
+    public void deleteCat(long category_id) {
+        categoryRepository.deleteCat(category_id);
     }
 }
+

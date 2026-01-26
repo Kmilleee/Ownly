@@ -16,11 +16,11 @@ public class Category {
         this.name = name;
     }
 
-    public long getIdCategory() {
+    public long getCategory_id() {
         return category_id;
     }
 
-    public void setIdCategory(long category_id) {
+    public void setCategory_id(long category_id) {
         this.category_id = category_id;
     }
 
