@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html data-th-replace="~{fragment/layout :: frag_layout(content= ~{::main})}" lang="fr">
+<main>
+
+    <h2>Il y a eu un problème</h2>
+    <ul>
+        <!-- affichage d'un messsage en fonction de l'erreur -->
+        <li th:switch="${status}">
+            <label th:case="403">T'as pas le droit d'aller là</label>
+            <label th:case="404">Y a rien ici</label>
+
+            <!-- affichage customizé pour notre exception -->
+            <label th:case="1000" th:text="${errorMessage}"></label>
+            <label th:case="*">je sais pas ce qui c'est passé</label>
+        </li>
+    </ul>
+</main>
+</html>
