@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html data-th-replace="~{fragment/layout :: frag_layout(content= ~{::main})}" lang="fr">
+
+<body>
+<main>
+    <table>
+        <thead>
+        <tr>
+            <td>Street</td>
+            <td>Postal Code</td>
+            <td>City</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="w : ${withdrawalList}" >
+            <th th:text="${w.street}" ></th>
+            <th th:text="${w.postalCode}" ></th>
+            <th th:text="${w.city}" ></th>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

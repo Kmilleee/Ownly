@@ -42,29 +42,14 @@ import org.springframework.web.bind.annotation.PostMapping;
             return "addUser";
         }
 
-//        @PostMapping("/addUser")
-//        public String createUser(@ModelAttribute("userOBJ") User user){
-//            userService.createUser(user);
-//            userService.readUser().forEach(System.out::println);
-//            return "redirect:/user";
-//        }
+        @PostMapping("/addUser")
+        public String createUser(@ModelAttribute("userOBJ") User user){
+            userService.createUser(user);
+            userService.readUser().forEach(System.out::println);
+            return "redirect:/user";
+        }
 
-    // Dans UserController.java
 
-    @PostMapping("/addUser")
-    public String createUser(@ModelAttribute("userOBJ") User user){
-        // AJOUTE CES LIGNES POUR LE DEBUG
-        System.out.println("---------------- DEBUG ----------------");
-        System.out.println("Pseudo: " + user.getUsername());
-        System.out.println("Prenom: " + user.getFirstName()); // Est-ce encore null ?
-        System.out.println("MDP: " + user.getPassword());
-        System.out.println("Credit: " + user.getCredit());
-        System.out.println("Active: " + user.isActive()); // ou user.getActive()
-        System.out.println("---------------------------------------");
-
-        userService.createUser(user); // Ça plante ici
-        return "redirect:/user";
-    }
 
 
     }
