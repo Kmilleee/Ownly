@@ -13,14 +13,14 @@
     <nav class="flex-1 flex justify-center">
         <ul class="flex gap-2 justify-center items-center">
 
-            <li><a th:href="@{/}" class="hover:text-red-500">Home</a></li>
+            <li ><a th:href="@{/}" class="hover:text-red-500">Home</a></li>
             <li><a th:href="@{/test}" class="hover:text-red-500">Auction</a></li>
             <li><a th:href="@{/ventes/createSale}" class="hover:text-red-500">Sell</a></li>
-            <li><a th:href="@{/user}" class="hover:text-red-500">USERS</a></li>
-            <li><a th:href="@{/addUser}" class="hover:text-red-500">addUSERS</a></li>
-            <li><a th:href="@{/withdrawal}" class="hover:text-red-500">withdrawal</a></li>
-            <li><a th:href="@{/addWithdrawal}" class="hover:text-red-500">addWithdrawal</a></li>
-            <li><a th:href="@{/test}" class="hover:text-red-500">Profile</a></li>
+            <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}" ><a th:href="@{/user}" class="hover:text-red-500">USERS</a></li>
+            <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}" ><a th:href="@{/addUser}" class="hover:text-red-500">Add User</a></li>
+            <li th:if="${#authorization.expression('hasRole(''USER'')')}" ><a th:href="@{/withdrawal}" class="hover:text-red-500">withdrawal</a></li>
+            <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}" ><a th:href="@{/addWithdrawal}" class="hover:text-red-500">Add Withdrawal</a></li>
+            <li th:if="${#authorization.expression('hasRole(''USER'')')}" ><a th:href="@{/test}" class="hover:text-red-500">Profile</a></li>
 
 <!--            <li th:if="${#authorization.expression('hasRole(''EMPLOYE'')')}">-->
 <!--                <a th:href="@{/barbie}" class="hover:text-red-500">Barbies</a>-->
