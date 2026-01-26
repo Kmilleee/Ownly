@@ -2,7 +2,9 @@ package fr.eni.springboot.repository;
 
 import fr.eni.springboot.bo.User;
 import fr.eni.springboot.repository.rowMapper.UtilisateurRowMapper;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -69,5 +71,14 @@ public class UserRepositorySql implements UserRepository {
         map.addValue("id", user_id);
 
         namedParameterJdbcTemplate.update(sql, map);
+    }
+
+    @Override
+    public User readUserByUsername(String username) {
+        String sql = "SELECT * FROM USERS where username=:username";
+
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("username", username);
+        return namedParameterJdbcTemplate.queryForObject(sql, map, new BeanPropertyRowMapper<>(User.class));
     }
 }

@@ -21,6 +21,7 @@ public class SecurityConfiguration {
 
         // 1. Requête pour récupérer l'utilisateur (username, password, enabled)
         jdbcUserDetailsManager.setUsersByUsernameQuery(
+                // Pour l'object principal : username en premier donc avec principal.getName ça retourne username
                 "SELECT username, password, active FROM USERS WHERE username = ?"
         );
 

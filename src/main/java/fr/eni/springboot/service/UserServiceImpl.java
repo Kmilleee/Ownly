@@ -37,4 +37,9 @@ public class UserServiceImpl implements UserService{
         dao.deleteUser(user_id );
 
     }
+
+    @Override
+    public User readUserByUsername(String username) {
+       return dao.readUserByUsername(username);
+    }
 }
