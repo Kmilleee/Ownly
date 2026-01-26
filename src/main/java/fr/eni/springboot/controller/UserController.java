@@ -28,6 +28,11 @@ import org.springframework.web.bind.annotation.PostMapping;
             return "test";
         }
 
+        @GetMapping("/about")
+        public String displayAbout(){
+            return "about";
+        }
+
         @GetMapping("/user")
         public String displayUser(Model model){
             model.addAttribute("userList", userService.readUser());

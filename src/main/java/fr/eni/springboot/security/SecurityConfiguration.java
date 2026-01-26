@@ -47,6 +47,7 @@ public class SecurityConfiguration {
                     /*accès au chemin /icecream/add en Get pour les admins */
                     .requestMatchers(HttpMethod.GET, "/user").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.GET, "/").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/about").permitAll()
                     .requestMatchers(HttpMethod.GET, "/admin/addWithdrawal").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.GET, "/admin/addUser").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.GET, "/ventes/").hasRole("USER")
