@@ -7,7 +7,7 @@
 <body>
 <main>
     <h1>Création cat</h1>
-    <form th:action="@{/createCat}" method="POST" th:object="${category}">
+    <form th:action="@{createCat}" method="POST" th:object="${category}">
 
         <ul>
             <li>
@@ -15,7 +15,7 @@
                 <input id="name" type="text" th:field="*{name}">
             </li>
         </ul>
-<button ></button>
+<button></button>
 
     </form>
 

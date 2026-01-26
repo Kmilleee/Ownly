@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html data-th-replace="~{fragment/layout :: frag_layout(content= ~{::main})}" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main>
+    <h1>Liste des catégories</h1>
+   <table>
+       <thead>
+       <tr>
+           <th>Id</th>
+           <th>Nom</th>
+           <th>Supprimer</th>
+       </tr>
+       </thead>
+       <tbody>
+       <tr data-th-each="item : ${categoryList}">
+           <td data-th-text="${item.category_id}"></td>
+           <td data-th-text="${item.name}"></td>
+           <td>
+               <form th:action="@{/admin/delete(id=${item.category_id})}" method="post">
+
+                   <input type="hidden" name="_method" value="delete" />
+
+                   <button type="submit" class="btn-danger">Supprimer</button>
+               </form>
+           </td>
+       </tr>
+       </tbody>
+   </table>
+</main>
+</body>
+</html>
