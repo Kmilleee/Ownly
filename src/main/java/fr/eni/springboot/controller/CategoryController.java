@@ -44,4 +44,10 @@ public class CategoryController {
         categoryService.deleteCat(id);
         return "redirect:/admin/categoryList";
     }
+
+    @PostMapping("/update")
+    public String updateCategories(@ModelAttribute(name = "category") Category category) {
+        categoryService.updateCat(category);
+        return "redirect:/admin/categoryList";
+    }
 }
