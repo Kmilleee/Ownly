@@ -47,8 +47,8 @@ public class SecurityConfiguration {
                     /*accès au chemin /icecream/add en Get pour les admins */
                     .requestMatchers(HttpMethod.GET, "/user").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.GET, "/").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/addWithdrawal").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.GET, "/addUser").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET, "/admin/addWithdrawal").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET, "/admin/addUser").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.GET, "/ventes/").hasRole("USER")
                     .requestMatchers(HttpMethod.GET, "/ventes/createSale").hasRole("ADMIN")
                     .requestMatchers("/.well-know/**").permitAll()
@@ -61,9 +61,11 @@ public class SecurityConfiguration {
                     //donner acces au image
                     .requestMatchers("/img/*").permitAll()
 
+                    .requestMatchers("/admin/**").hasAuthority("ADMIN")
+
                     .requestMatchers("/ventes/createSale").hasRole("ADMIN")
-                    .requestMatchers("/addUser").hasRole("ADMIN")
-                    .requestMatchers("/addWithdrawal").hasRole("ADMIN")
+                    .requestMatchers("/admin/addUser").hasRole("ADMIN")
+                    .requestMatchers("/admin/addWithdrawal").hasRole("ADMIN")
 
 
                     //tous ce qui n'est pas spécifié n'est pas accessible

@@ -35,14 +35,14 @@ import org.springframework.web.bind.annotation.PostMapping;
             return "user";
         }
 
-        @GetMapping("/addUser")
+        @GetMapping("/admin/addUser")
         public String displayAdduser(Model model){
 
             model.addAttribute("userOBJ", new User());
-            return "addUser";
+            return "admin/addUser";
         }
 
-        @PostMapping("/addUser")
+        @PostMapping("/admin/addUser")
         public String createUser(@ModelAttribute("userOBJ") User user){
             userService.createUser(user);
             userService.readUser().forEach(System.out::println);

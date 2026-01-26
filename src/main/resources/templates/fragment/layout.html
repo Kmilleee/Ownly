@@ -28,14 +28,14 @@
                 <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/user}"
                                                                                   class="hover:text-red-500">USERS</a>
                 </li>
-                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/addUser}"
+                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/addUser}"
                                                                                   class="hover:text-red-500">Add
                     User</a>
                 </li>
                 <li th:if="${#authorization.expression('hasRole(''USER'')')}"><a th:href="@{/withdrawal}"
                                                                                  class="hover:text-red-500">withdrawal</a>
                 </li>
-                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/addWithdrawal}"
+                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/addWithdrawal}"
                                                                                   class="hover:text-red-500">Add
                     Withdrawal</a></li>
                 <li th:if="${#authorization.expression('hasRole(''USER'')')}"><a th:href="@{/test}"
