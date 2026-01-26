@@ -6,6 +6,7 @@
 </head>
 <body>
 <main>
+    <div class="relative z-10">
     <form th:action="@{/admin/addWithdrawal}" method="POST" th:object="${withdrawalOBJ}" class="w-full max-w-lg">
 
         <div class="flex flex-wrap -mx-3 mb-6">
@@ -38,6 +39,7 @@
             add Withdrawal
         </button>
     </form>
+    </div>
 </main>
 </body>
 </html>
