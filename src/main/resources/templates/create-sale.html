@@ -5,74 +5,86 @@
     <title>Title</title>
 </head>
 <body>
-<main><h1>Page test </h1>
-    <form th:action="@{/ventes/createSale}" method="POST" th:object="${article}">
+<main>
+    <h1 class="text-[1.5rem] ml-9 text-white">New sale</h1>
+    <form th:action="@{/ventes/createSale}" method="POST" th:object="${article}" class="max-w-md mx-auto">
+        <div class='w-full max-w-lg backdrop-blur-sm rounded-xl p-8'>
 
-        <div id="infos">
-            <div class="form-group">
-                <label for="name">Name :</label>
-                <input id="name" type="text" th:field="*{articleName}" required>
+            <div id="infos">
+                <h2 class="text-center text-[1.3rem]">Infos</h2>
+                        <div>
+                            <label class='block text-white text-sm mb-2'>Name</label>
+                            <input type="text" required placeholder=" " th:field="*{articleName}"
+                           class='w-full bg-white border border-white rounded-lg px-4 py-3 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'>
+                        </div>
+
+                        <div>
+                            <label class='mt-4 block text-white text-sm mb-2'>Category</label>
+                            <select id="category" th:field="*{category.category_id}"
+                            class='w-full bg-white border border-white rounded-lg px-4 py-3 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'
+                            required>
+                                <option th:each="item : ${categoryList}" th:text="${item.name}" th:value="${item.category_id}"></option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class='mt-4 block text-white text-sm mb-2'>Price</label>
+                            <input type="number" required placeholder=" " th:field="*{startingPrice}"
+                           class='w-full bg-white border border-white rounded-lg px-4 py-3 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'>
+                        </div>
+                <section class="flex place-content-around gap-2">
+                    <div class="w-1/2">
+                        <label class='mt-4 block text-white text-sm mb-2'>Start</label>
+                        <input type="date" required placeholder=" " th:field="*{auctionStartDate}"
+                               class='w-full bg-white border border-white rounded-lg px-4 py-3 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'>
+                    </div>
+                    <div class="w-1/2">
+                        <label class='mt-4 block text-white text-sm mb-2'>End</label>
+                        <input type="date" required placeholder=" " th:field="*{auctionEndDate}"
+                               class='w-full bg-white border border-white rounded-lg px-4 py-3 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'>
+                    </div>
+                </section>
+
+                <div>
+                    <label class='mt-4 block text-white text-sm mb-2'>Description</label>
+                    <textarea placeholder=" " rows="4" required th:field="*{description}"
+                              class='w-full bg-white border border-white rounded-lg px-4 py-3 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'></textarea>
+                </div>
             </div>
-
-            <div class="form-group">
-                <label for="category">Category :</label>
-                <select id="category" th:field="*{category.category_id}" required>
-                    <option th:each="item : ${categoryList}"
-                            th:text="${item.name}"
-                            th:value="${item.category_id}">
-                    </option>
-                </select>
+            <div id="withdrawal" class="hidden md:block mt-4">
+                <h2 class="text-center text-[1.3rem]">Withdrawal</h2>
+                <div>
+                    <label class='block text-white text-sm mb-2'>Street</label>
+                    <input type="text" placeholder=" " th:field="*{withdrawal.street}"
+                           class='w-full bg-white border border-white rounded-lg px-4 py-3 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition' required>
+                </div>
+                <div>
+                    <label class='block text-white text-sm mb-2'>Postal Code</label>
+                    <input type="text" placeholder=" " th:field="*{withdrawal.postalCode}"
+                           class='w-full bg-white border border-white rounded-lg px-4 py-3 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition' required>
+                </div>
+                <div>
+                    <label class='block text-white text-sm mb-2'>City</label>
+                    <input type="text" placeholder=" " th:field="*{withdrawal.city}"
+                           class='w-full bg-white border border-white rounded-lg px-4 py-3 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition' required>
+                </div>
             </div>
+            <div class="actions flex items-center justify-around mt-6">
+                <button type="button" id="btn-next"
+                        class="md:hidden bg-white hover:from-green-600 hover:to-green-950 text-black text-sm px-8 md:px-16 py-3 rounded-full cursor-pointer"
+                        onclick="nextStep()">Next
+                </button>
 
-            <div class="form-group">
-                <label for="price">Price :</label>
-                <input id="price" type="number" th:field="*{startingPrice}" required>
-            </div>
+                <button type="submit" id="btn-save"
+                        class="hidden md:block bg-white hover:from-green-600 hover:to-green-950 text-black text-sm px-8 md:px-16 py-3 rounded-full cursor-pointer">
+                    Save
+                </button>
 
-            <div class="form-group">
-                <label for="startDate">Beginning :</label>
-                <input id="startDate" type="date" th:field="*{auctionStartDate}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="endDate">End :</label>
-                <input id="endDate" type="date" th:field="*{auctionEndDate}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="description">Description :</label>
-                <textarea id="description" th:field="*{description}" required></textarea>
+                <a href="/" class="text-white hover:text-gray-300 transition">Cancel</a>
             </div>
         </div>
-
-        <div id="withdrawal">
-            <h3>Withdrawal</h3>
-
-            <div class="form-group">
-                <label for="street">Street :</label>
-                <input id="street" type="text" th:field="*{withdrawal.street}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="cp">Postal Code :</label>
-                <input id="cp" type="text" th:field="*{withdrawal.postalCode}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="city">City :</label>
-                <input id="city" type="text" th:field="*{withdrawal.city}" required>
-            </div>
-        </div>
-
-        <div class="actions">
-            <button type="button" id="btn-next">Next</button>
-
-            <button type="submit">Save</button>
-            <a href="/">Cancel</a>
-        </div>
-
     </form>
-
+    <script th:src="@{/js/form-steps.js}"></script>
 </main>
 </body>
 </html>
