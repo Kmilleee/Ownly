@@ -19,68 +19,41 @@
             </h1>
 
 
-        <nav class="flex-1 flex justify-center">
-            <ul class="flex gap-2 justify-center items-center">
+            <nav class="flex-1 flex justify-center">
+                <ul class="flex gap-2 justify-center items-center">
 
-                <li><a th:href="@{/}" class="hover:text-red-500">Home</a></li>
-                <li><a th:href="@{/test}" class="hover:text-red-500">Auction</a></li>
-                <li><a th:href="@{/about}" class="hover:text-red-500">About</a></li>
-                <li><a th:href="@{/ventes/createSale}" class="hover:text-red-500">Sell</a></li>
-                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/user}"
-                                                                                  class="hover:text-red-500">USERS</a>
-                </li>
-                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/addUser}"
-                                                                                  class="hover:text-red-500">Add
-                    User</a>
-                </li>
-                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/categoryList}"
-                                                                                  class="hover:text-red-500">
-                    Categories</a>
-                </li>
-                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/createCat}"
-                                                                                  class="hover:text-red-500">
-                    Add Categories</a>
-                </li>
-                <li th:if="${#authorization.expression('hasRole(''USER'')')}"><a th:href="@{/withdrawal}"
-                                                                                 class="hover:text-red-500">withdrawal</a>
-                </li>
-                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/addWithdrawal}"
-                                                                                  class="hover:text-red-500">Add
-                    Withdrawal</a></li>
-                <li th:if="${#authorization.expression('hasRole(''USER'')')}"><a th:href="@{/test}"
-                                                                                 class="hover:text-red-500">Profile</a>
-                </li>
+                    <li><a th:href="@{/}" class="hover:text-red-500">Home</a></li>
+                    <li><a th:href="@{/test}" class="hover:text-red-500">Auction</a></li>
+                    <li><a th:href="@{/about}" class="hover:text-red-500">About</a></li>
+                    <li><a th:href="@{/ventes/createSale}" class="hover:text-red-500">Sell</a></li>
+                    <li th:if="${#authorization.expression('hasRole(''USER'')')}"><a th:href="@{/withdrawal}"
+                                                                                     class="hover:text-red-500">withdrawal</a>
+                    </li>
+                    <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/admin}"
+                                                                                      class="hover:text-red-500">Centre
+                        Admin</a>
+                    </li>
 
-                <!--            <li th:if="${#authorization.expression('hasRole(''EMPLOYE'')')}">-->
-                <!--                <a th:href="@{/barbie}" class="hover:text-red-500">Barbies</a>-->
-                <!--            </li>-->
+                    <li th:if="${!#authorization.expression('isAuthenticated()')}">
+                        <a th:href="@{/login}" class="font-bold text-blue-600">Connexion</a>
+                    </li>
 
-                <!--            <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">-->
-                <!--                <a th:href="@{/addBarbie}" class="hover:text-red-500">Ajout barbies</a>-->
-                <!--            </li>-->
+                    <li th:if="${#authorization.expression('isAuthenticated()')}">
+                        <form th:action="@{/logout}" method="post" class="m-0"><input type="hidden" name="_csrf"
+                                                                                      value="${_csrf.token}">
+                            <button type="submit">
+                                Déconnexion
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
 
-                <!--            <li th:if="${#authorization.expression('hasRole(''EMPLOYE'')')}">-->
-                <!--                <a th:href="@{/types}" class="hover:text-red-500">Types</a>-->
-                <!--            </li>-->
+            <li th:if="${#authorization.expression('hasRole(''USER'')')}" class="flex">
+                <a th:href="@{/test}"> <img class="size-8 me-3" th:src="@{/img/profileW.png}" alt="profile"/></a>
+            </li>
 
-                <!--            <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">-->
-                <!--                <a th:href="@{/addTypes}" class="hover:text-red-500">Ajout Type</a>-->
-                <!--            </li>-->
 
-                <li th:if="${!#authorization.expression('isAuthenticated()')}">
-                    <a th:href="@{/login}" class="font-bold text-blue-600">Connexion</a>
-                </li>
-
-                <li th:if="${#authorization.expression('isAuthenticated()')}">
-                    <form th:action="@{/logout}" method="post" class="m-0"><input type="hidden" name="_csrf"
-                                                                                  value="${_csrf.token}">
-                        <button type="submit">
-                            Déconnexion
-                        </button>
-                    </form>
-                </li>
-            </ul>
-        </nav>
         </div>
     </div>
 </header>

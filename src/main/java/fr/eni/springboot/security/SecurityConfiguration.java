@@ -55,6 +55,7 @@ public class SecurityConfiguration {
                     .requestMatchers(HttpMethod.GET, "/ventes/createSale").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.POST, "/admin/addWithdrawal").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.POST, "/admin/addUser").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET, "/admin/admin").hasRole("ADMIN")
                     .requestMatchers("/.well-know/**").permitAll()
 
                     /* *********************************************                     jusqu'à là */
@@ -70,6 +71,7 @@ public class SecurityConfiguration {
                     .requestMatchers("/ventes/createSale").hasRole("ADMIN")
                     .requestMatchers("/admin/addUser").hasRole("ADMIN")
                     .requestMatchers("/admin/addWithdrawal").hasRole("ADMIN")
+                    .requestMatchers("/admin/admin").hasRole("ADMIN")
 
 
                     //tous ce qui n'est pas spécifié n'est pas accessible

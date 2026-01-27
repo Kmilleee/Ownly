@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html data-th-replace="~{fragment/layout :: frag_layout(content= ~{::main})}" lang="fr">
+
+<body>
+<main>
+    <section>
+        <h1>Bienvenue dans le centre admin </h1> <span></span>
+    </section>
+    <section>
+        <nav class="flex-1 flex justify-center">
+            <ul class="flex gap-2 justify-center items-center">
+
+                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/user}"
+                                                                                  class="hover:text-red-500">USERS</a>
+                </li>
+                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/addUser}"
+                                                                                  class="hover:text-red-500">Add
+                    User</a>
+                </li>
+                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/categoryList}"
+                                                                                  class="hover:text-red-500">
+                    Categories</a>
+                </li>
+                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/createCat}"
+                                                                                  class="hover:text-red-500">
+                    Add Categories</a>
+                </li>
+                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/admin}"
+                                                                                  class="hover:text-red-500">Centre Admin</a>
+                </li>
+                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/addWithdrawal}"
+                                                                                  class="hover:text-red-500">Add
+                    Withdrawal</a></li>
+            </ul>
+        </nav>
+    </section>
+</main>
+</body>
+</html>

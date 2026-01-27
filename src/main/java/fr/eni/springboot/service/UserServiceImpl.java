@@ -42,4 +42,9 @@ public class UserServiceImpl implements UserService{
     public User readUserByUsername(String username) {
        return dao.readUserByUsername(username);
     }
+
+    @Override
+    public User readUserById(long user_id) {
+        return dao.readUserById(user_id);
+    }
 }

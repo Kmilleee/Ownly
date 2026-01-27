@@ -5,7 +5,6 @@ import fr.eni.springboot.repository.exception.TestException;
 import fr.eni.springboot.repository.rowMapper.UtilisateurRowMapper;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -55,6 +54,18 @@ public class UserRepositorySql implements UserRepository {
         String sql = "SELECT user_id, username, lastname, firstname, email, numPhone, street, postalCode, city,password,credit,admin from USERS";
 
        return jdbcTemplate.query(sql, new UtilisateurRowMapper());
+    }
+
+    @Override
+    public User readUserById(long user_id) {
+        String sql = "SELECT user_id, username, lastname, firstname, email, numPhone, street, postalCode, city,password,credit,admin from USERS where user_id=:user_id";
+
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("user_id",user_id);
+
+
+
+        return namedParameterJdbcTemplate.queryForObject(sql,map, new UtilisateurRowMapper());
     }
 
     @Override
