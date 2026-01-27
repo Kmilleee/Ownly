@@ -22,12 +22,6 @@ public class UserController {
         return "index";
     }
 
-    //test tailwinds
-    @GetMapping("/test")
-    public String displaytest() {
-        return "test";
-    }
-
     @GetMapping("/about")
     public String displayAbout() {
         return "about";
