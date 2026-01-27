@@ -54,5 +54,11 @@ public class UserController {
         return "admin/admin";
     }
 
+    @GetMapping("/singup")
+    public String displaySingup(Model model) {
+        model.addAttribute("userOBJ", new User());
+        return "/singup";
+    }
+
 
 }
