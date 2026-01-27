@@ -9,7 +9,6 @@
     </div>
 
 
-
     <section class="flex justify-between items-center">
 
 
@@ -518,7 +517,19 @@
 
         <div class="bg-neutral-primary-soft block max-w-sm  rounded-base shadow-xs">
             <a href="#" class="block w-full">
-                <img class=" w-full object-cover" src="/img/figurineRBG.png" alt="figurine"/>
+                <div class="hover-3d relative ">
+                    <figure class="w-full h-full transition-all duration-300 ease-out rounded-2xl shadow-xl transform preserve-3d">
+                        <img src="/img/figurineRBG.png" alt="Card" class="w-full h-full object-cover rounded-2xl"/>
+                    </figure>
+                    <div class="sensor"></div>
+                    <div class="sensor"></div>
+                    <div class="sensor"></div>
+                    <div class="sensor"></div>
+                    <div class="sensor"></div>
+                    <div class="sensor"></div>
+                    <div class="sensor"></div>
+                    <div class="sensor"></div>
+                </div>
             </a>
             <div class="p-6">
         <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
@@ -548,7 +559,19 @@
 
         <div class="bg-neutral-primary-soft block max-w-sm  rounded-base shadow-xs">
             <a href="#" class="block w-full">
-                <img class=" w-full object-cover" src="/img/figurineRBG.png" alt="figurine"/>
+                <div class="hover-3d relative ">
+                    <figure class="w-full h-full transition-all duration-300 ease-out rounded-2xl shadow-xl transform preserve-3d">
+                        <img src="/img/figurineRBG.png" alt="Card" class="w-full h-full object-cover rounded-2xl"/>
+                    </figure>
+                    <div class="sensor"></div>
+                    <div class="sensor"></div>
+                    <div class="sensor"></div>
+                    <div class="sensor"></div>
+                    <div class="sensor"></div>
+                    <div class="sensor"></div>
+                    <div class="sensor"></div>
+                    <div class="sensor"></div>
+                </div>
             </a>
             <div class="p-6">
         <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
@@ -556,7 +579,7 @@
                  fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round"
                                                        stroke-linejoin="round" stroke-width="2"
                                                        d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
-            Trending
+            Trendinng
         </span>
                 <div class="flex justify-between items-center">
                     <a href="#">
@@ -579,19 +602,49 @@
     </section>
 
 
-
     <section class="flex justify-center text-center m-20">
 
-        <h3>Procedente igitur mox tempore cum adventicium nihil inveniretur, relicta ora maritima in Lycaoniam adnexam Isauriae se contuleruntbr
+        <h3>Procedente igitur mox tempore cum adventicium nihil inveniretur, relicta ora maritima in Lycaoniam adnexam
+            Isauriae se contuleruntbr
             <br> ibique densis intersaepientes itineraintersaepientesintersaepientes
-            <br>    praetenturis provincialium et viatorum opibus pascebantur. intersaepientesintersaepientes</h3>
+            <br> praetenturis provincialium et viatorum opibus pascebantur. intersaepientesintersaepientes</h3>
 
 
     </section>
 
+<!--            <th:block th:each="a : ${articles}">-->
+
+<!--                <div th:replace="~{fragment/card :: auctionCard(-->
+<!--            ${a.articleName},-->
+<!--            '/img/' + ${a.image},-->
+<!--            ${a.startingPrice} + ' €',-->
+<!--            'En cours'-->
+<!--         )}">-->
+<!--                </div>-->
+
+<!--            </th:block>-->
 
 
 
+
+
+
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-6 mt-16">
+
+
+
+            <th:block th:each="a : ${articles}">
+                <div th:replace="~{fragment/card :: auctionCard(
+            ${a.articleName},
+            '/img/' + ${a.image},
+            ${a.startingPrice} + ' €',
+            'En cours'
+         )}">
+                </div>
+            </th:block>
+
+        </div>
 
 
 </main>

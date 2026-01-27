@@ -5,6 +5,8 @@ import fr.eni.springboot.repository.ItemSoldRepository;
 import fr.eni.springboot.repository.ItemSoldRepositorySql;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ItemSoldServiceImpl implements ItemSoldService {
 
@@ -17,5 +19,10 @@ public class ItemSoldServiceImpl implements ItemSoldService {
     @Override
     public void createItemSold(ItemSold itemSold) {
         itemSoldRepository.createItemSold(itemSold);
+    }
+
+    @Override
+    public List<ItemSold> readItemSold() {
+        return itemSoldRepository.readItemSold();
     }
 }

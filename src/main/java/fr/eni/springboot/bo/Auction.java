@@ -7,10 +7,9 @@ import java.time.LocalDate;
 public class Auction {
 
 
-private long auction_id;
+    private long auction_id;
     private LocalDate auctionDate;
     private long auctionAmount;
-
     private ItemSold item;
     private User bidder;
 

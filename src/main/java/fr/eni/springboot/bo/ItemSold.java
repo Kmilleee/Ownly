@@ -11,11 +11,20 @@ public class ItemSold {
     private LocalDate auctionEndDate;
     private long startingPrice;
     private long priceSale;
+    private String image;
 
     private User buyer;
     private User seller;
     private Category category;
     private Withdrawal withdrawal;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public long getId() {
         return id;
@@ -108,7 +117,7 @@ public class ItemSold {
     public ItemSold() {
     }
 
-    public ItemSold(long id, String articleName, String description, LocalDate auctionStartDate, LocalDate auctionEndDate, long startingPrice, long priceSale, User buyer, User seller, Category category, Withdrawal withdrawal) {
+    public ItemSold(long id, String articleName, String description, LocalDate auctionStartDate, LocalDate auctionEndDate, long startingPrice, long priceSale, String image, User buyer, User seller, Category category, Withdrawal withdrawal) {
         this.id = id;
         this.articleName = articleName;
         this.description = description;
@@ -116,19 +125,21 @@ public class ItemSold {
         this.auctionEndDate = auctionEndDate;
         this.startingPrice = startingPrice;
         this.priceSale = priceSale;
+        this.image = image;
         this.buyer = buyer;
         this.seller = seller;
         this.category = category;
         this.withdrawal = withdrawal;
     }
 
-    public ItemSold(String articleName, String description, LocalDate auctionStartDate, LocalDate auctionEndDate, long startingPrice, long priceSale, User buyer, User seller, Category category, Withdrawal withdrawal) {
+    public ItemSold(String articleName, String description, LocalDate auctionStartDate, LocalDate auctionEndDate, long startingPrice, long priceSale, String image, User buyer, User seller, Category category, Withdrawal withdrawal) {
         this.articleName = articleName;
         this.description = description;
         this.auctionStartDate = auctionStartDate;
         this.auctionEndDate = auctionEndDate;
         this.startingPrice = startingPrice;
         this.priceSale = priceSale;
+        this.image = image;
         this.buyer = buyer;
         this.seller = seller;
         this.category = category;
