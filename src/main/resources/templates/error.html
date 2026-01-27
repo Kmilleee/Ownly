@@ -11,6 +11,7 @@
 
             <!-- affichage customizé pour notre exception -->
             <label th:case="1000" th:text="${errorMessage}"></label>
+            <label th:case="500">erreur serveur</label>
             <label th:case="*">je sais pas ce qui c'est passé</label>
         </li>
     </ul>
