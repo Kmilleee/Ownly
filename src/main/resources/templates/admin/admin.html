@@ -3,10 +3,32 @@
 
 <body>
 <main>
-    <section>
-        <h1>Bienvenue dans le centre admin </h1> <span></span>
-    </section>
-    <section class="relative z-10">
+    <section class="relative z-10 w-full">
+        <h2 class="text-[5rem] font-medium text-white ms-15">Admin Center</h2>
+        <div class="flex w-full justify-between me-15 gap-15 ">
+            <section class="ms-15 mt-10 w-full">
+                <div class="border-2 border-solid rounded-2xl p-4 w-full">
+                    <div class="flex justify-around gap-10">
+                        <button class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                            See Users
+                        </button>
+                        <button class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                            Add Users
+                        </button>
+                    </div>
+                    <div class="mt-5">
+                        <button class="w-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
+                            Delete ALL USERS
+                        </button>
+                    </div>
+                </div>
+
+
+            </section>
+            <img src="/img/figurineTest.png" alt="" srcset="">
+        </div>
+
+
         <nav class="flex-1 flex justify-center">
             <ul class="flex gap-2 justify-center items-center">
 
@@ -24,9 +46,6 @@
                 <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/createCat}"
                                                                                   class="hover:text-red-500">
                     Add Categories</a>
-                </li>
-                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/admin}"
-                                                                                  class="hover:text-red-500">Centre Admin</a>
                 </li>
                 <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/addWithdrawal}"
                                                                                   class="hover:text-red-500">Add
