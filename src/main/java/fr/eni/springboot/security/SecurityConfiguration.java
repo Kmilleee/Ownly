@@ -21,15 +21,15 @@ public class SecurityConfiguration {
     UserDetailsManager users(DataSource dataSource) {
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
 
-        // 1. Requête pour récupérer l'utilisateur (username, password, enabled)
+        // 1. Récupérer l'utilisateur (inchangé)
         jdbcUserDetailsManager.setUsersByUsernameQuery(
-                // Pour l'object principal : username en premier donc avec principal.getName ça retourne username
                 "SELECT username, password, active FROM USERS WHERE username = ?"
         );
 
-        // 2. Requête pour récupérer les rôles
+        // 2. CORRECTION : On utilise un 'CASE' pour transformer 0/1 en ROLE
+        // Si admin=1 alors 'ROLE_ADMIN', sinon 'ROLE_USER'
         jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
-                "SELECT u.username, r.role FROM USERS u JOIN ROLES r ON u.user_id = r.user_id WHERE u.username = ?"
+                "SELECT username, CASE WHEN admin = 1 THEN 'ROLE_ADMIN' ELSE 'ROLE_USER' END FROM USERS WHERE username = ?"
         );
 
         return jdbcUserDetailsManager;
@@ -65,6 +65,8 @@ public class SecurityConfiguration {
                     .requestMatchers(HttpMethod.POST, "/admin/addWithdrawal").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.POST, "/admin/addUser").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.GET, "/admin/admin").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.POST, "/signup").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/login").permitAll()
                     .requestMatchers("/.well-know/**").permitAll()
 
                     /* *********************************************                     jusqu'à là */
