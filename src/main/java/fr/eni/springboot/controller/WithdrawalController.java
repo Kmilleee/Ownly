@@ -21,6 +21,7 @@ public class WithdrawalController {
     @GetMapping("/withdrawal")
     public String displayWithdrawal(Model model){
         model.addAttribute("withdrawalList",service.readWithdrawal());
+        model.addAttribute("activePage", "withdrawal");
 
         return "withdrawal";
     }

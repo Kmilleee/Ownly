@@ -20,12 +20,15 @@ public class UserController {
     }
 
     @GetMapping("/")
-    public String displayIndex() {
+    public String displayIndex(Model model) {
+        model.addAttribute("activePage", "index");
+
         return "index";
     }
 
     @GetMapping("/about")
-    public String displayAbout() {
+    public String displayAbout(Model model) {
+        model.addAttribute("activePage", "about");
         return "about";
     }
 
@@ -52,6 +55,7 @@ public class UserController {
 
     @GetMapping("/admin/admin")
     public String displayAdmin(Model model) {
+        model.addAttribute("activePage", "admin");
        // model.addAttribute("NameUser", userService.readUserById());
         return "admin/admin";
     }
@@ -74,6 +78,7 @@ public class UserController {
 
     @GetMapping("/profile")
     public String displayProfile(Principal principal, Model model){
+        model.addAttribute("activePage", "profile");
         String username = principal.getName();
 
         User user = userService.readUserByUsername(username);

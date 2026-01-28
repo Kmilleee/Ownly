@@ -20,6 +20,7 @@ public class AuctionController {
 
     @GetMapping("/auction")
     public String displayAuction(Model model){
+        model.addAttribute("activePage", "auction");
         return"auction";
     }
 
