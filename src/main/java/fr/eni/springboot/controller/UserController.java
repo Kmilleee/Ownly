@@ -2,6 +2,10 @@ package fr.eni.springboot.controller;
 
 import fr.eni.springboot.bo.User;
 import fr.eni.springboot.service.UserService;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -100,6 +104,19 @@ public class UserController {
     @PostMapping("/changeProfile")
     public String displayUpdateProfile(@ModelAttribute("UserOBJ") User user, Model model ){
         userService.updateUser(user);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+
+        Authentication newAuth = new UsernamePasswordAuthenticationToken(
+                user.getUsername(),
+                auth.getCredentials(),
+                auth.getAuthorities()
+        );
+        SecurityContextHolder.getContext().setAuthentication(newAuth);
+
+        System.out.println("Base de données et Session mises à jour !");
+
         System.out.println("utilisateur modifié");
         return"redirect:/profile";
     }
