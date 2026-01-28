@@ -13,9 +13,9 @@ public class User {
     private String postalCode;
     private String city;
     private String password;
-    private long credit;
-    private boolean admin;
-    private boolean active;
+    private long credit = 100;
+    private boolean admin = false;
+    private boolean active = true ;
 
     public User(long user_id, String username, String lastName, String firstName, String email, String numPhone, String street, String postalCode, String city, String password, long credit, boolean admin, boolean active) {
         this.user_id = user_id;

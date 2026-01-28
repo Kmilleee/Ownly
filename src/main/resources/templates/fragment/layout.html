@@ -8,7 +8,12 @@
     <link rel="stylesheet" th:href="@{/css/general.css}">
     <title>Title</title>
 </head>
-<body class="bg-black text-white min-h-screen flex flex-col">
+<body class="bg-black text-white min-h-screen flex flex-col max-h-100 overflow-y-auto
+  [&::-webkit-scrollbar]:w-2
+  [&::-webkit-scrollbar-track]:bg-transparent
+  [&::-webkit-scrollbar-thumb]:bg-transparent
+  dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
 <header>
     <nav class="relative items-center flex justify-center md:justify-between mb-10 p-4">
 
@@ -54,7 +59,7 @@
                 </form>
             </div>
 
-            <div th:if="${#authorization.expression('hasRole(''USER'')')}" class="hidden md:flex">
+            <div  class="hidden md:flex">
                 <a th:href="@{/test}" class="block hover:opacity-80 transition">
                     <img class="size-10 rounded-full border border-gray-200 object-cover" th:src="@{/img/profileW.png}" alt="profile"/>
                 </a>

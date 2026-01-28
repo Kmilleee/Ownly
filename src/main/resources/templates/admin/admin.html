@@ -3,36 +3,108 @@
 
 <body>
 <main>
-    <section>
-        <h1>Bienvenue dans le centre admin </h1> <span></span>
-    </section>
-    <section class="relative z-10">
-        <nav class="flex-1 flex justify-center">
-            <ul class="flex gap-2 justify-center items-center">
+    <section class="relative z-10 w-full">
+        <h2 class="text-[5rem] font-medium text-white ms-15 mb-10">Admin Center</h2>
 
-                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/user}"
-                                                                                  class="hover:text-red-500">USERS</a>
-                </li>
-                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/addUser}"
-                                                                                  class="hover:text-red-500">Add
-                    User</a>
-                </li>
-                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/categoryList}"
-                                                                                  class="hover:text-red-500">
-                    Categories</a>
-                </li>
-                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/createCat}"
-                                                                                  class="hover:text-red-500">
-                    Add Categories</a>
-                </li>
-                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/admin}"
-                                                                                  class="hover:text-red-500">Centre Admin</a>
-                </li>
-                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/addWithdrawal}"
-                                                                                  class="hover:text-red-500">Add
-                    Withdrawal</a></li>
-            </ul>
-        </nav>
+        <div class="flex w-full px-15  gap-10">
+
+            <div class="flex flex-col justify-between w-1/2 gap-8">
+
+                <section>
+                    <h3 class="text-white text-xl mb-2">User</h3>
+                    <div class="border-2 border-white/20 rounded-2xl p-6 bg-black/20 backdrop-blur-sm">
+                        <div class="flex justify-between gap-4">
+                            <a th:href="@{/user}" class="w-full">
+                                <button class="w-full bg-white text-black font-bold py-3 px-4 rounded-full hover:bg-gray-200 transition">
+                                    See Users
+                                </button>
+                            </a>
+
+                            <a th:href="@{/admin/addUser}" class="w-full">
+                                <button class="w-full bg-white text-black font-bold py-3 px-4 rounded-full hover:bg-gray-200 transition">
+                                    Add Users
+                                </button>
+                            </a>
+                        </div>
+                        <div class="mt-4">
+                            <a th:href="@{/login}">
+                                <button class="w-full border border-white text-white font-bold py-3 px-4 rounded-full hover:bg-white/10 transition">
+                                    test
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3 class="text-white text-xl mb-2">Category</h3>
+                    <div class="border-2 border-white/20 rounded-2xl p-6 bg-black/20 backdrop-blur-sm">
+                        <div class="flex justify-between gap-4">
+                            <a th:href="@{/admin/categoryList}" class="w-full">
+                                <button class="w-full bg-white text-black font-bold py-3 px-4 rounded-full hover:bg-gray-200 transition">
+                                    See Category
+                                </button>
+                            </a>
+                            <a th:href="@{/admin/createCat}" class="w-full">
+                                <button class="w-full bg-white text-black font-bold py-3 px-4 rounded-full hover:bg-gray-200 transition">
+                                    Add Category
+                                </button>
+                            </a>
+                        </div>
+                        <div class="mt-4">
+                            <button class="w-full border border-white text-white font-bold py-3 px-4 rounded-full hover:bg-white/10 transition">
+                                Delete ALL
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3 class="text-white text-xl mb-2">Withdrawal</h3>
+                    <div class="border-2 border-white/20 rounded-2xl p-6 bg-black/20 backdrop-blur-sm">
+                        <div class="flex justify-between gap-4">
+
+                            <a th:href="@{/withdrawal}" class="w-full">
+                                <button class="w-full bg-white text-black font-bold py-3 px-4 rounded-full hover:bg-gray-200 transition">
+                                    See Withdrawal
+                                </button>
+                            </a>
+                            <a th:href="@{/admin/addWithdrawal}" class="w-full">
+                                <button class="w-full bg-white text-black font-bold py-3 px-4 rounded-full hover:bg-gray-200 transition">
+                                    Add withdrawal
+                                </button>
+                            </a>
+                        </div>
+                        <div class="mt-4">
+                            <button class="w-full border border-white text-white font-bold py-3 px-4 rounded-full hover:bg-white/10 transition">
+                                Delete ALL
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+
+            <div class="rounded-2xl overflow-hidden flex justify-center w-1/2">
+                <img src="/img/figurineTest.png" alt="Admin Illustration">
+            </div>
+
+
+        </div>
+        <section class="m-15">
+            <h3 class="text-white text-xl mb-2">truc</h3>
+            <div class="border-2 border-white/20 rounded-2xl p-6 bg-black/20 backdrop-blur-sm">
+                <div class="flex justify-between gap-4">
+                    <button class="w-full bg-white text-black font-bold py-3 px-4 rounded-full hover:bg-gray-200 transition">
+                        Option 1
+                    </button>
+                    <button class="w-full bg-white text-black font-bold py-3 px-4 rounded-full hover:bg-gray-200 transition">
+                        Option 2
+                    </button>
+                </div>
+            </div>
+        </section>
     </section>
 </main>
 </body>
