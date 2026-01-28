@@ -25,6 +25,8 @@ public class AuctionController {
 
     @GetMapping("/auctionAll")
     public String displayAuctionAll(Model model) {
+        model.addAttribute("activePage", "auction");
+
         model.addAttribute("articles", serviceItem.readItemSold());
         return "auctionAll";
     }

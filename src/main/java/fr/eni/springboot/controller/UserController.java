@@ -18,7 +18,9 @@ public class UserController {
     }
 
     @GetMapping("/")
-    public String displayIndex() {
+    public String displayIndex(Model model) {
+
+        model.addAttribute("activePage", "home");
         return "index";
     }
 
@@ -51,6 +53,7 @@ public class UserController {
     @GetMapping("/admin/admin")
     public String displayAdmin(Model model) {
        // model.addAttribute("NameUser", userService.readUserById());
+        model.addAttribute("activePage", "admin");
         return "admin/admin";
     }
 

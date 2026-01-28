@@ -39,6 +39,8 @@ public class ItemSoldController {
 
         model.addAttribute("categoryList", categoryList);
 
+        model.addAttribute("activePage", "sell");
+
         return "create-sale";
     }
 
