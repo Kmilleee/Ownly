@@ -2,39 +2,10 @@
 
 <body>
 <main>
-    <!--    <table class="table-auto">-->
-    <!--        <thead>-->
-    <!--            <tr>-->
-    <!--                <td>Username</td>-->
-    <!--                <td>Last Name</td>-->
-    <!--                <td>Frist Name</td>-->
-    <!--                <td>Email</td>-->
-    <!--                <td>Phone</td>-->
-    <!--                <td>Street</td>-->
-    <!--                <td>Postal Code</td>-->
-    <!--                <td>City</td>-->
-    <!--                <td>Password</td>-->
-    <!--                <td>Credit</td>-->
-    <!--            </tr>-->
-    <!--        </thead>-->
-    <!--        <tbody>-->
-    <!--            <tr th:each="u : ${userList}" >-->
-    <!--                <th th:text="${u.getUsername()}" ></th>-->
-    <!--                <th th:text="${u.getLastName()}" ></th>-->
-    <!--                <th th:text="${u.getFirstName()}" ></th>-->
-    <!--                <th th:text="${u.getEmail()}" ></th>-->
-    <!--                <th th:text="${u.getNumPhone()}" ></th>-->
-    <!--                <th th:text="${u.getStreet()}" ></th>-->
-    <!--                <th th:text="${u.getPostalCode()}" ></th>-->
-    <!--                <th th:text="${u.getCity()}" ></th>-->
-    <!--                <th th:text="${u.getPassword()}" ></th>-->
-    <!--                <th th:text="${u.getCredit()}" ></th>-->
-    <!--            </tr>-->
-    <!--        </tbody>-->
-    <!--    </table>-->
-    <!-- Table responsive wrapper -->
-    <section class="m-15">
-        <div class="overflow-x-auto bg-grey dark:bg-neutral-700 max-h-full overflow-y-auto
+    <h2 class="text-[4rem] font-medium ms-15 p-5 text-white">All Users</h2>
+    <section class=" h-2/3 w-full mb-10">
+        <div class="flex justify-center">
+        <div class=" overflow-x-auto bg-grey dark:bg-neutral-700 max-h-full overflow-y-auto
           [&::-webkit-scrollbar]:w-2
           [&::-webkit-scrollbar-track]:bg-transparent
           [&::-webkit-scrollbar-thumb]:bg-transparent
@@ -72,7 +43,7 @@
             <table class="min-w-full text-left text-sm whitespace-nowrap">
 
                 <!-- Table head -->
-                <thead class="uppercase tracking-wider sticky top-0 bg-grey dark:bg-neutral-700 outline outline-2 outline-neutral-200 dark:outline-neutral-600">
+                <thead class="uppercase tracking-wider sticky top-0 bg-grey dark:bg-neutral-700 outline outline-2 outline-neutral-200 dark:outline-neutral-600 bg-black">
                 <tr>
                     <th scope="col" class="px-6 py-3">
                         Username
@@ -131,6 +102,7 @@
 
             </table>
 
+        </div>
         </div>
     </section>
 </main>

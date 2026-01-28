@@ -30,7 +30,7 @@
 
         <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 z-10">
             <ul class="flex gap-6 justify-center items-center">
-                <li><a th:href="@{/}" class="hover:text-red-500 font-medium">Home</a></li>
+                <li><a th:href="@{/}" class="hover:text-red-500 font-medium" >Home</a></li>
                 <li><a th:href="@{/auction}" class="hover:text-red-500 font-medium">Auction</a></li>
                 <li><a th:href="@{/about}" class="hover:text-red-500 font-medium">About</a></li>
                 <li><a th:href="@{/ventes/createSale}" class="hover:text-red-500 font-medium">Sell</a></li>
@@ -59,8 +59,8 @@
                 </form>
             </div>
 
-            <div  class="hidden md:flex">
-                <a th:href="@{/test}" class="block hover:opacity-80 transition">
+            <div th:if="${#authorization.expression('isAuthenticated()')}"  class="hidden md:flex">
+                <a th:href="@{/profile}" class="block hover:opacity-80 transition">
                     <img class="size-10 rounded-full border border-gray-200 object-cover" th:src="@{/img/profileW.png}" alt="profile"/>
                 </a>
             </div>

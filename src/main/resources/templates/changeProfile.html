@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html data-th-replace="~{fragment/layout :: frag_layout(content= ~{::main})}" lang="fr">
+
+<body>
+<main>
+    <section class="relative z-10 w-full">
+        <!--    <h2 class="text-[5rem] font-medium text-white ms-15 mb-10">Profile</h2>-->
+
+        <div class="flex w-full px-15  gap-10">
+
+            <div class="flex flex-col justify-between w-full gap-8">
+
+                <section>
+                    <div class="flex items-center w-full ">
+                        <img src="/img/profileW.png" alt="photo de profile">
+                        <div class="w-full">
+                            <div class="flex justify-between">
+                                <h1 th:text="${UserCo.username}" class="text-[4rem]"></h1>
+                                <div class="flex">
+                                    <h1 th:text="${UserCo.credit}" class="text-[4rem]"></h1>
+                                    <h1 class="text-[4rem]">$</h1>
+                                </div>
+                            </div>
+                            <div class="flex justify-between ">
+                                <div class="flex gap-3">
+                                    <h3 th:text="${UserCo.firstName}"></h3>
+                                    <h3 th:text="${UserCo.lastName}"></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="flex w-full  mb-15">
+                    <section class="mt-15 w-full">
+                        <h1>My Account</h1>
+                        <div class="border-1 border-white rounded-3xl p-5">
+                            <div class="flex gap-10">
+                                <div class="w-full">
+                                    <label class="mb-1">
+                                        Last Name
+                                    </label>
+                                    <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
+                                        th:text="${UserCo.lastName}"></h2>
+                                </div>
+                                <div class="w-full">
+                                    <label class="mb-1">
+                                        First Name
+                                    </label>
+                                    <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
+                                        th:text="${UserCo.firstName}"></h2>
+                                </div>
+                                <div class="w-full">
+                                    <label>
+                                        Username
+                                    </label>
+                                    <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
+                                        th:text="${UserCo.username}"></h2>
+                                </div>
+
+                            </div>
+                            <div class="flex gap-10 mt-5">
+                                <div class="w-full">
+                                    <label class="mb-1">
+                                        City
+                                    </label>
+                                    <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
+                                        th:text="${UserCo.city}"></h2>
+                                </div>
+                                <div class="w-full">
+                                    <label class="mb-1">
+                                        Street
+                                    </label>
+                                    <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
+                                        th:text="${UserCo.street}"></h2>
+                                </div>
+                                <div class="w-full">
+                                    <label>
+                                        Postal Code
+                                    </label>
+                                    <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
+                                        th:text="${UserCo.postalCode}"></h2>
+                                </div>
+
+                            </div>
+                            <div class="flex gap-10 mt-5">
+                                <div class="w-full">
+                                    <label class="mb-1">
+                                        Phone
+                                    </label>
+                                    <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
+                                        th:text="${UserCo.numPhone}"></h2>
+                                </div>
+                                <div class="w-full">
+                                    <label class="mb-1">
+                                        email
+                                    </label>
+                                    <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
+                                        th:text="${UserCo.email}"></h2>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

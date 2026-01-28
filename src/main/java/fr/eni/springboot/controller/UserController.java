@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
+
 @Controller
 public class UserController {
 
@@ -68,6 +70,26 @@ public class UserController {
     public String displaySignup(Model model) {
         model.addAttribute("userOBJ", new User());
         return "/singup";
+    }
+
+    @GetMapping("/profile")
+    public String displayProfile(Principal principal, Model model){
+        String username = principal.getName();
+
+        User user = userService.readUserByUsername(username);
+
+        model.addAttribute("UserCo", user);
+        return"/profile";
+    }
+
+    @GetMapping("/changeProfile")
+    public String displayChangeProfile(Principal principal, Model model){
+        String username = principal.getName();
+
+        User user = userService.readUserByUsername(username);
+
+        model.addAttribute("UserCo", user);
+        return"/changeProfile";
     }
 
 
