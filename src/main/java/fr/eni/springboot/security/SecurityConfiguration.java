@@ -3,6 +3,8 @@ package fr.eni.springboot.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,18 +23,22 @@ public class SecurityConfiguration {
     UserDetailsManager users(DataSource dataSource) {
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
 
-        // 1. Requête pour récupérer l'utilisateur (username, password, enabled)
+        // Récupère l'utilisateur, son mot de passe et s'il est actif
         jdbcUserDetailsManager.setUsersByUsernameQuery(
-                // Pour l'object principal : username en premier donc avec principal.getName ça retourne username
                 "SELECT username, password, active FROM USERS WHERE username = ?"
         );
 
-        // 2. Requête pour récupérer les rôles
+        // Récupère le rôle : Si admin=1 -> ROLE_ADMIN, Sinon -> ROLE_USER
         jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
-                "SELECT u.username, r.role FROM USERS u JOIN ROLES r ON u.user_id = r.user_id WHERE u.username = ?"
+                "SELECT username, CASE WHEN admin = 1 THEN 'ROLE_ADMIN' ELSE 'ROLE_USER' END FROM USERS WHERE username = ?"
         );
 
         return jdbcUserDetailsManager;
+    }
+
+    @Bean
+    static RoleHierarchy roleHierarchy() {
+        return RoleHierarchyImpl.fromHierarchy("ROLE_ADMIN > ROLE_USER");
     }
 
     @Bean
@@ -65,6 +71,11 @@ public class SecurityConfiguration {
                     .requestMatchers(HttpMethod.POST, "/admin/addWithdrawal").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.POST, "/admin/addUser").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.GET, "/admin/admin").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET, "/admin/categoryList").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.POST, "/admin/createCat").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET, "/admin/admin").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.POST, "/signup").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/login").permitAll()
                     .requestMatchers("/.well-know/**").permitAll()
 
                     /* *********************************************                     jusqu'à là */
@@ -76,13 +87,15 @@ public class SecurityConfiguration {
                     .requestMatchers("/img/*").permitAll()
                     .requestMatchers("/js/**").permitAll()
 
-                    .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                    .requestMatchers("/admin/**").hasRole("ADMIN")
                     .requestMatchers("/ventes/**").hasRole("ADMIN")
 
                     .requestMatchers("/ventes/createSale").hasRole("ADMIN")
                     .requestMatchers("/admin/addUser").hasRole("ADMIN")
                     .requestMatchers("/admin/addWithdrawal").hasRole("ADMIN")
                     .requestMatchers("/admin/admin").hasRole("ADMIN")
+                    .requestMatchers("/admin/createCat").hasRole("ADMIN")
+                    .requestMatchers("/admin/categoryList").hasRole("ADMIN")
 
 
                     //tous ce qui n'est pas spécifié n'est pas accessible

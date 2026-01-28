@@ -54,8 +54,18 @@ public class UserController {
         return "admin/admin";
     }
 
+
+
+    @PostMapping("/singup")
+    public String createUserInscription(@ModelAttribute("userOBJ") User user) {
+        System.out.println("Attempting to create user: " + user.getUsername());
+        userService.createUser(user);
+        return "redirect:/login";
+    }
+
+
     @GetMapping("/singup")
-    public String displaySingup(Model model) {
+    public String displaySignup(Model model) {
         model.addAttribute("userOBJ", new User());
         return "/singup";
     }
