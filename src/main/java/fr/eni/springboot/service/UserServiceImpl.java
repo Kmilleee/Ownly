@@ -2,6 +2,8 @@ package fr.eni.springboot.service;
 
 import fr.eni.springboot.bo.User;
 import fr.eni.springboot.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,15 +12,23 @@ import java.util.List;
 public class UserServiceImpl implements UserService{
 
     UserRepository dao;
+    private PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository dao) {
+    public UserServiceImpl(UserRepository dao, PasswordEncoder passwordEncoder) {
         this.dao = dao;
+        this.passwordEncoder = passwordEncoder;
     }
-
 
     @Override
     public void createUser(User user) {
+
+        String motDePasseCrypte = passwordEncoder.encode(user.getPassword());
+        user.setPassword(motDePasseCrypte);
+
+
         dao.createUser(user);
+
+
     }
 
     @Override
