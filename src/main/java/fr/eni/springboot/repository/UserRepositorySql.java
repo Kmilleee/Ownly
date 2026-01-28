@@ -74,7 +74,7 @@ public class UserRepositorySql implements UserRepository {
     @Override
     public void updateUser(User user){
 
-        String sql =" update users set username=:username, lastName=:LastName, firstName=:firstName, email=:email, numPhone=:numPhone, street=:street, postalCode=:postalCode, city=:city,password=:password,credit=:credit where user_id=:user_id";
+        String sql =" update users set username=:username, lastName=:LastName, firstName=:firstName, email=:email, numPhone=:numPhone, street=:street, postalCode=:postalCode, city=:city,password=:password where user_id=:user_id";
 
         BeanPropertySqlParameterSource map = new BeanPropertySqlParameterSource(user);
 

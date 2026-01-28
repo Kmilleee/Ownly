@@ -88,13 +88,20 @@ public class UserController {
     }
 
     @GetMapping("/changeProfile")
-    public String displayChangeProfile(Principal principal, Model model){
+    public String displayChangeProfile(Principal principal, Model model ){
         String username = principal.getName();
 
         User user = userService.readUserByUsername(username);
-
+        model.addAttribute("UserOBJ", user);
         model.addAttribute("UserCo", user);
         return"/changeProfile";
+    }
+
+    @PostMapping("/changeProfile")
+    public String displayUpdateProfile(@ModelAttribute("UserOBJ") User user, Model model ){
+        userService.updateUser(user);
+        System.out.println("utilisateur modifié");
+        return"redirect:/profile";
     }
 
 
