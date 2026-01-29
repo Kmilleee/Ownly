@@ -35,6 +35,8 @@ public class ItemSoldController {
 
         List<Category> categoryList = categoryService.findAll();
 
+        model.addAttribute("activePage", "sell");
+
         model.addAttribute("article", new ItemSold());
 
         model.addAttribute("categoryList", categoryList);

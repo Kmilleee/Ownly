@@ -38,6 +38,11 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void updateUser(User user) {
+        User currentInDb = dao.readUserById(user.getUser_id());
+
+        if (!user.getPassword().equals(currentInDb.getPassword())) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         dao.updateUser(user);
 
     }
