@@ -92,6 +92,14 @@
     <script th:src="@{/js/form-steps.js}"></script>
 
 
+
+
+
+
+
+
+
+
     <section class="flex items-center justify-center py-12 px-4">
         <form class="md:grid md:grid-cols-2 md:gap-10 lg:gap-20 max-w-7xl w-full items-start hidden "
               th:action="@{/ventes/createSale}" method="POST" th:object="${article}">
@@ -104,44 +112,40 @@
                     Have a question or idea? Our approachable team would love to connect and support you.
                 </p>
 
-                <div class="grid grid-cols-2 gap-4 mb-5">
+                <div class="grid grid-cols-2 gap-4 mb-5 items-center">
                     <div>
                         <label class="block text-sm text-white mb-2" for="articleName">Name</label>
                         <input th:field="*{articleName}" id="articleName" type="text" placeholder="David"
-                               class="w-full px-3 py-3 border border-gray-300 rounded-lg text-sm outline-none focus:border-indigo-500 transition-colors"/>
+                               class='w-full bg-white border border-white rounded-lg px-3 py-2 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'>
                     </div>
                     <div>
-                        <label class="block text-sm text-white-500 mb-2">Category</label>
-                        <input type="text" placeholder="Andrew"
-                               class="w-full px-3 py-3 border border-gray-300 rounded-lg text-sm outline-none focus:border-indigo-500 transition-colors"/>
-                    </div>
+                        <label for="category2" class="block text-sm text-white mb-2">Category</label>
+                        <select id="category2" th:field="*{category.category_id}"
+                                class='w-full bg-white border border-white rounded-lg px-3 py-2.5 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'>
+                                required>
+                            <option th:each="item : ${categoryList}" th:text="${item.name}"
+                                    th:value="${item.category_id}"></option>
+                        </select>  </div>
                 </div>
 
                 <div class="mb-5">
-                    <label class="block text-sm text-white mb-2">Email id</label>
-                    <input type="email" placeholder="david@company.com"
-                           class="w-full px-3 py-3 border border-gray-300 rounded-lg text-sm outline-none focus:border-indigo-500 transition-colors"/>
+                    <label for="price" class='mt-4 block text-white text-sm mb-2'>Price</label>
+                    <input id="price" type="number" required placeholder=" " th:field="*{startingPrice}"
+                           class='w-full bg-white border border-white rounded-lg px-3 py-2 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'>
                 </div>
 
                 <div class="mb-5">
-                    <label class="block text-sm text-white-500 mb-2">Phone number</label>
-                    <div class="flex border border-gray-300 rounded-lg overflow-hidden focus-within:border-indigo-500 transition-colors">
-                        <select class="px-3 py-3 text-sm outline-none cursor-pointer text-white bg-transparent border-r border-gray-300">
-                            <option class="text-black">US</option>
-                            <option class="text-black">UK</option>
-                            <option class="text-black">IN</option>
-                            <option class="text-black">CA</option>
-                        </select>
-                        <input type="tel" placeholder="+1 342 123-456" class="flex-1 px-3 py-3 text-sm outline-none"/>
-                    </div>
+                    <label class='mt-4 block text-white text-sm mb-2' for="start">start</label>
+                    <input id="start" type="date" required placeholder=" " th:field="*{auctionStartDate}"
+                           class='w-full bg-white border border-white rounded-lg px-3 py-2 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'>
                 </div>
 
                 <div class="mb-5">
-                    <label class="block text-sm text-white-500 mb-2">Phone number</label>
-                    <div class="flex border border-gray-300 rounded-lg overflow-hidden focus-within:border-indigo-500 transition-colors">
-                        <input type="tel" placeholder="+1 342 123-456" class="flex-1 px-3 py-3 text-sm outline-none"/>
-                    </div>
+                    <label class='mt-4 block text-white text-sm mb-2' for="end">End</label>
+                    <input id="end" type="date" required placeholder=" " th:field="*{auctionEndDate}"
+                           class='w-full bg-white border border-white rounded-lg px-3 py-2 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'>
                 </div>
+
 
                 <div class="flex items-center gap-2 mb-6">
                     <input type="checkbox"
@@ -171,9 +175,11 @@
             </div>
 
             <div class="mb-5 md:col-span-2 w-full p-5">
-                <label class="block text-sm text-white mb-2">Description</label>
+                <label for="description" class="block text-sm text-white mb-2">Description</label>
                 <textarea rows="4"
-                          class="w-full px-3 py-3 border border-gray-300 rounded-lg text-sm outline-none resize-y focus:border-indigo-500 transition-colors"
+                          id="description"
+                          required th:field="*{description}"
+                          class='w-full bg-white border border-white rounded-lg px-3 py-2 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'>
                           placeholder="Write your message here..."></textarea>
 
                 <div class="border border-white-500 w-full mt-10"></div>
@@ -182,36 +188,30 @@
                 </h1>
 
                 <div class="flex-col mt-15">
-                    <div class="mb-5 flex items-center w-full justify-around">
-                        <label class="block text-sm text-white-500 mb-2">Phone number</label>
-                        <div class="w-1/2 flex border border-gray-300 rounded-lg overflow-hidden focus-within:border-indigo-500 transition-colors">
-                            <input type="tel" placeholder="+1 342 123-456"
-                                   class="flex-1 px-3 py-3 text-sm outline-none"/>
-                        </div>
+                    <div class="flex flex-col mt-15 max-w-2xl mx-auto"> <div class="space-y-5"> <div class="grid grid-cols-3 items-center">
+                        <label for="street" class="text-white font-medium">Street</label>
+                        <input id="street" type="text" placeholder="Rue de la place" th:field="*{withdrawal.street}"
+                               class="col-span-2 bg-white rounded-lg px-4 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
-                    <div class="mb-5 flex items-center w-full justify-around">
-                        <label class="block text-sm text-white-500 mb-2">Phone number</label>
-                        <div class="w-1/2 flex border border-gray-300 rounded-lg overflow-hidden focus-within:border-indigo-500 transition-colors">
-                            <input type="tel" placeholder="+1 342 123-456"
-                                   class="flex-1 px-3 py-3 text-sm outline-none"/>
+
+                        <div class="grid grid-cols-3 items-center">
+                            <label for="postalCode" class="text-white font-medium">Postal Code</label>
+                            <input id="postalCode" type="text" placeholder="35000" th:field="*{withdrawal.postalCode}"
+                                   class="col-span-2 bg-white rounded-lg px-4 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
-                    </div>
-                    <div class="mb-5 flex items-center w-full justify-around">
-                        <label class="block text-sm text-white-500 mb-2">Phone number</label>
-                        <div class="w-1/2 flex border border-gray-300 rounded-lg overflow-hidden focus-within:border-indigo-500 transition-colors">
-                            <input type="tel" placeholder="+1 342 123-456"
-                                   class="flex-1 px-3 py-3 text-sm outline-none"/>
+
+                        <div class="grid grid-cols-3 items-center">
+                            <label for="city" class="text-white font-medium">City</label>
+                            <input id="city" type="text" placeholder="Paris" th:field="*{withdrawal.city}"
+                                   class="col-span-2 bg-white rounded-lg px-4 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
+
                     </div>
-                    <div class="flex gap-15 mt-15 ">
-                        <button type="submit"
-                                class="mt-4 w-full py-3.5 bg-gradient-to-br bg-white text-black rounded-lg text-sm cursor-pointer transition-all hover:-translate-y-0.5 hover:shadow-lg font-bold">
-                            Apply
-                        </button>
-                        <button type="submit"
-                                class="mt-4 w-full py-3.5 bg-gradient-to-br  bg-white text-black rounded-lg text-sm cursor-pointer transition-all hover:-translate-y-0.5 hover:shadow-lg font-bold">
-                            Back
-                        </button>
+
+                        <div class="flex gap-4 mt-10">
+                            <button type="submit" class="w-full py-3 bg-white text-black rounded-lg font-bold hover:bg-gray-200 transition">Apply</button>
+                            <button type="button" class="w-full py-3 bg-gray-600 text-white rounded-lg font-bold hover:bg-gray-700 transition">Back</button>
+                        </div>
                     </div>
 
                 </div>
