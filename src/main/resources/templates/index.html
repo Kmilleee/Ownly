@@ -24,15 +24,19 @@
         </h3>
 
         <div class="flex gap-4">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+            <a th:href="@{/auction}">
+            <button class="bg-[#a60f65] hover:scale-108 transition text-white font-bold py-2 px-4 rounded-full w-30 md:w-40">
                 Explore
             </button>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+            </a>
+            <a th:href="@{/about}">
+            <button class="bg-[#a60f65] hover:scale-108 transition text-white font-bold py-2 px-4 rounded-full w-30 md:w-40">
                 Learn More
             </button>
+            </a>
         </div>
 
-        <h3 class="font-light tracking-wide md:p-1 mt-4">See your future invest : </h3>
+        <h3 class="font-bold tracking-wide md:p-1 mt-4">See your future invest : </h3>
         <img src="/img/indexIMG.png" alt="">
     </div>
         <div class="flex justify-center w-full">
