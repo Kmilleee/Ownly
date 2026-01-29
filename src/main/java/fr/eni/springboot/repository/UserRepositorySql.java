@@ -84,11 +84,15 @@ public class UserRepositorySql implements UserRepository {
     }
 
     @Override
+    @Transactional
     public void deleteUser(long user_id){
         String sql = "delete from USERS where user_id=:user_id";
 
         MapSqlParameterSource map = new MapSqlParameterSource();
-        map.addValue("id", user_id);
+        map.addValue("user_id", user_id);
+
+        String sqlDeleteRoles = "DELETE FROM ROLES WHERE user_id = :user_id";
+        namedParameterJdbcTemplate.update(sqlDeleteRoles, map);
 
         namedParameterJdbcTemplate.update(sql, map);
     }

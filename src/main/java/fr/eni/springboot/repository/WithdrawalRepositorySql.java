@@ -29,7 +29,7 @@ public class WithdrawalRepositorySql implements WithdrawalRepository{
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
 
-        String sql = "INSERT INTO Withdrawal (street, postalCode,city) values(:street, :postalCode, :city)";
+        String sql = "INSERT INTO Withdrawal (street, postalCode,city, article_id) values(:street, :postalCode, :city, :article_id)";
 
         BeanPropertySqlParameterSource map = new BeanPropertySqlParameterSource(withdrawal);
 
@@ -49,7 +49,7 @@ public class WithdrawalRepositorySql implements WithdrawalRepository{
     @Override
     public void updateWithdrawal(Withdrawal withdrawal){
 
-        String sql = "UPDATE withdrawal SET street, postalCode, city where withdrawal_id=:withdrawal_id";
+        String sql = "UPDATE withdrawal SET street=:street, postalCode=:postalCode, city=:city, article_id=:article_id where withdrawal_id=:withdrawal_id";
 
         BeanPropertySqlParameterSource map = new BeanPropertySqlParameterSource(withdrawal);
 
