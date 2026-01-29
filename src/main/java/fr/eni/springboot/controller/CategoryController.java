@@ -36,7 +36,7 @@ public class CategoryController {
 
         categoryService.createCategory(category);
 
-        return "redirect:/admin/createCat";
+        return "redirect:/admin/categoryList";
     }
 
     @DeleteMapping("/delete")
