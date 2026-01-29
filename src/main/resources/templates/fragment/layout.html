@@ -84,7 +84,7 @@
                 <span class="text-[10px] font-medium">Home</span>
             </a>
 
-            <a href="/ventes"
+            <a href="/auction"
                class="flex flex-col items-center justify-center w-full h-full " th:classappend="${activePage == 'auction' ? 'text-white opacity-100 scale-105' : 'text-gray-400 opacity-70 hover:text-white hover:opacity-100'}">
                 <svg class="w-7 h-7 mb-1 stroke-current" viewBox="0 0 24 24" fill="none"
                      xmlns="http://www.w3.org/2000/svg">
@@ -107,8 +107,8 @@
                 <span class="text-[10px] font-bold">Admin</span>
             </a>
 
-            <a href="/profil" th:if="${#authorization.expression('isAuthenticated()')}"
-               class="flex flex-col items-center justify-center w-full h-full hover:text-white hover:bg-gray-900 transition">
+            <a href="/profile" th:if="${#authorization.expression('isAuthenticated()')}"
+               class="flex flex-col items-center justify-center w-full h-full " th:classappend="${activePage == 'profile' ? 'text-white opacity-100 scale-105' : 'text-gray-400 opacity-70 hover:text-white hover:opacity-100'}">
 
                 <div class="relative inline-block">
 
