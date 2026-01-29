@@ -1,13 +1,12 @@
 package fr.eni.springboot.controller;
 
 
+import fr.eni.springboot.bo.Category;
 import fr.eni.springboot.bo.Withdrawal;
 import fr.eni.springboot.service.WithdrawalService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class WithdrawalController {
@@ -39,4 +38,17 @@ public class WithdrawalController {
         service.readWithdrawal().forEach(System.out::println);
         return "redirect:/withdrawal";
     }
+
+    @DeleteMapping("/admin/deleteWithdrawal")
+    public String deleteWithdrawal(@RequestParam("id") long id) {
+        service.deleteWithdrawal(id);
+        return "redirect:/withdrawal";
+    }
+
+    @PostMapping("/admin/updateWithdrawal")
+    public String updateWithdrawal(@ModelAttribute(name = "withdrawal") Withdrawal withdrawal) {
+        service.updateWithdrawal(withdrawal);
+        return "redirect:/withdrawal";
+    }
+
 }

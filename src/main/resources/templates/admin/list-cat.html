@@ -6,56 +6,117 @@
 </head>
 <body>
 <main>
-    <h1>Liste des catégories</h1>
-    <table>
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nom</th>
-            <th>Supprimer</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr data-th-each="item : ${categoryList}">
-            <td data-th-text="${item.category_id}"></td>
-            <td data-th-text="${item.name}"></td>
-            <td>
-                <form th:action="@{/admin/delete(id=${item.category_id})}" method="post">
+    <h2 class="text-[4rem] font-medium ms-15 p-5 text-white">All Category's</h2>
+    <section class=" h-2/3 w-full mb-10">
+        <div class="flex justify-center">
+            <div class=" overflow-x-auto bg-grey dark:bg-neutral-700 max-h-full overflow-y-auto
+          [&::-webkit-scrollbar]:w-2
+          [&::-webkit-scrollbar-track]:bg-transparent
+          [&::-webkit-scrollbar-thumb]:bg-transparent
+          dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+          dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
 
-                    <input type="hidden" name="_method" value="delete"/>
+                <div class="relative m-[2px] mb-3 mr-5 float-left">
+                    <label for="inputSearch" class="sr-only">Search </label>
+                    <input id="inputSearch" type="text" placeholder="Search..."
+                           class="block w-64 rounded-lg border dark:border-none dark:bg-neutral-600 py-2 pl-10 pr-4 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400"/>
+                    <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 transform">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+           class="h-4 w-4 text-neutral-500 dark:text-neutral-200">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+      </svg>
+    </span>
+                </div>
+                <div class="relative m-[2px] mb-3 float-right hidden sm:block">
+                    <label for="inputFilter" class="sr-only">Filter</label>
+                    <select id="inputFilter"
+                            class="block w-40 rounded-lg border dark:border-none dark:bg-neutral-600 p-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400">
+                        <option value="1" selected>Last week</option>
+                        <option value="2">Last month</option>
+                        <option value="3">Yesterday</option>
+                        <option value="4">Last 7 days</option>
+                        <option value="5">Last 30 days</option>
+                    </select>
+                </div>
 
-                    <button type="submit" class="btn-danger">Supprimer</button>
-                </form>
-                <button type="button"
-                        th:onclick="'document.getElementById(\'modal-' + ${item.category_id} + '\').showModal()'">
-                    Modifier
-                </button>
+                <!-- Table -->
+                <table class="min-w-full text-left text-sm whitespace-nowrap">
 
+                    <!-- Table head -->
+                    <thead class="uppercase tracking-wider sticky top-0 bg-grey dark:bg-neutral-700 outline outline-2 outline-neutral-200 dark:outline-neutral-600 bg-black">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            id
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Name
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Delete
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Change
+                        </th>
+                    </tr>
+                    </thead>
 
-                <!--MODAL-->
-                <dialog th:id="'modal-' + ${item.category_id}">
-                    <h3>Modifier la catégorie</h3>
+                    <tbody>
 
-                    <form th:action="@{/admin/update}" method="post">
+                    <tr data-th-each="item : ${categoryList}" class="border-b dark:border-neutral-600">
+                        <th class="px-6 py-3" th:text="${item.category_id}"></th>
+                        <th class="px-6 py-3" th:text="${item.name}"></th>
+                        <th class="px-6 py-3" >
 
-                        <input type="hidden" name="category_id" th:value="${item.category_id}"/>
+                            <form th:action="@{/admin/delete(id=${item.category_id})}" method="post">
 
-                        <ul>
-                            <li>
-                                <label>Nom :</label>
-                                <input type="text" name="name" th:value="${item.name}" required/>
-                            </li>
-                        </ul>
+                                <input type="hidden" name="_method" value="delete"/>
 
-                        <button type="submit">Enregistrer</button>
+                                <button type="submit" class="btn-danger">Supprimer</button>
+                            </form>
+                        </th>
+                        <th>
+                            <button type="button"
+                                    th:onclick="'document.getElementById(\'modal-' + ${item.category_id} + '\').showModal()'">
+                                Change
+                            </button>
+                            <!--MODAL-->
+                            <dialog th:id="'modal-' + ${item.category_id}">
+                                <h3>Change category</h3>
 
-                        <button type="button" onclick="this.closest('dialog').close()">Annuler</button>
-                    </form>
-                </dialog>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+                                <form th:action="@{/admin/update}" method="post">
+
+                                    <input type="hidden" name="category_id" th:value="${item.category_id}"/>
+
+                                    <ul>
+                                        <li>
+                                            <label>Name  :</label>
+                                            <input type="text" name="name" th:value="${item.name}" required/>
+                                        </li>
+                                    </ul>
+
+                                    <button type="submit">Save</button>
+
+                                    <button type="button" onclick="this.closest('dialog').close()">Back</button>
+                                </form>
+                            </dialog>
+                        </th>
+                    </tr>
+                    </tbody>
+
+                    <tfoot class="border-t-2 dark:border-neutral-600">
+                    <tr>
+                        <th class="px-6 py-3">Total Category:</th>
+                        <td class="px-6 py-3" th:text="${categoryList.size()}"></td>
+                    </tr>
+                    </tfoot>
+
+                </table>
+
+            </div>
+        </div>
+    </section>
+
 </main>
 </body>
 </html>

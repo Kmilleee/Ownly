@@ -6,6 +6,15 @@ public class Withdrawal {
     private String street;
     private String postalCode;
     private String city;
+    private long article_id;
+
+    public long getArticle_id() {
+        return article_id;
+    }
+
+    public void setArticle_id(long article_id) {
+        this.article_id = article_id;
+    }
 
     public long getWithdrawal_id() {
         return withdrawal_id;
