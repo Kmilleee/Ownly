@@ -45,32 +45,38 @@
                 <!-- Table head -->
                 <thead class="uppercase tracking-wider sticky top-0 bg-grey dark:bg-neutral-700 outline outline-2 outline-neutral-200 dark:outline-neutral-600 bg-black">
                 <tr>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-3">
                         Username
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-3">
                         Last Name
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-3">
                         Frist Name
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-3">
                         Email
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-3">
                         Phone
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-3">
                         Street
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-3">
                         Postal Code
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-3">
                         City
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-3">
                         Credit
+                    </th>
+                    <th scope="col" class="px-3 py-3">
+                        Admin
+                    </th>
+                    <th scope="col" class="px-3 y-3">
+                        Delete
                     </th>
                 </tr>
                 </thead>
@@ -79,15 +85,24 @@
                 <tbody>
 
                 <tr th:each="u : ${userList}" class="border-b dark:border-neutral-600">
-                    <th class="px-6 py-3" th:text="${u.getUsername()}"></th>
-                    <th class="px-6 py-3" th:text="${u.getLastName()}"></th>
-                    <th class="px-6 py-3" th:text="${u.getFirstName()}"></th>
-                    <th class="px-6 py-3" th:text="${u.getEmail()}"></th>
-                    <th class="px-6 py-3" th:text="${u.getNumPhone()}"></th>
-                    <th class="px-6 py-3" th:text="${u.getStreet()}"></th>
-                    <th class="px-6 py-3" th:text="${u.getPostalCode()}"></th>
-                    <th class="px-6 py-3" th:text="${u.getCity()}"></th>
-                    <th class="px-6 py-3" th:text="${u.getCredit()}"></th>
+                    <th class="px-3 py-3" th:text="${u.getUsername()}"></th>
+                    <th class="px-3 py-3" th:text="${u.getLastName()}"></th>
+                    <th class="px-3 py-3" th:text="${u.getFirstName()}"></th>
+                    <th class="px-3 py-3" th:text="${u.getEmail()}"></th>
+                    <th class="px-3 py-3" th:text="${u.getNumPhone()}"></th>
+                    <th class="px-3 py-3" th:text="${u.getStreet()}"></th>
+                    <th class="px-3 py-3" th:text="${u.getPostalCode()}"></th>
+                    <th class="px-3 py-3" th:text="${u.getCity()}"></th>
+                    <th class="px-3 py-3" th:text="${u.getCredit()}"></th>
+                    <th class="px-3 py-3" th:text="${u.isAdmin()}" ></th>
+                    <th>
+                        <form th:action="@{/deleteUser(id=${u.user_id})}" method="post">
+
+                            <input type="hidden" name="_method" value="delete"/>
+
+                            <button type="submit" class="btn-danger">Supprimer</button>
+                        </form>
+                    </th>
                 </tr>
 
 

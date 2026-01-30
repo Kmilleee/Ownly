@@ -66,6 +66,7 @@ public class SecurityConfiguration {
                     .requestMatchers(HttpMethod.GET, "/admin/addUser").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.GET, "/ventes/").hasRole("USER")
                     .requestMatchers(HttpMethod.GET, "/auction").hasRole("USER")
+                    .requestMatchers(HttpMethod.GET, "/forgotPassword").permitAll()
                     .requestMatchers(HttpMethod.GET, "/auctionAll").hasRole("USER")
                     .requestMatchers(HttpMethod.GET, "/ventes/createSale").hasRole("USER")
                     .requestMatchers(HttpMethod.POST, "/admin/addWithdrawal").hasRole("ADMIN")
