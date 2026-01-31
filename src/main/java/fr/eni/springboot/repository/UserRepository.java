@@ -17,4 +17,8 @@ public interface UserRepository {
     void deleteUser(long user_id);
 
     User readUserByUsername(String username);
+
+    User findByEmail(String email);
+
+    void updatePassword(String email, String encodedPassword);
 }

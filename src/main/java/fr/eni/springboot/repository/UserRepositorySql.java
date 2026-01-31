@@ -3,6 +3,7 @@ package fr.eni.springboot.repository;
 import fr.eni.springboot.bo.User;
 import fr.eni.springboot.repository.exception.TestException;
 import fr.eni.springboot.repository.rowMapper.UtilisateurRowMapper;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -104,5 +105,32 @@ public class UserRepositorySql implements UserRepository {
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("username", username);
         return namedParameterJdbcTemplate.queryForObject(sql, map, new BeanPropertyRowMapper<>(User.class));
+    }
+
+    @Override
+    public User findByEmail(String email) {
+
+            String sql = "SELECT * FROM USERS WHERE email = :email";
+
+            MapSqlParameterSource map = new MapSqlParameterSource();
+            map.addValue("email", email);
+
+            try {
+                return namedParameterJdbcTemplate.queryForObject(sql,map, new BeanPropertyRowMapper<>(User.class));
+            } catch (EmptyResultDataAccessException e) {
+                return null;
+            }
+
+    }
+    @Override
+    public void updatePassword(String email, String encodedPassword) {
+        String sql = "UPDATE USERS SET password = :password WHERE email = :email";
+
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("password", encodedPassword);
+        map.addValue("email", email);
+
+
+        namedParameterJdbcTemplate.update(sql,map);
     }
 }

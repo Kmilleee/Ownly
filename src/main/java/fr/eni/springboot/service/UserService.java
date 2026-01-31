@@ -17,4 +17,8 @@ public interface UserService {
     User readUserByUsername(String username);
 
     User readUserById(long user_id);
+
+    User findByEmail(String email);
+
+    void updatePassword(String email, String newPassword);
 }
