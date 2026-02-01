@@ -1,5 +1,7 @@
 package fr.eni.springboot.bo;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 public class ItemSold {
@@ -7,10 +9,12 @@ public class ItemSold {
     private long id;
     private String articleName;
     private String description;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate auctionStartDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate auctionEndDate;
-    private long startingPrice;
-    private long priceSale;
+    private Long startingPrice;
+    private Long priceSale;
     private String image;
 
     private User buyer;
@@ -66,19 +70,19 @@ public class ItemSold {
         this.auctionEndDate = auctionEndDate;
     }
 
-    public long getStartingPrice() {
+    public Long getStartingPrice() {
         return startingPrice;
     }
 
-    public void setStartingPrice(long startingPrice) {
+    public void setStartingPrice(Long startingPrice) {
         this.startingPrice = startingPrice;
     }
 
-    public long getPriceSale() {
+    public Long getPriceSale() {
         return priceSale;
     }
 
-    public void setPriceSale(long priceSale) {
+    public void setPriceSale(Long priceSale) {
         this.priceSale = priceSale;
     }
 
@@ -117,7 +121,7 @@ public class ItemSold {
     public ItemSold() {
     }
 
-    public ItemSold(long id, String articleName, String description, LocalDate auctionStartDate, LocalDate auctionEndDate, long startingPrice, long priceSale, String image, User buyer, User seller, Category category, Withdrawal withdrawal) {
+    public ItemSold(long id, String articleName, String description, LocalDate auctionStartDate, LocalDate auctionEndDate, Long startingPrice, Long priceSale, String image, User buyer, User seller, Category category, Withdrawal withdrawal) {
         this.id = id;
         this.articleName = articleName;
         this.description = description;

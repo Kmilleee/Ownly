@@ -1,18 +1,22 @@
 package fr.eni.springboot.controller;
 
+import ch.qos.logback.core.util.StringUtil;
 import fr.eni.springboot.bo.Category;
 import fr.eni.springboot.bo.ItemSold;
 import fr.eni.springboot.bo.User;
 import fr.eni.springboot.service.CategoryService;
+import fr.eni.springboot.service.FileUploadService;
 import fr.eni.springboot.service.ItemSoldService;
 import fr.eni.springboot.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
@@ -47,18 +51,12 @@ public class ItemSoldController {
     }
 
     @PostMapping("/createSale")
-    //Objet Principal EN GROS ça permet d'accéder à l'identité du user connecté
-    public String validSalesForm(Principal principal, @ModelAttribute("article") ItemSold itemSold) {
+    public String createSale(@RequestParam("imageFile") MultipartFile multipartFile, @ModelAttribute("article") ItemSold itemSold, BindingResult bindingResult, Principal principal) throws IOException {
+        if (bindingResult.hasErrors()) {
+            return "create-sale";
+        }
+        itemSoldService.createItemSold(itemSold, multipartFile, principal);
 
-        /* principal.getName retourne l'identité du user connecté (en l'occurence le username car la valeur retournée
-         correspond à la première colonne sélectionnée dans la requête SQL dans SecurityConfiguration (voir commentaire)*/
-        User seller = userService.readUserByUsername(principal.getName());
-
-        //Affecte le User récupéré en tant que vendeur
-        itemSold.setSeller(seller);
-
-        itemSoldService.createItemSold(itemSold);
-
-        return "redirect:createSale";
+        return "redirect:/ventes/createSale";
     }
 }

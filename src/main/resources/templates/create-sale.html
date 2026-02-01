@@ -8,7 +8,8 @@
 <main>
     <h1 class="text-[1.5rem] md:text-[5rem] ml-9 text-white text-3xl font-semibold  text-start mb-3 tracking-tight">New
         sale</h1>
-    <form th:action="@{/ventes/createSale}" method="POST" th:object="${article}" class="max-w-md mx-auto md:hidden">
+    <form th:action="@{/ventes/createSale}" enctype="multipart/form-data" method="POST" th:object="${article}"
+          class="max-w-md mx-auto md:hidden">
         <div class='w-full max-w-lg backdrop-blur-sm rounded-xl p-8'>
 
             <div id="infos">
@@ -46,7 +47,14 @@
                                class='w-full bg-white border border-white rounded-lg px-4 py-3 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'>
                     </div>
                 </section>
-
+                <div>
+                    <label for="fileImage_Mobile" class='mt-4 block text-white text-sm mb-2'>Image</label>
+                    <input type="file" id="fileImage_Mobile" name="imageFile" accept="image/jpeg, image/png" required>
+                    <p id="imageError_Mobile" class="hidden text-red-500 text-xs mt-1">L'image est trop lourde (max 1 Mo).</p>
+                </div>
+                <div>
+                    <img src="#" alt="" id="thumbnail_Mobile">
+                </div>
                 <div>
                     <label class='mt-4 block text-white text-sm mb-2'>Description</label>
                     <textarea placeholder=" " rows="4" required th:field="*{description}"
@@ -90,19 +98,12 @@
         </div>
     </form>
     <script th:src="@{/js/form-steps.js}"></script>
-
-
-
-
-
-
-
-
+    <script th:src="@{/js/upload-preview.js}"></script>
 
 
     <section class="flex items-center justify-center py-12 px-4">
         <form class="md:grid md:grid-cols-2 md:gap-10 lg:gap-20 max-w-7xl w-full items-start hidden "
-              th:action="@{/ventes/createSale}" method="POST" th:object="${article}">
+              th:action="@{/ventes/createSale}" enctype="multipart/form-data" method="POST" th:object="${article}">
 
             <div class="p-5">
                 <h1 class="text-3xl font-semibold text-white text-center md:text-start mb-3 tracking-tight">
@@ -122,10 +123,10 @@
                         <label for="category2" class="block text-sm text-white mb-2">Category</label>
                         <select id="category2" th:field="*{category.category_id}"
                                 class='w-full bg-white border border-white rounded-lg px-3 py-2.5 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'>
-                                required>
+                            required>
                             <option th:each="item : ${categoryList}" th:text="${item.name}"
                                     th:value="${item.category_id}"></option>
-                        </select>  </div>
+                        </select></div>
                 </div>
 
                 <div class="mb-5">
@@ -145,8 +146,14 @@
                     <input id="end" type="date" required placeholder=" " th:field="*{auctionEndDate}"
                            class='w-full bg-white border border-white rounded-lg px-3 py-2 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'>
                 </div>
-
-
+                <div>
+                    <label for="fileImage_Desktop" class='mt-4 block text-white text-sm mb-2'>Image</label>
+                    <input type="file" id="fileImage_Desktop" name="imageFile" accept="image/jpeg, image/png" required>
+                    <p id="imageError_Desktop" class="hidden text-red-500 text-xs mt-1">L'image est trop lourde (max 1 Mo).</p>
+                </div>
+                <div>
+                    <img src="#" alt="" id="thumbnail_Desktop">
+                </div>
                 <div class="flex items-center gap-2 mb-6">
                     <input type="checkbox"
                            class="w-5 h-5 cursor-pointer accent-indigo-500 rounded-[5px] text-gray-300"/>
@@ -188,29 +195,39 @@
                 </h1>
 
                 <div class="flex-col mt-15">
-                    <div class="flex flex-col mt-15 max-w-2xl mx-auto"> <div class="space-y-5"> <div class="grid grid-cols-3 items-center">
-                        <label for="street" class="text-white font-medium">Street</label>
-                        <input id="street" type="text" placeholder="Rue de la place" th:field="*{withdrawal.street}"
-                               class="col-span-2 bg-white rounded-lg px-4 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
+                    <div class="flex flex-col mt-15 max-w-2xl mx-auto">
+                        <div class="space-y-5">
+                            <div class="grid grid-cols-3 items-center">
+                                <label for="street" class="text-white font-medium">Street</label>
+                                <input id="street" type="text" placeholder="Rue de la place"
+                                       th:field="*{withdrawal.street}"
+                                       class="col-span-2 bg-white rounded-lg px-4 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
 
-                        <div class="grid grid-cols-3 items-center">
-                            <label for="postalCode" class="text-white font-medium">Postal Code</label>
-                            <input id="postalCode" type="text" placeholder="35000" th:field="*{withdrawal.postalCode}"
-                                   class="col-span-2 bg-white rounded-lg px-4 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <div class="grid grid-cols-3 items-center">
+                                <label for="postalCode" class="text-white font-medium">Postal Code</label>
+                                <input id="postalCode" type="text" placeholder="35000"
+                                       th:field="*{withdrawal.postalCode}"
+                                       class="col-span-2 bg-white rounded-lg px-4 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+
+                            <div class="grid grid-cols-3 items-center">
+                                <label for="city" class="text-white font-medium">City</label>
+                                <input id="city" type="text" placeholder="Paris" th:field="*{withdrawal.city}"
+                                       class="col-span-2 bg-white rounded-lg px-4 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+
                         </div>
-
-                        <div class="grid grid-cols-3 items-center">
-                            <label for="city" class="text-white font-medium">City</label>
-                            <input id="city" type="text" placeholder="Paris" th:field="*{withdrawal.city}"
-                                   class="col-span-2 bg-white rounded-lg px-4 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        </div>
-
-                    </div>
 
                         <div class="flex gap-4 mt-10">
-                            <button type="submit" class="w-full py-3 bg-white text-black rounded-lg font-bold hover:bg-gray-200 transition">Apply</button>
-                            <button type="button" class="w-full py-3 bg-gray-600 text-white rounded-lg font-bold hover:bg-gray-700 transition">Back</button>
+                            <button type="submit"
+                                    class="w-full py-3 bg-white text-black rounded-lg font-bold hover:bg-gray-200 transition">
+                                Apply
+                            </button>
+                            <button type="button"
+                                    class="w-full py-3 bg-gray-600 text-white rounded-lg font-bold hover:bg-gray-700 transition">
+                                Back
+                            </button>
                         </div>
                     </div>
 
