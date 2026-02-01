@@ -10,6 +10,7 @@
                 <p class="hidden md:block w-full text-sm text-nowrap text-white text-center ">connect with Google</p>
 
                 <div class="mt-10 mb-2 w-full flex justify-center">
+                    <a th:href="@{/oauth2/authorization/google}">
                     <button type="button"
                             class="flex w-1/2 mb-10 items-center justify-center rounded-full bg-gray-200 border border-gray-200 py-2  hover:bg-gray-50 focus:border-gray-300 cursor-pointer">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -30,6 +31,7 @@
                             </defs>
                         </svg>
                     </button>
+                    </a>
                 </div>
                 <div class="my-5 flex w-full items-center gap-4">
                     <div class="h-px w-full bg-gray-300/90"></div>

@@ -82,6 +82,8 @@ public class UserRepositorySql implements UserRepository {
         namedParameterJdbcTemplate.update(sql, map);
 
 
+
+
     }
 
     @Override
@@ -104,7 +106,13 @@ public class UserRepositorySql implements UserRepository {
 
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("username", username);
-        return namedParameterJdbcTemplate.queryForObject(sql, map, new BeanPropertyRowMapper<>(User.class));
+        // le try catch permet de mettre des valeurs null au lieu de crash dans le cas d'un utilisateur google
+        try {
+            return namedParameterJdbcTemplate.queryForObject(sql, map, new BeanPropertyRowMapper<>(User.class));
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+
     }
 
     @Override

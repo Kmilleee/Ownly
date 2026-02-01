@@ -15,6 +15,8 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 public class SecurityConfiguration {
     //configuration de l'utilisation de la base de donnée pour se connecter
@@ -58,6 +60,7 @@ public class SecurityConfiguration {
                      *           *********************************************    */
 
                             requestMatchers(HttpMethod.GET, "/withdrawal").hasRole("USER")
+
                     /*accès au chemin /icecream/add en Get pour les admins */
                     .requestMatchers(HttpMethod.GET, "/user").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.GET, "/").permitAll()
@@ -79,6 +82,7 @@ public class SecurityConfiguration {
                     .requestMatchers(HttpMethod.POST, "/signup").permitAll()
                     .requestMatchers(HttpMethod.GET, "/login").permitAll()
                     .requestMatchers("/.well-know/**").permitAll()
+
 
                     /* *********************************************                     jusqu'à là */
                     //donne à tous la permission sur la page d'accueil
@@ -104,7 +108,8 @@ public class SecurityConfiguration {
                     .anyRequest().denyAll();
         });
         //gestion automatique du login
-        http.formLogin(Customizer.withDefaults());
+        http.formLogin(withDefaults());
+
 
 
         /*** pas touche *****/
@@ -117,6 +122,11 @@ public class SecurityConfiguration {
                 }
         );
 
+        http.oauth2Login((oauth2) -> oauth2
+                .loginPage("/login")
+                .defaultSuccessUrl("/changeProfile", true)
+        );
+
         http.logout(logout -> {
             //déterminer la page à utiliser pour le logout
             logout.logoutUrl("/logout")
@@ -125,7 +135,9 @@ public class SecurityConfiguration {
         });
 
 
-        return http.build();
+        return http
+
+                .build();
 
 
 
