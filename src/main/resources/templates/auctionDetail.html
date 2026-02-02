@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html data-th-replace="~{fragment/layout :: frag_layout(content= ~{::main})}" lang="fr">
+
+<body>
+<main>
+    <div class="relative z-10">
+        <h1 class="text-[5rem] font-bold p-1 ms-15 ">Auction Détails</h1>
+    </div>
+
+
+    <section class="flex justify-around w-full items-center">
+
+        <img th:src="|/itemsSold-photos/${itemOBJ.id}/${itemOBJ.image}|" alt="image de l'item à vendre">
+
+
+        <div class="flex-col">
+            <h2>test</h2>
+            <h2 th:text="${itemOBJ.getCategory().name}"></h2>
+            <h2>fe</h2>
+
+            <h2>nom de l'article</h2>
+            <h2 th:text="${itemOBJ.getArticleName()}"></h2>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+</body>
+</html>

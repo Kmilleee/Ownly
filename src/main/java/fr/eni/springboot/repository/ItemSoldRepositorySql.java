@@ -67,7 +67,11 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
 
     @Override
     public List<ItemSold> readItemSold() {
-        String sql = "SELECT * FROM ItemSold";
+        String sql = "SELECT a.article_id as article_id, a.articleName as name_article, a.startingPrice as startingPrice, a.priceSale, a.auctionStartDate, a.auctionEndDate, a.description,a.category_id as category_id, a.image, c.name as nom_cat, u.username \n" +
+                "FROM ItemSold a\n" +
+                "INNER JOIN CATEGORY c ON a.category_id = c.category_id\n" +
+                "INNER JOIN USERS u ON a.user_id = u.user_id\n";
+
 
         return jdbcTemplate.query(sql, new ItemSoldRowMapper());
     }
@@ -110,8 +114,11 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
     @Override
     public ItemSold readItemById(long article_id) {
 
-        String sql = "SELECT * FROM ItemSold WHERE article_id=:article_id";
-
+        String sql = "SELECT a.article_id as article_id, a.articleName as name_article, a.startingPrice as startingPrice, a.priceSale, a.auctionStartDate, a.auctionEndDate, a.description, a.image, a.category_id as category_id,c.name as nom_cat, u.username \n" +
+                "FROM ItemSold a\n" +
+                "INNER JOIN CATEGORY c ON a.category_id = c.category_id\n" +
+                "INNER JOIN USERS u ON a.user_id = u.user_id\n" +
+                "WHERE a.article_id =:article_id  ";
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("article_id", article_id);
 
