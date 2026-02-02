@@ -1,4 +1,36 @@
+/* 1. On définit la police */
+@font-face {
+    font-family: 'Chillax';
 
+    src: url('/font/Chillax-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Supreme';
+    src: url('/font/Supreme-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@import "tailwindcss";
+
+
+@theme {
+
+    --font-chillax: "Chillax", sans-serif;
+    --font-para: "Supreme", sans-serif;
+}
+
+body {
+    font-family: "Chillax", sans-serif;
+}
+
+
+
+/*CSS POUR LA ROTATION DES CARDS */
 .hover-3d {
     perspective: 1000px; /* Donne la profondeur */
     position: relative;
