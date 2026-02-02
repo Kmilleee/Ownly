@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.nio.file.Path;
@@ -83,6 +84,13 @@ public class AuctionController {
 
         model.addAttribute("articles", articles);
         return "auctionAll";
+    }
+
+    @GetMapping("/auctionDetail")
+    public String displayAuctionDetail(@RequestParam("id") long  id_item, Model model) {
+        model.addAttribute("itemOBJ", serviceItem.readItemSoldById(id_item));
+
+        return "/auctionDetail";
     }
 
 }

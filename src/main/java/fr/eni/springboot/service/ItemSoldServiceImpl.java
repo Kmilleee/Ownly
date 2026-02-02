@@ -56,4 +56,9 @@ public class ItemSoldServiceImpl implements ItemSoldService {
     public List<ItemSold> readItemSold() {
         return itemSoldRepository.readItemSold();
     }
+
+    @Override
+    public ItemSold readItemSoldById(long article_id) {
+        return itemSoldRepository.readItemSoldById(article_id);
+    }
 }

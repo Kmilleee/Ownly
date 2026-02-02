@@ -11,4 +11,5 @@ public interface ItemSoldService {
 
     void createItemSold(ItemSold itemSold, MultipartFile file, Principal principal) throws IOException;
     List<ItemSold> readItemSold();
+    ItemSold readItemSoldById(long article_id);
 }
