@@ -191,7 +191,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @PostMapping("/user")
+    @PostMapping("/disable-user")
     public String disableUser(@RequestParam("id") long id) {
         userService.disableUser(id);
         return "redirect:/user";

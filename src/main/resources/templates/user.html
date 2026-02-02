@@ -99,7 +99,7 @@
                         <th class="px-3 py-3" th:text="${u.getCredit()}"></th>
                         <th class="px-3 py-3" th:text="${u.isAdmin()}"></th>
                         <th>
-                            <form th:action="@{/admin/disable-user}" method="post">
+                            <form th:action="@{/disable-user}" method="post">
                                 <input type="hidden" name="id" th:value="${u.user_id}">
 
                                 <button type="submit"
