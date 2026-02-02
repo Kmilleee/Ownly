@@ -49,3 +49,9 @@
 .hover-3d:has(.sensor:nth-child(8):hover) figure { transform: rotateX(-20deg); }
 /* Bas-Droite */
 .hover-3d:has(.sensor:nth-child(9):hover) figure { transform: rotateX(-20deg) rotateY(20deg); }
+
+/* Version compatible avec ton HTML actuel */
+.hover-3d:has(.sensor:nth-child(2):hover) figure { transform: rotateX(25deg) rotateY(-25deg); }
+.hover-3d:has(.sensor:nth-child(3):hover) figure { transform: rotateX(25deg); }
+/* etc... répéter pour les 8 directions */
+
