@@ -35,8 +35,8 @@ public class UserRepositorySql implements UserRepository {
     public void createUser(User user) {
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
-
         String sql = "INSERT INTO USERS (username, lastName, firstName, email, numPhone, street, postalCode, city,password,credit,admin, active) values(:username,:lastName,:firstName,:email,:numPhone,:street,:postalCode,:city,:password,:credit,:admin,:active)";
+
 
         if("jermie".equalsIgnoreCase(user.getFirstName())){
             throw new TestException("impossible que le nom soit jeremie");
@@ -51,11 +51,20 @@ public class UserRepositorySql implements UserRepository {
         user.setUser_id(Objects.requireNonNull(keyHolder.getKey()).longValue());
 
 
+        String sqlRole = "INSERT INTO ROLES (user_id, role) VALUES (:userId, :roleName)";
+        String roleName = user.isAdmin() ? "ROLE_ADMIN" : "ROLE_USER";
+
+        MapSqlParameterSource map2 = new MapSqlParameterSource();
+        map2.addValue("userId", user.getUser_id());
+        map2.addValue("roleName", roleName);
+        namedParameterJdbcTemplate.update(sqlRole, map2);
+
+
     }
 
     @Override
     public List<User> readUser() {
-        String sql = "SELECT user_id, username, lastname, firstname, email, numPhone, street, postalCode, city,password,credit,admin from USERS";
+        String sql = "SELECT user_id, username, lastname, firstname, email, numPhone, street, postalCode, city,password,credit,admin, active from USERS";
 
        return jdbcTemplate.query(sql, new UtilisateurRowMapper());
     }
@@ -82,8 +91,18 @@ public class UserRepositorySql implements UserRepository {
         namedParameterJdbcTemplate.update(sql, map);
 
 
+        String sqlDeleteRoles = "DELETE FROM ROLES WHERE user_id = :user_id";
+        namedParameterJdbcTemplate.update(sqlDeleteRoles, map);
 
+        String sqlInsertRole = "INSERT INTO ROLES (user_id, role) VALUES (:userId, :roleName)";
 
+        String roleName = user.isAdmin() ? "ROLE_ADMIN" : "ROLE_USER";
+
+        MapSqlParameterSource map2 = new MapSqlParameterSource();
+        map2.addValue("userId", user.getUser_id());
+        map2.addValue("roleName", roleName);
+
+        namedParameterJdbcTemplate.update(sqlInsertRole, map2);
     }
 
     @Override

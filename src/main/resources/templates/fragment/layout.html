@@ -44,11 +44,11 @@
                        th:classappend="${activePage == 'sell' ? ' text-pink-500' : 'text-white'}"
                        class="hover:text-pink-500 font-medium transition">Sell</a></li>
 
-                <li th:if="${#authorization.expression('hasRole(''USER'')')}">
-                    <a th:href="@{/withdrawal}"
-                       th:classappend="${activePage == 'withdrawal' ? ' text-pink-500' : 'text-white'}"
-                       class="hover:text-pink-500 font-medium transition">Withdrawal</a>
-                </li>
+<!--                <li th:if="${#authorization.expression('hasRole(''USER'')')}">-->
+<!--                    <a th:href="@{/withdrawal}"-->
+<!--                       th:classappend="${activePage == 'withdrawal' ? ' text-pink-500' : 'text-white'}"-->
+<!--                       class="hover:text-pink-500 font-medium transition">Withdrawal</a>-->
+<!--                </li>-->
                 <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
                     <a th:href="@{/admin/admin}"
                        th:classappend="${activePage == 'admin' ? ' text-pink-500' : 'text-white'}"

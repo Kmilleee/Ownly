@@ -1,5 +1,7 @@
 package fr.eni.springboot.bo;
 
+import org.springframework.data.relational.core.mapping.Column;
+
 import java.util.Objects;
 
 public class User {
@@ -14,6 +16,7 @@ public class User {
     private String city;
     private String password;
     private long credit = 100;
+    @Column("admin")
     private boolean admin = false;
     private boolean active = true ;
 
@@ -170,6 +173,7 @@ public class User {
         sb.append(", password='").append(password).append('\'');
         sb.append(", credit=").append(credit);
         sb.append(", admin=").append(admin);
+        sb.append(", active=").append(active);
         sb.append('}');
         return sb.toString();
     }

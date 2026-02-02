@@ -23,6 +23,8 @@ public class UtilisateurRowMapper implements RowMapper<User> {
         user.setStreet((rs.getString("street")));
         user.setCredit(rs.getInt("credit"));
         user.setPostalCode(rs.getString("postalCode"));
+        user.setAdmin(rs.getBoolean("admin"));
+        user.setActive(rs.getBoolean("active"));
 
         return user;
 
