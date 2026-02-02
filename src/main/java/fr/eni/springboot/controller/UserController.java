@@ -5,6 +5,7 @@ import fr.eni.springboot.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -81,44 +82,91 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public String displayProfile(Principal principal, Model model){
+    public String displayProfile(Principal principal, Model model, Authentication authentication) {
         model.addAttribute("activePage", "profile");
-        String username = principal.getName();
 
-        User user = userService.readUserByUsername(username);
+        User user = null;
+
+        if (authentication.getPrincipal() instanceof OAuth2User) {
+            OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
+            String email = oauth2User.getAttribute("email");
+            user = userService.findByEmail(email);
+        } else {
+            user = userService.readUserByUsername(principal.getName());
+        }
+        if (user == null) {
+            user = new User();
+            if (authentication.getPrincipal() instanceof OAuth2User) {
+                OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
+                user.setUsername(oauth2User.getAttribute("name"));
+                user.setEmail(oauth2User.getAttribute("email"));
+                user.setFirstName("Compte Google");
+            } else {
+                user.setUsername(principal.getName());
+            }
+        }
 
         model.addAttribute("UserCo", user);
-        return"/profile";
+        return "/profile";
     }
 
     @GetMapping("/changeProfile")
-    public String displayChangeProfile(Principal principal, Model model ){
+    public String displayChangeProfile(Principal principal, Model model, Authentication authentication ) {
         String username = principal.getName();
 
         User user = userService.readUserByUsername(username);
+        if (user == null) {
+            user = new User();
+            if (authentication.getPrincipal() instanceof OAuth2User) {
+                OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
+                user.setUsername(oauth2User.getAttribute("name"));
+                user.setEmail(oauth2User.getAttribute("email"));
+            }
+        }
+
+        model.addAttribute("user", user);
         model.addAttribute("UserOBJ", user);
         model.addAttribute("UserCo", user);
         return"/changeProfile";
     }
 
     @PostMapping("/changeProfile")
-    public String displayUpdateProfile(@ModelAttribute("UserOBJ") User user, Model model ){
-        userService.updateUser(user);
+    public String displayUpdateProfile(@ModelAttribute("UserOBJ") User formUser, Model model, Principal principal, Authentication authentication) {
 
+        User existingUser = null;
+
+        if (authentication.getPrincipal() instanceof OAuth2User) {
+            OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
+            String email = oauth2User.getAttribute("email");
+            existingUser = userService.findByEmail(email);
+        } else {
+            existingUser = userService.readUserByUsername(authentication.getName());
+        }
+
+
+        if (existingUser == null) {
+
+            if (authentication.getPrincipal() instanceof OAuth2User) {
+                OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
+                formUser.setEmail(oauth2User.getAttribute("email"));
+            }
+            userService.createUser(formUser);
+        } else {
+            formUser.setUser_id(existingUser.getUser_id());
+            formUser.setEmail(existingUser.getEmail());
+
+            userService.updateUser(formUser);
+        }
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-
         Authentication newAuth = new UsernamePasswordAuthenticationToken(
-                user.getUsername(),
+                formUser.getUsername(),
                 auth.getCredentials(),
                 auth.getAuthorities()
         );
         SecurityContextHolder.getContext().setAuthentication(newAuth);
 
-        System.out.println("Base de données et Session mises à jour !");
-
-        System.out.println("utilisateur modifié");
-        return"redirect:/profile";
+        System.out.println("✅ Profil mis à jour avec succès !");
+        return "redirect:/profile";
     }
 
     @DeleteMapping("/deleteUser")

@@ -2,7 +2,6 @@ package fr.eni.springboot.service;
 
 import fr.eni.springboot.bo.User;
 import fr.eni.springboot.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +12,7 @@ public class UserServiceImpl implements UserService{
 
     UserRepository dao;
     private PasswordEncoder passwordEncoder;
+
 
     public UserServiceImpl(UserRepository dao, PasswordEncoder passwordEncoder) {
         this.dao = dao;
@@ -61,5 +61,17 @@ public class UserServiceImpl implements UserService{
     @Override
     public User readUserById(long user_id) {
         return dao.readUserById(user_id);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return dao.findByEmail(email);
+    }
+
+    @Override
+    public void updatePassword(String email, String newPassword) {
+        String encodedPassword = passwordEncoder.encode(newPassword);
+
+        dao.updatePassword(email, encodedPassword);
     }
 }
