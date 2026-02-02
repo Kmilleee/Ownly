@@ -143,14 +143,18 @@ public class SecurityConfiguration {
         http.logout(logout -> {
             //déterminer la page à utiliser pour le logout
             logout.logoutUrl("/logout")
-                    .deleteCookies("JSESSIONID")
+                    .deleteCookies("JSESSIONID", "remember-me")
                     //redirige après le logout sur la page d'accueil
                     .logoutSuccessUrl("/");
         });
 
 
         return http
-
+                .rememberMe(rememberMe -> rememberMe
+                        .key("maCleSecreteUnique") // Une chaîne de caractères unique au projet
+                        .tokenValiditySeconds(86400) // Durée du cookie (ici 24h)
+                        .rememberMeParameter("remember-me")
+                )
                 .build();
 
 
