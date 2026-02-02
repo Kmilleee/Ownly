@@ -5,6 +5,10 @@
 <main>
     <div class="relative z-10">
         <h1 class="text-[5rem] font-bold p-1 ms-15 ">Auction Détails</h1>
+        <div class="flex justify-between p-5">
+        <button>Back</button>
+            <h3>ENCHERE EN COURS</h3>
+        </div>
     </div>
 
 
@@ -13,18 +17,86 @@
         <img th:src="|/itemsSold-photos/${itemOBJ.id}/${itemOBJ.image}|" alt="image de l'item à vendre">
 
 
-        <div class="flex-col">
-            <h2>test</h2>
-            <h2 th:text="${itemOBJ.getCategory().name}"></h2>
-            <h2>fe</h2>
-
-            <h2>nom de l'article</h2>
-            <h2 th:text="${itemOBJ.getArticleName()}"></h2>
-
+        <div class="flex-col flex w-full leading-non">
+            <div class="flex items-center gap-5 ">
+            <h2 class="text-[3rem] font-semibold -mt-2" th:text="${itemOBJ.getCategory().name}"></h2>
+                <h2 class="text-[2rem] "  > - </h2>
+            <h2 class="text-[3rem] font-semibold -mt-2" th:text="${itemOBJ.rarity.name()}"></h2>
+            </div>
+            <h1 class="text-[4rem] font-bold -mt-4" th:text="${itemOBJ.getArticleName()}"></h1>
+            <div class="flex items-center gap-5 font-[3rem] -mt-4">
+                <h3 th:text="${itemOBJ.startingPrice}"></h3>
+                <h3 th:text="${itemOBJ.seller.getUsername()}"></h3>
+            </div>
+            <h4 class="text-[1.25rem] break-all text-wrap mr-10 mt-5" th:text="${itemOBJ.description}"></h4>
         </div>
 
 
     </section>
+
+<!--    <section class="mt-12 px-6" th:if="${!itemOBJ.rarity == 'RARE'}" >-->
+<!--        <img src="/img/figurine/communes/militaireCOMMON.png" alt="">-->
+
+<!--        <h3 class="font-chillax text-3xl text-purple-400 mb-6"> Cartes Rares Associées</h3>-->
+
+<!--        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">-->
+
+<!--            <div th:each="rare : ${rareCards}" class="group relative">-->
+
+<!--                    <div class="rounded-xl overflow-hidden border border-purple-500/50 shadow-lg hover:shadow-purple-500/50 transition-all duration-300 transform hover:-translate-y-2">-->
+<!--                        <img th:src="@{|/img/figurine/communes/rareCards[1]|}"-->
+<!--                             alt="Carte Rare"-->
+<!--                             class="w-full h-auto object-cover" />-->
+
+<!--                        <div class="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded">-->
+<!--                            <span th:text="${rare.startingPrice} + ' €'"></span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+
+
+<!--    <section class="mt-12 px-6 mb-20" th:if="${!itemOBJ.rarity == 'COMMON'}">-->
+<!--        <h3 class="font-chillax text-3xl text-gray-400 mb-6"> Cartes Communes</h3>-->
+
+<!--        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">-->
+<!--            <div th:each="common : ${commonCards}">-->
+<!--                    <div class="rounded-lg overflow-hidden border border-gray-700 opacity-80 hover:opacity-100 transition-opacity">-->
+<!--                        <img th:src="@{|/img/figurine/communes/${common.articleName}${common.rarity}.png|}"-->
+<!--                             class="w-full h-auto grayscale hover:grayscale-0 transition-all duration-500" />-->
+<!--                    </div>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+
+<!--    <section class="mt-12 px-6 mb-20" th:if="${!itemOBJ.rarity == 'EPIC'}">-->
+<!--        <h3 class="font-chillax text-3xl text-gray-400 mb-6"> Cartes EPIC</h3>-->
+
+<!--        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">-->
+<!--            <div th:each="common : ${commonCards}">-->
+<!--                    <div class="rounded-lg overflow-hidden border border-gray-700 opacity-80 hover:opacity-100 transition-opacity">-->
+<!--                        <img th:src="@{|/itemsSold-photos/${common.id}/${common.image}|}"-->
+<!--                             class="w-full h-auto grayscale hover:grayscale-0 transition-all duration-500" />-->
+<!--                    </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+
+<!--    <section class="mt-12 px-6 mb-20" th:if="${!itemOBJ.rarity == 'LEGENDARY'}">-->
+<!--        <h3 class="font-chillax text-3xl text-gray-400 mb-6"> Cartes LEGENDARY</h3>-->
+
+<!--        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">-->
+<!--            <div th:each="common : ${commonCards}">-->
+<!--                    <div class="rounded-lg overflow-hidden border border-gray-700 opacity-80 hover:opacity-100 transition-opacity">-->
+<!--                        <img th:src="@{|/itemsSold-photos/${common.id}/${common.image}|}"-->
+<!--                             class="w-full h-auto grayscale hover:grayscale-0 transition-all duration-500" />-->
+<!--                    </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
 
 
 </main>

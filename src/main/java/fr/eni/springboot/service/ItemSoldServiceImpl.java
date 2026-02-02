@@ -1,6 +1,7 @@
 package fr.eni.springboot.service;
 
 import fr.eni.springboot.bo.ItemSold;
+import fr.eni.springboot.bo.Rarity;
 import fr.eni.springboot.bo.User;
 import fr.eni.springboot.repository.ItemSoldRepository;
 import org.springframework.stereotype.Service;
@@ -87,5 +88,10 @@ public class ItemSoldServiceImpl implements ItemSoldService {
     @Override
     public List<ItemSold> readItemsBySeller(long sellerId) {
         return itemSoldRepository.readItemsBySeller(sellerId);
+    }
+
+    @Override
+    public List<ItemSold> findByRarity(Rarity rarity) {
+        return itemSoldRepository.findByRarity(rarity);
     }
 }

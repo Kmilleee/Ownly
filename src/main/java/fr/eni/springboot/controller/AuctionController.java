@@ -1,6 +1,7 @@
 package fr.eni.springboot.controller;
 
 import fr.eni.springboot.bo.ItemSold;
+import fr.eni.springboot.bo.Rarity;
 import fr.eni.springboot.service.AuctionService;
 import fr.eni.springboot.service.ItemSoldService;
 import fr.eni.springboot.service.ItemSoldServiceImpl;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -89,6 +91,23 @@ public class AuctionController {
     @GetMapping("/auctionDetail")
     public String displayAuctionDetail(@RequestParam("id") long  id_item, Model model) {
         model.addAttribute("itemOBJ", serviceItem.readItemById(id_item));
+
+        List<String> listFigurine = new ArrayList<>();
+        listFigurine.add("militaireRare.png");
+        model.addAttribute("listFigurine", listFigurine);
+
+        List<String> rareCards = new ArrayList<>();
+        rareCards.add("militaireCOMMON.png");
+        model.addAttribute("rareCards", rareCards);
+
+        List<ItemSold> commonCards = serviceItem.findByRarity(Rarity.COMMON);
+        model.addAttribute("commonCards", commonCards);
+
+        List<ItemSold> epicCards = serviceItem.findByRarity(Rarity.EPIC);
+        model.addAttribute("commonCards", commonCards);
+
+        List<ItemSold> legendrayCards = serviceItem.findByRarity(Rarity.LEGENDARY);
+        model.addAttribute("commonCards", commonCards);
 
         return "/auctionDetail";
     }
