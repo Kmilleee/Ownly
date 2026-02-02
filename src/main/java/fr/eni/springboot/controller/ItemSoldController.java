@@ -59,4 +59,31 @@ public class ItemSoldController {
 
         return "redirect:/ventes/createSale";
     }
+
+    @GetMapping("/edit-sale")
+    public String displayEditSale(@RequestParam("id") long id, Model model) {
+        ItemSold article = itemSoldService.readItemById(id);
+
+        List<Category> categoryList = categoryService.findAll();
+
+        model.addAttribute("article", article);
+        model.addAttribute("categoryList", categoryList);
+        model.addAttribute("activePage", "sell");
+
+        return "create-sale";
+    }
+
+    @PostMapping("/edit-sale")
+    public String editSale(@RequestParam("imageFile") MultipartFile multipartFile,
+                           @ModelAttribute("article") ItemSold itemSold,
+                           BindingResult bindingResult) throws IOException {
+
+        if (bindingResult.hasErrors()) {
+            return "create-sale";
+        }
+
+        itemSoldService.updateItemSold(itemSold, multipartFile);
+
+        return "redirect:/profile";
+    }
 }

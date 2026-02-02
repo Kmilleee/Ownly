@@ -1,6 +1,8 @@
 package fr.eni.springboot.controller;
 
+import fr.eni.springboot.bo.ItemSold;
 import fr.eni.springboot.bo.User;
+import fr.eni.springboot.service.ItemSoldService;
 import fr.eni.springboot.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -14,14 +16,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class UserController {
 
     private final UserService userService;
+    private final ItemSoldService itemSoldService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, ItemSoldService itemSoldService) {
         this.userService = userService;
+        this.itemSoldService = itemSoldService;
     }
 
     @GetMapping("/")
@@ -61,10 +67,9 @@ public class UserController {
     @GetMapping("/admin/admin")
     public String displayAdmin(Model model) {
         model.addAttribute("activePage", "admin");
-       // model.addAttribute("NameUser", userService.readUserById());
+        // model.addAttribute("NameUser", userService.readUserById());
         return "admin/admin";
     }
-
 
 
     @PostMapping("/singup")
@@ -86,6 +91,7 @@ public class UserController {
         model.addAttribute("activePage", "profile");
 
         User user = null;
+        List<ItemSold> mesVentes = new ArrayList<>();
 
         if (authentication.getPrincipal() instanceof OAuth2User) {
             OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
@@ -94,7 +100,9 @@ public class UserController {
         } else {
             user = userService.readUserByUsername(principal.getName());
         }
-        if (user == null) {
+        if (user != null) {
+            mesVentes = itemSoldService.readItemsBySeller(user.getUser_id());
+        } else {
             user = new User();
             if (authentication.getPrincipal() instanceof OAuth2User) {
                 OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
@@ -106,12 +114,13 @@ public class UserController {
             }
         }
 
+        model.addAttribute("mesVentes", mesVentes);
         model.addAttribute("UserCo", user);
         return "/profile";
     }
 
     @GetMapping("/changeProfile")
-    public String displayChangeProfile(Principal principal, Model model, Authentication authentication ) {
+    public String displayChangeProfile(Principal principal, Model model, Authentication authentication) {
         String username = principal.getName();
 
         User user = userService.readUserByUsername(username);
@@ -127,7 +136,7 @@ public class UserController {
         model.addAttribute("user", user);
         model.addAttribute("UserOBJ", user);
         model.addAttribute("UserCo", user);
-        return"/changeProfile";
+        return "/changeProfile";
     }
 
     @PostMapping("/changeProfile")
@@ -181,7 +190,6 @@ public class UserController {
 
         return "redirect:/";
     }
-
 
 
 }

@@ -3,7 +3,6 @@ package fr.eni.springboot.service;
 import fr.eni.springboot.bo.ItemSold;
 import fr.eni.springboot.bo.User;
 import fr.eni.springboot.repository.ItemSoldRepository;
-import fr.eni.springboot.repository.ItemSoldRepositorySql;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -55,5 +54,38 @@ public class ItemSoldServiceImpl implements ItemSoldService {
     @Override
     public List<ItemSold> readItemSold() {
         return itemSoldRepository.readItemSold();
+    }
+
+    @Override
+    @Transactional
+    public void updateItemSold(ItemSold itemSold, MultipartFile file) throws IOException {
+        ItemSold articleActuel = itemSoldRepository.readItemById(itemSold.getId());
+
+        if (file != null && !file.isEmpty()) {
+            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+            itemSold.setImage(fileName);
+
+            String uploadDir = "itemsSold-photos/" + itemSold.getId();
+            FileUploadService.uploadFile(uploadDir, fileName, file);
+        } else {
+            itemSold.setImage(articleActuel.getImage());
+        }
+
+        itemSoldRepository.updateItemSold(itemSold);
+    }
+
+    @Override
+    public void deleteItemSold(long id) {
+        itemSoldRepository.deleteItemSold(id);
+    }
+
+    @Override
+    public ItemSold readItemById(long id) {
+        return itemSoldRepository.readItemById(id);
+    }
+
+    @Override
+    public List<ItemSold> readItemsBySeller(long sellerId) {
+        return itemSoldRepository.readItemsBySeller(sellerId);
     }
 }

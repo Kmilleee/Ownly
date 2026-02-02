@@ -10,5 +10,14 @@ import java.util.List;
 public interface ItemSoldService {
 
     void createItemSold(ItemSold itemSold, MultipartFile file, Principal principal) throws IOException;
+
     List<ItemSold> readItemSold();
+
+    void updateItemSold(ItemSold itemSold, MultipartFile multipartFile) throws IOException;
+
+    void deleteItemSold(long id);
+
+    ItemSold readItemById(long id);
+
+    List<ItemSold> readItemsBySeller(long sellerId);
 }

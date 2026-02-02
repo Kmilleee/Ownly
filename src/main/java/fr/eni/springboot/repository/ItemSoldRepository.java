@@ -10,4 +10,10 @@ public interface ItemSoldRepository {
     void createItemSold(ItemSold itemSold);
 
     List<ItemSold> readItemSold();
+
+    void updateItemSold(ItemSold itemSold);
+    void deleteItemSold(long id);
+    ItemSold readItemById(long id);
+
+    List<ItemSold> readItemsBySeller(long sellerId);
 }

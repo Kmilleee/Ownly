@@ -8,8 +8,10 @@
 <main>
     <h1 class="text-[1.5rem] md:text-[5rem] ml-9 text-white text-3xl font-semibold  text-start mb-3 tracking-tight">New
         sale</h1>
-    <form th:action="@{/ventes/createSale}" enctype="multipart/form-data" method="POST" th:object="${article}"
+    <form th:action="${article.id != 0} ? @{/ventes/edit-sale} : @{/ventes/createSale}" enctype="multipart/form-data"
+          method="POST" th:object="${article}"
           class="max-w-md mx-auto md:hidden">
+        <input type="hidden" th:field="*{id}">
         <div class='w-full max-w-lg backdrop-blur-sm rounded-xl p-8'>
 
             <div id="infos">
@@ -49,8 +51,13 @@
                 </section>
                 <div>
                     <label for="fileImage_Mobile" class='mt-4 block text-white text-sm mb-2'>Image</label>
-                    <input type="file" id="fileImage_Mobile" name="imageFile" accept="image/jpeg, image/png" required>
-                    <p id="imageError_Mobile" class="hidden text-red-500 text-xs mt-1">L'image est trop lourde (max 1 Mo).</p>
+                    <input type="file"
+                           id="fileImage_Mobile"
+                           name="imageFile"
+                           accept="image/jpeg, image/png"
+                           th:required="${article.id == 0}">
+                    <p id="imageError_Mobile" class="hidden text-red-500 text-xs mt-1">L'image est trop lourde (max 1
+                        Mo).</p>
                 </div>
                 <div>
                     <img src="#" alt="" id="thumbnail_Mobile">
@@ -103,7 +110,9 @@
 
     <section class="flex items-center justify-center py-12 px-4">
         <form class="md:grid md:grid-cols-2 md:gap-10 lg:gap-20 max-w-7xl w-full items-start hidden "
-              th:action="@{/ventes/createSale}" enctype="multipart/form-data" method="POST" th:object="${article}">
+              th:action="${article.id != 0} ? @{/ventes/edit-sale} : @{/ventes/createSale}"
+              enctype="multipart/form-data" method="POST" th:object="${article}">
+            <input type="hidden" th:field="*{id}">
 
             <div class="p-5">
                 <h1 class="text-3xl font-semibold text-white text-center md:text-start mb-3 tracking-tight">
@@ -148,24 +157,18 @@
                 </div>
                 <div>
                     <label for="fileImage_Desktop" class='mt-4 block text-white text-sm mb-2'>Image</label>
-                    <input type="file" id="fileImage_Desktop" name="imageFile" accept="image/jpeg, image/png" required>
-                    <p id="imageError_Desktop" class="hidden text-red-500 text-xs mt-1">L'image est trop lourde (max 1 Mo).</p>
-                </div>
-                <div>
-                    <img src="#" alt="" id="thumbnail_Desktop">
-                </div>
-                <div class="flex items-center gap-2 mb-6">
-                    <input type="checkbox"
-                           class="w-5 h-5 cursor-pointer accent-indigo-500 rounded-[5px] text-gray-300"/>
-                    <label class="text-sm text-white cursor-pointer">
-                        You agree to our <span class="underline">terms</span> and <span
-                            class="underline">privacy policy</span>.
-                    </label>
+                    <input type="file"
+                           id="fileImage_Desktop"
+                           name="imageFile"
+                           accept="image/jpeg, image/png"
+                           th:required="${article.id == 0}">
+                    <p id="imageError_Desktop" class="hidden text-red-500 text-xs mt-1">L'image est trop lourde (max 1
+                        Mo).</p>
                 </div>
             </div>
 
             <div class="rounded-3xl p-10 relative h-full min-h-[500px] w-full hidden md:flex flex-col justify-between overflow-hidden">
-                <img src="/img/figurineTest.png" alt="3D shapes" class="absolute inset-0 w-full h-full object-cover"/>
+                <img src="#" alt="" id="thumbnail_Desktop" class="absolute inset-0 w-full h-full object-cover"/>
 
                 <div class="relative z-10 mt-auto">
                     <p class="text-sm/6 text-white mb-5 max-w-[400px]">

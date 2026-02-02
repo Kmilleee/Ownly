@@ -122,14 +122,20 @@
                     </section>
                 </div>
                 <section class="mt-15 w-full mb-10">
-                    <h1>Enchère</h1>
+                    <h1>Ventes</h1>
                     <div class="border-1 border-white rounded-3xl p-5">
-                        <div>
-                            <label class="mb-1">
-                                Last Name
-                            </label>
-                            <h2 class="bg-white rounded-xl text-black p-1 w-1/6  text-center"
-                                th:text="${UserCo.lastName}"></h2>
+                        <div th:each="vente : ${mesVentes}">
+                            <p th:text="${vente.articleName}"></p>
+                            <p th:text="${vente.image}"></p>
+                            <p th:text="${vente.description}"></p>
+                            <p th:text="${vente.auctionStartDate}"></p>
+                            <p th:text="${vente.auctionEndDate}"></p>
+                            <p th:text="${vente.startingPrice}"></p>
+                            <a th:href="@{/ventes/edit-sale(id=${vente.id})}">Edit Sale
+                                <button class=" bg-white text-black font-bold py-1.5 px-4 rounded-full hover:bg-gray-200 transition">
+                                    Edit sale
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </section>

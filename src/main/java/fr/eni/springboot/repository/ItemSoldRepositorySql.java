@@ -2,9 +2,8 @@ package fr.eni.springboot.repository;
 
 import fr.eni.springboot.bo.ItemSold;
 import fr.eni.springboot.repository.rowMapper.ItemSoldRowMapper;
-import fr.eni.springboot.repository.rowMapper.UtilisateurRowMapper;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -68,10 +67,64 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
 
     @Override
     public List<ItemSold> readItemSold() {
-        String sql = "SELECT article_id as no_article, image as image, user_id, category_id, article_id, articleName as nom_article, description as description, auctionEndDate, auctionStartDate, startingPrice as prix_initial, priceSale from ItemSold";
-
+        String sql = "SELECT * FROM ItemSold";
 
         return jdbcTemplate.query(sql, new ItemSoldRowMapper());
     }
 
+    @Transactional
+    @Override
+    public void updateItemSold(ItemSold itemSold) {
+
+        String sql = "UPDATE ItemSold SET articleName = :articleName, image = :image, description = :description, auctionStartDate = :auctionStartDate, auctionEndDate = :auctionEndDate, startingPrice = :startingPrice, priceSale = :priceSale WHERE article_id = :id";
+
+        BeanPropertySqlParameterSource map = new BeanPropertySqlParameterSource(itemSold);
+
+        namedParameterJdbcTemplate.update(sql, map);
+
+        if (itemSold.getWithdrawal() != null) {
+            String sqlWithdrawal = "UPDATE WITHDRAWAL SET street = :street, postalCode = :postalCode, city = :city WHERE article_id = :article_id";
+
+            MapSqlParameterSource paramsW = new MapSqlParameterSource();
+            paramsW.addValue("street", itemSold.getWithdrawal().getStreet());
+            paramsW.addValue("postalCode", itemSold.getWithdrawal().getPostalCode());
+            paramsW.addValue("city", itemSold.getWithdrawal().getCity());
+            paramsW.addValue("article_id", itemSold.getId());
+
+            namedParameterJdbcTemplate.update(sqlWithdrawal, paramsW);
+        }
+    }
+
+    @Transactional // Ajoute ça pour que si l'un échoue, rien ne soit supprimé
+    @Override
+    public void deleteItemSold(long article_id) {
+        String sqlWithdrawal = "DELETE FROM WITHDRAWAL WHERE article_id = :article_id";
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("article_id", article_id);
+        namedParameterJdbcTemplate.update(sqlWithdrawal, map);
+
+        String sqlItem = "DELETE FROM ItemSold WHERE article_id = :article_id";
+        namedParameterJdbcTemplate.update(sqlItem, map);
+    }
+
+    @Override
+    public ItemSold readItemById(long article_id) {
+
+        String sql = "SELECT * FROM ItemSold WHERE article_id=:article_id";
+
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("article_id", article_id);
+
+        return namedParameterJdbcTemplate.queryForObject(sql, map, new ItemSoldRowMapper());
+    }
+
+    @Override
+    public List<ItemSold> readItemsBySeller(long sellerId) {
+        String sql = "SELECT * FROM ItemSold WHERE user_id = :sellerId";
+
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("sellerId", sellerId);
+
+        return namedParameterJdbcTemplate.query(sql, map, new ItemSoldRowMapper());
+    }
 }

@@ -95,6 +95,8 @@ public class SecurityConfiguration {
                             .requestMatchers(HttpMethod.POST, "/deleteUser").hasRole("USER")
                             .requestMatchers(HttpMethod.POST, "/signup").permitAll()
                             .requestMatchers(HttpMethod.GET, "/login").permitAll()
+                            .requestMatchers(HttpMethod.GET, "/ventes/edit-sale").hasRole("USER")
+                            .requestMatchers(HttpMethod.POST, "/ventes/edit-sale").hasRole("USER")
                             .requestMatchers("/.well-know/**").permitAll()
 
 
