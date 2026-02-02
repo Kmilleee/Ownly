@@ -160,4 +160,15 @@ public class UserRepositorySql implements UserRepository {
 
         namedParameterJdbcTemplate.update(sql,map);
     }
+
+    @Override
+    public void updateAvatar(long userId, String imageName) {
+        String sql = "UPDATE USERS SET avatar = :avatar WHERE user_id = :user_id";
+
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("avatar", imageName);
+        map.addValue("user_id", userId);
+
+        namedParameterJdbcTemplate.update(sql,map);
+    }
 }

@@ -83,6 +83,8 @@ public class SecurityConfiguration {
                             .requestMatchers(HttpMethod.GET, "/ventes/").authenticated()
                             .requestMatchers(HttpMethod.GET, "/auction").authenticated()
                             .requestMatchers(HttpMethod.GET, "/forgotPassword").permitAll()
+                            .requestMatchers(HttpMethod.POST, "/changeProfile/edit-avatar").permitAll()
+                            .requestMatchers(HttpMethod.GET, "/edit-avatar").permitAll()
                             .requestMatchers(HttpMethod.GET, "/auctionAll").authenticated()
                             .requestMatchers(HttpMethod.GET, "/ventes/createSale").authenticated()
                             .requestMatchers(HttpMethod.POST, "/admin/addWithdrawal").hasRole("ADMIN")
@@ -107,10 +109,13 @@ public class SecurityConfiguration {
                     .requestMatchers("/css/*").permitAll()
                     //donner acces au image
                     .requestMatchers("/img/*").permitAll()
+                            .requestMatchers("/img/**").permitAll()
                     .requestMatchers("/images/**").permitAll()
                     .requestMatchers("/js/**").permitAll()
                     .requestMatchers("/font/**").permitAll()
                     .requestMatchers("/itemsSold-photos/**").permitAll()
+                            .requestMatchers("/changeProfile/**").authenticated()
+                            .requestMatchers("/changeProfile/**").authenticated()
 
 
                     .requestMatchers("/admin/**").hasRole("ADMIN")

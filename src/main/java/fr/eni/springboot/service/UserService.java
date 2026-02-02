@@ -23,4 +23,6 @@ public interface UserService {
     void updatePassword(String email, String newPassword);
 
     void disableUser(long id);
+
+    void updateAvatar(long userId, String imageName);
 }
