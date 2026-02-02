@@ -1,4 +1,4 @@
-const sessionTimeout = 60 * 1000;
+const sessionTimeout = 300 * 1000;
 let timeoutId;
 
 function resetTimer() {
