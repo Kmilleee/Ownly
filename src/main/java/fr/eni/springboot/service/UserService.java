@@ -21,4 +21,6 @@ public interface UserService {
     User findByEmail(String email);
 
     void updatePassword(String email, String newPassword);
+
+    void disableUser(long id);
 }

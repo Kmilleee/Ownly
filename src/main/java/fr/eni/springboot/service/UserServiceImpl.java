@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     UserRepository dao;
     private PasswordEncoder passwordEncoder;
@@ -49,13 +49,13 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void deleteUser(long user_id) {
-        dao.deleteUser(user_id );
+        dao.deleteUser(user_id);
 
     }
 
     @Override
     public User readUserByUsername(String username) {
-       return dao.readUserByUsername(username);
+        return dao.readUserByUsername(username);
     }
 
     @Override
@@ -73,5 +73,14 @@ public class UserServiceImpl implements UserService{
         String encodedPassword = passwordEncoder.encode(newPassword);
 
         dao.updatePassword(email, encodedPassword);
+    }
+
+    @Override
+    public void disableUser(long id) {
+        User user = dao.readUserById(id);
+
+        user.setActive(!user.isActive());
+
+        dao.updateUser(user);
     }
 }
