@@ -8,7 +8,7 @@
     <link rel="stylesheet" th:href="@{/css/general.css}">
     <title>Title</title>
 </head>
-<body class="bg-black text-white min-h-screen flex flex-col max-h-100 overflow-y-auto
+<body class=" bg-black text-white min-h-screen flex flex-col max-h-100 overflow-y-auto
   [&::-webkit-scrollbar]:w-2
   [&::-webkit-scrollbar-track]:bg-transparent
   [&::-webkit-scrollbar-thumb]:bg-transparent
@@ -25,7 +25,7 @@
         <div class="flex items-center z-10 ">
             <a th:href="@{/}" class="text-xl font-bold flex items-center tracking-wider">
                 <img class="size-8 me-3" th:src="@{/img/logo.png}" alt="logo"/>
-                POCOYO
+                OWNLY
             </a>
         </div>
 
@@ -44,11 +44,11 @@
                        th:classappend="${activePage == 'sell' ? ' text-pink-500' : 'text-white'}"
                        class="hover:text-pink-500 font-medium transition">Sell</a></li>
 
-                <li th:if="${#authorization.expression('hasRole(''USER'')')}">
-                    <a th:href="@{/withdrawal}"
-                       th:classappend="${activePage == 'withdrawal' ? ' text-pink-500' : 'text-white'}"
-                       class="hover:text-pink-500 font-medium transition">Withdrawal</a>
-                </li>
+                <!--                <li th:if="${#authorization.expression('hasRole(''USER'')')}">-->
+                <!--                    <a th:href="@{/withdrawal}"-->
+                <!--                       th:classappend="${activePage == 'withdrawal' ? ' text-pink-500' : 'text-white'}"-->
+                <!--                       class="hover:text-pink-500 font-medium transition">Withdrawal</a>-->
+                <!--                </li>-->
                 <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
                     <a th:href="@{/admin/admin}"
                        th:classappend="${activePage == 'admin' ? ' text-pink-500' : 'text-white'}"
@@ -270,6 +270,7 @@
         <div class="px-4 py-6 bg-neutral-secondary-soft md:flex md:items-center md:justify-between">
         <span class="text-sm text-body sm:text-center">© 2023 <a href="https://flowbite.com/">Flowbite™</a>. All Rights Reserved.
         </span>
+            <h1 class="font-semibold">OWNLY</h1>
             <div class="flex mt-4 sm:justify-center md:mt-0 space-x-2 rtl:space-x-reverse">
                 <a href="#" class="text-body hover:text-heading">
                     <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"

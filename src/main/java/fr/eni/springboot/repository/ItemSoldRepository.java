@@ -16,4 +16,6 @@ public interface ItemSoldRepository {
     ItemSold readItemById(long id);
 
     List<ItemSold> readItemsBySeller(long sellerId);
+
+    ItemSold readItemSoldById(long article_id);
 }

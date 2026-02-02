@@ -1,4 +1,41 @@
+/* 1. On définit la police */
+@font-face {
+    font-family: 'Chillax';
+    /*noinspection CssUnknownTarget*/
+    src: url('/font/Chillax-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
 
+@font-face {
+    font-family: 'Supreme';
+    /*noinspection CssUnknownTarget*/
+    src: url('/font/Supreme-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@import "tailwindcss";
+
+
+@theme {
+
+    --font-chillax: "Chillax", sans-serif;
+    --font-para: "Supreme", sans-serif;
+}
+
+body {
+    font-family: "Supreme", sans-serif;
+}
+
+h1 {
+    font-family: "Chillax", sans-serif;
+}
+
+
+
+/*CSS POUR LA ROTATION DES CARDS */
 .hover-3d {
     perspective: 1000px; /* Donne la profondeur */
     position: relative;
@@ -49,3 +86,9 @@
 .hover-3d:has(.sensor:nth-child(8):hover) figure { transform: rotateX(-20deg); }
 /* Bas-Droite */
 .hover-3d:has(.sensor:nth-child(9):hover) figure { transform: rotateX(-20deg) rotateY(20deg); }
+
+/* Version compatible avec ton HTML actuel */
+.hover-3d:has(.sensor:nth-child(2):hover) figure { transform: rotateX(25deg) rotateY(-25deg); }
+.hover-3d:has(.sensor:nth-child(3):hover) figure { transform: rotateX(25deg); }
+/* etc... répéter pour les 8 directions */
+
