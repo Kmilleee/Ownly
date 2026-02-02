@@ -1,6 +1,7 @@
 package fr.eni.springboot.service;
 
 import fr.eni.springboot.bo.ItemSold;
+import fr.eni.springboot.bo.Rarity;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -20,4 +21,6 @@ public interface ItemSoldService {
     ItemSold readItemById(long id);
 
     List<ItemSold> readItemsBySeller(long sellerId);
+
+    List<ItemSold> findByRarity(Rarity rarity);
 }
