@@ -201,11 +201,11 @@ public class UserController {
     @GetMapping("/changeProfile/edit-avatar")
     public String afficherSelectionAvatar(Model model) {
         List<String> avatars = Arrays.asList(
-                "avatar1.png",
-                "avatar2.png",
-                "detective.png",
-                "soldier.png",
-                "robot.png"
+                "clown.png",
+                "coureur.png",
+                "dormeur.png",
+                "militaire.png",
+                "peintre.png"
         );
 
         model.addAttribute("avatarList", avatars);

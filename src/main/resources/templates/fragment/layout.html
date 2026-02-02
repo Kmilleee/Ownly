@@ -76,7 +76,9 @@
                 <a th:href="@{/profile}"
                    th:classappend="${activePage == 'profile' ? 'size-10 rounded-full border border-pink-500 object-cover' : 'size-10 rounded-full border border-gray-200 object-cover'}"
                    class="block hover:opacity-80 transition relative">
-                    <img class="" th:src="@{/img/profileW.png}" alt="profile"/>
+                    <img th:src="@{|/img/avatars/${UserCo.avatar != null ? UserCo.avatar : 'default.png'}|}"
+                         alt="Photo de profil"
+                         class="rounded-full w-10 h-10 object-cover " />
                     <span class="absolute -top-1 -right-1 flex h-3.5 w-3.5">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-600 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-600 border-2 border-black"></span>
