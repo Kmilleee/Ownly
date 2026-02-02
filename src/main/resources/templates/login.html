@@ -10,7 +10,13 @@
                     <h2 class="flex justify-center md:justify-start text-3xl md:text-[5rem] font-medium text-white">
                         Sign in
                     </h2>
+                    <div th:if="${param.expired}" class="text-red-600">
+                        Votre session a expiré après 1 minute d'inactivité. Veuillez vous reconnecter.
+                    </div>
 
+                    <div th:if="${param.error}" class="alert alert-danger">
+                        Identifiants invalides.
+                    </div>
                     <p class="hidden md:block w-full text-sm text-nowrap text-white text-center ">
                         connect with Google
                     </p>

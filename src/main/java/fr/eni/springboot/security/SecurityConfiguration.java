@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 import javax.sql.DataSource;
 
@@ -48,68 +49,80 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
+    }
+
     // mise en place de la gestion des droits en fonction des pages affichées
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         //c'est ici que l'on va authoriser les chemins en fonction des utilisateurs
-        http.authorizeHttpRequests(auth -> {
-            //authoriser l'accès à la liste des glaces aux employés
-            // accès au chemin /icecream en Get pour les employé
-            auth.
-                    /* les changments c'est ici le reste ne change pas il n'y a pas de raison
-                     *           *********************************************    */
+        http.sessionManagement(session -> session
+                        .invalidSessionUrl("/login?expired=true")
+                        .sessionFixation(fixation -> fixation.migrateSession())
+                        .maximumSessions(1)
+                        .expiredUrl("/login?expired=true")
+                )
+                .authorizeHttpRequests(auth -> {
 
-                            requestMatchers(HttpMethod.GET, "/withdrawal").hasRole("USER")
+                    //authoriser l'accès à la liste des glaces aux employés
+                    // accès au chemin /icecream en Get pour les employé
+                    auth.
+                            /* les changments c'est ici le reste ne change pas il n'y a pas de raison
+                             *           *********************************************    */
 
-                    /*accès au chemin /icecream/add en Get pour les admins */
-                    .requestMatchers(HttpMethod.GET, "/user").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.GET, "/").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/about").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/admin/addWithdrawal").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.GET, "/admin/addUser").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.GET, "/ventes/").hasRole("USER")
-                    .requestMatchers(HttpMethod.GET, "/auction").hasRole("USER")
-                    .requestMatchers(HttpMethod.GET, "/forgotPassword").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/auctionAll").hasRole("USER")
-                    .requestMatchers(HttpMethod.GET, "/ventes/createSale").hasRole("USER")
-                    .requestMatchers(HttpMethod.POST, "/admin/addWithdrawal").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.POST, "/admin/addUser").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.GET, "/admin/admin").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.GET, "/admin/categoryList").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.POST, "/admin/createCat").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.GET, "/admin/admin").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.POST, "/deleteUser").hasRole("USER")
-                    .requestMatchers(HttpMethod.POST, "/signup").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/login").permitAll()
-                    .requestMatchers("/.well-know/**").permitAll()
+                                    requestMatchers(HttpMethod.GET, "/withdrawal").hasRole("USER")
 
-
-                    /* *********************************************                     jusqu'à là */
-                    //donne à tous la permission sur la page d'accueil
-                    .requestMatchers("/*").permitAll()
-                    //donner acces au css
-                    .requestMatchers("/css/*").permitAll()
-                    //donner acces au image
-                    .requestMatchers("/img/*").permitAll()
-                    .requestMatchers("/js/**").permitAll()
-
-                    .requestMatchers("/admin/**").hasRole("ADMIN")
-                    .requestMatchers("/ventes/**").hasRole("ADMIN")
-
-                    .requestMatchers("/ventes/createSale").hasRole("ADMIN")
-                    .requestMatchers("/admin/addUser").hasRole("ADMIN")
-                    .requestMatchers("/admin/addWithdrawal").hasRole("ADMIN")
-                    .requestMatchers("/admin/admin").hasRole("ADMIN")
-                    .requestMatchers("/admin/createCat").hasRole("ADMIN")
-                    .requestMatchers("/admin/categoryList").hasRole("ADMIN")
+                            /*accès au chemin /icecream/add en Get pour les admins */
+                            .requestMatchers(HttpMethod.GET, "/user").hasRole("ADMIN")
+                            .requestMatchers(HttpMethod.GET, "/").permitAll()
+                            .requestMatchers(HttpMethod.GET, "/about").permitAll()
+                            .requestMatchers(HttpMethod.GET, "/admin/addWithdrawal").hasRole("ADMIN")
+                            .requestMatchers(HttpMethod.GET, "/admin/addUser").hasRole("ADMIN")
+                            .requestMatchers(HttpMethod.GET, "/ventes/").hasRole("USER")
+                            .requestMatchers(HttpMethod.GET, "/auction").hasRole("USER")
+                            .requestMatchers(HttpMethod.GET, "/forgotPassword").permitAll()
+                            .requestMatchers(HttpMethod.GET, "/auctionAll").hasRole("USER")
+                            .requestMatchers(HttpMethod.GET, "/ventes/createSale").hasRole("USER")
+                            .requestMatchers(HttpMethod.POST, "/admin/addWithdrawal").hasRole("ADMIN")
+                            .requestMatchers(HttpMethod.POST, "/admin/addUser").hasRole("ADMIN")
+                            .requestMatchers(HttpMethod.POST, "/ventes/createSale").hasRole("USER")
+                            .requestMatchers(HttpMethod.GET, "/admin/admin").hasRole("ADMIN")
+                            .requestMatchers(HttpMethod.GET, "/admin/categoryList").hasRole("ADMIN")
+                            .requestMatchers(HttpMethod.POST, "/admin/createCat").hasRole("ADMIN")
+                            .requestMatchers(HttpMethod.GET, "/admin/admin").hasRole("ADMIN")
+                            .requestMatchers(HttpMethod.POST, "/deleteUser").hasRole("USER")
+                            .requestMatchers(HttpMethod.POST, "/signup").permitAll()
+                            .requestMatchers(HttpMethod.GET, "/login").permitAll()
+                            .requestMatchers("/.well-know/**").permitAll()
 
 
-                    //tous ce qui n'est pas spécifié n'est pas accessible
-                    .anyRequest().denyAll();
-        });
+                            /* *********************************************                     jusqu'à là */
+                            //donne à tous la permission sur la page d'accueil
+                            .requestMatchers("/*").permitAll()
+                            //donner acces au css
+                            .requestMatchers("/css/*").permitAll()
+                            //donner acces au image
+                            .requestMatchers("/img/*").permitAll()
+                            .requestMatchers("/js/**").permitAll()
+
+                            .requestMatchers("/admin/**").hasRole("ADMIN")
+                            .requestMatchers("/ventes/**").hasRole("ADMIN")
+
+                            .requestMatchers("/ventes/createSale").hasRole("ADMIN")
+                            .requestMatchers("/admin/addUser").hasRole("ADMIN")
+                            .requestMatchers("/admin/addWithdrawal").hasRole("ADMIN")
+                            .requestMatchers("/admin/admin").hasRole("ADMIN")
+                            .requestMatchers("/admin/createCat").hasRole("ADMIN")
+                            .requestMatchers("/admin/categoryList").hasRole("ADMIN")
+
+
+                            //tous ce qui n'est pas spécifié n'est pas accessible
+                            .anyRequest().denyAll();
+                });
         //gestion automatique du login
         http.formLogin(withDefaults());
-
 
 
         /*** pas touche *****/
@@ -130,6 +143,7 @@ public class SecurityConfiguration {
         http.logout(logout -> {
             //déterminer la page à utiliser pour le logout
             logout.logoutUrl("/logout")
+                    .deleteCookies("JSESSIONID")
                     //redirige après le logout sur la page d'accueil
                     .logoutSuccessUrl("/");
         });
@@ -138,9 +152,6 @@ public class SecurityConfiguration {
         return http
 
                 .build();
-
-
-
 
 
     }
