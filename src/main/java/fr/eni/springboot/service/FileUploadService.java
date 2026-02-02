@@ -16,20 +16,21 @@ public class FileUploadService {
         Path uploadPath = Paths.get(uploadDir);
 
         // Vérifie si le dossier existe déjà sinon le créer
-        if(!Files.exists(uploadPath)) {
+        if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
 
-        try {
+        try (InputStream inputStream = uploadedFile.getInputStream()) {
+            //"Tuyau" on récupère le flux (géré par le try pour fermeture automatique)
 
-            //"Tuyau" on récupère le flux
-            InputStream inputStream = uploadedFile.getInputStream();
             //Colle bout à bout les éléments pour l'emplacement de l'image (Dossier + / + NomDuFichier)
             Path filePath = uploadPath.resolve(fileName);
+
             //Envoie l'image vers son emplacement (et efface / remplace l'ancienne image si l'ancienne à le même nom)
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+
         } catch (IOException e) {
-            throw new IOException(e.getMessage());
+            throw new IOException("Erreur lors de l'upload : " + e.getMessage());
         }
     }
 }

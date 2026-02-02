@@ -2,16 +2,34 @@
 <title>login</title>
 <main>
     <div class="relative z-10">
-        <section class="flex items-center justify-center ">
+        <div class="absolute top-0 left-0 w-full h-[120vh] overflow-hidden -z-10 pointer-events-none">
+
+            <div class="absolute top-1/2 right-0 w-[400px] h-[400px] md:w-[800px] md:h-[800px]"
+                 style="background: radial-gradient(circle, rgba(126, 34, 206, 0.4) 0%, rgba(0,0,0,0) 70%);
+                    transform: translate(30%, -30%);">
+            </div>
+
+            <div class="absolute top-1/2 right-0 w-[400px] h-[400px] md:w-[800px] md:h-[800px]"
+                 style="background: radial-gradient(circle, rgba(238, 27, 136, 0.66) 0%, rgba(0,0,0,0) 70%);
+                    transform: translate(30%, -30%);">
+            </div>
+
+            <div class="absolute top-1/2 left-1/2 w-[400px] h-[400px] md:w-[800px] md:h-[800px]"
+                 style="background: radial-gradient(circle, rgba(30, 237, 251, 0.46) 0%, rgba(0,0,0,0) 50%);
+                    transform: translate(-90%, -60%);">
+            </div>
+
+        </div>
+        <section class="flex items-center justify-center max-w-xl mx-auto">
 
             <form th:action="@{/login}" method="post" class="w-3/4 items-center">
 
                 <section class="flex flex-col items-center gap-10 ">
-                    <h2 class="flex justify-center md:justify-start text-3xl md:text-[5rem] font-medium text-white">
+                    <h2 class="flex justify-center md:justify-start text-4xl md:text-[5rem] font-medium text-white">
                         Sign in
                     </h2>
-                    <div th:if="${param.expired}" class="text-red-600">
-                        Votre session a expiré après 1 minute d'inactivité. Veuillez vous reconnecter.
+                    <div th:if="${param.expired}" class="w-11/12 text-center text-sm font-medium p-3 rounded-lg bg-red-500/20 border border-red-500/50 text-red-200">
+                        Votre session a expiré après 5 minutes d'inactivité.
                     </div>
 
                     <div th:if="${param.error}" class="alert alert-danger">
@@ -87,7 +105,20 @@
                                 id="idPassword"
                         />
                     </div>
-
+                    <div class="flex w-11/12 items-center justify-between px-2">
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox"
+                                   name="remember-me"
+                                   id="remember-me"
+                                   class="h-4 w-4 rounded border-gray-300 accent-white cursor-pointer">
+                            <label for="remember-me" class="text-sm text-white cursor-pointer select-none">
+                                Remember me
+                            </label>
+                        </div>
+                        <a class="text-white underline text-sm hover:text-gray-300 transition-colors" th:href="@{/forgotPassword}">
+                            Forgot password?
+                        </a>
+                    </div>
                     <div class="flex flex-col items-center w-full gap-2">
                         <div class="flex h-12 w-11/12">
                             <button type="submit"
@@ -95,11 +126,6 @@
                                 Login
                             </button>
                         </div>
-                        <input type="checkbox" name="remember-me" id="remember-me">
-                        <label for="remember-me">Se souvenir de moi</label>
-                        <a class="text-white underline text-sm" href="#">
-                            Forgot password?
-                        </a>
                     </div>
                 </section>
 
