@@ -86,4 +86,10 @@ public class ItemSoldController {
 
         return "redirect:/profile";
     }
+
+    @DeleteMapping("/delete-sale")
+    public String deleteSale(@RequestParam("id") long id) {
+        itemSoldService.deleteItemSold(id);
+        return "redirect:/profile";
+    }
 }

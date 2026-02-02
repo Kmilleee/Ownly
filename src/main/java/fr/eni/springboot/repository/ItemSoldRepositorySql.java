@@ -95,7 +95,7 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
         }
     }
 
-    @Transactional // Ajoute ça pour que si l'un échoue, rien ne soit supprimé
+    @Transactional
     @Override
     public void deleteItemSold(long article_id) {
         String sqlWithdrawal = "DELETE FROM WITHDRAWAL WHERE article_id = :article_id";

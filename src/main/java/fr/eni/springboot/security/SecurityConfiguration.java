@@ -111,7 +111,7 @@ public class SecurityConfiguration {
                             .requestMatchers("/js/**").permitAll()
 
                             .requestMatchers("/admin/**").hasRole("ADMIN")
-                            .requestMatchers("/ventes/**").hasRole("ADMIN")
+                            .requestMatchers("/ventes/**").hasAnyRole("USER","ADMIN")
 
                             .requestMatchers("/ventes/createSale").hasRole("ADMIN")
                             .requestMatchers("/admin/addUser").hasRole("ADMIN")

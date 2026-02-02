@@ -133,11 +133,18 @@
                             <p th:text="${vente.auctionStartDate}"></p>
                             <p th:text="${vente.auctionEndDate}"></p>
                             <p th:text="${vente.startingPrice}"></p>
-                            <a th:href="@{/ventes/edit-sale(id=${vente.id})}">Edit Sale
+                            <a th:href="@{/ventes/edit-sale(id=${vente.id})}">
                                 <button class=" bg-white text-black font-bold py-1.5 px-4 rounded-full hover:bg-gray-200 transition">
                                     Edit sale
                                 </button>
                             </a>
+                            <form th:action="@{/ventes/delete-sale(id=${vente.id})}" method="post">
+                                <input type="hidden" name="_method" value="delete"/>
+
+                                <button type="submit" class="text-red-500" onsubmit="return confirm('Supprimer ?')">
+                                    Supprimer l'article
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </section>
