@@ -1,7 +1,7 @@
 /* 1. On définit la police */
 @font-face {
     font-family: 'Chillax';
-
+    /*noinspection CssUnknownTarget*/
     src: url('/font/Chillax-Regular.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
@@ -9,6 +9,7 @@
 
 @font-face {
     font-family: 'Supreme';
+    /*noinspection CssUnknownTarget*/
     src: url('/font/Supreme-Regular.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
