@@ -67,7 +67,7 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
 
     @Override
     public List<ItemSold> readItemSold() {
-        String sql = "SELECT a.article_id as article_id, a.articleName as name_article, a.startingPrice as startingPrice, a.priceSale, a.auctionStartDate, a.auctionEndDate, a.description,a.category_id as category_id, a.image, c.name as nom_cat, u.username \n" +
+        String sql = "SELECT a.article_id as article_id, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, u.username as username \n" +
                 "FROM ItemSold a\n" +
                 "INNER JOIN CATEGORY c ON a.category_id = c.category_id\n" +
                 "INNER JOIN USERS u ON a.user_id = u.user_id\n";
@@ -114,7 +114,7 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
     @Override
     public ItemSold readItemById(long article_id) {
 
-        String sql = "SELECT a.article_id as article_id, a.articleName as name_article, a.startingPrice as startingPrice, a.priceSale, a.auctionStartDate, a.auctionEndDate, a.description, a.image, a.category_id as category_id,c.name as nom_cat, u.username \n" +
+        String sql = "SELECT a.article_id as article_id, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, u.username as username \n" +
                 "FROM ItemSold a\n" +
                 "INNER JOIN CATEGORY c ON a.category_id = c.category_id\n" +
                 "INNER JOIN USERS u ON a.user_id = u.user_id\n" +
@@ -133,5 +133,10 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
         map.addValue("sellerId", sellerId);
 
         return namedParameterJdbcTemplate.query(sql, map, new ItemSoldRowMapper());
+    }
+
+    @Override
+    public ItemSold readItemSoldById(long article_id) {
+        return null;
     }
 }

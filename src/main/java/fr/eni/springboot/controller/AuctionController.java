@@ -88,7 +88,7 @@ public class AuctionController {
 
     @GetMapping("/auctionDetail")
     public String displayAuctionDetail(@RequestParam("id") long  id_item, Model model) {
-        model.addAttribute("itemOBJ", serviceItem.readItemSoldById(id_item));
+        model.addAttribute("itemOBJ", serviceItem.readItemById(id_item));
 
         return "/auctionDetail";
     }

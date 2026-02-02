@@ -14,15 +14,18 @@ public class ItemSoldRowMapper implements RowMapper<ItemSold> {
     public ItemSold mapRow(ResultSet rs, int rowNum) throws SQLException {
         ItemSold article = new ItemSold();
         article.setId(rs.getLong("article_id"));
-        article.setArticleName(rs.getString("name_article"));
+        article.setArticleName(rs.getString("articleName"));
         article.setDescription(rs.getString("description"));
         article.setStartingPrice(rs.getLong("startingPrice"));
         article.setImage(rs.getString("image"));
+        article.setPriceSale(rs.getLong("priceSale"));
+        article.setAuctionEndDate(rs.getDate("auctionEndDate").toLocalDate());
+        article.setAuctionStartDate(rs.getDate("auctionStartDate").toLocalDate());
 
 
         Category cat = new Category();
         cat.setCategory_id(rs.getLong("category_id"));
-        cat.setName(rs.getString("nom_cat"));
+        cat.setName(rs.getString("name"));
 
         User user = new User();
         user.setUsername(rs.getString("username"));
