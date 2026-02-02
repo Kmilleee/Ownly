@@ -107,6 +107,7 @@ public class SecurityConfiguration {
                             .requestMatchers("/css/*").permitAll()
                             //donner acces au image
                             .requestMatchers("/img/*").permitAll()
+                            .requestMatchers("/images/**").permitAll()
                             .requestMatchers("/js/**").permitAll()
 
                             .requestMatchers("/admin/**").hasRole("ADMIN")
