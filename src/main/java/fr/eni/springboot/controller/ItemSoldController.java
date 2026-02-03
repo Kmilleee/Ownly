@@ -3,6 +3,7 @@ package fr.eni.springboot.controller;
 import ch.qos.logback.core.util.StringUtil;
 import fr.eni.springboot.bo.Category;
 import fr.eni.springboot.bo.ItemSold;
+import fr.eni.springboot.bo.Rarity;
 import fr.eni.springboot.bo.User;
 import fr.eni.springboot.service.CategoryService;
 import fr.eni.springboot.service.FileUploadService;
@@ -45,6 +46,8 @@ public class ItemSoldController {
 
         model.addAttribute("categoryList", categoryList);
 
+        model.addAttribute("rarities", Rarity.values());
+
         model.addAttribute("activePage", "sell");
 
         return "create-sale";
@@ -57,7 +60,7 @@ public class ItemSoldController {
         }
         itemSoldService.createItemSold(itemSold, multipartFile, principal);
 
-        return "redirect:/ventes/createSale";
+        return "redirect:/auctionAll";
     }
 
     @GetMapping("/edit-sale")

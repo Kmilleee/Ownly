@@ -12,7 +12,9 @@
 
                 <section>
                     <div class="flex items-center w-full ">
-                        <img src="/img/profileW.png" alt="photo de profile">
+                        <img th:src="@{|/img/avatars/${UserCo.avatar != null ? UserCo.avatar : 'default.png'}|}"
+                             alt="Photo de profil"
+                             class="rounded-full w-32 h-32 object-cover border-4 border-pink-800" />
                         <div class="w-full">
                             <div class="flex justify-between">
                                 <h1 th:text="${UserCo.username}" class="text-[4rem]"></h1>

@@ -1,6 +1,7 @@
 package fr.eni.springboot.repository;
 
 import fr.eni.springboot.bo.ItemSold;
+import fr.eni.springboot.bo.Rarity;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface ItemSoldRepository {
     List<ItemSold> readItemsBySeller(long sellerId);
 
     ItemSold readItemSoldById(long article_id);
+
+    List<ItemSold> findByRarity(Rarity rarity);
 }

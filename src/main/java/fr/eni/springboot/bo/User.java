@@ -19,8 +19,9 @@ public class User {
     @Column("admin")
     private boolean admin = false;
     private boolean active = true ;
+    private String avatar;
 
-    public User(long user_id, String username, String lastName, String firstName, String email, String numPhone, String street, String postalCode, String city, String password, long credit, boolean admin, boolean active) {
+    public User(long user_id, String username, String lastName, String firstName, String email, String numPhone, String street, String postalCode, String city, String password, long credit, boolean admin, boolean active, String avatar) {
         this.user_id = user_id;
         this.username = username;
         this.lastName = lastName;
@@ -34,9 +35,10 @@ public class User {
         this.credit = credit;
         this.admin = admin;
         this.active = active;
+        this.avatar = avatar;
     }
 
-    public User(String username, String lastName, String firstName, String email, String numPhone, String street, String postalCode, String city, String password, long credit, boolean admin, boolean active) {
+    public User(String username, String lastName, String firstName, String email, String numPhone, String street, String postalCode, String city, String password, long credit, boolean admin, boolean active, String avatar) {
         this.username = username;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -49,9 +51,18 @@ public class User {
         this.credit = credit;
         this.admin = admin;
         this.active = active;
+        this.avatar = avatar;
     }
 
     public User() {
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public boolean isActive() {

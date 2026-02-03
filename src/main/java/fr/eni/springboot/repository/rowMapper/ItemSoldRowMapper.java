@@ -1,9 +1,9 @@
 package fr.eni.springboot.repository.rowMapper;
 
 import fr.eni.springboot.bo.ItemSold;
+import fr.eni.springboot.bo.Rarity;
 import fr.eni.springboot.bo.User;
 import fr.eni.springboot.bo.Category;
-import org.eclipse.angus.mail.imap.protocol.Item;
 import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,6 +21,13 @@ public class ItemSoldRowMapper implements RowMapper<ItemSold> {
         article.setPriceSale(rs.getLong("priceSale"));
         article.setAuctionEndDate(rs.getDate("auctionEndDate").toLocalDate());
         article.setAuctionStartDate(rs.getDate("auctionStartDate").toLocalDate());
+
+        String rarityString = rs.getString("rarity");
+        if (rarityString != null) {
+            article.setRarity(Rarity.valueOf(rarityString));
+        } else {
+            article.setRarity(Rarity.COMMON);
+        }
 
 
         Category cat = new Category();

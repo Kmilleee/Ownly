@@ -71,7 +71,7 @@ public class UserRepositorySql implements UserRepository {
 
     @Override
     public User readUserById(long user_id) {
-        String sql = "SELECT user_id, username, lastname, firstname, email, numPhone, street, postalCode, city,password,credit,admin,active from USERS where user_id=:user_id";
+        String sql = "SELECT user_id, username, lastname, firstname, email, numPhone, street, postalCode, city,password,credit,admin, active from USERS where user_id=:user_id";
 
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("user_id",user_id);
@@ -157,6 +157,17 @@ public class UserRepositorySql implements UserRepository {
         map.addValue("password", encodedPassword);
         map.addValue("email", email);
 
+
+        namedParameterJdbcTemplate.update(sql,map);
+    }
+
+    @Override
+    public void updateAvatar(long userId, String imageName) {
+        String sql = "UPDATE USERS SET avatar = :avatar WHERE user_id = :user_id";
+
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("avatar", imageName);
+        map.addValue("user_id", userId);
 
         namedParameterJdbcTemplate.update(sql,map);
     }

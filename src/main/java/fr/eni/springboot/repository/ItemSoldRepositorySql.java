@@ -1,6 +1,7 @@
 package fr.eni.springboot.repository;
 
 import fr.eni.springboot.bo.ItemSold;
+import fr.eni.springboot.bo.Rarity;
 import fr.eni.springboot.repository.rowMapper.ItemSoldRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -26,7 +27,7 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
     @Transactional
     @Override
     public void createItemSold(ItemSold itemSold) {
-        String sql = "INSERT INTO ItemSold (articleName,image, description, auctionStartDate, auctionEndDate, startingPrice, priceSale, user_id, category_id) VALUES (:articleName,:image, :description, :auctionStartDate, :auctionEndDate, :startingPrice, :priceSale, :user_id, :category_id)";
+        String sql = "INSERT INTO ItemSold (articleName,image, description, auctionStartDate, auctionEndDate, startingPrice, priceSale, user_id, category_id, rarity) VALUES (:articleName,:image, :description, :auctionStartDate, :auctionEndDate, :startingPrice, :priceSale, :user_id, :category_id, :rarity)";
 
         MapSqlParameterSource params = new MapSqlParameterSource();
 
@@ -39,6 +40,7 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
         params.addValue("priceSale", itemSold.getPriceSale());
         params.addValue("user_id", itemSold.getSeller().getUser_id());
         params.addValue("category_id", itemSold.getCategory().getCategory_id());
+        params.addValue("rarity", itemSold.getRarity());
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -67,7 +69,7 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
 
     @Override
     public List<ItemSold> readItemSold() {
-        String sql = "SELECT a.article_id as article_id, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, u.username as username \n" +
+        String sql = "SELECT a.article_id as article_id,rarity as rarity ,a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, u.username as username \n" +
                 "FROM ItemSold a\n" +
                 "INNER JOIN CATEGORY c ON a.category_id = c.category_id\n" +
                 "INNER JOIN USERS u ON a.user_id = u.user_id\n";
@@ -113,8 +115,13 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
 
     @Override
     public ItemSold readItemById(long article_id) {
-        String sql = "SELECT a.article_id, a.articleName, a.startingPrice, a.priceSale, a.auctionStartDate, a.auctionEndDate, a.description, a.category_id, a.image, c.name as name, u.username as username FROM ItemSold a LEFT JOIN CATEGORY c ON a.category_id = c.category_id INNER JOIN USERS u ON a.user_id = u.user_id WHERE a.article_id = :article_id";
+        //String sql = "SELECT a.article_id, a.articleName, a.startingPrice, a.priceSale, a.auctionStartDate, a.auctionEndDate, a.description, a.category_id, a.image, c.name as name, u.username as username FROM ItemSold a LEFT JOIN CATEGORY c ON a.category_id = c.category_id INNER JOIN USERS u ON a.user_id = u.user_id WHERE a.article_id = :article_id";
 
+        String sql = "SELECT a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, u.username as username \n" +
+                "FROM ItemSold a\n" +
+                "INNER JOIN CATEGORY c ON a.category_id = c.category_id\n" +
+                "INNER JOIN USERS u ON a.user_id = u.user_id\n" +
+                "WHERE a.article_id =:article_id  ";
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("article_id", article_id);
 
@@ -124,7 +131,13 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
 
     @Override
     public List<ItemSold> readItemsBySeller(long sellerId) {
-        String sql = "SELECT a.*, c.name as name, u.username as username FROM ItemSold a LEFT JOIN CATEGORY c ON a.category_id = c.category_id INNER JOIN USERS u ON a.user_id = u.user_id WHERE a.user_id = :sellerId";
+        //String sql = "SELECT a.*, c.name as name, u.username as username FROM ItemSold a LEFT JOIN CATEGORY c ON a.category_id = c.category_id INNER JOIN USERS u ON a.user_id = u.user_id WHERE a.user_id = :sellerId";
+
+        String sql = "SELECT a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, u.username as username \n" +
+                "FROM ItemSold a\n" +
+                "INNER JOIN CATEGORY c ON a.category_id = c.category_id\n" +
+                "INNER JOIN USERS u ON a.user_id = u.user_id\n" +
+                "WHERE a.user_id =:sellerId  ";
 
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("sellerId", sellerId);
@@ -135,5 +148,19 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
     @Override
     public ItemSold readItemSoldById(long article_id) {
         return null;
+    }
+
+    @Override
+    public List<ItemSold> findByRarity(Rarity rarity) {
+        String sql = "SELECT a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, u.username as username \n" +
+                "FROM ItemSold a\n" +
+                "INNER JOIN CATEGORY c ON a.category_id = c.category_id\n" +
+                "INNER JOIN USERS u ON a.user_id = u.user_id\n" +
+                "WHERE rarity =:rarity  ";
+
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("rarity", rarity.name());
+
+        return namedParameterJdbcTemplate.query(sql,map, new ItemSoldRowMapper());
     }
 }
