@@ -78,6 +78,7 @@ public class SecurityConfiguration {
                             .requestMatchers(HttpMethod.GET, "/user").hasRole("ADMIN")
                             .requestMatchers(HttpMethod.GET, "/").permitAll()
                             .requestMatchers(HttpMethod.GET, "/about").permitAll()
+                            .requestMatchers(HttpMethod.GET, "/cherche").permitAll()
                             .requestMatchers(HttpMethod.GET, "/admin/addWithdrawal").hasRole("ADMIN")
                             .requestMatchers(HttpMethod.GET, "/admin/addUser").hasRole("ADMIN")
                             .requestMatchers(HttpMethod.GET, "/ventes/").authenticated()
@@ -97,6 +98,8 @@ public class SecurityConfiguration {
                             .requestMatchers(HttpMethod.POST, "/deleteUser").authenticated()
                             .requestMatchers(HttpMethod.POST, "/signup").permitAll()
                             .requestMatchers(HttpMethod.GET, "/login").permitAll()
+                            .requestMatchers(HttpMethod.GET, "/creditReward").permitAll()
+                            .requestMatchers(HttpMethod.POST, "/creditReward").permitAll()
                             .requestMatchers(HttpMethod.GET, "/ventes/edit-sale").authenticated()
                             .requestMatchers(HttpMethod.POST, "/ventes/edit-sale").authenticated()
                             .requestMatchers("/.well-know/**").permitAll()
@@ -120,7 +123,7 @@ public class SecurityConfiguration {
 
                     .requestMatchers("/admin/**").hasRole("ADMIN")
                     .requestMatchers("/ventes/**").hasAnyRole("USER", "ADMIN")
-
+                            .requestMatchers("/chercheCat").permitAll()
                     .requestMatchers("/ventes/createSale").hasRole("ADMIN")
                     .requestMatchers("/admin/addUser").hasRole("ADMIN")
                     .requestMatchers("/admin/addWithdrawal").hasRole("ADMIN")

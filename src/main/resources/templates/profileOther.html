@@ -29,34 +29,21 @@
 
                 <section>
                     <div class="flex items-center w-full ">
-                        <img th:src="@{|/img/avatars/${UserCo.avatar != null ? UserCo.avatar : 'default.png'}|}"
+                        <img th:src="@{|/img/avatars/${User.avatar != null ? User.avatar : 'default.png'}|}"
                              alt="Photo de profil"
-                             class="rounded-full w-32 h-32 object-cover border-4 border-pink-800"/>
+                             class="rounded-full w-32 h-32 object-cover border-4 border-pink-800" />
                         <div class="w-full">
                             <div class="flex justify-between">
-                                <h1 th:text="${UserCo.username}" class="text-[4rem]"></h1>
+                                <h1 th:text="${User.username}" class="text-[4rem]"></h1>
                                 <div class="flex">
-                                    <h1 th:text="${UserCo.credit}" class="text-[4rem]"></h1>
+                                    <h1 th:text="${User.credit}" class="text-[4rem]"></h1>
                                     <h1 class="text-[4rem]">$</h1>
                                 </div>
                             </div>
                             <div class="flex justify-between ">
                                 <div class="flex gap-3">
-                                    <h3 th:text="${UserCo.firstName}"></h3>
-                                    <h3 th:text="${UserCo.lastName}"></h3>
-                                </div>
-                                <div>
-                                    <a th:href="@{/changeProfile}">
-                                        <button class=" bg-white text-black font-bold py-1.5 px-4 rounded-full hover:bg-gray-200 transition">
-                                            Change profile
-                                        </button>
-                                    </a>
-                                    <a th:href="@{/creditReward}">
-                                        <button th:classappend="${isRewardAvailable} ? 'border-red-500 animate-pulse' : 'border-gray-200'"
-                                                class="border-2 bg-white text-black font-bold py-1.5 px-4 rounded-full hover:bg-gray-200 transition">
-                                            +
-                                        </button>
-                                    </a>
+                                    <h3 th:text="${User.firstName}"></h3>
+                                    <h3 th:text="${User.lastName}"></h3>
                                 </div>
                             </div>
                         </div>
@@ -73,21 +60,21 @@
                                         Last Name
                                     </label>
                                     <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
-                                        th:text="${UserCo.lastName}"></h2>
+                                        th:text="${User.lastName}"></h2>
                                 </div>
                                 <div class="w-full">
                                     <label class="mb-1">
                                         First Name
                                     </label>
                                     <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
-                                        th:text="${UserCo.firstName}"></h2>
+                                        th:text="${User.firstName}"></h2>
                                 </div>
                                 <div class="w-full">
                                     <label>
                                         Username
                                     </label>
                                     <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
-                                        th:text="${UserCo.username}"></h2>
+                                        th:text="${User.username}"></h2>
                                 </div>
 
                             </div>
@@ -97,21 +84,21 @@
                                         City
                                     </label>
                                     <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
-                                        th:text="${UserCo.city}"></h2>
+                                        th:text="${User.city}"></h2>
                                 </div>
                                 <div class="w-full">
                                     <label class="mb-1">
                                         Street
                                     </label>
                                     <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
-                                        th:text="${UserCo.street}"></h2>
+                                        th:text="${User.street}"></h2>
                                 </div>
                                 <div class="w-full">
                                     <label>
                                         Postal Code
                                     </label>
                                     <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
-                                        th:text="${UserCo.postalCode}"></h2>
+                                        th:text="${User.postalCode}"></h2>
                                 </div>
 
                             </div>
@@ -121,14 +108,14 @@
                                         Phone
                                     </label>
                                     <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
-                                        th:text="${UserCo.numPhone}"></h2>
+                                        th:text="${User.numPhone}"></h2>
                                 </div>
                                 <div class="w-full">
                                     <label class="mb-1">
                                         email
                                     </label>
                                     <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
-                                        th:text="${UserCo.email}"></h2>
+                                        th:text="${User.email}"></h2>
                                 </div>
 
 
@@ -143,7 +130,7 @@
                                     Last Name
                                 </label>
                                 <h2 class="bg-white rounded-xl text-black p-1 w-1/6  text-center"
-                                    th:text="${UserCo.lastName}"></h2>
+                                    th:text="${User.lastName}"></h2>
                             </div>
                         </div>
                     </section>
@@ -160,18 +147,6 @@
                             <p th:text="${vente.auctionStartDate}"></p>
                             <p th:text="${vente.auctionEndDate}"></p>
                             <p th:text="${vente.startingPrice}"></p>
-                            <a th:href="@{/ventes/edit-sale(id=${vente.id})}">
-                                <button class=" bg-white text-black font-bold py-1.5 px-4 rounded-full hover:bg-gray-200 transition">
-                                    Edit sale
-                                </button>
-                            </a>
-                            <form th:action="@{/ventes/delete-sale(id=${vente.id})}" method="post">
-                                <input type="hidden" name="_method" value="delete"/>
-
-                                <button type="submit" class="text-red-500" onsubmit="return confirm('Supprimer ?')">
-                                    Supprimer l'article
-                                </button>
-                            </form>
                         </div>
                     </div>
                 </section>

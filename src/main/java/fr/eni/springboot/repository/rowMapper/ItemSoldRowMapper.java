@@ -36,6 +36,8 @@ public class ItemSoldRowMapper implements RowMapper<ItemSold> {
 
         User user = new User();
         user.setUsername(rs.getString("username"));
+        user.setAvatar(rs.getString("avatar"));
+        user.setUser_id(rs.getLong("user_id"));
 
         article.setSeller(user);
         article.setCategory(cat);

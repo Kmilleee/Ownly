@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.springframework.data.relational.core.mapping.Column;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class User {
@@ -27,8 +28,10 @@ public class User {
     private boolean admin = false;
     private boolean active = true ;
     private String avatar;
+    private LocalDate lastDailyReward;
 
-    public User(long user_id, String username, String lastName, String firstName, String email, String numPhone, String street, String postalCode, String city, String password, long credit, boolean admin, boolean active, String avatar) {
+
+    public User(long user_id, String username, String lastName, String firstName, String email, String numPhone, String street, String postalCode, String city, String password, long credit, boolean admin, boolean active, String avatar, LocalDate lastDailyReward) {
         this.user_id = user_id;
         this.username = username;
         this.lastName = lastName;
@@ -43,9 +46,10 @@ public class User {
         this.admin = admin;
         this.active = active;
         this.avatar = avatar;
+        this.lastDailyReward = lastDailyReward;
     }
 
-    public User(String username, String lastName, String firstName, String email, String numPhone, String street, String postalCode, String city, String password, long credit, boolean admin, boolean active, String avatar) {
+    public User(String username, String lastName, String firstName, String email, String numPhone, String street, String postalCode, String city, String password, long credit, boolean admin, boolean active, String avatar, LocalDate lastDailyReward) {
         this.username = username;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -59,9 +63,18 @@ public class User {
         this.admin = admin;
         this.active = active;
         this.avatar = avatar;
+        this.lastDailyReward = lastDailyReward;
     }
 
     public User() {
+    }
+
+    public LocalDate getLastDailyReward() {
+        return lastDailyReward;
+    }
+
+    public void setLastDailyReward(LocalDate lastDailyReward) {
+        this.lastDailyReward = lastDailyReward;
     }
 
     public String getAvatar() {

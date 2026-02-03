@@ -71,7 +71,7 @@ public class UserRepositorySql implements UserRepository {
 
     @Override
     public User readUserById(long user_id) {
-        String sql = "SELECT user_id, username, lastname, firstname, email, numPhone, street, postalCode, city,password,credit,admin, active from USERS where user_id=:user_id";
+        String sql = "SELECT user_id, username, lastname, firstname, email, numPhone, street, postalCode, city,password,credit,admin, active, avatar from USERS where user_id=:user_id";
 
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("user_id",user_id);
@@ -170,5 +170,22 @@ public class UserRepositorySql implements UserRepository {
         map.addValue("user_id", userId);
 
         namedParameterJdbcTemplate.update(sql,map);
+    }
+
+    @Override
+    public boolean claimDailyReward(long userId) {
+        String sql = "UPDATE USERS " +
+                "SET credit = credit + 500, last_daily_reward = GETDATE() " +
+                "WHERE user_id = :userId " +
+                "AND (last_daily_reward < CAST(GETDATE() AS DATE) OR last_daily_reward IS NULL)";
+
+        MapSqlParameterSource map = new MapSqlParameterSource("userId", userId);
+
+        // update renvoie le nombre de lignes modifiées.
+        // Si renvoie 1 : Succès (c'était un nouveau jour).
+        // Si renvoie 0 : Échec (déjà pris aujourd'hui).
+        int rowsAffected = namedParameterJdbcTemplate.update(sql, map);
+
+        return rowsAffected > 0;
     }
 }

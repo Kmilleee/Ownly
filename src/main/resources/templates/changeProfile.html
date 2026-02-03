@@ -3,12 +3,30 @@
 
 <body>
 <main>
-        <div th:if="${error}"
-             class="flex max-w-72 items-center p-4 text-sm text-red-100 bg-red-500/20 border border-red-500 rounded-xl backdrop-blur-sm">
-            <div>
-                <span class="font-bold">Erreur :</span> <span th:text="${error}"></span>
-            </div>
+    <div class="absolute top-0 left-0 w-full h-[120vh] overflow-hidden -z-10 pointer-events-none">
+
+        <div class="absolute top-1/2 right-0 w-[400px] h-[400px] md:w-[800px] md:h-[800px]"
+             style="background: radial-gradient(circle, rgba(126, 34, 206, 0.4) 0%, rgba(0,0,0,0) 70%);
+                    transform: translate(30%, -30%);">
         </div>
+
+        <div class="absolute top-1/2 right-0 w-[400px] h-[400px] md:w-[800px] md:h-[800px]"
+             style="background: radial-gradient(circle, rgba(238, 27, 136, 0.66) 0%, rgba(0,0,0,0) 70%);
+                    transform: translate(30%, -30%);">
+        </div>
+
+        <div class="absolute top-1/2 left-1/2 w-[400px] h-[400px] md:w-[800px] md:h-[800px]"
+             style="background: radial-gradient(circle, rgba(30, 237, 251, 0.46) 0%, rgba(0,0,0,0) 50%);
+                    transform: translate(-90%, -60%);">
+        </div>
+
+    </div>
+    <div th:if="${error}"
+         class="flex max-w-72 items-center p-4 text-sm text-red-100 bg-red-500/20 border border-red-500 rounded-xl backdrop-blur-sm">
+        <div>
+            <span class="font-bold">Erreur :</span> <span th:text="${error}"></span>
+        </div>
+    </div>
     <section class="relative z-10 w-full">
         <!--    <h2 class="text-[5rem] font-medium text-white ms-15 mb-10">Profile</h2>-->
 
@@ -294,11 +312,11 @@
                                         </svg>
                                         <label for="idPassword"></label>
                                         <input
-                                                placeholder="Password (laisser vide pour ne pas changer)"
+                                                placeholder="Password"
                                                 class="h-full bg-white  placeholder-black  text-black outline-none w-1/2"
                                                 required=""
                                                 type="password"
-                                                name="newPassword"
+                                                name="password"
                                                 id="idPassword"
                                                 th:field="*{password}"
                                         />

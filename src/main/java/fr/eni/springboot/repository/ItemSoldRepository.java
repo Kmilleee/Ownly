@@ -21,4 +21,10 @@ public interface ItemSoldRepository {
     ItemSold readItemSoldById(long article_id);
 
     List<ItemSold> findByRarity(Rarity rarity);
+
+    List<ItemSold> readItemsByBetterSel();
+
+    List<ItemSold> readItemBySearch(String query);
+
+    List<ItemSold> readItemByCategory(String cat);
 }

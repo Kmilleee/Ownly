@@ -1,10 +1,10 @@
 <section class="flex gap-4 justify-around ">
     <div th:fragment="auctionCard(title, imageURL, price, tag)"
-         class="bg-neutral-primary-soft block max-w-xs rounded-base shadow-xs">
+         class="bg-neutral-primary-soft block max-w-xs rounded-base ">
 
         <a th:href="@{/auctionDetail(id=${a.id})}" class="block w-full">
             <div class="hover-3d relative w-full">
-                <figure class="w-full h-full transition-all duration-300 ease-out rounded-2xl shadow-xl transform preserve-3d">
+                <figure class="w-full h-full transition-all duration-300 ease-out rounded-2xl  transform preserve-3d">
                     <img th:src="${imageURL}" alt="Image Enchère" class="w-full h-full object-center rounded-t-lg"/>
                 </figure>
 
@@ -37,7 +37,7 @@
             </div>
 
             <a href="#"
-               class="inline-flex items-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+               class="inline-flex items-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium  font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                 Read more
                 <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                      width="24" height="24" fill="none" viewBox="0 0 24 24">

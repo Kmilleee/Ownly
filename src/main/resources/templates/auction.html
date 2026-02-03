@@ -3,16 +3,33 @@
 
 <body>
 <main>
+    <div class="absolute top-0 left-0 w-full h-[120vh] overflow-hidden -z-10 pointer-events-none">
+
+        <div class="absolute top-1/2 right-0 w-[400px] h-[400px] md:w-[800px] md:h-[800px]"
+             style="background: radial-gradient(circle, rgba(126, 34, 206, 0.4) 0%, rgba(0,0,0,0) 70%);
+                    transform: translate(30%, -30%);">
+        </div>
+
+        <div class="absolute top-1/2 right-0 w-[400px] h-[400px] md:w-[800px] md:h-[800px]"
+             style="background: radial-gradient(circle, rgba(238, 27, 136, 0.66) 0%, rgba(0,0,0,0) 70%);
+                    transform: translate(30%, -30%);">
+        </div>
+
+        <div class="absolute top-1/2 left-1/2 w-[400px] h-[400px] md:w-[800px] md:h-[800px]"
+             style="background: radial-gradient(circle, rgba(30, 237, 251, 0.46) 0%, rgba(0,0,0,0) 50%);
+                    transform: translate(-90%, -60%);">
+        </div>
+
+    </div>
+
     <div class="relative z-10">
-        <h1 class="text-[5rem] p-1 ms-15 md:text-[5rem] ml-9 text-white text-3xl font-semibold  text-start mb-3 tracking-tight">
-            Auction</h1>
+        <h1 class="text-[5rem] font-bold p-1 ms-15 ">Auction</h1>
         <h2 class="ms-15 text-[2rem] p-1 mt-5">Discover a new world, invest in your new world </h2>
     </div>
     <section class="flex justify-between items-center">
 
 
         <form class="max-w-md ms-15 w-1/2 p-1 ">
-            <!--            <label for="search" class="block mb-2.5 text-sm font-medium text-black"></label>-->
             <div class="relative">
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                     <svg class="w-4 h-4 text-black " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -21,17 +38,10 @@
                               d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
                     </svg>
                 </div>
-                <!--                <input type="search" id="search"-->
-                <!--                       class="block w-full p-3 ps-9 bg-white text-black border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body rounded-[20rem]"-->
-                <!--                       placeholder="Search" required/>-->
-                <!--                <button type="button"-->
-                <!--                        class="absolute end-1.5 bottom-1.5 text-black bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-xs px-3 py-1.5 focus:outline-none">-->
-                <!--                    Search-->
-                <!--                </button>-->
             </div>
         </form>
 
-        <div class="flex justify-end-safe items-center gap-5">
+        <div class="flex justify-end-safe items-center gap-5 mr-10">
 
             <a th:href="@{/auctionAll}">
                 <button type="button"
@@ -40,276 +50,34 @@
                 </button>
             </a>
 
-
-            <div class=" relative w-full max-w-sm me-15">
-                <svg class="absolute top-1/2 -translate-y-1/2 left-4 z-50" width="20" height="20"
-                     viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                            d="M16.5555 3.33203H3.44463C2.46273 3.33203 1.66675 4.12802 1.66675 5.10991C1.66675 5.56785 1.84345 6.00813 2.16004 6.33901L6.83697 11.2271C6.97021 11.3664 7.03684 11.436 7.0974 11.5068C7.57207 12.062 7.85127 12.7576 7.89207 13.4869C7.89728 13.5799 7.89728 13.6763 7.89728 13.869V16.251C7.89728 17.6854 9.30176 18.6988 10.663 18.2466C11.5227 17.961 12.1029 17.157 12.1029 16.251V14.2772C12.1029 13.6825 12.1029 13.3852 12.1523 13.1015C12.2323 12.6415 12.4081 12.2035 12.6683 11.8158C12.8287 11.5767 13.0342 11.3619 13.4454 10.9322L17.8401 6.33901C18.1567 6.00813 18.3334 5.56785 18.3334 5.10991C18.3334 4.12802 17.5374 3.33203 16.5555 3.33203Z"
-                            stroke="black" stroke-width="1.6" stroke-linecap="round"/>
-                </svg>
-                <select id="Offer"
-                        class="h-12 border border-gray-300 text-gray-900 pl-11 text-base font-normal leading-7 rounded-full block w-full py-2.5 px-4 appearance-none relative focus:outline-none bg-white transition-all duration-500 hover:border-gray-400 hover:bg-gray-50 focus-within:bg-gray-50">
-                    <option selected>Sort by time(high to low)</option>
-                    <option value="option 1">option 1</option>
-                    <option value="option 2">option 2</option>
-                    <option value="option 3">option 3</option>
-                    <option value="option 4">option 4</option>
-                </select>
-                <svg class="absolute top-1/2 -translate-y-1/2 right-4 z-50" width="16" height="16"
-                     viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.0002 5.99845L8.00008 9.99862L3.99756 5.99609" stroke="#111827" stroke-width="1.6"
-                          stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
         </div>
     </section>
 
-    <section class="flex gap-4 justify-around mt-15">
 
-        <div class="bg-neutral-primary-soft block max-w-sm  rounded-base shadow-xs">
-            <a href="#" class="block w-full">
-                <img class=" w-full object-cover" src="/img/figurineRBG.png" alt="figurine"/>
-            </a>
-            <div class="p-6">
-        <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
-            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                 fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round"
-                                                       stroke-linejoin="round" stroke-width="2"
-                                                       d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
-            Trending
-        </span>
-                <div class="flex justify-between items-center">
-                    <a href="#">
-                        <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading">Le cuisto</h5>
-                    </a>
-                    <h5>#1</h5>
-                </div>
-                <a href="#"
-                   class="inline-flex items-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-                    Read more
-                    <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true"
-                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6 mt-16 justify-items-center grid-flow-row-dense">
 
-        <div class="bg-neutral-primary-soft block max-w-sm  rounded-base shadow-xs">
-            <a href="#" class="block w-full">
-                <img class=" w-full object-cover" src="/img/figurineRBG.png" alt="figurine"/>
-            </a>
-            <div class="p-6">
-        <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
-            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                 fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round"
-                                                       stroke-linejoin="round" stroke-width="2"
-                                                       d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
-            Trending
-        </span>
-                <div class="flex justify-between items-center">
-                    <a href="#">
-                        <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading">Le cuisto</h5>
-                    </a>
-                    <h5>#1</h5>
-                </div>
-                <a href="#"
-                   class="inline-flex items-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-                    Read more
-                    <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true"
-                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
+        <th:block th:each="a : ${topAuctions}">
 
-        <div class="bg-neutral-primary-soft block max-w-sm  rounded-base shadow-xs">
-            <a href="#" class="block w-full">
-                <img class=" w-full object-cover" src="/img/figurineRBG.png" alt="figurine"/>
-            </a>
-            <div class="p-6">
-        <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
-            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                 fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round"
-                                                       stroke-linejoin="round" stroke-width="2"
-                                                       d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
-            Trending
-        </span>
-                <div class="flex justify-between items-center">
-                    <a href="#">
-                        <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading">Le cuisto</h5>
-                    </a>
-                    <h5>#1</h5>
-                </div>
-                <a href="#"
-                   class="inline-flex items-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-                    Read more
-                    <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true"
-                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
+            <th:block th:if="${a.startingPrice != null}">
 
-        <div class="bg-neutral-primary-soft block max-w-sm  rounded-base shadow-xs">
-            <a href="#" class="block w-full">
-                <img class=" w-full object-cover" src="/img/figurineRBG.png" alt="figurine"/>
-            </a>
-            <div class="p-6">
-        <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
-            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                 fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round"
-                                                       stroke-linejoin="round" stroke-width="2"
-                                                       d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
-            Trending
-        </span>
-                <div class="flex justify-between items-center">
-                    <a href="#">
-                        <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading">Le cuisto</h5>
-                    </a>
-                    <h5>#1</h5>
-                </div>
-                <a href="#"
-                   class="inline-flex items-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-                    Read more
-                    <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true"
-                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
+                <th:block th:replace="~{fragment/card :: auctionCard(
+                ${a.articleName},
+                |/itemsSold-photos/${a.id}/${a.image}|,
+                ${a.startingPrice} + ' €',
+                'En cours'
+        )}">
+                </th:block>
 
-    </section>
+            </th:block>
+
+        </th:block>
+
+    </div>
+
 
     <section class="flex gap-4 justify-around mt-15">
 
-        <div class="bg-neutral-primary-soft block max-w-sm  rounded-base shadow-xs">
-            <a href="#" class="block w-full">
-                <img class=" w-full object-cover" src="/img/figurineRBG.png" alt="figurine"/>
-            </a>
-            <div class="p-6">
-        <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
-            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                 fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round"
-                                                       stroke-linejoin="round" stroke-width="2"
-                                                       d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
-            Trending
-        </span>
-                <div class="flex justify-between items-center">
-                    <a href="#">
-                        <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading">Le cuisto</h5>
-                    </a>
-                    <h5>#1</h5>
-                </div>
-                <a href="#"
-                   class="inline-flex items-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-                    Read more
-                    <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true"
-                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
 
-        <div class="bg-neutral-primary-soft block max-w-sm  rounded-base shadow-xs">
-            <a href="#" class="block w-full">
-                <img class=" w-full object-cover" src="/img/figurineRBG.png" alt="figurine"/>
-            </a>
-            <div class="p-6">
-        <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
-            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                 fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round"
-                                                       stroke-linejoin="round" stroke-width="2"
-                                                       d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
-            Trending
-        </span>
-                <div class="flex justify-between items-center">
-                    <a href="#">
-                        <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading">Le cuisto</h5>
-                    </a>
-                    <h5>#1</h5>
-                </div>
-                <a href="#"
-                   class="inline-flex items-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-                    Read more
-                    <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true"
-                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
-
-        <div class="bg-neutral-primary-soft block max-w-sm  rounded-base shadow-xs">
-            <a href="#" class="block w-full">
-                <img class=" w-full object-cover" src="/img/figurineRBG.png" alt="figurine"/>
-            </a>
-            <div class="p-6">
-        <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
-            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                 fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round"
-                                                       stroke-linejoin="round" stroke-width="2"
-                                                       d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
-            Trending
-        </span>
-                <div class="flex justify-between items-center">
-                    <a href="#">
-                        <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading">Le cuisto</h5>
-                    </a>
-                    <h5>#1</h5>
-                </div>
-                <a href="#"
-                   class="inline-flex items-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-                    Read more
-                    <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true"
-                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
-
-        <div class="bg-neutral-primary-soft block max-w-sm  rounded-base shadow-xs">
-            <a href="#" class="block w-full">
-                <img class=" w-full object-cover" src="/img/figurineRBG.png" alt="figurine"/>
-            </a>
-            <div class="p-6">
-        <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
-            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                 fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round"
-                                                       stroke-linejoin="round" stroke-width="2"
-                                                       d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
-            Trending
-        </span>
-                <div class="flex justify-between items-center">
-                    <a href="#">
-                        <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading">Le cuisto</h5>
-                    </a>
-                    <h5>#1</h5>
-                </div>
-                <a href="#"
-                   class="inline-flex items-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-                    Read more
-                    <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true"
-                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
     </section>
 
 
@@ -320,209 +88,46 @@
 
             <section class="flex gap-4 justify-around mt-15 text-white">
 
-                <div class="bg-neutral-primary-soft block max-w-sm  rounded-base shadow-xs">
-                    <a href="#" class="block w-full">
-                        <img class="  h-65 w-70  object-scale-down" src="/img/figurineRBG.png" alt="figurine"/>
-                    </a>
-                    <div class="p-6">
-        <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
-            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                 fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round"
-                                                       stroke-linejoin="round" stroke-width="2"
-                                                       d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
-            Trending
-        </span>
-                        <div class="flex justify-between items-center">
-                            <a href="#">
-                                <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading">Le cuisto</h5>
-                            </a>
-                            <h5>#1</h5>
-                        </div>
-                        <a href="#"
-                           class="inline-flex items-center text-black bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-                            Read more
-                            <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true"
-                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                 viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
+                <th:block th:each="a : ${newCollection}">
 
-                <div class="bg-neutral-primary-soft block max-w-sm  rounded-base shadow-xs">
-                    <a href="#" class="block w-full">
-                        <img class=" h-65 w-70  object-scale-down" src="/img/figurineRBG.png" alt="figurine"/>
-                    </a>
-                    <div class="p-6">
-        <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
-            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                 fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round"
-                                                       stroke-linejoin="round" stroke-width="2"
-                                                       d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
-            Trending
-        </span>
-                        <div class="flex justify-between items-center">
-                            <a href="#">
-                                <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading">Le cuisto</h5>
-                            </a>
-                            <h5>#1</h5>
-                        </div>
-                        <a href="#"
-                           class="inline-flex items-center text-black bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-                            Read more
-                            <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true"
-                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                 viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
+                    <th:block th:if="${a.startingPrice != null}">
 
-                <div class="bg-neutral-primary-soft block max-w-sm  rounded-base shadow-xs">
-                    <a href="#" class="block w-full">
-                        <img class=" h-65 w-70  object-scale-down" src="/img/figurineRBG.png" alt="figurine"/>
-                    </a>
-                    <div class="p-6">
-        <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
-            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                 fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round"
-                                                       stroke-linejoin="round" stroke-width="2"
-                                                       d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
-            Trending
-        </span>
-                        <div class="flex justify-between items-center">
-                            <a href="#">
-                                <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading">Le cuisto</h5>
-                            </a>
-                            <h5>#1</h5>
-                        </div>
-                        <a href="#"
-                           class="inline-flex items-center text-black bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-                            Read more
-                            <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true"
-                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                 viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
+                        <th:block th:replace="~{fragment/card :: auctionCard(
+                ${a.articleName},
+                |/itemsSold-photos/${a.id}/${a.image}|,
+                ${a.startingPrice} + ' €',
+                'En cours'
+                         )}">
+                        </th:block>
+
+                    </th:block>
+
+                </th:block>
             </section>
         </div>
     </section>
 
 
-    <section class="flex gap-4 justify-around mt-15 items-center ">
+    <section class="flex gap-4 justify-around mt-15 text-white">
 
+        <th:block th:each="a : ${otherAuctions}">
 
-        <img class="w-1/3" src="img/pub.png" alt="" srcset="">
+            <th:block th:if="${a.startingPrice != null}">
 
+                <th:block th:replace="~{fragment/card :: auctionCard(
+                ${a.articleName},
+                |/itemsSold-photos/${a.id}/${a.image}|,
+                ${a.startingPrice} + ' €',
+                'En cours'
+                         )}">
+                </th:block>
 
-        <div class="bg-neutral-primary-soft block max-w-sm  rounded-base shadow-xs">
-            <a href="#" class="block w-full">
-                <img class=" w-full object-cover" src="/img/figurineRBG.png" alt="figurine"/>
-            </a>
-            <div class="p-6">
-        <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
-            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                 fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round"
-                                                       stroke-linejoin="round" stroke-width="2"
-                                                       d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
-            Trending
-        </span>
-                <div class="flex justify-between items-center">
-                    <a href="#">
-                        <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading">Le cuisto</h5>
-                    </a>
-                    <h5>#1</h5>
-                </div>
-                <a href="#"
-                   class="inline-flex items-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-                    Read more
-                    <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true"
-                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
+            </th:block>
 
-        <div class="items center">
-            <div class="bg-neutral-primary-soft block max-w-sm  rounded-base shadow-xs">
-                <a href="#" class="block w-full">
-                    <img class="  h-45 w-70  object-scale-down" src="/img/figurineRBG.png" alt="figurine"/>
-                </a>
-                <div class="p-6">
-        <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
-            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                 fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round"
-                                                       stroke-linejoin="round" stroke-width="2"
-                                                       d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
-            Trending
-        </span>
-                    <div class="flex justify-between items-center">
-                        <a href="#">
-                            <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading">Le cuisto</h5>
-                        </a>
-                        <h5>#1</h5>
-                    </div>
-                    <a href="#"
-                       class="inline-flex items-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-                        Read more
-                        <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                             viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-
-            <div class="bg-neutral-primary-soft block max-w-sm  rounded-base shadow-xs">
-                <a href="#" class="block w-full">
-                    <img class=" h-45 w-70  object-scale-down" src="/img/figurineRBG.png" alt="figurine"/>
-                </a>
-                <div class="p-6">
-        <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
-            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                 fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round"
-                                                       stroke-linejoin="round" stroke-width="2"
-                                                       d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
-            Trending
-        </span>
-                    <div class="flex justify-between items-center">
-                        <a href="#">
-                            <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading">Le cuisto</h5>
-                        </a>
-                        <h5>#1</h5>
-                    </div>
-                    <a href="#"
-                       class="inline-flex items-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-                        Read more
-                        <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                             viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-
+        </th:block>
     </section>
+    </div>
+
 
     <section>
         <div class="bg-[#1F9CB9] w-full">
@@ -531,26 +136,29 @@
 
             <section class="flex gap-4 justify-around mt-15 text-white">
 
-                <div class="bg-neutral-primary-soft block max-w-sm  rounded-base shadow-xs">
-                    <a href="#" class="block w-full">
-                        <img class="  h-65 w-70  object-scale-down" src="/img/profileW.png" alt="pp"/>
+                <div class="bg-neutral-primary-soft block max-w-sm  rounded-base shadow-xs" th:each="u : ${userList}">
+                    <a th:href="@{/profileOther(id=${u.seller.getUser_id()})}" class="block w-full">
+                        <img class="  h-65 w-70  object-scale-down" th:src="@{|/img/avatars/${u.seller.avatar}|}"
+                             alt="pp"/>
                     </a>
                     <div class="p-6">
-        <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
-            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                 fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round"
-                                                       stroke-linejoin="round" stroke-width="2"
-                                                       d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
-            Trending
-        </span>
+                        <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
+                            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                 height="24"
+                                 fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round"
+                                                                       stroke-linejoin="round" stroke-width="2"
+                                                                       d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
+                            Trending
+                        </span>
                         <div class="flex justify-between items-center">
                             <a href="#">
-                                <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading">Vendeur</h5>
+                                <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading"
+                                    th:text="${u.seller.getUsername()}"></h5>
                             </a>
-                            <h5>#1</h5>
+                            <h5 th:text="${u.seller.getUser_id()}"></h5>
                         </div>
-                        <a href="#"
-                           class="inline-flex items-center text-black bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                        <a th:href="@{/profileOther(id=${u.seller.getUser_id()})}"
+                           class="inline-flex items-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                             Read more
                             <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -563,101 +171,6 @@
                     </div>
                 </div>
 
-                <div class="bg-neutral-primary-soft block max-w-sm  rounded-base shadow-xs">
-                    <a href="#" class="block w-full">
-                        <img class=" h-65 w-70  object-scale-down" src="/img/profileW.png" alt="pp"/>
-                    </a>
-                    <div class="p-6">
-        <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
-            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                 fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round"
-                                                       stroke-linejoin="round" stroke-width="2"
-                                                       d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
-            Trending
-        </span>
-                        <div class="flex justify-between items-center">
-                            <a href="#">
-                                <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading">Vendeur</h5>
-                            </a>
-                            <h5>#1</h5>
-                        </div>
-                        <a href="#"
-                           class="inline-flex items-center text-black bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-                            Read more
-                            <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true"
-                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                 viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="bg-neutral-primary-soft block max-w-sm  rounded-base shadow-xs">
-                    <a href="#" class="block w-full">
-                        <img class=" h-65 w-70  object-scale-down" src="/img/profileW.png" alt="pp"/>
-                    </a>
-                    <div class="p-6">
-        <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
-            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                 fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round"
-                                                       stroke-linejoin="round" stroke-width="2"
-                                                       d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
-            Trending
-        </span>
-                        <div class="flex justify-between items-center">
-                            <a href="#">
-                                <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading">Vendeur</h5>
-                            </a>
-                            <h5>#1</h5>
-                        </div>
-                        <a href="#"
-                           class="inline-flex items-center text-black bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-                            Read more
-                            <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true"
-                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                 viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="bg-neutral-primary-soft block max-w-sm  rounded-base shadow-xs">
-                    <a href="#" class="block w-full">
-                        <img class=" h-65 w-70  object-scale-down" src="/img/profileW.png" alt="pp"/>
-                    </a>
-                    <div class="p-6">
-        <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-sm">
-            <svg class="w-3 h-3 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                 fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round"
-                                                       stroke-linejoin="round" stroke-width="2"
-                                                       d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z"/></svg>
-            Trending
-        </span>
-                        <div class="flex justify-between items-center">
-                            <a href="#">
-                                <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading">Vendeur</h5>
-                            </a>
-                            <h5>#1</h5>
-                        </div>
-                        <a href="#"
-                           class="inline-flex items-center text-black bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-                            Read more
-                            <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true"
-                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                 viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
             </section>
         </div>
     </section>

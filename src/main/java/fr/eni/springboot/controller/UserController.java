@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -100,7 +101,10 @@ public class UserController {
     public String displayProfile(Principal principal, Model model, Authentication authentication) {
         model.addAttribute("activePage", "profile");
 
+
         User user = null;
+
+
         List<ItemSold> mesVentes = new ArrayList<>();
 
         if (authentication.getPrincipal() instanceof OAuth2User) {
@@ -124,10 +128,39 @@ public class UserController {
             }
         }
 
+        user = userService.readUserByUsername(principal.getName());
+
+        boolean isAvailable = true;
+        if (user.getLastDailyReward() != null) {
+            if (user.getLastDailyReward().equals(LocalDate.now())) {
+                isAvailable = false;
+            }
+        }
+
+        model.addAttribute("isRewardAvailable", isAvailable);
+
         model.addAttribute("mesVentes", mesVentes);
         model.addAttribute("UserCo", user);
         return "/profile";
     }
+
+    @GetMapping("/profileOther")
+    public String displayProfileOther(@RequestParam("id")long user_id, Model model, Authentication authentication) {
+        model.addAttribute("activePage", "profile");
+
+        userService.readUserById(user_id);
+
+        User user = userService.readUserById(user_id);
+
+
+
+        List<ItemSold> mesVentes = new ArrayList<>();
+        mesVentes = itemSoldService.readItemsBySeller(user.getUser_id());
+        model.addAttribute("mesVentes", mesVentes);
+        model.addAttribute("User", userService.readUserById(user_id));
+        return "/profileOther";
+    }
+
 
     @GetMapping("/changeProfile")
     public String displayChangeProfile(Principal principal, Model model, Authentication authentication) {
@@ -222,6 +255,8 @@ public class UserController {
         System.out.println("Nouvel avatar choisi : " + avatarName);
         return "redirect:/profile";
     }
+
+
 
 
 }
