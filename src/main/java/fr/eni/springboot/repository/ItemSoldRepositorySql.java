@@ -27,23 +27,23 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
     @Transactional
     @Override
     public void createItemSold(ItemSold itemSold) {
-        String sql = "INSERT INTO ItemSold (articleName,image, description, auctionStartDate, auctionEndDate, startingPrice, priceSale, user_id, category_id, rarity) VALUES (:articleName,:image, :description, :auctionStartDate, :auctionEndDate, :startingPrice, :priceSale, :user_id, :category_id, :rarity)";
+        String sql = "INSERT INTO ItemSold (articleName, image, description, auctionStartDate, auctionEndDate, startingPrice, priceSale, user_id, category_id, rarity) VALUES (:articleName, :image, :description, :auctionStartDate, :auctionEndDate, :startingPrice, :priceSale, :user_id, :category_id, :rarity)";
 
         MapSqlParameterSource params = new MapSqlParameterSource();
 
         params.addValue("articleName", itemSold.getArticleName());
         params.addValue("image", itemSold.getImage());
         params.addValue("description", itemSold.getDescription());
-        params.addValue("auctionStartDate", itemSold.getAuctionStartDate());
-        params.addValue("auctionEndDate", itemSold.getAuctionEndDate());
+        params.addValue("auctionStartDate", itemSold.getAuctionStartDate() != null ? java.sql.Timestamp.valueOf(itemSold.getAuctionStartDate()) : null);
+        params.addValue("auctionEndDate", itemSold.getAuctionEndDate() != null ? java.sql.Timestamp.valueOf(itemSold.getAuctionEndDate()) : null);
         params.addValue("startingPrice", itemSold.getStartingPrice());
         params.addValue("priceSale", itemSold.getPriceSale());
-        params.addValue("user_id", itemSold.getSeller().getUser_id());
-        params.addValue("category_id", itemSold.getCategory().getCategory_id());
-        params.addValue("rarity", itemSold.getRarity());
+        params.addValue("user_id", itemSold.getSeller() != null ? itemSold.getSeller().getUser_id() : null);
+        params.addValue("category_id", itemSold.getCategory() != null ? itemSold.getCategory().getCategory_id() : null);
+        // Envoie le nom de la rareté en String, pas l'objet Enum
+        params.addValue("rarity", itemSold.getRarity() != null ? itemSold.getRarity().name() : "COMMON");
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
-
         namedParameterJdbcTemplate.update(sql, params, keyHolder);
 
         if (keyHolder.getKey() != null) {
@@ -81,12 +81,22 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
     @Transactional
     @Override
     public void updateItemSold(ItemSold itemSold) {
+        String sql = "UPDATE ItemSold SET articleName = :articleName, image = :image, description = :description, " +
+                "auctionStartDate = :auctionStartDate, auctionEndDate = :auctionEndDate, " +
+                "startingPrice = :startingPrice, priceSale = :priceSale, rarity = :rarity WHERE article_id = :id";
 
-        String sql = "UPDATE ItemSold SET articleName = :articleName, image = :image, description = :description, auctionStartDate = :auctionStartDate, auctionEndDate = :auctionEndDate, startingPrice = :startingPrice, priceSale = :priceSale WHERE article_id = :id";
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("id", itemSold.getId());
+        params.addValue("articleName", itemSold.getArticleName());
+        params.addValue("image", itemSold.getImage());
+        params.addValue("description", itemSold.getDescription());
+        params.addValue("auctionStartDate", itemSold.getAuctionStartDate() != null ? java.sql.Timestamp.valueOf(itemSold.getAuctionStartDate()) : null);
+        params.addValue("auctionEndDate", itemSold.getAuctionEndDate() != null ? java.sql.Timestamp.valueOf(itemSold.getAuctionEndDate()) : null);
+        params.addValue("startingPrice", itemSold.getStartingPrice());
+        params.addValue("priceSale", itemSold.getPriceSale());
+        params.addValue("rarity", itemSold.getRarity() != null ? itemSold.getRarity().name() : "COMMON");
 
-        BeanPropertySqlParameterSource map = new BeanPropertySqlParameterSource(itemSold);
-
-        namedParameterJdbcTemplate.update(sql, map);
+        namedParameterJdbcTemplate.update(sql, params);
 
         if (itemSold.getWithdrawal() != null) {
             String sqlWithdrawal = "UPDATE WITHDRAWAL SET street = :street, postalCode = :postalCode, city = :city WHERE article_id = :article_id";
@@ -161,6 +171,6 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("rarity", rarity.name());
 
-        return namedParameterJdbcTemplate.query(sql,map, new ItemSoldRowMapper());
+        return namedParameterJdbcTemplate.query(sql, map, new ItemSoldRowMapper());
     }
 }

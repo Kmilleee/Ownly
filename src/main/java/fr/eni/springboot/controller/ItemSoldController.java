@@ -71,6 +71,7 @@ public class ItemSoldController {
 
         model.addAttribute("article", article);
         model.addAttribute("categoryList", categoryList);
+        model.addAttribute("rarities", Rarity.values());
         model.addAttribute("activePage", "sell");
 
         return "create-sale";

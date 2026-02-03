@@ -2,17 +2,17 @@ package fr.eni.springboot.bo;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ItemSold {
 
     private long id;
     private String articleName;
     private String description;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate auctionStartDate;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate auctionEndDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime auctionStartDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime auctionEndDate;
     private Long startingPrice;
     private Long priceSale;
     private String image;
@@ -55,19 +55,19 @@ public class ItemSold {
         this.description = description;
     }
 
-    public LocalDate getAuctionStartDate() {
+    public LocalDateTime getAuctionStartDate() {
         return auctionStartDate;
     }
 
-    public void setAuctionStartDate(LocalDate auctionStartDate) {
+    public void setAuctionStartDate(LocalDateTime auctionStartDate) {
         this.auctionStartDate = auctionStartDate;
     }
 
-    public LocalDate getAuctionEndDate() {
+    public LocalDateTime getAuctionEndDate() {
         return auctionEndDate;
     }
 
-    public void setAuctionEndDate(LocalDate auctionEndDate) {
+    public void setAuctionEndDate(LocalDateTime auctionEndDate) {
         this.auctionEndDate = auctionEndDate;
     }
 
@@ -131,7 +131,7 @@ public class ItemSold {
     }
 
 
-    public ItemSold(long id, String articleName, String description, LocalDate auctionStartDate, LocalDate auctionEndDate, Long startingPrice, Long priceSale, String image, Rarity rarity, User buyer, User seller, Category category, Withdrawal withdrawal) {
+    public ItemSold(long id, String articleName, String description, LocalDateTime auctionStartDate, LocalDateTime auctionEndDate, Long startingPrice, Long priceSale, String image, Rarity rarity, User buyer, User seller, Category category, Withdrawal withdrawal) {
         this.id = id;
         this.articleName = articleName;
         this.description = description;
@@ -147,7 +147,7 @@ public class ItemSold {
         this.withdrawal = withdrawal;
     }
 
-    public ItemSold(String articleName, String description, LocalDate auctionStartDate, LocalDate auctionEndDate, Long startingPrice, Long priceSale, String image, Rarity rarity, User buyer, User seller, Category category, Withdrawal withdrawal) {
+    public ItemSold(String articleName, String description, LocalDateTime auctionStartDate, LocalDateTime auctionEndDate, Long startingPrice, Long priceSale, String image, Rarity rarity, User buyer, User seller, Category category, Withdrawal withdrawal) {
         this.articleName = articleName;
         this.description = description;
         this.auctionStartDate = auctionStartDate;

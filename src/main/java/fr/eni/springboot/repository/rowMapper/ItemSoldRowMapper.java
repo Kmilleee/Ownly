@@ -19,8 +19,8 @@ public class ItemSoldRowMapper implements RowMapper<ItemSold> {
         article.setStartingPrice(rs.getLong("startingPrice"));
         article.setImage(rs.getString("image"));
         article.setPriceSale(rs.getLong("priceSale"));
-        article.setAuctionEndDate(rs.getDate("auctionEndDate").toLocalDate());
-        article.setAuctionStartDate(rs.getDate("auctionStartDate").toLocalDate());
+        article.setAuctionEndDate(rs.getTimestamp("auctionEndDate").toLocalDateTime());
+        article.setAuctionStartDate(rs.getTimestamp("auctionStartDate").toLocalDateTime());
 
         String rarityString = rs.getString("rarity");
         if (rarityString != null) {
