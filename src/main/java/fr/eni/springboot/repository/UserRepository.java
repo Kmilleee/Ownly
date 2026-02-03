@@ -23,4 +23,6 @@ public interface UserRepository {
     void updatePassword(String email, String encodedPassword);
 
     void updateAvatar(long userId, String imageName);
+
+    void updateCredit(long userId, long newCredit);
 }

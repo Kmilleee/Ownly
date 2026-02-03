@@ -18,7 +18,5 @@ public interface ItemSoldRepository {
 
     List<ItemSold> readItemsBySeller(long sellerId);
 
-    ItemSold readItemSoldById(long article_id);
-
     List<ItemSold> findByRarity(Rarity rarity);
 }

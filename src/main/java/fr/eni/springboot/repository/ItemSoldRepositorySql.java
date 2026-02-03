@@ -156,11 +156,6 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
     }
 
     @Override
-    public ItemSold readItemSoldById(long article_id) {
-        return null;
-    }
-
-    @Override
     public List<ItemSold> findByRarity(Rarity rarity) {
         String sql = "SELECT a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, u.username as username \n" +
                 "FROM ItemSold a\n" +

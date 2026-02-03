@@ -1,22 +1,25 @@
 package fr.eni.springboot.controller;
 
+import fr.eni.springboot.bo.Auction;
 import fr.eni.springboot.bo.ItemSold;
 import fr.eni.springboot.bo.Rarity;
+import fr.eni.springboot.bo.User;
 import fr.eni.springboot.service.AuctionService;
 import fr.eni.springboot.service.ItemSoldService;
-import fr.eni.springboot.service.ItemSoldServiceImpl;
+import fr.eni.springboot.service.UserService;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,16 +28,18 @@ public class AuctionController {
 
     private final AuctionService service;
     private final ItemSoldService serviceItem;
+    private final UserService userService;
 
-    public AuctionController(AuctionService service, ItemSoldService serviceItem) {
+    public AuctionController(AuctionService service, ItemSoldService serviceItem, UserService userService) {
         this.service = service;
         this.serviceItem = serviceItem;
+        this.userService = userService;
     }
 
     @GetMapping("/auction")
-    public String displayAuction(Model model){
+    public String displayAuction(Model model) {
         model.addAttribute("activePage", "auction");
-        return"auction";
+        return "auction";
     }
 
     @GetMapping("/itemsSold-photos/{id}/{imageName}")
@@ -89,7 +94,7 @@ public class AuctionController {
     }
 
     @GetMapping("/auctionDetail")
-    public String displayAuctionDetail(@RequestParam("id") long  id_item, Model model) {
+    public String displayAuctionDetail(@RequestParam("id") long id_item, Model model) {
         model.addAttribute("itemOBJ", serviceItem.readItemById(id_item));
 
         List<String> listFigurine = new ArrayList<>();
@@ -110,6 +115,34 @@ public class AuctionController {
         model.addAttribute("commonCards", commonCards);
 
         return "/auctionDetail";
+    }
+
+    @PostMapping("/encherir")
+    public String placerEnchere(@RequestParam("articleId") long articleId, @RequestParam("montant") int montant, Principal principal, RedirectAttributes redirectAttributes) {
+        try {
+            String bidderUsername = principal.getName();
+
+            User bidder = userService.readUserByUsername(bidderUsername);
+            ItemSold itemSold = serviceItem.readItemById(articleId);
+
+            Auction auction = new Auction();
+
+            auction.setBidder(bidder);
+            auction.setItem(itemSold);
+            auction.setAuctionDate(LocalDateTime.now());
+            auction.setAuctionAmount(montant);
+
+            service.createAuction(auction);
+
+            redirectAttributes.addFlashAttribute("success", "Votre enchère a bien été enregistrée !");
+
+
+        } catch (RuntimeException e) {
+            //RedirectAttributes est nécessaire dans le cas où on redirect (avec le model le redirect l'effacerait car nouvelle requête)
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+        }
+
+        return "redirect:/auctionDetail?id=" + articleId;
     }
 
 }
