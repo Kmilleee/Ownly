@@ -12,4 +12,6 @@ public interface AuctionRepository {
     void updateAuction(Auction auction);
 
     void deleteAuction(long auction_id);
+
+    Auction findBestAuctionByItemId(long itemId);
 }

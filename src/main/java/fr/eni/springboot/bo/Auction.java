@@ -1,14 +1,13 @@
 package fr.eni.springboot.bo;
 
-import org.apache.catalina.User;
-
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Auction {
 
 
     private long auction_id;
-    private LocalDate auctionDate;
+    private LocalDateTime auctionDate;
     private long auctionAmount;
     private ItemSold item;
     private User bidder;
@@ -21,11 +20,11 @@ public class Auction {
         this.auction_id = auction_id;
     }
 
-    public LocalDate getAuctionDate() {
+    public LocalDateTime getAuctionDate() {
         return auctionDate;
     }
 
-    public void setAuctionDate(LocalDate auctionDate) {
+    public void setAuctionDate(LocalDateTime auctionDate) {
         this.auctionDate = auctionDate;
     }
 
@@ -56,7 +55,7 @@ public class Auction {
     public Auction() {
     }
 
-    public Auction(long auction_id, LocalDate auctionDate, long auctionAmount, ItemSold item, User bidder) {
+    public Auction(long auction_id, LocalDateTime auctionDate, long auctionAmount, ItemSold item, User bidder) {
         this.auction_id = auction_id;
         this.auctionDate = auctionDate;
         this.auctionAmount = auctionAmount;
@@ -64,7 +63,7 @@ public class Auction {
         this.bidder = bidder;
     }
 
-    public Auction(LocalDate auctionDate, long auctionAmount, ItemSold item, User bidder) {
+    public Auction(LocalDateTime auctionDate, long auctionAmount, ItemSold item, User bidder) {
         this.auctionDate = auctionDate;
         this.auctionAmount = auctionAmount;
         this.item = item;
