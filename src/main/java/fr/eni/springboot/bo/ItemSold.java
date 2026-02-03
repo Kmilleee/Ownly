@@ -16,6 +16,7 @@ public class ItemSold {
     private Long startingPrice;
     private Long priceSale;
     private String image;
+    private Rarity rarity;
 
     private User buyer;
     private User seller;
@@ -118,10 +119,19 @@ public class ItemSold {
         this.withdrawal = withdrawal;
     }
 
+    public Rarity getRarity() {
+        return rarity;
+    }
+
+    public void setRarity(Rarity rarity) {
+        this.rarity = rarity;
+    }
+
     public ItemSold() {
     }
 
-    public ItemSold(long id, String articleName, String description, LocalDate auctionStartDate, LocalDate auctionEndDate, Long startingPrice, Long priceSale, String image, User buyer, User seller, Category category, Withdrawal withdrawal) {
+
+    public ItemSold(long id, String articleName, String description, LocalDate auctionStartDate, LocalDate auctionEndDate, Long startingPrice, Long priceSale, String image, Rarity rarity, User buyer, User seller, Category category, Withdrawal withdrawal) {
         this.id = id;
         this.articleName = articleName;
         this.description = description;
@@ -130,13 +140,14 @@ public class ItemSold {
         this.startingPrice = startingPrice;
         this.priceSale = priceSale;
         this.image = image;
+        this.rarity = rarity;
         this.buyer = buyer;
         this.seller = seller;
         this.category = category;
         this.withdrawal = withdrawal;
     }
 
-    public ItemSold(String articleName, String description, LocalDate auctionStartDate, LocalDate auctionEndDate, long startingPrice, long priceSale, String image, User buyer, User seller, Category category, Withdrawal withdrawal) {
+    public ItemSold(String articleName, String description, LocalDate auctionStartDate, LocalDate auctionEndDate, Long startingPrice, Long priceSale, String image, Rarity rarity, User buyer, User seller, Category category, Withdrawal withdrawal) {
         this.articleName = articleName;
         this.description = description;
         this.auctionStartDate = auctionStartDate;
@@ -144,6 +155,7 @@ public class ItemSold {
         this.startingPrice = startingPrice;
         this.priceSale = priceSale;
         this.image = image;
+        this.rarity = rarity;
         this.buyer = buyer;
         this.seller = seller;
         this.category = category;

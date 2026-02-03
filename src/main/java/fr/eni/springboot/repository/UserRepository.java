@@ -21,4 +21,6 @@ public interface UserRepository {
     User findByEmail(String email);
 
     void updatePassword(String email, String encodedPassword);
+
+    void updateAvatar(long userId, String imageName);
 }

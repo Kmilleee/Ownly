@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -195,6 +196,32 @@ public class UserController {
     public String disableUser(@RequestParam("id") long id) {
         userService.disableUser(id);
         return "redirect:/user";
+    }
+
+    @GetMapping("/changeProfile/edit-avatar")
+    public String afficherSelectionAvatar(Model model) {
+        List<String> avatars = Arrays.asList(
+                "clown.png",
+                "coureur.png",
+                "dormeur.png",
+                "militaire.png",
+                "peintre.png"
+        );
+
+        model.addAttribute("avatarList", avatars);
+
+        return "/edit-avatar";
+    }
+
+    @PostMapping("/changeProfile/edit-avatar")
+    public String enregistrerAvatar(@RequestParam("avatarChoice") String avatarName, Principal principal) {
+        User userConnecte = userService.readUserByUsername(principal.getName());
+        if (userConnecte != null) {
+            userService.updateAvatar(userConnecte.getUser_id(), avatarName);
+        }
+
+        System.out.println("Nouvel avatar choisi : " + avatarName);
+        return "redirect:/profile";
     }
 
 
