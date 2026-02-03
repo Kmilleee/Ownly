@@ -22,6 +22,58 @@ public class ItemSold {
     private User seller;
     private Category category;
     private Withdrawal withdrawal;
+    private StatusSale status;
+
+    public ItemSold(long id, String articleName, String description, LocalDateTime auctionStartDate, LocalDateTime auctionEndDate, Long startingPrice, Long priceSale, String image, Rarity rarity, User buyer, User seller, Category category, Withdrawal withdrawal, StatusSale status) {
+        this.id = id;
+        this.articleName = articleName;
+        this.description = description;
+        this.auctionStartDate = auctionStartDate;
+        this.auctionEndDate = auctionEndDate;
+        this.startingPrice = startingPrice;
+        this.priceSale = priceSale;
+        this.image = image;
+        this.rarity = rarity;
+        this.buyer = buyer;
+        this.seller = seller;
+        this.category = category;
+        this.withdrawal = withdrawal;
+        this.status = status;
+    }
+
+    public ItemSold(String articleName, String description, LocalDateTime auctionStartDate, LocalDateTime auctionEndDate, Long startingPrice, Long priceSale, String image, Rarity rarity, User buyer, User seller, Category category, Withdrawal withdrawal, StatusSale status) {
+        this.articleName = articleName;
+        this.description = description;
+        this.auctionStartDate = auctionStartDate;
+        this.auctionEndDate = auctionEndDate;
+        this.startingPrice = startingPrice;
+        this.priceSale = priceSale;
+        this.image = image;
+        this.rarity = rarity;
+        this.buyer = buyer;
+        this.seller = seller;
+        this.category = category;
+        this.withdrawal = withdrawal;
+        this.status = status;
+    }
+
+    public StatusSale getStatus() {
+        LocalDateTime now = LocalDateTime.now();
+
+        if (this.auctionStartDate.isAfter(now)) {
+            return StatusSale.NOT_STARTED;
+        }
+        else if (this.auctionEndDate.isBefore(now)) {
+            return StatusSale.COMPLETED;
+        }
+        else {
+            return StatusSale.IN_PROGRESS;
+        }
+    }
+
+    public void setStatus(StatusSale status) {
+        this.status = status;
+    }
 
     public String getImage() {
         return image;
@@ -131,34 +183,4 @@ public class ItemSold {
     }
 
 
-    public ItemSold(long id, String articleName, String description, LocalDateTime auctionStartDate, LocalDateTime auctionEndDate, Long startingPrice, Long priceSale, String image, Rarity rarity, User buyer, User seller, Category category, Withdrawal withdrawal) {
-        this.id = id;
-        this.articleName = articleName;
-        this.description = description;
-        this.auctionStartDate = auctionStartDate;
-        this.auctionEndDate = auctionEndDate;
-        this.startingPrice = startingPrice;
-        this.priceSale = priceSale;
-        this.image = image;
-        this.rarity = rarity;
-        this.buyer = buyer;
-        this.seller = seller;
-        this.category = category;
-        this.withdrawal = withdrawal;
-    }
-
-    public ItemSold(String articleName, String description, LocalDateTime auctionStartDate, LocalDateTime auctionEndDate, Long startingPrice, Long priceSale, String image, Rarity rarity, User buyer, User seller, Category category, Withdrawal withdrawal) {
-        this.articleName = articleName;
-        this.description = description;
-        this.auctionStartDate = auctionStartDate;
-        this.auctionEndDate = auctionEndDate;
-        this.startingPrice = startingPrice;
-        this.priceSale = priceSale;
-        this.image = image;
-        this.rarity = rarity;
-        this.buyer = buyer;
-        this.seller = seller;
-        this.category = category;
-        this.withdrawal = withdrawal;
-    }
 }
