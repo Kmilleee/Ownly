@@ -69,10 +69,10 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
 
     @Override
     public List<ItemSold> readItemSold() {
-        String sql = "SELECT a.article_id as article_id,rarity as rarity ,a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, u.username as username, u.avatar as avatar \n" +
+        String sql = "SELECT a.article_id as article_id,rarity as rarity ,a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image,a.user_id as user_id, c.name as name, u.username as username, u.avatar as avatar \n" +
                 "FROM ItemSold a\n" +
-                "INNER JOIN CATEGORY c ON a.category_id = c.category_id\n" +
-                "INNER JOIN USERS u ON a.user_id = u.user_id\n";
+                "left JOIN CATEGORY c ON a.category_id = c.category_id\n" +
+                "left JOIN USERS u ON a.user_id = u.user_id\n";
 
 
         return jdbcTemplate.query(sql, new ItemSoldRowMapper());
@@ -117,7 +117,7 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
     public ItemSold readItemById(long article_id) {
         //String sql = "SELECT a.article_id, a.articleName, a.startingPrice, a.priceSale, a.auctionStartDate, a.auctionEndDate, a.description, a.category_id, a.image, c.name as name, u.username as username FROM ItemSold a LEFT JOIN CATEGORY c ON a.category_id = c.category_id INNER JOIN USERS u ON a.user_id = u.user_id WHERE a.article_id = :article_id";
 
-        String sql = "SELECT a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, u.username as username, u.avatar as avatar \n" +
+        String sql = "SELECT a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, a.user_id as user_id, u.username as username, u.avatar as avatar \n" +
                 "FROM ItemSold a\n" +
                 "left JOIN CATEGORY c ON a.category_id = c.category_id\n" +
                 "left JOIN USERS u ON a.user_id = u.user_id\n" +
@@ -152,7 +152,7 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
 
     @Override
     public List<ItemSold> findByRarity(Rarity rarity) {
-        String sql = "SELECT a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, u.username as username, u.avatar as avatar \n" +
+        String sql = "SELECT a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, a.user_id as user_id, c.name as name, u.username as username, u.avatar as avatar \n" +
                 "FROM ItemSold a\n" +
                 "left JOIN CATEGORY c ON a.category_id = c.category_id\n" +
                 "left JOIN USERS u ON a.user_id = u.user_id\n" +
@@ -175,4 +175,21 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
 
         return jdbcTemplate.query(sql, new ItemSoldRowMapper());
     }
+
+    @Override
+    public List<ItemSold> readItemBySearch(String query){
+        String sql ="SELECT a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image,a.user_id as user_id, c.name as name, u.username as username, u.avatar as avatar \n" +
+                "FROM ItemSold a\n" +
+                "left JOIN CATEGORY c ON a.category_id = c.category_id\n" +
+                "left JOIN USERS u ON a.user_id = u.user_id \n"+
+                "where a.articleName Like :query";
+
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("query", "%" + query + "%");
+
+         return namedParameterJdbcTemplate.query(sql, map, new ItemSoldRowMapper());
+
+    }
+
+
 }

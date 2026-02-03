@@ -32,11 +32,29 @@ public class AuctionController {
     }
 
     @GetMapping("/auction")
-    public String displayAuction(Model model){
+    public String displayAuction(Model model) {
 
+        List<ItemSold> allItems = serviceItem.readItemSold();
+        List<ItemSold> allItemsLegendary = serviceItem.findByRarity(Rarity.LEGENDARY);
+        int limit = Math.min(allItems.size(), 8);
+        int limit2 = Math.min(allItems.size(), 3);
+
+        List<ItemSold> newCollection = allItemsLegendary.subList(0, limit2);
+
+        List<ItemSold> topAuctions = allItems.subList(0, limit);
+
+        List<ItemSold> otherAuctions = new ArrayList<>();
+        if (allItems.size() > 8) {
+            otherAuctions = allItems.subList(limit, 12);
+        }
+
+        model.addAttribute("newCollection", newCollection);
+        model.addAttribute("topAuctions", topAuctions);
+        model.addAttribute("otherAuctions", otherAuctions);
         model.addAttribute("userList", serviceItem.readItemsByBetterSel());
         model.addAttribute("activePage", "auction");
-        return"auction";
+
+        return "auction";
     }
 
     @GetMapping("/itemsSold-photos/{id}/{imageName}")
@@ -91,7 +109,7 @@ public class AuctionController {
     }
 
     @GetMapping("/auctionDetail")
-    public String displayAuctionDetail(@RequestParam("id") long  id_item, Model model) {
+    public String displayAuctionDetail(@RequestParam("id") long id_item, Model model) {
         model.addAttribute("itemOBJ", serviceItem.readItemById(id_item));
 
         List<String> listFigurine = new ArrayList<>();
@@ -112,6 +130,49 @@ public class AuctionController {
         model.addAttribute("commonCards", commonCards);
 
         return "/auctionDetail";
+    }
+
+    @GetMapping("/cherche")
+    public String displayCherche(@RequestParam(value = "p", required = false) String query, Model model) {
+
+        List<ItemSold> articlesTrouves;
+
+        if (query != null && !query.isEmpty()) {
+            articlesTrouves = serviceItem.readItemBySearch(query);
+        } else {
+            model.addAttribute("activePage", "auction");
+            articlesTrouves = serviceItem.readItemSold();
+
+
+            ItemSold pub = new ItemSold();
+            pub.setArticleName("Mystic Realms");
+            pub.setDescription("Découvrez notre nouveau RPG !");
+            pub.setImage("pub2.png");
+            pub.setStartingPrice(null);
+
+            if (articlesTrouves.size() >= 3) {
+                articlesTrouves.add(3, pub);
+            } else {
+                articlesTrouves.add(pub);
+            }
+
+            ItemSold pub2 = new ItemSold();
+            pub2.setArticleName("test pub2");
+            pub2.setDescription("Découvrez notre nouveau RPG !");
+            pub2.setImage("pub.png");
+            pub2.setStartingPrice(null);
+
+            if (articlesTrouves.size() >= 8) {
+                articlesTrouves.add(8, pub2);
+            } else {
+                articlesTrouves.add(pub2);
+            }
+        }
+
+
+        model.addAttribute("articles", articlesTrouves);
+
+        return "auctionAll";
     }
 
 }

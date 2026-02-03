@@ -25,4 +25,6 @@ public interface ItemSoldService {
     List<ItemSold> findByRarity(Rarity rarity);
 
     List<ItemSold> readItemsByBetterSel();
+
+    List<ItemSold> readItemBySearch(String query);
 }

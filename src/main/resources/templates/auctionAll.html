@@ -12,7 +12,7 @@
     <section class="flex justify-between items-center">
 
 
-        <form class="max-w-md ms-15 w-1/2 p-1 ">
+        <form method="get" th:action="@{/cherche}" class="max-w-md ms-15 w-1/2 p-1 ">
             <label for="search" class="block mb-2.5 text-sm font-medium text-black"></label>
             <div class="relative">
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -22,11 +22,23 @@
                               d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
                     </svg>
                 </div>
-                <input type="search" id="search"
-                       class="block w-full p-3 ps-9 bg-white text-black border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body rounded-[20rem]"
-                       placeholder="Search" required/>
-                <button type="button"
-                        class="absolute end-1.5 bottom-1.5 text-black bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-xs px-3 py-1.5 focus:outline-none">
+                <input type="text"
+                       id="search"
+                       name="p"
+                       th:value="${param.p}"
+                       class="block w-full p-3 ps-9 bg-white text-black border border-default-medium text-heading text-sm rounded-base focus:ring-brand  shadow-xs placeholder:text-body rounded-[20rem]"
+                       placeholder="Search an auction..." />
+                <a th:if="${param.p != null and !#strings.isEmpty(param.p)}"
+                   th:href="@{/auctionAll}"
+                   class="absolute -end-10 bottom-2 text-white hover:text-red-500 hover:bg-gray-100 rounded-full p-1 transition"
+                   title="Effacer la recherche">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </a>
+
+                <button type="submit"
+                        class="absolute end-1.5 bottom-1.5 text-black bg-brand hover:bg-brand-strong box-border border border-transparent  shadow-xs font-medium leading-5 rounded text-xs px-3 py-1.5 focus:outline-none">
                     Search
                 </button>
             </div>

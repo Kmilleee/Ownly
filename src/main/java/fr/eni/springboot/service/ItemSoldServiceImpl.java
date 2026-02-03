@@ -99,4 +99,9 @@ public class ItemSoldServiceImpl implements ItemSoldService {
     public List<ItemSold> readItemsByBetterSel() {
         return itemSoldRepository.readItemsByBetterSel();
     }
+
+    @Override
+    public List<ItemSold> readItemBySearch(String query) {
+        return itemSoldRepository.readItemBySearch(query);
+    }
 }
