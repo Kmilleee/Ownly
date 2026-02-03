@@ -88,4 +88,9 @@ public class UserServiceImpl implements UserService {
     public void updateAvatar(long userId, String imageName) {
         dao.updateAvatar(userId, imageName);
     }
+
+    @Override
+    public boolean claimDailyReward(long userId) {
+        return dao.claimDailyReward(userId);
+    }
 }

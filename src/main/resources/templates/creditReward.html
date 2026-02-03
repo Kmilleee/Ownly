@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html data-th-replace="~{fragment/layout :: frag_layout(content= ~{::main})}" lang="fr">
+<main class=" text-white mb-10 flex flex-col items-center justify-center">
+
+    <div class="text-center mb-10">
+        <h1 class="text-6xl font-chillax font-bold mb-4">Daily Reward</h1>
+        <p class="text-gray-400 text-xl">Come back every day to earn 500 free credits!</p>
+    </div>
+
+    <div th:if="${successMessage}" class="bg-green-500/20 text-green-400 px-6 py-3 rounded-xl border border-green-500 mb-8">
+        <span th:text="${successMessage}"></span>
+    </div>
+    <div th:if="${errorMessage}" class="bg-red-500/20 text-red-400 px-6 py-3 rounded-xl border border-red-500 mb-8">
+        <span th:text="${errorMessage}"></span>
+    </div>
+
+    <div class="relative w-full max-w-md">
+
+        <div th:if="${isRewardAvailable}">
+            <form th:action="@{/creditReward}" method="post">
+                <button type="submit" class="group w-full">
+                    <div >
+
+                        <div class="text-8xl mb-6 animate-bounce mt-10">Open UP</div>
+                        <p class="text-pink-300 mb-8">+500 Crédits</p>
+
+                        <div class="bg-pink-600 mb-15 text-white font-bold py-4 px-8 rounded-full shadow-lg group-pink:bg-pink-500 transition-colors">
+                            RECUP NOW
+                        </div>
+                    </div>
+                </button>
+            </form>
+        </div>
+
+        <div th:if="${!isRewardAvailable}">
+            <div class="p-10 text-center opacity-75 cursor-not-allowed">
+
+                <div class="text-8xl mb-6 grayscale opacity-50">🔒</div>
+
+                <h2 class="text-3xl font-bold text-gray-400 mb-2">Already Recup</h2>
+                <p class="text-gray-500 mb-8">Come back tomorrow!</p>
+
+                <div class="bg-gray-700 text-gray-400 font-bold py-4 px-8 rounded-full">
+                    NOT NOW
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</main>

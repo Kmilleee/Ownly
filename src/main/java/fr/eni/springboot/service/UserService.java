@@ -25,4 +25,7 @@ public interface UserService {
     void disableUser(long id);
 
     void updateAvatar(long userId, String imageName);
+
+    boolean claimDailyReward(long userId);
+
 }

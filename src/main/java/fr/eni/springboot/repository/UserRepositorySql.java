@@ -171,4 +171,21 @@ public class UserRepositorySql implements UserRepository {
 
         namedParameterJdbcTemplate.update(sql,map);
     }
+
+    @Override
+    public boolean claimDailyReward(long userId) {
+        String sql = "UPDATE USERS " +
+                "SET credit = credit + 500, last_daily_reward = GETDATE() " +
+                "WHERE user_id = :userId " +
+                "AND (last_daily_reward < CAST(GETDATE() AS DATE) OR last_daily_reward IS NULL)";
+
+        MapSqlParameterSource map = new MapSqlParameterSource("userId", userId);
+
+        // update renvoie le nombre de lignes modifiées.
+        // Si renvoie 1 : Succès (c'était un nouveau jour).
+        // Si renvoie 0 : Échec (déjà pris aujourd'hui).
+        int rowsAffected = namedParameterJdbcTemplate.update(sql, map);
+
+        return rowsAffected > 0;
+    }
 }

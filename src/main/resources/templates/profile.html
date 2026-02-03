@@ -3,8 +3,25 @@
 
 <body>
 <main>
+    <div class="absolute top-0 left-0 w-full h-[120vh] overflow-hidden -z-10 pointer-events-none">
+
+        <div class="absolute top-1/2 right-0 w-[400px] h-[400px] md:w-[800px] md:h-[800px]"
+             style="background: radial-gradient(circle, rgba(126, 34, 206, 0.4) 0%, rgba(0,0,0,0) 70%);
+                    transform: translate(30%, -30%);">
+        </div>
+
+        <div class="absolute top-1/2 right-0 w-[400px] h-[400px] md:w-[800px] md:h-[800px]"
+             style="background: radial-gradient(circle, rgba(238, 27, 136, 0.66) 0%, rgba(0,0,0,0) 70%);
+                    transform: translate(30%, -30%);">
+        </div>
+
+        <div class="absolute top-1/2 left-1/2 w-[400px] h-[400px] md:w-[800px] md:h-[800px]"
+             style="background: radial-gradient(circle, rgba(30, 237, 251, 0.46) 0%, rgba(0,0,0,0) 50%);
+                    transform: translate(-90%, -60%);">
+        </div>
+
+    </div>
     <section class="relative z-10 w-full">
-        <!--    <h2 class="text-[5rem] font-medium text-white ms-15 mb-10">Profile</h2>-->
 
         <div class="flex w-full px-15  gap-10">
 
@@ -14,7 +31,7 @@
                     <div class="flex items-center w-full ">
                         <img th:src="@{|/img/avatars/${UserCo.avatar != null ? UserCo.avatar : 'default.png'}|}"
                              alt="Photo de profil"
-                             class="rounded-full w-32 h-32 object-cover border-4 border-pink-800" />
+                             class="rounded-full w-32 h-32 object-cover border-4 border-pink-800"/>
                         <div class="w-full">
                             <div class="flex justify-between">
                                 <h1 th:text="${UserCo.username}" class="text-[4rem]"></h1>
@@ -28,11 +45,19 @@
                                     <h3 th:text="${UserCo.firstName}"></h3>
                                     <h3 th:text="${UserCo.lastName}"></h3>
                                 </div>
-                                <a th:href="@{/changeProfile}">
-                                    <button class=" bg-white text-black font-bold py-1.5 px-4 rounded-full hover:bg-gray-200 transition">
-                                        Change profile
-                                    </button>
-                                </a>
+                                <div>
+                                    <a th:href="@{/changeProfile}">
+                                        <button class=" bg-white text-black font-bold py-1.5 px-4 rounded-full hover:bg-gray-200 transition">
+                                            Change profile
+                                        </button>
+                                    </a>
+                                    <a th:href="@{/creditReward}">
+                                        <button th:classappend="${isRewardAvailable} ? 'border-red-500 animate-pulse' : 'border-gray-200'"
+                                                class="border-2 bg-white text-black font-bold py-1.5 px-4 rounded-full hover:bg-gray-200 transition">
+                                            +
+                                        </button>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
