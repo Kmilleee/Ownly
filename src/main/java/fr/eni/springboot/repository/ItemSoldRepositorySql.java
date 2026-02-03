@@ -70,7 +70,7 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
 
     @Override
     public List<ItemSold> readItemSold() {
-        String sql = "SELECT a.article_id as article_id,rarity as rarity ,a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, u.username as username \n" +
+        String sql = "SELECT a.article_id as article_id,rarity as rarity ,a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, u.username as username, u.avatar as avatar, u.user_id as user_id \n" +
                 "FROM ItemSold a\n" +
                 "INNER JOIN CATEGORY c ON a.category_id = c.category_id\n" +
                 "INNER JOIN USERS u ON a.user_id = u.user_id\n";
