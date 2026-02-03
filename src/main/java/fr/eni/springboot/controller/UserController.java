@@ -150,24 +150,32 @@ public class UserController {
     }
 
     @PostMapping("/changeProfile")
-    public String displayUpdateProfile(@ModelAttribute("UserOBJ") User formUser, Authentication authentication) {
-        User existingUser = userService.readUserByUsername(authentication.getName());
+    public String displayUpdateProfile(@ModelAttribute("UserOBJ") User formUser, Model model, Authentication authentication) {
+        try {
+            User existingUser = userService.readUserByUsername(authentication.getName());
 
-        if (existingUser != null) {
-            formUser.setUser_id(existingUser.getUser_id());
-            formUser.setEmail(existingUser.getEmail());
+            if (existingUser != null) {
+                formUser.setUser_id(existingUser.getUser_id());
 
-            userService.updateUser(formUser);
+                userService.updateUser(formUser);
 
-            Authentication newAuth = new UsernamePasswordAuthenticationToken(
-                    formUser.getUsername(),
-                    authentication.getCredentials(),
-                    authentication.getAuthorities()
-            );
-            SecurityContextHolder.getContext().setAuthentication(newAuth);
+                Authentication newAuth = new UsernamePasswordAuthenticationToken(
+                        formUser.getUsername(),
+                        authentication.getCredentials(),
+                        authentication.getAuthorities()
+                );
+                SecurityContextHolder.getContext().setAuthentication(newAuth);
+
+                return "redirect:/profile";
+            }
+            return "redirect:/";
+
+        } catch (RuntimeException e) {
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("UserOBJ", formUser);
+            model.addAttribute("UserCo", userService.readUserByUsername(authentication.getName()));
+            return "/changeProfile";
         }
-
-        return "redirect:/profile";
     }
 
     @DeleteMapping("/deleteUser")

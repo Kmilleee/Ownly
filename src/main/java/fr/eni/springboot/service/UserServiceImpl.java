@@ -22,9 +22,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public void createUser(User user) {
         User existingUser = dao.readUserByUsername(user.getUsername());
+        User existingEmail = dao.findByEmail(user.getEmail());
 
         if (existingUser != null) {
             throw new RuntimeException("Ce pseudo est déjà utilisé par un autre membre.");
+        }
+
+        if (existingEmail != null) {
+            throw new RuntimeException("Cet Email est déjà lié à un compte.");
         }
         String motDePasseCrypte = passwordEncoder.encode(user.getPassword());
         user.setPassword(motDePasseCrypte);
@@ -40,16 +45,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUser(User user) {
         User userWithSameName = dao.readUserByUsername(user.getUsername());
+        User userWithSameEmail = dao.findByEmail(user.getEmail());
 
         // Verif si le pseudo est déjà utilisé par un autre user
         if (userWithSameName != null && userWithSameName.getUser_id() != user.getUser_id()) {
             throw new RuntimeException("Le pseudo '" + user.getUsername() + "'est déjà pris");
         }
 
+        if (userWithSameEmail != null && userWithSameEmail.getUser_id() != user.getUser_id()) {
+            throw new RuntimeException("L'email' '" + user.getEmail() + "'est utilisé par un autre compte");
+        }
+
         User currentInDb = dao.readUserById(user.getUser_id());
 
-        //Si le mdp est vide ou est le même que celui existant on le change pas
-        if (user.getPassword() == null || user.getPassword().isEmpty() || user.getPassword().equals(currentInDb.getPassword())) {
+        //Si le mdp est différent de celui actuel et n'est pas vide
+        if (user.getPassword() != null && !user.getPassword().isEmpty() && !user.getPassword().equals(currentInDb.getPassword())) {
             user.setPassword(currentInDb.getPassword());
         } else {
             //Sinon s'il change on crypte le nouveau mdp

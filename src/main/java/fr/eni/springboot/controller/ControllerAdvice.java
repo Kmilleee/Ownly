@@ -13,52 +13,35 @@ import org.springframework.web.servlet.ModelAndView;
 @org.springframework.web.bind.annotation.ControllerAdvice
 public class ControllerAdvice {
 
-    @ExceptionHandler(TestException.class)
-    public ModelAndView handleException(Exception ex){
-        //permet de configurer la vue
-        ModelAndView model = new ModelAndView();
-
-        //ajoute un statut
-        //création d'un statut à moi : 1000
-        model.addObject("status", "1000");
-        //ajout du message d'erreur
-        model.addObject("errorMessage", ex.getMessage());
-
-        //associe le model à la vue que je souhaite affichée
-        model.setViewName("error");
-
-        return model;
-
-    }
-
     private final UserService userService;
 
     public ControllerAdvice(UserService userService) {
         this.userService = userService;
     }
 
+    @ExceptionHandler(TestException.class)
+    public ModelAndView handleException(Exception ex){
+        ModelAndView model = new ModelAndView();
+        model.addObject("status", "1000");
+        model.addObject("errorMessage", ex.getMessage());
+        model.setViewName("error");
+        return model;
+    }
 
     @ModelAttribute
     public void addUserToModel(Model model, Authentication authentication) {
-
-        if (authentication == null) {
-            return;
-        }
+        if (authentication == null || !authentication.isAuthenticated()) return;
 
         User user = null;
-
         if (authentication.getPrincipal() instanceof OAuth2User) {
             OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
-            String email = oauth2User.getAttribute("email");
-            user = userService.findByEmail(email);
+            user = userService.findByEmail(oauth2User.getAttribute("email"));
         } else {
-            String username = authentication.getName();
-            user = userService.readUserByUsername(username);
+            user = userService.readUserByUsername(authentication.getName());
         }
 
         if (user != null) {
             model.addAttribute("UserCo", user);
         }
     }
-
 }
