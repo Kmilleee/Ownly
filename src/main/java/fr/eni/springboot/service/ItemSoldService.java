@@ -2,6 +2,7 @@ package fr.eni.springboot.service;
 
 import fr.eni.springboot.bo.ItemSold;
 import fr.eni.springboot.bo.Rarity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -14,9 +15,11 @@ public interface ItemSoldService {
 
     List<ItemSold> readItemSold();
 
-    void updateItemSold(ItemSold itemSold, MultipartFile multipartFile) throws IOException;
+    @Transactional
+    void updateItemSold(ItemSold itemSold, MultipartFile file, Principal principal) throws IOException;
 
-    void deleteItemSold(long id);
+    @Transactional
+    void deleteItemSold(long id, Principal principal);
 
     ItemSold readItemById(long id);
 

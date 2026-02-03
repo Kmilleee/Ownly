@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -80,20 +81,31 @@ public class ItemSoldController {
     @PostMapping("/edit-sale")
     public String editSale(@RequestParam("imageFile") MultipartFile multipartFile,
                            @ModelAttribute("article") ItemSold itemSold,
-                           BindingResult bindingResult) throws IOException {
+                           BindingResult bindingResult, Principal principal, RedirectAttributes redirectAttributes) throws IOException {
 
         if (bindingResult.hasErrors()) {
             return "create-sale";
         }
 
-        itemSoldService.updateItemSold(itemSold, multipartFile);
+        try {
+            itemSoldService.updateItemSold(itemSold, multipartFile, principal);
+            redirectAttributes.addFlashAttribute("success", "L'article a été mis à jour !");
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/edit-sale?id=" + itemSold.getId();
+        }
 
         return "redirect:/profile";
     }
 
     @DeleteMapping("/delete-sale")
-    public String deleteSale(@RequestParam("id") long id) {
-        itemSoldService.deleteItemSold(id);
+    public String deleteSale(@RequestParam("id") long id, Principal principal, RedirectAttributes redirectAttributes) {
+        try {
+            itemSoldService.deleteItemSold(id, principal);
+            redirectAttributes.addFlashAttribute("success", "L'article a été supprimé avec succès.");
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+        }
         return "redirect:/profile";
     }
 }

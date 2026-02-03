@@ -10,8 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -58,10 +64,30 @@ public class ItemSoldServiceImpl implements ItemSoldService {
         return itemSoldRepository.readItemSold();
     }
 
-    @Override
     @Transactional
-    public void updateItemSold(ItemSold itemSold, MultipartFile file) throws IOException {
+    @Override
+    public void updateItemSold(ItemSold itemSold, MultipartFile file, Principal principal) throws IOException {
+
+        if (principal == null) {
+            throw new RuntimeException("Vous devez être connecté pour modifier une vente");
+        }
+
         ItemSold articleActuel = itemSoldRepository.readItemById(itemSold.getId());
+
+      if(!LocalDateTime.now().isBefore(articleActuel.getAuctionStartDate())) {
+          throw new RuntimeException("Impossible de modifier la vente car elle a déjà commencé");
+      }
+
+        long actualUserId = userRepository.readUserByUsername(principal.getName()).getUser_id();
+        long ownerId = articleActuel.getSeller().getUser_id();
+
+        if (actualUserId != ownerId) {
+            throw new RuntimeException("Impossible de modifier la vente : elle ne vous appartient pas");
+        }
+
+        if (!LocalDateTime.now().isBefore(articleActuel.getAuctionStartDate())) {
+            throw new RuntimeException("Impossible de modifier la vente car elle a déjà commencé");
+        }
 
         if (file != null && !file.isEmpty()) {
             String fileName = StringUtils.cleanPath(file.getOriginalFilename());
@@ -76,8 +102,32 @@ public class ItemSoldServiceImpl implements ItemSoldService {
         itemSoldRepository.updateItemSold(itemSold);
     }
 
+    @Transactional
     @Override
-    public void deleteItemSold(long id) {
+    public void deleteItemSold(long id, Principal principal) {
+        ItemSold articleActuel = itemSoldRepository.readItemById(id);
+
+        if (principal == null) {
+            throw new RuntimeException("Vous devez être connecté pour supprimer une vente");
+        }
+
+        long actualUserId = userRepository.readUserByUsername(principal.getName()).getUser_id();
+        long ownerId = articleActuel.getSeller().getUser_id();
+
+        if (actualUserId != ownerId) {
+            throw new RuntimeException("Impossible de supprimer la vente : elle ne vous appartient pas");
+        }
+
+        if (!LocalDateTime.now().isBefore(articleActuel.getAuctionStartDate())) {
+            throw new RuntimeException("Impossible d'annuler la vente car elle a déjà commencé");
+        }
+        String folderPath = "itemsSold-photos/" + id;
+        try {
+            deleteDirectory(Paths.get(folderPath));
+        } catch (IOException e) {
+            System.err.println("Erreur lors de la suppression du dossier image : " + e.getMessage());
+        }
+
         itemSoldRepository.deleteItemSold(id);
     }
 
@@ -109,5 +159,14 @@ public class ItemSoldServiceImpl implements ItemSoldService {
     @Override
     public List<ItemSold> readItemByCategory(String cat) {
         return itemSoldRepository.readItemByCategory(cat);
+    }
+
+    private void deleteDirectory(Path path) throws IOException {
+        if (Files.exists(path)) {
+            Files.walk(path)
+                    .sorted(Comparator.reverseOrder())
+                    .map(Path::toFile)
+                    .forEach(File::delete);
+        }
     }
 }
