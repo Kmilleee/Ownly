@@ -1,14 +1,21 @@
 package fr.eni.springboot.bo;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.relational.core.mapping.Column;
 
 import java.util.Objects;
 
 public class User {
     private long user_id;
+    @NotBlank(message = "Le pseudo est obligatoire")
+    @Size(min = 3, max = 20, message = "Le pseudo doit faire entre 3 et 20 caractères")
     private String username;
     private String lastName;
     private String firstName;
+    @NotBlank(message = "L'email est obligatoire")
+    @Email(message = "Merci de saisir un email valide")
     private String email;
     private String numPhone;
     private String street;
