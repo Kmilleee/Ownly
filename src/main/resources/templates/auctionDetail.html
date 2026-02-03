@@ -30,8 +30,8 @@
             <h3 class="flex items-center gap-2 text-xl font-bold uppercase tracking-wider">
 
                 <svg viewBox="0 0 8 8" class="w-3 h-3 fill-current"
-                     th:classappend="${itemOBJ.status.name() == 'IN_PROGRESS' ? 'text-green-500' :
-                         (itemOBJ.status.name() == 'COMPLETED' ? 'text-red-500' : ' text-yellow-500 animate-ping transition ')}">
+                     th:classappend="${itemOBJ.status.name() == 'IN_PROGRESS' ? 'text-green-500 animate-ping transition' :
+                         (itemOBJ.status.name() == 'COMPLETED' ? 'text-red-500 animate-ping transition' : ' text-yellow-500 animate-ping transition ')}">
                     <circle cx="4" cy="4" r="3" />
                 </svg>
 
