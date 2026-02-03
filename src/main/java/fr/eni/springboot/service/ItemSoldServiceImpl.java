@@ -94,4 +94,9 @@ public class ItemSoldServiceImpl implements ItemSoldService {
     public List<ItemSold> findByRarity(Rarity rarity) {
         return itemSoldRepository.findByRarity(rarity);
     }
+
+    @Override
+    public List<ItemSold> readItemsByBetterSel() {
+        return itemSoldRepository.readItemsByBetterSel();
+    }
 }

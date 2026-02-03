@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html data-th-replace="~{fragment/layout :: frag_layout(content= ~{::main})}" lang="fr">
+
+<body>
+<main>
+    <section class="relative z-10 w-full">
+        <!--    <h2 class="text-[5rem] font-medium text-white ms-15 mb-10">Profile</h2>-->
+
+        <div class="flex w-full px-15  gap-10">
+
+            <div class="flex flex-col justify-between w-full gap-8">
+
+                <section>
+                    <div class="flex items-center w-full ">
+                        <img th:src="@{|/img/avatars/${User.avatar != null ? User.avatar : 'default.png'}|}"
+                             alt="Photo de profil"
+                             class="rounded-full w-32 h-32 object-cover border-4 border-pink-800" />
+                        <div class="w-full">
+                            <div class="flex justify-between">
+                                <h1 th:text="${User.username}" class="text-[4rem]"></h1>
+                                <div class="flex">
+                                    <h1 th:text="${User.credit}" class="text-[4rem]"></h1>
+                                    <h1 class="text-[4rem]">$</h1>
+                                </div>
+                            </div>
+                            <div class="flex justify-between ">
+                                <div class="flex gap-3">
+                                    <h3 th:text="${User.firstName}"></h3>
+                                    <h3 th:text="${User.lastName}"></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="flex w-full justify-between gap-10">
+                    <section class="mt-15 w-full">
+                        <h1>My Account</h1>
+                        <div class="border-1 border-white rounded-3xl p-5">
+                            <div class="flex gap-10">
+                                <div class="w-full">
+                                    <label class="mb-1">
+                                        Last Name
+                                    </label>
+                                    <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
+                                        th:text="${User.lastName}"></h2>
+                                </div>
+                                <div class="w-full">
+                                    <label class="mb-1">
+                                        First Name
+                                    </label>
+                                    <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
+                                        th:text="${User.firstName}"></h2>
+                                </div>
+                                <div class="w-full">
+                                    <label>
+                                        Username
+                                    </label>
+                                    <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
+                                        th:text="${User.username}"></h2>
+                                </div>
+
+                            </div>
+                            <div class="flex gap-10 mt-5">
+                                <div class="w-full">
+                                    <label class="mb-1">
+                                        City
+                                    </label>
+                                    <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
+                                        th:text="${User.city}"></h2>
+                                </div>
+                                <div class="w-full">
+                                    <label class="mb-1">
+                                        Street
+                                    </label>
+                                    <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
+                                        th:text="${User.street}"></h2>
+                                </div>
+                                <div class="w-full">
+                                    <label>
+                                        Postal Code
+                                    </label>
+                                    <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
+                                        th:text="${User.postalCode}"></h2>
+                                </div>
+
+                            </div>
+                            <div class="flex gap-10 mt-5">
+                                <div class="w-full">
+                                    <label class="mb-1">
+                                        Phone
+                                    </label>
+                                    <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
+                                        th:text="${User.numPhone}"></h2>
+                                </div>
+                                <div class="w-full">
+                                    <label class="mb-1">
+                                        email
+                                    </label>
+                                    <h2 class="bg-white rounded-3xl text-black p-1 w-full  text-center"
+                                        th:text="${User.email}"></h2>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </section>
+                    <section class="mt-15 w-full">
+                        <h1>Achat</h1>
+                        <div class="border-1 border-white rounded-3xl p-5">
+                            <div>
+                                <label class="mb-1">
+                                    Last Name
+                                </label>
+                                <h2 class="bg-white rounded-xl text-black p-1 w-1/6  text-center"
+                                    th:text="${User.lastName}"></h2>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <section class="mt-15 w-full mb-10">
+                    <h1>Ventes</h1>
+                    <div class="border-1 border-white rounded-3xl p-5">
+                        <div th:each="vente : ${mesVentes}">
+                            <p th:text="${vente.articleName}"></p>
+                            <img th:src="@{/images/{id}/{name}(id=${vente.id}, name=${vente.image})}"
+                                 alt="Image de l'article"
+                                 class="w-20 h-20 object-cover rounded">
+                            <p th:text="${vente.description}"></p>
+                            <p th:text="${vente.auctionStartDate}"></p>
+                            <p th:text="${vente.auctionEndDate}"></p>
+                            <p th:text="${vente.startingPrice}"></p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

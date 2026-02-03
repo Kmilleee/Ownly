@@ -33,6 +33,8 @@ public class AuctionController {
 
     @GetMapping("/auction")
     public String displayAuction(Model model){
+
+        model.addAttribute("userList", serviceItem.readItemsByBetterSel());
         model.addAttribute("activePage", "auction");
         return"auction";
     }

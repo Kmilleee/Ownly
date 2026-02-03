@@ -120,6 +120,24 @@ public class UserController {
         return "/profile";
     }
 
+    @GetMapping("/profileOther")
+    public String displayProfileOther(@RequestParam("id")long user_id, Model model, Authentication authentication) {
+        model.addAttribute("activePage", "profile");
+
+        userService.readUserById(user_id);
+
+        User user = userService.readUserById(user_id);
+
+
+
+        List<ItemSold> mesVentes = new ArrayList<>();
+        mesVentes = itemSoldService.readItemsBySeller(user.getUser_id());
+        model.addAttribute("mesVentes", mesVentes);
+        model.addAttribute("User", userService.readUserById(user_id));
+        return "/profileOther";
+    }
+
+
     @GetMapping("/changeProfile")
     public String displayChangeProfile(Principal principal, Model model, Authentication authentication) {
         String username = principal.getName();

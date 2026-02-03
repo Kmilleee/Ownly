@@ -25,6 +25,7 @@ public class UtilisateurRowMapper implements RowMapper<User> {
         user.setPostalCode(rs.getString("postalCode"));
         user.setAdmin(rs.getBoolean("admin"));
         user.setActive(rs.getBoolean("active"));
+        user.setAvatar(rs.getString("avatar"));
 
         return user;
 

@@ -21,4 +21,6 @@ public interface ItemSoldRepository {
     ItemSold readItemSoldById(long article_id);
 
     List<ItemSold> findByRarity(Rarity rarity);
+
+    List<ItemSold> readItemsByBetterSel();
 }
