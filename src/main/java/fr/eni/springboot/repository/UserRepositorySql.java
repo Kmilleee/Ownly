@@ -173,6 +173,17 @@ public class UserRepositorySql implements UserRepository {
     }
 
     @Override
+    public void updateCredit(long userId, long newCredit) {
+        String sql = "UPDATE USERS SET credit = :credit WHERE user_id =:user_id";
+
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("credit", newCredit);
+        map.addValue("user_id", userId);
+
+        namedParameterJdbcTemplate.update(sql, map);
+    }
+
+    @Override
     public boolean claimDailyReward(long userId) {
         String sql = "UPDATE USERS " +
                 "SET credit = credit + 500, last_daily_reward = GETDATE() " +

@@ -25,4 +25,6 @@ public interface UserRepository {
     void updateAvatar(long userId, String imageName);
 
     boolean claimDailyReward(long userId);
+
+    void updateCredit(long userId, long newCredit);
 }
