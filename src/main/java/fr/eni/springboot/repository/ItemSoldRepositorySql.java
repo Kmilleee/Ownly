@@ -119,8 +119,8 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
 
         String sql = "SELECT a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, u.username as username \n" +
                 "FROM ItemSold a\n" +
-                "INNER JOIN CATEGORY c ON a.category_id = c.category_id\n" +
-                "INNER JOIN USERS u ON a.user_id = u.user_id\n" +
+                "left JOIN CATEGORY c ON a.category_id = c.category_id\n" +
+                "left JOIN USERS u ON a.user_id = u.user_id\n" +
                 "WHERE a.article_id =:article_id  ";
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("article_id", article_id);
@@ -135,8 +135,8 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
 
         String sql = "SELECT a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, u.username as username \n" +
                 "FROM ItemSold a\n" +
-                "INNER JOIN CATEGORY c ON a.category_id = c.category_id\n" +
-                "INNER JOIN USERS u ON a.user_id = u.user_id\n" +
+                "left JOIN CATEGORY c ON a.category_id = c.category_id\n" +
+                "left JOIN USERS u ON a.user_id = u.user_id\n" +
                 "WHERE a.user_id =:sellerId  ";
 
         MapSqlParameterSource map = new MapSqlParameterSource();
@@ -154,8 +154,8 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
     public List<ItemSold> findByRarity(Rarity rarity) {
         String sql = "SELECT a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, u.username as username \n" +
                 "FROM ItemSold a\n" +
-                "INNER JOIN CATEGORY c ON a.category_id = c.category_id\n" +
-                "INNER JOIN USERS u ON a.user_id = u.user_id\n" +
+                "left JOIN CATEGORY c ON a.category_id = c.category_id\n" +
+                "left JOIN USERS u ON a.user_id = u.user_id\n" +
                 "WHERE rarity =:rarity  ";
 
         MapSqlParameterSource map = new MapSqlParameterSource();
