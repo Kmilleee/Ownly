@@ -59,10 +59,14 @@ public class UserController {
     }
 
     @PostMapping("/admin/addUser")
-    public String createUser(@ModelAttribute("userOBJ") User user) {
-        userService.createUser(user);
-        userService.readUser().forEach(System.out::println);
-        return "redirect:/user";
+    public String createUser(@ModelAttribute("userOBJ") User user, Model model) {
+        try {
+            userService.createUser(user);
+            return "redirect:/user";
+        } catch (RuntimeException e) {
+            model.addAttribute("error", e.getMessage());
+            return "admin/addUser";
+        }
     }
 
     @GetMapping("/admin/admin")
@@ -74,10 +78,15 @@ public class UserController {
 
 
     @PostMapping("/singup")
-    public String createUserInscription(@ModelAttribute("userOBJ") User user) {
-        System.out.println("Attempting to create user: " + user.getUsername());
-        userService.createUser(user);
-        return "redirect:/login";
+    public String createUserInscription(@ModelAttribute("userOBJ") User user, Model model) {
+        try {
+            System.out.println("Attempting to create user: " + user.getUsername());
+            userService.createUser(user);
+            return "redirect:/login?success";
+        } catch (RuntimeException e) {
+            model.addAttribute("error", e.getMessage());
+            return "/singup";
+        }
     }
 
 
@@ -141,41 +150,23 @@ public class UserController {
     }
 
     @PostMapping("/changeProfile")
-    public String displayUpdateProfile(@ModelAttribute("UserOBJ") User formUser, Model model, Principal principal, Authentication authentication) {
+    public String displayUpdateProfile(@ModelAttribute("UserOBJ") User formUser, Authentication authentication) {
+        User existingUser = userService.readUserByUsername(authentication.getName());
 
-        User existingUser = null;
-
-        if (authentication.getPrincipal() instanceof OAuth2User) {
-            OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
-            String email = oauth2User.getAttribute("email");
-            existingUser = userService.findByEmail(email);
-        } else {
-            existingUser = userService.readUserByUsername(authentication.getName());
-        }
-
-
-        if (existingUser == null) {
-
-            if (authentication.getPrincipal() instanceof OAuth2User) {
-                OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
-                formUser.setEmail(oauth2User.getAttribute("email"));
-            }
-            userService.createUser(formUser);
-        } else {
+        if (existingUser != null) {
             formUser.setUser_id(existingUser.getUser_id());
             formUser.setEmail(existingUser.getEmail());
 
             userService.updateUser(formUser);
-        }
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Authentication newAuth = new UsernamePasswordAuthenticationToken(
-                formUser.getUsername(),
-                auth.getCredentials(),
-                auth.getAuthorities()
-        );
-        SecurityContextHolder.getContext().setAuthentication(newAuth);
 
-        System.out.println("✅ Profil mis à jour avec succès !");
+            Authentication newAuth = new UsernamePasswordAuthenticationToken(
+                    formUser.getUsername(),
+                    authentication.getCredentials(),
+                    authentication.getAuthorities()
+            );
+            SecurityContextHolder.getContext().setAuthentication(newAuth);
+        }
+
         return "redirect:/profile";
     }
 

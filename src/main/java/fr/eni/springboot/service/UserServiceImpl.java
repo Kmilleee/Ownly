@@ -21,14 +21,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createUser(User user) {
+        User existingUser = dao.readUserByUsername(user.getUsername());
 
+        if (existingUser != null) {
+            throw new RuntimeException("Ce pseudo est déjà utilisé par un autre membre.");
+        }
         String motDePasseCrypte = passwordEncoder.encode(user.getPassword());
         user.setPassword(motDePasseCrypte);
 
-
         dao.createUser(user);
-
-
     }
 
     @Override
@@ -38,9 +39,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(User user) {
+        User userWithSameName = dao.readUserByUsername(user.getUsername());
+
+        // Verif si le pseudo est déjà utilisé par un autre user
+        if (userWithSameName != null && userWithSameName.getUser_id() != user.getUser_id()) {
+            throw new RuntimeException("Le pseudo '" + user.getUsername() + "'est déjà pris");
+        }
+
         User currentInDb = dao.readUserById(user.getUser_id());
 
-        if (!user.getPassword().equals(currentInDb.getPassword())) {
+        //Si le mdp est vide ou est le même que celui existant on le change pas
+        if (user.getPassword() == null || user.getPassword().isEmpty() || user.getPassword().equals(currentInDb.getPassword())) {
+            user.setPassword(currentInDb.getPassword());
+        } else {
+            //Sinon s'il change on crypte le nouveau mdp
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
         dao.updateUser(user);

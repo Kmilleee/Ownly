@@ -4,6 +4,7 @@ import fr.eni.springboot.bo.ItemSold;
 import fr.eni.springboot.bo.Rarity;
 import fr.eni.springboot.bo.User;
 import fr.eni.springboot.repository.ItemSoldRepository;
+import fr.eni.springboot.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -17,11 +18,11 @@ import java.util.List;
 public class ItemSoldServiceImpl implements ItemSoldService {
 
     ItemSoldRepository itemSoldRepository;
-    private final UserService userService;
+    UserRepository userRepository;
 
-    public ItemSoldServiceImpl(ItemSoldRepository itemSoldRepository, UserService userService) {
+    public ItemSoldServiceImpl(ItemSoldRepository itemSoldRepository, UserRepository userRepository) {
         this.itemSoldRepository = itemSoldRepository;
-        this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -29,7 +30,7 @@ public class ItemSoldServiceImpl implements ItemSoldService {
     public void createItemSold(ItemSold itemSold, MultipartFile file, Principal principal) throws IOException {
 
         if (principal != null) {
-            User seller = userService.readUserByUsername(principal.getName());
+            User seller = userRepository.readUserByUsername(principal.getName());
             if (seller != null) {
                 itemSold.setSeller(seller);
             }
