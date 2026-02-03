@@ -25,4 +25,6 @@ public interface ItemSoldRepository {
     List<ItemSold> readItemsByBetterSel();
 
     List<ItemSold> readItemBySearch(String query);
+
+    List<ItemSold> readItemByCategory(String cat);
 }

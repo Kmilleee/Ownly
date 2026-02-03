@@ -123,7 +123,7 @@ public class SecurityConfiguration {
 
                     .requestMatchers("/admin/**").hasRole("ADMIN")
                     .requestMatchers("/ventes/**").hasAnyRole("USER", "ADMIN")
-
+                            .requestMatchers("/chercheCat").permitAll()
                     .requestMatchers("/ventes/createSale").hasRole("ADMIN")
                     .requestMatchers("/admin/addUser").hasRole("ADMIN")
                     .requestMatchers("/admin/addWithdrawal").hasRole("ADMIN")

@@ -3,6 +3,25 @@
 
 <body>
 <main>
+
+    <div class="absolute top-0 left-0 w-full h-[120vh] overflow-hidden -z-10 pointer-events-none">
+
+        <div class="absolute top-1/2 right-0 w-[400px] h-[400px] md:w-[800px] md:h-[800px]"
+             style="background: radial-gradient(circle, rgba(126, 34, 206, 0.4) 0%, rgba(0,0,0,0) 70%);
+                    transform: translate(30%, -30%);">
+        </div>
+
+        <div class="absolute top-1/2 right-0 w-[400px] h-[400px] md:w-[800px] md:h-[800px]"
+             style="background: radial-gradient(circle, rgba(238, 27, 136, 0.66) 0%, rgba(0,0,0,0) 70%);
+                    transform: translate(30%, -30%);">
+        </div>
+
+        <div class="absolute top-1/2 left-1/2 w-[400px] h-[400px] md:w-[800px] md:h-[800px]"
+             style="background: radial-gradient(circle, rgba(30, 237, 251, 0.46) 0%, rgba(0,0,0,0) 50%);
+                    transform: translate(-90%, -60%);">
+        </div>
+
+    </div>
     <div class="relative z-10">
         <h1 class="text-[5rem] font-bold p-1 ms-15 ">Auction</h1>
         <h2 class="ms-15 text-[2rem] p-1 mt-5">Discover a new world, invest in your new world </h2>
@@ -27,13 +46,14 @@
                        name="p"
                        th:value="${param.p}"
                        class="block w-full p-3 ps-9 bg-white text-black border border-default-medium text-heading text-sm rounded-base focus:ring-brand  shadow-xs placeholder:text-body rounded-[20rem]"
-                       placeholder="Search an auction..." />
+                       placeholder="Search an auction..."/>
                 <a th:if="${param.p != null and !#strings.isEmpty(param.p)}"
                    th:href="@{/auctionAll}"
                    class="absolute -end-10 bottom-2 text-white hover:text-red-500 hover:bg-gray-100 rounded-full p-1 transition"
                    title="Effacer la recherche">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
                 </a>
 
@@ -52,19 +72,29 @@
                             d="M16.5555 3.33203H3.44463C2.46273 3.33203 1.66675 4.12802 1.66675 5.10991C1.66675 5.56785 1.84345 6.00813 2.16004 6.33901L6.83697 11.2271C6.97021 11.3664 7.03684 11.436 7.0974 11.5068C7.57207 12.062 7.85127 12.7576 7.89207 13.4869C7.89728 13.5799 7.89728 13.6763 7.89728 13.869V16.251C7.89728 17.6854 9.30176 18.6988 10.663 18.2466C11.5227 17.961 12.1029 17.157 12.1029 16.251V14.2772C12.1029 13.6825 12.1029 13.3852 12.1523 13.1015C12.2323 12.6415 12.4081 12.2035 12.6683 11.8158C12.8287 11.5767 13.0342 11.3619 13.4454 10.9322L17.8401 6.33901C18.1567 6.00813 18.3334 5.56785 18.3334 5.10991C18.3334 4.12802 17.5374 3.33203 16.5555 3.33203Z"
                             stroke="black" stroke-width="1.6" stroke-linecap="round"/>
                 </svg>
-                <select id="Offer"
-                        class="h-12 border border-gray-300 text-gray-900 pl-11 text-base font-normal leading-7 rounded-full block w-full py-2.5 px-4 appearance-none relative focus:outline-none bg-white transition-all duration-500 hover:border-gray-400 hover:bg-gray-50 focus-within:bg-gray-50">
-                    <option selected>Sort by time(high to low)</option>
-                    <option value="option 1">option 1</option>
-                    <option value="option 2">option 2</option>
-                    <option value="option 3">option 3</option>
-                    <option value="option 4">option 4</option>
-                </select>
-                <svg class="absolute top-1/2 -translate-y-1/2 right-4 z-50" width="16" height="16"
+                <form th:action="@{/chercheCat}" method="get" class="relative w-full max-w-sm">
+
+                <svg class="absolute top-1/2 -translate-y-1/2 right-4 z-10 pointer-events-none" width="16" height="16"
                      viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12.0002 5.99845L8.00008 9.99862L3.99756 5.99609" stroke="#111827" stroke-width="1.6"
                           stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
+
+                <select name="c"
+                        id="Offer"
+                        onchange="this.form.submit()"
+                        class="h-12 border border-gray-300 text-gray-900 pl-10 pr-12 text-base font-normal leading-7 rounded-full block w-full py-2.5 px-7 appearance-none relative focus:outline-none bg-white transition-all duration-500 hover:border-gray-400 hover:bg-gray-50 focus-within:bg-gray-50 cursor-pointer">
+
+                    <option value="">Category</option>
+
+                    <option th:each="cat : ${categoryList}"
+                            th:value="${cat.name}"
+                            th:text="${cat.name}"
+                            th:selected="${param.c != null and param.c[0] == cat.name}">
+                    </option>
+
+                </select>
+            </form>
             </div>
         </div>
     </section>
@@ -76,12 +106,15 @@
             <div th:if="${a.startingPrice == null}"
                  class="row-span-1 relative w-2/3 h-2/3 rounded-2xl overflow-hidden group shadow-2xl border border-purple-500/30 justify-self-center self-center ">
 
-                <img th:src="@{|/img/${a.image}|}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 " />
+                <img th:src="@{|/img/${a.image}|}"
+                     class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 "/>
 
                 <div class="absolute inset-0 bg-gradient-to-t from-purple-900/90 via-purple-900/40 to-transparent flex flex-col justify-end p-6">
                     <span class="bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded w-fit mb-2">SPONSORING</span>
-                    <h2 class="text-3xl font-black text-white leading-none uppercase" th:text="${a.articleName}">TITRE</h2>
-                    <a th:href="@{/about}" class="mt-4 w-full bg-white text-purple-900 py-3 rounded-xl font-bold text-center hover:bg-gray-100 transition">Découvrir</a>
+                    <h2 class="text-3xl font-black text-white leading-none uppercase" th:text="${a.articleName}">
+                        TITRE</h2>
+                    <a th:href="@{/about}"
+                       class="mt-4 w-full bg-white text-purple-900 py-3 rounded-xl font-bold text-center hover:bg-gray-100 transition">Découvrir</a>
                 </div>
             </div>
 
@@ -100,7 +133,6 @@
         </th:block>
 
     </div>
-
 
 
     <section class="flex justify-center text-center m-20">

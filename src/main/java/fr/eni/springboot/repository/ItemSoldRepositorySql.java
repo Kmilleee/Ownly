@@ -191,5 +191,20 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
 
     }
 
+    @Override
+    public List<ItemSold> readItemByCategory(String cat){
+        String sql ="SELECT a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image,a.user_id as user_id, c.name as name, u.username as username, u.avatar as avatar \n" +
+                "FROM ItemSold a\n" +
+                "left JOIN CATEGORY c ON a.category_id = c.category_id\n" +
+                "left JOIN USERS u ON a.user_id = u.user_id \n"+
+                "where c.name = :cat";
+
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("cat", cat);
+
+        return namedParameterJdbcTemplate.query(sql, map, new ItemSoldRowMapper());
+
+    }
+
 
 }

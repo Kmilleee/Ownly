@@ -1,8 +1,10 @@
 package fr.eni.springboot.controller;
 
+import fr.eni.springboot.bo.Category;
 import fr.eni.springboot.bo.ItemSold;
 import fr.eni.springboot.bo.Rarity;
 import fr.eni.springboot.service.AuctionService;
+import fr.eni.springboot.service.CategoryService;
 import fr.eni.springboot.service.ItemSoldService;
 import fr.eni.springboot.service.ItemSoldServiceImpl;
 import org.springframework.core.io.FileSystemResource;
@@ -25,10 +27,12 @@ public class AuctionController {
 
     private final AuctionService service;
     private final ItemSoldService serviceItem;
+    private final CategoryService categoryService;
 
-    public AuctionController(AuctionService service, ItemSoldService serviceItem) {
+    public AuctionController(AuctionService service, ItemSoldService serviceItem, CategoryService categoryService) {
         this.service = service;
         this.serviceItem = serviceItem;
+        this.categoryService = categoryService;
     }
 
     @GetMapping("/auction")
@@ -75,6 +79,9 @@ public class AuctionController {
     @GetMapping("/auctionAll")
     public String displayAuctionAll(Model model) {
         model.addAttribute("activePage", "auction");
+
+        List<Category> categoryList = categoryService.findAll();
+        model.addAttribute("categoryList", categoryList);
 
 
         List<ItemSold> articles = serviceItem.readItemSold();
@@ -169,6 +176,52 @@ public class AuctionController {
             }
         }
 
+
+        model.addAttribute("articles", articlesTrouves);
+
+        return "auctionAll";
+    }
+
+    @GetMapping("/chercheCat")
+    public String displayChercheCat(@RequestParam(value = "c", required = false) String cat, Model model) {
+
+        List<Category> categoryList = categoryService.findAll();
+        model.addAttribute("categoryList", categoryList);
+
+
+        List<ItemSold> articlesTrouves;
+
+        if (cat != null && !cat.isEmpty()) {
+            articlesTrouves = serviceItem.readItemByCategory(cat);
+        } else {
+            model.addAttribute("activePage", "auction");
+            articlesTrouves = serviceItem.readItemSold();
+
+
+            ItemSold pub = new ItemSold();
+            pub.setArticleName("Mystic Realms");
+            pub.setDescription("Découvrez notre nouveau RPG !");
+            pub.setImage("pub2.png");
+            pub.setStartingPrice(null);
+
+            if (articlesTrouves.size() >= 3) {
+                articlesTrouves.add(3, pub);
+            } else {
+                articlesTrouves.add(pub);
+            }
+
+            ItemSold pub2 = new ItemSold();
+            pub2.setArticleName("test pub2");
+            pub2.setDescription("Découvrez notre nouveau RPG !");
+            pub2.setImage("pub.png");
+            pub2.setStartingPrice(null);
+
+            if (articlesTrouves.size() >= 8) {
+                articlesTrouves.add(8, pub2);
+            } else {
+                articlesTrouves.add(pub2);
+            }
+        }
 
         model.addAttribute("articles", articlesTrouves);
 

@@ -104,4 +104,9 @@ public class ItemSoldServiceImpl implements ItemSoldService {
     public List<ItemSold> readItemBySearch(String query) {
         return itemSoldRepository.readItemBySearch(query);
     }
+
+    @Override
+    public List<ItemSold> readItemByCategory(String cat) {
+        return itemSoldRepository.readItemByCategory(cat);
+    }
 }
