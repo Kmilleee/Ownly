@@ -27,4 +27,6 @@ public interface ItemSoldRepository {
     List<ItemSold> readItemByCategory(String cat);
 
     List<ItemSold> findItemsWonByUser(long userId);
+
+    List<ItemSold> findItemsInProgressByUser(long userId);
 }

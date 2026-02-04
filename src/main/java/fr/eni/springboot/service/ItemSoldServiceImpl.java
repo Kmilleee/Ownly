@@ -166,6 +166,11 @@ public class ItemSoldServiceImpl implements ItemSoldService {
         return itemSoldRepository.findItemsWonByUser(userId);
     }
 
+    @Override
+    public List<ItemSold> findItemsInProgressByUser(long userId) {
+        return itemSoldRepository.findItemsInProgressByUser(userId);
+    }
+
     private void deleteDirectory(Path path) throws IOException {
         if (Files.exists(path)) {
             Files.walk(path)

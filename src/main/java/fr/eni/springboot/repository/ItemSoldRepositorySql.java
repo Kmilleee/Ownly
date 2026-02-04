@@ -245,5 +245,24 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
         return namedParameterJdbcTemplate.query(sql, params, new ItemSoldRowMapper2());
     }
 
+    @Override
+    public List<ItemSold> findItemsInProgressByUser(long userId) {
+
+        String sql = "SELECT i.article_id, i.articleName, i.image, i.priceSale, i.auctionEndDate, i.auctionStartDate, " +
+                "i.user_id, i.category_id, i.description, i.startingPrice, i.rarity, " +
+                "c.name as name, u.username as username " +
+                "FROM ItemSold i " +
+                "INNER JOIN AUCTION a ON i.article_id = a.article_id " +
+                "INNER JOIN CATEGORY c ON i.category_id = c.category_id " +
+                "INNER JOIN USERS u ON i.user_id = u.user_id " +
+                "WHERE a.user_id = :userId " +
+                "AND i.auctionEndDate > GETDATE() ";
+
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("userId", userId);
+
+        return namedParameterJdbcTemplate.query(sql, params, new ItemSoldRowMapper2());
+    }
+
 
 }
