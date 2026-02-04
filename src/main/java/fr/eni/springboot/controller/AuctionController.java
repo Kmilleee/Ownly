@@ -125,23 +125,8 @@ public class AuctionController {
     public String displayAuctionDetail(@RequestParam("id") long id_item, Model model) {
         model.addAttribute("itemOBJ", serviceItem.readItemById(id_item));
         model.addAttribute("listAuction", auctionService.readItemById(id_item));
+        model.addAttribute("gagnant", auctionService.findBestAuctionByItemId(id_item));
 
-        List<String> listFigurine = new ArrayList<>();
-        listFigurine.add("militaireRare.png");
-        model.addAttribute("listFigurine", listFigurine);
-
-        List<String> rareCards = new ArrayList<>();
-        rareCards.add("militaireCOMMON.png");
-        model.addAttribute("rareCards", rareCards);
-
-        List<ItemSold> commonCards = serviceItem.findByRarity(Rarity.COMMON);
-        model.addAttribute("commonCards", commonCards);
-
-        List<ItemSold> epicCards = serviceItem.findByRarity(Rarity.EPIC);
-        model.addAttribute("commonCards", commonCards);
-
-        List<ItemSold> legendrayCards = serviceItem.findByRarity(Rarity.LEGENDARY);
-        model.addAttribute("commonCards", commonCards);
 
         return "/auctionDetail";
     }

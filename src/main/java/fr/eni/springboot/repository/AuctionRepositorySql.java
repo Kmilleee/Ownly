@@ -85,7 +85,7 @@ public class AuctionRepositorySql implements AuctionRepository {
                 "u.username as username, u.user_id as user_id " +
                 "FROM AUCTION a " +
                 "left JOIN USERS u ON a.user_id = u.user_id " +
-                " where a.article_id = :auction_id "+
+                "where a.article_id = :auction_id "+
                 "ORDER BY a.auctionAmount DESC";
 //        String sql = "SELECT TOP 1 a.auction_id, a.auctionDate, a.auctionAmount, a.user_id, a.article_id, u.username FROM auction a INNER JOIN USERS u ON a.user_id = u.user_id WHERE a.article_id = :itemId ORDER BY a.auctionAmount DESC";
         MapSqlParameterSource params = new MapSqlParameterSource("auction_id", itemId);

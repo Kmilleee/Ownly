@@ -94,4 +94,9 @@ public class AuctionServiceImpl implements AuctionService {
     public List<Auction> readItemById(long auction_id) {
         return dao.readItemById(auction_id);
     }
+
+    @Override
+    public Auction findBestAuctionByItemId(long itemId) {
+        return dao.findBestAuctionByItemId(itemId);
+    }
 }

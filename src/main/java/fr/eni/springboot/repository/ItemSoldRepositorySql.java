@@ -3,8 +3,8 @@ package fr.eni.springboot.repository;
 import fr.eni.springboot.bo.ItemSold;
 import fr.eni.springboot.bo.Rarity;
 import fr.eni.springboot.repository.rowMapper.ItemSoldRowMapper;
+import fr.eni.springboot.repository.rowMapper.ItemSoldRowMapper2;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -70,7 +70,7 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
 
     @Override
     public List<ItemSold> readItemSold() {
-        String sql = "SELECT a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, a.user_id as user_id, u.username as username, u.avatar as avatar, w.postalCode as postalCode, w.street as street,w.city as city \n" +
+        String sql = "SELECT  a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, a.user_id as user_id, u.username as username, u.avatar as avatar, w.postalCode as postalCode, w.street as street,w.city as city \n" +
                 "FROM ItemSold a\n" +
                 "left JOIN CATEGORY c ON a.category_id = c.category_id\n" +
                 "left JOIN USERS u ON a.user_id = u.user_id\n" +
@@ -178,7 +178,7 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
 
     @Override
     public List<ItemSold> readItemsByBetterSel() {
-        String sql = "SELECT a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, a.user_id as user_id, u.username as username, u.avatar as avatar, w.postalCode as postalCode, w.street as street,w.city as city \n" +
+        String sql = "SELECT TOP 4 a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, a.user_id as user_id, u.username as username, u.avatar as avatar, w.postalCode as postalCode, w.street as street,w.city as city \n" +
                 "FROM ItemSold a\n" +
                 "left JOIN CATEGORY c ON a.category_id = c.category_id\n" +
                 "left JOIN USERS u ON a.user_id = u.user_id\n" +
@@ -219,6 +219,30 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
 
         return namedParameterJdbcTemplate.query(sql, map, new ItemSoldRowMapper());
 
+    }
+
+    @Override
+    public List<ItemSold> findItemsWonByUser(long userId) {
+
+        String sql = "SELECT i.article_id, i.articleName, i.image, i.priceSale, i.auctionEndDate, i.auctionStartDate, " +
+                "i.user_id, i.category_id, i.description, i.startingPrice, i.rarity, " +
+                "c.name as name, u.username as username " +
+                "FROM ItemSold i " +
+                "INNER JOIN AUCTION a ON i.article_id = a.article_id " +
+                "INNER JOIN CATEGORY c ON i.category_id = c.category_id " +
+                "INNER JOIN USERS u ON i.user_id = u.user_id " +
+                "WHERE a.user_id = :userId " +
+                "AND i.auctionEndDate < GETDATE() " +
+                "AND a.auctionAmount = (" +
+                "    SELECT MAX(a2.auctionAmount) " +
+                "    FROM AUCTION a2 " +
+                "    WHERE a2.article_id = i.article_id" +
+                ")";
+
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("userId", userId);
+
+        return namedParameterJdbcTemplate.query(sql, params, new ItemSoldRowMapper2());
     }
 
 

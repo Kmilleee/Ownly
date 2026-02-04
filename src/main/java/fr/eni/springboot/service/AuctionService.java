@@ -14,4 +14,6 @@ public interface AuctionService {
     void deleteAuction(long auction_id);
 
     List<Auction> readItemById(long auction_id);
+
+    Auction findBestAuctionByItemId(long itemId);
 }
