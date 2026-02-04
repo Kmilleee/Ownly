@@ -77,7 +77,6 @@ public class AuctionController {
         if (resource.exists() && resource.isReadable()) {
             return ResponseEntity.ok().body(resource);
         } else {
-            System.out.println("Image introuvable ici : " + imagePath.toAbsolutePath());
             return ResponseEntity.notFound().build();
         }
     }

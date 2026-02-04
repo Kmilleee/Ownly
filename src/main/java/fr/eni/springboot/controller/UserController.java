@@ -81,7 +81,6 @@ public class UserController {
     @PostMapping("/signup")
     public String createUserInscription(@ModelAttribute("userOBJ") User user, Model model) {
         try {
-            System.out.println("Attempting to create user: " + user.getUsername());
             userService.createUser(user);
             return "redirect:/login?success";
         } catch (RuntimeException e) {
@@ -254,7 +253,6 @@ public class UserController {
             userService.updateAvatar(userConnecte.getUser_id(), avatarName);
         }
 
-        System.out.println("Nouvel avatar choisi : " + avatarName);
         return "redirect:/profile";
     }
 

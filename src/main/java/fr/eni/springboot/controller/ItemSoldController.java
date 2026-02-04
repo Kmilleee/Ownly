@@ -54,7 +54,6 @@ public class ItemSoldController {
 
     @PostMapping("/createSale")
     public String createSale(@RequestParam("imageFile") MultipartFile multipartFile, @ModelAttribute("article") ItemSold itemSold, BindingResult bindingResult, Principal principal) throws IOException {
-        System.out.println("Date reçue du formulaire : " + itemSold.getAuctionStartDate());
         if (bindingResult.hasErrors()) {
             return "create-sale";
         }
@@ -104,7 +103,6 @@ public class ItemSoldController {
             redirectAttributes.addFlashAttribute("success", "L'article a été supprimé avec succès.");
         } catch (RuntimeException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
-            System.out.println("probleme de delete");
         }
         return "redirect:/profile";
     }

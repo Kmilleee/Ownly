@@ -23,7 +23,6 @@ class ApplicationTests {
     void displayUser() {
 
         List<User> users = userRepository.readUser();
-        System.out.println("Nombre d'utilisateurs trouvés : " + users.size());
 
         assertThat(users).isNotEmpty();
         assertThat(users).hasSize(4);
@@ -50,7 +49,6 @@ class ApplicationTests {
         userRepository.createUser(nouveau);
 
         assertThat(nouveau.getUser_id()).isNotNull();
-        System.out.println("Nouvel ID généré : " + nouveau.getUser_id());
         List<User> users = userRepository.readUser();
         assertThat(users).extracting("username").contains("TestMan");
         assertThat(users).hasSize(5);

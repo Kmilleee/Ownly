@@ -66,9 +66,6 @@ public class SecurityController {
     @PostMapping("/forgotPassword")
     public String processForgotPassword(@RequestParam("email") String email) {
 
-        System.out.println("Email reçu : " + email);
-
-
         User user = userService.findByEmail(email);
         if (user == null) {
             return "redirect:/forgotPassword?error";
@@ -89,9 +86,7 @@ public class SecurityController {
 
             javaMailSender.send(message);
 
-            System.out.println(" MAIL ENVOYÉ AVEC SUCCÈS !");
         } catch (Exception e) {
-            System.out.println(" ERREUR D'ENVOI MAIL : " + e.getMessage());
             e.printStackTrace();
         }
 
