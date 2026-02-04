@@ -33,6 +33,10 @@ h1 {
     font-family: "Chillax", sans-serif;
 }
 
+img[src="#"] {
+    display: none;
+}
+
 
 
 /*CSS POUR LA ROTATION DES CARDS */

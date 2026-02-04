@@ -64,7 +64,7 @@ public class UserRepositorySql implements UserRepository {
 
     @Override
     public List<User> readUser() {
-        String sql = "SELECT user_id, username, lastname, firstname, email, numPhone, street, postalCode, city,password,credit,admin, active from USERS";
+        String sql = "SELECT user_id, username, lastname, firstname, email, numPhone, street, postalCode, city,password,credit,admin, active, avatar from USERS";
 
        return jdbcTemplate.query(sql, new UtilisateurRowMapper());
     }
