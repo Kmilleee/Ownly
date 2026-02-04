@@ -260,4 +260,8 @@ public class AuctionController {
         return "auctionAll";
     }
 
+
+
+
+
 }

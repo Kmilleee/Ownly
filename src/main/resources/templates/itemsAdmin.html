@@ -22,7 +22,7 @@
 
     </div>
     <h2 class="text-[4rem]    md:text-[5rem] ml-9 text-white text-3xl font-semibold  text-start mb-3 tracking-tight mb-10">
-        All Withdrawals</h2>
+        All Auction</h2>
     <section class=" h-2/3 w-full mb-10">
         <div class="flex justify-center">
             <div class=" overflow-x-auto bg-grey dark:bg-neutral-700 max-h-full overflow-y-auto
@@ -40,81 +40,65 @@
                             Id
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Street
+                            item Name
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Postal Code
+                            image
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            City
+                            auction Date start
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Delete
+                            auction Date end
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Change
+                            starting price
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            priceSale
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            rarity
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            user
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            category
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            status
                         </th>
                     </tr>
                     </thead>
                     <tbody>
 
-                    <tr th:each="w : ${withdrawalList}" class="border-b dark:border-neutral-600">
-                        <th class="px-6 py-3" th:text="${w.article_id}"></th>
-                        <th class="px-6 py-3" th:text="${w.street}"></th>
-                        <th class="px-6 py-3" th:text="${w.postalCode}"></th>
-                        <th class="px-6 py-3" th:text="${w.city}"></th>
+                    <tr th:each="i : ${itemsList}" class="border-b dark:border-neutral-600">
+                        <th class="px-6 py-3" th:text="${i.id}"></th>
+                        <th class="px-6 py-3" th:text="${i.articleName}"></th>
+                        <th class="px-6 py-3" th:text="${i.image}"></th>
+                        <th class="px-6 py-3" th:text="${i.auctionStartDate}"></th>
+                        <th class="px-6 py-3" th:text="${i.auctionEndDate}"></th>
+                        <th class="px-6 py-3" th:text="${i.startingPrice}"></th>
+                        <th class="px-6 py-3" th:text="${i.priceSale}"></th>
+                        <th class="px-6 py-3" th:text="${i.rarity}"></th>
+                        <th class="px-6 py-3" th:text="${i.getSeller().getUsername()}"></th>
+                        <th class="px-6 py-3" th:text="${i.getCategory().getName()}"></th>
+                        <th class="px-6 py-3" th:text="${i.status}"></th>
                         <th>
-                            <form th:action="@{/admin/deleteWithdrawal(id=${w.withdrawal_id})}" method="post">
+                            <form th:action="@{/ventes/delete-sale(id=${i.id})}" method="post">
 
                                 <input type="hidden" name="_method" value="delete"/>
 
                                 <button type="submit" class="btn-danger">Supprimer</button>
                             </form>
                         </th>
-                        <th>
-                            <button type="button"
-                                    th:onclick="'document.getElementById(\'modal-' + ${w.withdrawal_id} + '\').showModal()'">
-                                Change
-                            </button>
-                            <!--MODAL-->
-                            <dialog th:id="'modal-' + ${w.withdrawal_id}">
-                                <h3>Change Withdrawal</h3>
-
-                                <form th:action="@{/admin/updateWithdrawal}" method="post">
-
-                                    <input type="hidden" name="withdrawal_id" th:value="${w.withdrawal_id}"/>
-
-                                    <ul>
-                                        <li>
-                                            <label>Postal Code :</label>
-                                            <input type="text" name="postalCode" th:value="${w.postalCode}" required/>
-                                        </li>
-                                        <li>
-                                            <label>Street :</label>
-                                            <input type="text" name="Street" th:value="${w.street}" required/>
-                                        </li>
-                                        <li>
-                                            <label>City :</label>
-                                            <input type="text" name="city" th:value="${w.city}" required/>
-                                        </li>
-                                        <li>
-                                            <label>id :</label>
-                                            <input type="text" name="article_id" th:value="${w.article_id}" required/>
-                                        </li>
-                                    </ul>
-
-                                    <button type="submit">Save</button>
-
-                                    <button type="button" onclick="this.closest('dialog').close()">Back</button>
-                                </form>
-                            </dialog>
-                        </th>
                     </tr>
                     </tbody>
                     <tfoot class="border-t-2 dark:border-neutral-600">
                     <tr>
-                        <th class="px-6 py-3">Total withdrawal:</th>
-                        <td class="px-6 py-3" th:text="${withdrawalList.size()}"></td>
+                        <th class="px-6 py-3">Total Auction:</th>
+                        <td class="px-6 py-3" th:text="${itemsList.size()}"></td>
                     </tr>
                     </tfoot>
                 </table>
