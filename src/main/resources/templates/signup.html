@@ -19,7 +19,7 @@
 
         <section class="flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-6 md:py-10">
 
-            <form th:action="@{/singup}" method="post" th:object="${userOBJ}" class="w-full md:w-[45%] items-center">
+            <form th:action="@{/signup}" method="post" th:object="${userOBJ}" class="w-full md:w-[45%] items-center">
                 <section class="flex flex-col items-center gap-10">
                     <h1 class="flex justify-center md:justify-start text-4xl md:text-[5rem] font-medium text-white">
                         Sign up
@@ -59,7 +59,7 @@
                         </div>
 
                         <div class="md:col-span-2 flex h-12 items-center gap-2 overflow-hidden rounded-full bg-white border border-gray-200 pl-5 focus-within:border-gray-300">
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <svg class="w-6 h-6 text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.5 11.5 11 13l4-3.5M12 20a16.405 16.405 0 0 1-5.092-5.804A16.694 16.694 0 0 1 5 6.666L12 4l7 2.667a16.695 16.695 0 0 1-1.908 7.529A16.406 16.406 0 0 1 12 20Z"/>
                             </svg>
                             <input placeholder="Password" class="h-full bg-white placeholder-black text-black outline-none w-full" required="" type="password" id="idPassword" th:field="*{password}"/>

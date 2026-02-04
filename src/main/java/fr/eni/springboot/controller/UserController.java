@@ -78,7 +78,7 @@ public class UserController {
     }
 
 
-    @PostMapping("/singup")
+    @PostMapping("/signup")
     public String createUserInscription(@ModelAttribute("userOBJ") User user, Model model) {
         try {
             System.out.println("Attempting to create user: " + user.getUsername());
@@ -86,15 +86,15 @@ public class UserController {
             return "redirect:/login?success";
         } catch (RuntimeException e) {
             model.addAttribute("error", e.getMessage());
-            return "/singup";
+            return "/signup";
         }
     }
 
 
-    @GetMapping("/singup")
+    @GetMapping("/signup")
     public String displaySignup(Model model) {
         model.addAttribute("userOBJ", new User());
-        return "/singup";
+        return "/signup";
     }
 
     @GetMapping("/profile")
