@@ -3,6 +3,7 @@ package fr.eni.springboot.service;
 import fr.eni.springboot.bo.ItemSold;
 import fr.eni.springboot.bo.Rarity;
 import fr.eni.springboot.bo.User;
+import fr.eni.springboot.bo.Withdrawal;
 import fr.eni.springboot.repository.ItemSoldRepository;
 import fr.eni.springboot.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -34,27 +35,35 @@ public class ItemSoldServiceImpl implements ItemSoldService {
     @Override
     @Transactional
     public void createItemSold(ItemSold itemSold, MultipartFile file, Principal principal) throws IOException {
-
+        User seller = null;
         if (principal != null) {
-            User seller = userRepository.readUserByUsername(principal.getName());
+            seller = userRepository.readUserByUsername(principal.getName());
             if (seller != null) {
                 itemSold.setSeller(seller);
             }
         }
 
+        if (seller != null && (itemSold.getWithdrawal() == null ||
+                itemSold.getWithdrawal().getStreet() == null || itemSold.getWithdrawal().getStreet().isBlank() ||
+                itemSold.getWithdrawal().getCity() == null || itemSold.getWithdrawal().getCity().isBlank())) {
+
+            Withdrawal adresseDefaut = new Withdrawal();
+            adresseDefaut.setStreet(seller.getStreet());
+            adresseDefaut.setPostalCode(seller.getPostalCode());
+            adresseDefaut.setCity(seller.getCity());
+
+            itemSold.setWithdrawal(adresseDefaut);
+        }
+
         if (file != null && !file.isEmpty()) {
-            // Sécurité pour récupérer seulement le nom de l'image (évite de pouvoir placer son image à l'endroit où le user veut)
             String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-            //Ajout du nom de l'image à l'item à vendre
             itemSold.setImage(fileName);
         }
 
         itemSoldRepository.createItemSold(itemSold);
 
         if (file != null && !file.isEmpty()) {
-            //Création du dossier de l'image avec l'id de l'annonce
             String uploadDir = "itemsSold-photos/" + itemSold.getId();
-            //Ajout de l'image dans le dossier
             FileUploadService.uploadFile(uploadDir, itemSold.getImage(), file);
         }
     }
@@ -74,9 +83,9 @@ public class ItemSoldServiceImpl implements ItemSoldService {
 
         ItemSold articleActuel = itemSoldRepository.readItemById(itemSold.getId());
 
-      if(!LocalDateTime.now().isBefore(articleActuel.getAuctionStartDate())) {
-          throw new RuntimeException("Impossible de modifier la vente car elle a déjà commencé");
-      }
+        if (!LocalDateTime.now().isBefore(articleActuel.getAuctionStartDate())) {
+            throw new RuntimeException("Impossible de modifier la vente car elle a déjà commencé");
+        }
 
         long actualUserId = userRepository.readUserByUsername(principal.getName()).getUser_id();
         long ownerId = articleActuel.getSeller().getUser_id();
