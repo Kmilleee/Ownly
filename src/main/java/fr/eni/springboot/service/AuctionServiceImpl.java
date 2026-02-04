@@ -29,6 +29,10 @@ public class AuctionServiceImpl implements AuctionService {
     public void createAuction(Auction auction) {
         ItemSold itemEnBase = itemSoldRepository.readItemById(auction.getItem().getId());
 
+        if (auction.getAuctionAmount() < itemEnBase.getStartingPrice()) {
+            throw new RuntimeException("L'enchère doit être supérieure au prix de base");
+        }
+
         //Vérifie que le montant de l'enchère est plus élevé que celui actuel
         if (auction.getAuctionAmount() <= itemEnBase.getPriceSale()) {
             throw new RuntimeException("L'enchère doit être supérieure au prix actuel !");
