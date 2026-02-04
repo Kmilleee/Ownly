@@ -53,12 +53,12 @@
                 <section class="flex place-content-around gap-2">
                     <div class="w-1/2">
                         <label class='mt-4 block text-white text-sm mb-2'>Start</label>
-                        <input type="date" required placeholder=" " th:field="*{auctionStartDate}"
+                        <input type="datetime-local" required placeholder=" " th:field="*{auctionStartDate}"
                                class='w-full bg-white border border-white rounded-lg px-4 py-3 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'>
                     </div>
                     <div class="w-1/2">
                         <label class='mt-4 block text-white text-sm mb-2'>End</label>
-                        <input type="date" required placeholder=" " th:field="*{auctionEndDate}"
+                        <input type="datetime-local" required placeholder=" " th:field="*{auctionEndDate}"
                                class='w-full bg-white border border-white rounded-lg px-4 py-3 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'>
                     </div>
                 </section>
