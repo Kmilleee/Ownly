@@ -9,12 +9,12 @@
     <link rel="icon" type="image/png" th:href="@{/img/logo.png}">
     <title>OWNLY</title>
 </head>
-<body class=" bg-black text-white min-h-screen flex flex-col max-h-100 overflow-y-auto
+<body class="bg-black text-white min-h-screen flex flex-col overflow-x-hidden
   [&::-webkit-scrollbar]:w-2
   [&::-webkit-scrollbar-track]:bg-transparent
   [&::-webkit-scrollbar-thumb]:bg-transparent
-  dark:[&::-webkit-scrollbar-track]:bg-neutral-700
-  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
+dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
 <header>
     <nav class="relative items-center flex justify-center md:justify-between mb-10 p-4">
 
@@ -79,7 +79,7 @@
                    class="block hover:opacity-80 transition relative">
                     <img th:src="@{|/img/avatars/${UserCo.avatar != null ? UserCo.avatar : 'default.png'}|}"
                          alt="Photo de profil"
-                         class="rounded-full w-10 h-10 object-cover " />
+                         class="rounded-full w-10 h-10 object-cover "/>
                     <span class="absolute -top-1 -right-1 flex h-3.5 w-3.5">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-600 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-600 border-2 border-black"></span>
@@ -183,8 +183,7 @@
 
 <main class="flex-1 container mx-auto p-4" data-th-replace="${content}"></main>
 
-
-<footer class="relative bg-transparent text-center md:block ">
+<footer class="mt-auto relative bg-transparent text-center md:block">
     <div class="flex justify-center">
         <div class=" border-t border- border-white w-3/4 rounded-xl"></div>
     </div>
