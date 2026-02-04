@@ -25,9 +25,9 @@
             <form th:action="@{/login}" method="post" class="w-3/4 items-center">
 
                 <section class="flex flex-col items-center gap-10 ">
-                    <h2 class="flex justify-center md:justify-start text-4xl md:text-[5rem] font-medium text-white">
+                    <h1 class="flex justify-center md:justify-start text-4xl md:text-[5rem] font-medium text-white">
                         Sign in
-                    </h2>
+                    </h1>
                     <div th:if="${param.expired}" class="w-11/12 text-center text-sm font-medium p-3 rounded-lg bg-red-500/20 border border-red-500/50 text-red-200">
                         Votre session a expiré après 5 minutes d'inactivité.
                     </div>
