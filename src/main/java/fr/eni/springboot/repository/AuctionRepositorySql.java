@@ -49,7 +49,12 @@ public class AuctionRepositorySql implements AuctionRepository {
 
     @Override
     public List<Auction> readAuction() {
-        String sql = "SELECT user_id, article_id, auctionDate, auctionAmount FROM auction";
+        String sql = "SELECT a.auctionAmount, a.auctionDate,a.auction_id as auction_id, " +
+                "u.username as username, u.user_id as user_id " +
+                "FROM AUCTION a " +
+                "left JOIN USERS u ON a.user_id = u.user_id " +
+                "ORDER BY a.auctionAmount DESC";
+
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Auction.class));
     }
@@ -76,16 +81,34 @@ public class AuctionRepositorySql implements AuctionRepository {
 
     @Override
     public Auction findBestAuctionByItemId(long itemId) {
-        String sql = "SELECT TOP 1 a.auction_id, a.auctionDate, a.auctionAmount, a.user_id, a.article_id, u.username FROM auction a INNER JOIN USERS u ON a.user_id = u.user_id WHERE a.article_id = :itemId ORDER BY a.auctionAmount DESC";
-        MapSqlParameterSource params = new MapSqlParameterSource("itemId", itemId);
+        String sql = "SELECT TOP 1 a.auctionAmount, a.auctionDate,a.auction_id, " +
+                "u.username as username, u.user_id as user_id " +
+                "FROM AUCTION a " +
+                "left JOIN USERS u ON a.user_id = u.user_id " +
+                " where a.article_id = :auction_id "+
+                "ORDER BY a.auctionAmount DESC";
+//        String sql = "SELECT TOP 1 a.auction_id, a.auctionDate, a.auctionAmount, a.user_id, a.article_id, u.username FROM auction a INNER JOIN USERS u ON a.user_id = u.user_id WHERE a.article_id = :itemId ORDER BY a.auctionAmount DESC";
+        MapSqlParameterSource params = new MapSqlParameterSource("auction_id", itemId);
 
         try {
-            // Transforme le résultat en objet Auction
             return namedParameterJdbcTemplate.queryForObject(sql, params, new AuctionRowMapper());
         } catch (EmptyResultDataAccessException e) {
-            // Si aucune enchère leve l'exception + retourne null
             return null;
         }
+    }
+
+    @Override
+    public List<Auction> readItemById(long auction_id) {
+        String sql = "SELECT a.auctionAmount, a.auctionDate,a.auction_id, " +
+                "u.username as username, u.user_id as user_id " +
+                "FROM AUCTION a " +
+                "left JOIN USERS u ON a.user_id = u.user_id " +
+                " where a.article_id = :auction_id";
+
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("auction_id", auction_id);
+
+        return namedParameterJdbcTemplate.query(sql, map, new AuctionRowMapper());
     }
 
 

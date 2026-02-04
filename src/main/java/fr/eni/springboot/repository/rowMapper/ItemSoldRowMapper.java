@@ -1,9 +1,6 @@
 package fr.eni.springboot.repository.rowMapper;
 
-import fr.eni.springboot.bo.ItemSold;
-import fr.eni.springboot.bo.Rarity;
-import fr.eni.springboot.bo.User;
-import fr.eni.springboot.bo.Category;
+import fr.eni.springboot.bo.*;
 import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,8 +36,14 @@ public class ItemSoldRowMapper implements RowMapper<ItemSold> {
         user.setAvatar(rs.getString("avatar"));
         user.setUser_id(rs.getLong("user_id"));
 
+        Withdrawal w = new Withdrawal();
+        w.setStreet(rs.getString("street"));
+        w.setPostalCode(rs.getString("postalCode")); //
+        w.setCity(rs.getString("city"));
+
         article.setSeller(user);
         article.setCategory(cat);
+        article.setWithdrawal(w);
 
         return article;
     }

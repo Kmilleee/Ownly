@@ -89,4 +89,9 @@ public class AuctionServiceImpl implements AuctionService {
         dao.deleteAuction(auction_id);
 
     }
+
+    @Override
+    public List<Auction> readItemById(long auction_id) {
+        return dao.readItemById(auction_id);
+    }
 }

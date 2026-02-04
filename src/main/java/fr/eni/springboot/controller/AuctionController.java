@@ -31,12 +31,14 @@ public class AuctionController {
     private final ItemSoldService serviceItem;
     private final CategoryService categoryService;
     private final UserService userService;
+    private final AuctionService auctionService;
 
-    public AuctionController(AuctionService service, ItemSoldService serviceItem, UserService userService, CategoryService categoryService) {
+    public AuctionController(AuctionService service, ItemSoldService serviceItem, UserService userService, CategoryService categoryService, AuctionService auctionService) {
         this.service = service;
         this.serviceItem = serviceItem;
         this.categoryService = categoryService;
         this.userService = userService;
+        this.auctionService = auctionService;
     }
 
     @GetMapping("/auction")
@@ -122,6 +124,7 @@ public class AuctionController {
     @GetMapping("/auctionDetail")
     public String displayAuctionDetail(@RequestParam("id") long id_item, Model model) {
         model.addAttribute("itemOBJ", serviceItem.readItemById(id_item));
+        model.addAttribute("listAuction", auctionService.readItemById(id_item));
 
         List<String> listFigurine = new ArrayList<>();
         listFigurine.add("militaireRare.png");

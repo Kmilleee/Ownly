@@ -12,4 +12,6 @@ public interface AuctionService {
     void updateAuction(Auction auction);
 
     void deleteAuction(long auction_id);
+
+    List<Auction> readItemById(long auction_id);
 }
