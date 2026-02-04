@@ -27,4 +27,7 @@ public interface ItemSoldRepository {
     List<ItemSold> readItemByCategory(String cat);
 
     List<ItemSold> findItemsWonByUser(long userId);
+
+    @Transactional
+    void deleteItemsBySellerId(long sellerId);
 }

@@ -111,5 +111,19 @@ public class AuctionRepositorySql implements AuctionRepository {
         return namedParameterJdbcTemplate.query(sql, map, new AuctionRowMapper());
     }
 
+    @Override
+    public void deleteAuctionsByUserId(long userId) {
+        String sql = "DELETE FROM AUCTION WHERE user_id = :userId";
+        MapSqlParameterSource params = new MapSqlParameterSource("userId", userId);
+        namedParameterJdbcTemplate.update(sql, params);
+    }
+
+    @Override
+    public void deleteAuctionsBySellerId(long sellerId) {
+        String sql = "DELETE a FROM AUCTION a INNER JOIN ItemSold i ON a.article_id = i.article_id WHERE i.user_id = :sellerId";
+        MapSqlParameterSource params = new MapSqlParameterSource("sellerId", sellerId);
+        namedParameterJdbcTemplate.update(sql, params);
+    }
+
 
 }

@@ -1,9 +1,14 @@
 package fr.eni.springboot.service;
 
+import fr.eni.springboot.bo.Auction;
+import fr.eni.springboot.bo.ItemSold;
 import fr.eni.springboot.bo.User;
+import fr.eni.springboot.repository.AuctionRepository;
+import fr.eni.springboot.repository.ItemSoldRepository;
 import fr.eni.springboot.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -11,11 +16,15 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     UserRepository dao;
+    AuctionRepository auctionRepository;
+    ItemSoldRepository itemSoldRepository;
     private PasswordEncoder passwordEncoder;
 
 
-    public UserServiceImpl(UserRepository dao, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository dao, AuctionRepository auctionRepository, ItemSoldRepository itemSoldRepository, PasswordEncoder passwordEncoder) {
         this.dao = dao;
+        this.auctionRepository = auctionRepository;
+        this.itemSoldRepository = itemSoldRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -59,7 +68,7 @@ public class UserServiceImpl implements UserService {
         User currentInDb = dao.readUserById(user.getUser_id());
 
         //Si le mdp est différent de celui actuel et n'est pas vide
-        if (user.getPassword() != null && !user.getPassword().isEmpty() && !user.getPassword().equals(currentInDb.getPassword())) {
+        if (user.getPassword() == null || user.getPassword().isEmpty()) {
             user.setPassword(currentInDb.getPassword());
         } else {
             //Sinon s'il change on crypte le nouveau mdp
@@ -97,12 +106,35 @@ public class UserServiceImpl implements UserService {
         dao.updatePassword(email, encodedPassword);
     }
 
+    @Transactional
     @Override
     public void disableUser(long id) {
         User user = dao.readUserById(id);
+        if (user.isActive()) {
+            //Récupère ses ventes en cours
+            List<ItemSold> itemSoldList = itemSoldRepository.readItemsBySeller(id);
+
+            //Pour toutes les ventes on récup le user qui a la meilleure enchère
+            for (ItemSold itemSold : itemSoldList) {
+                Auction bestAuction = auctionRepository.findBestAuctionByItemId(itemSold.getId());
+
+                if (bestAuction != null) {
+                    // On le rembourse
+                    User bidder = bestAuction.getBidder();
+                    bidder.setCredit(bidder.getCredit() + bestAuction.getAuctionAmount());
+                    dao.updateUser(bidder);
+                }
+
+            }
+
+            //Et après on supprime (ventes et enchères)
+            auctionRepository.deleteAuctionsByUserId(id);
+            auctionRepository.deleteAuctionsBySellerId(id);
+
+            itemSoldRepository.deleteItemsBySellerId(id);
+        }
 
         user.setActive(!user.isActive());
-
         dao.updateUser(user);
     }
 

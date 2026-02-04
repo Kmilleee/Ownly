@@ -245,5 +245,16 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
         return namedParameterJdbcTemplate.query(sql, params, new ItemSoldRowMapper2());
     }
 
+    @Transactional
+    @Override
+    public void deleteItemsBySellerId(long sellerId) {
+        String sqlWithdrawal = "DELETE w FROM WITHDRAWAL w INNER JOIN ItemSold i ON w.article_id = i.article_id WHERE i.user_id = :sellerId";
+        MapSqlParameterSource params = new MapSqlParameterSource("sellerId", sellerId);
+        namedParameterJdbcTemplate.update(sqlWithdrawal, params);
+
+        String sqlItems = "DELETE FROM ItemSold WHERE user_id = :sellerId";
+        namedParameterJdbcTemplate.update(sqlItems, params);
+    }
+
 
 }
