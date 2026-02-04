@@ -1,6 +1,12 @@
 <html data-th-replace="~{fragment/footer :: frag_footer(content= ~{::main})}" lang="fr">
 <title>login</title>
 <main>
+    <div th:if="${error}"
+         class="flex max-w-72 items-center p-4 text-sm text-red-100 bg-red-500/20 border border-red-500 rounded-xl backdrop-blur-sm">
+        <div>
+            <span class="font-bold">Erreur :</span> <span th:text="${error}"></span>
+        </div>
+    </div>
     <div class="relative z-10">
         <div class="absolute top-0 left-0 w-full h-[120vh] overflow-hidden -z-10 pointer-events-none">
 
@@ -131,7 +137,7 @@
 
                 <p class="mt-8 text-center text-white">
                     Don’t have an account?
-                    <a class="text-gray-800 underline" href="/singup">
+                    <a class="text-white underline" href="/singup">
                         Sign up
                     </a>
                 </p>

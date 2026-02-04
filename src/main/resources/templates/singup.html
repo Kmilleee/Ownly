@@ -1,5 +1,5 @@
 <html data-th-replace="~{fragment/footer :: frag_footer(content= ~{::main})}" lang="fr">
-
+<title>login</title>
 <main>
     <div th:if="${error}"
          class="flex max-w-72 items-center p-4 text-sm text-red-100 bg-red-500/20 border border-red-500 rounded-xl backdrop-blur-sm">
@@ -7,320 +7,121 @@
             <span class="font-bold">Erreur :</span> <span th:text="${error}"></span>
         </div>
     </div>
-    <div class="relative z-10 ">
-        <div class="ms-15 p-2">
-            <h1 class="text-[5rem] font-medium text-white">Sign up</h1>
-            <h2 class="text-[3rem] font-light mb-15 text-white">Welcome, Discover a new world</h2>
-        </div>
-        <section class="flex items-center justify-center w-full ">
-            <div class="flex w-full gap-10 p-2 m-15">
-                <form class="w-3/4 items-center" th:action="@{/singup}" method="POST" th:object="${userOBJ}">
-                    <p class="w-full text-sm text-nowrap text-white text-center ">connect with Google</p>
 
-                    <div class="mt-10 mb-2 w-full flex justify-center ">
-                        <a th:href="@{/oauth2/authorization/google}"
-                           class="flex w-1/2 justify-center rounded-full bg-gray-200 border border-gray-200 py-2  hover:bg-gray-50 focus:border-gray-300 cursor-pointer">
-                            <button type="button">
-
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_8755_1278)">
-                                        <path d="M12 9.81836V14.4656H18.4582C18.1746 15.9602 17.3236 17.2257 16.0472 18.0766L19.9417 21.0984C22.2108 19.0039 23.5199 15.9276 23.5199 12.273C23.5199 11.4221 23.4436 10.6039 23.3017 9.81849L12 9.81836Z"
-                                              fill="#4285F4"/>
-                                        <path d="M5.27657 14.2842L4.3982 14.9566L1.28906 17.3783C3.2636 21.2947 7.31058 24.0002 12.0014 24.0002C15.2414 24.0002 17.9577 22.9311 19.9432 21.0984L16.0487 18.0765C14.9796 18.7965 13.6159 19.2329 12.0014 19.2329C8.88146 19.2329 6.23063 17.1275 5.28147 14.2911L5.27657 14.2842Z"
-                                              fill="#34A853"/>
-                                        <path d="M1.28718 6.62207C0.469042 8.23655 0 10.0584 0 12.0002C0 13.942 0.469042 15.7638 1.28718 17.3783C1.28718 17.3891 5.27997 14.2801 5.27997 14.2801C5.03998 13.5601 4.89812 12.7965 4.89812 12.0001C4.89812 11.2036 5.03998 10.44 5.27997 9.72L1.28718 6.62207Z"
-                                              fill="#FBBC05"/>
-                                        <path d="M12.0017 4.77818C13.769 4.77818 15.3399 5.38907 16.5944 6.56727L20.0307 3.13095C17.9471 1.18917 15.2417 0 12.0017 0C7.31082 0 3.2636 2.69454 1.28906 6.62183L5.28174 9.72001C6.23077 6.88362 8.88171 4.77818 12.0017 4.77818Z"
-                                              fill="#EA4335"/>
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_8755_1278">
-                                            <rect width="24" height="24" fill="white"/>
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </button>
-                        </a>
-                    </div>
-                    <div class="my-5 flex w-full items-center gap-4">
-                        <div class="h-px w-full bg-gray-300/90"></div>
-                        <p class="w-full text-sm text-nowrap text-white text-center ">or sign in with email</p>
-                        <div class="h-px w-full bg-gray-300/90"></div>
-                    </div>
-                    <div class="flex gap-10">
-                        <div class="mt-15 flex h-12 w-1/2 items-center gap-2 overflow-hidden rounded-full border border-gray-200 bg-white pl-5 focus-within:border-gray-300 ">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg" stroke="#000000">
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                <g id="SVGRepo_iconCarrier">
-                                    <circle cx="9" cy="9" r="2" stroke="#000000" stroke-width="1.5"></circle>
-                                    <path d="M13 15C13 16.1046 13 17 9 17C5 17 5 16.1046 5 15C5 13.8954 6.79086 13 9 13C11.2091 13 13 13.8954 13 15Z"
-                                          stroke="#000000" stroke-width="1.5"></path>
-                                    <path d="M2 12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12C22 15.7712 22 17.6569 20.8284 18.8284C19.6569 20 17.7712 20 14 20H10C6.22876 20 4.34315 20 3.17157 18.8284C2 17.6569 2 15.7712 2 12Z"
-                                          stroke="#000000" stroke-width="1.5"></path>
-                                    <path d="M19 12H15" stroke="#000000" stroke-width="1.5"
-                                          stroke-linecap="round"></path>
-                                    <path d="M19 9H14" stroke="#000000" stroke-width="1.5"
-                                          stroke-linecap="round"></path>
-                                    <path d="M19 15H16" stroke="#000000" stroke-width="1.5"
-                                          stroke-linecap="round"></path>
-                                </g>
-                            </svg>
-                            <label for="idFirstName"></label>
-                            <input
-                                    placeholder="First Name"
-                                    class="h-full  bg-white text-sm placeholder-black  text-black outline-none w-1/2"
-                                    required=""
-                                    type="text"
-                                    id="idFirstName"
-                                    name="firstName"
-                                    th:field="*{firstName}"
-                            />
-
-
-                        </div>
-                        <div class="mt-15 flex h-12 w-1/2 items-center gap-2 overflow-hidden rounded-full border border-gray-200 bg-white pl-5 focus-within:border-gray-300 ">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg" stroke="#000000">
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                <g id="SVGRepo_iconCarrier">
-                                    <circle cx="9" cy="9" r="2" stroke="#000000" stroke-width="1.5"></circle>
-                                    <path d="M13 15C13 16.1046 13 17 9 17C5 17 5 16.1046 5 15C5 13.8954 6.79086 13 9 13C11.2091 13 13 13.8954 13 15Z"
-                                          stroke="#000000" stroke-width="1.5"></path>
-                                    <path d="M2 12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12C22 15.7712 22 17.6569 20.8284 18.8284C19.6569 20 17.7712 20 14 20H10C6.22876 20 4.34315 20 3.17157 18.8284C2 17.6569 2 15.7712 2 12Z"
-                                          stroke="#000000" stroke-width="1.5"></path>
-                                    <path d="M19 12H15" stroke="#000000" stroke-width="1.5"
-                                          stroke-linecap="round"></path>
-                                    <path d="M19 9H14" stroke="#000000" stroke-width="1.5"
-                                          stroke-linecap="round"></path>
-                                    <path d="M19 15H16" stroke="#000000" stroke-width="1.5"
-                                          stroke-linecap="round"></path>
-                                </g>
-                            </svg>
-                            <label for="idLastName"></label>
-                            <input
-                                    placeholder="Last Name"
-                                    class="h-full  bg-white text-sm placeholder-black  text-black outline-none w-1/2"
-                                    required=""
-                                    type="text"
-                                    id="idLastName"
-                                    name="lastName"
-                                    th:field="*{lastName}"
-                            />
-
-
-                        </div>
-                    </div>
-                    <div class="flex gap-10">
-                        <div class="mt-15 flex h-12 w-1/2 items-center gap-2 overflow-hidden rounded-full border border-gray-200 bg-white pl-5 focus-within:border-gray-300 ">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                <g id="SVGRepo_iconCarrier">
-                                    <circle cx="12" cy="6" r="4" stroke="#000000" stroke-width="1.5"></circle>
-                                    <path d="M19.9975 18C20 17.8358 20 17.669 20 17.5C20 15.0147 16.4183 13 12 13C7.58172 13 4 15.0147 4 17.5C4 19.9853 4 22 12 22C14.231 22 15.8398 21.8433 17 21.5634"
-                                          stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path>
-                                </g>
-                            </svg>
-                            <label for="idUsername"></label>
-                            <input
-                                    placeholder="Username"
-                                    class="h-full  bg-white text-sm placeholder-black  text-black outline-none w-1/2"
-                                    required=""
-                                    type="text"
-                                    id="idUsername"
-                                    name="username"
-                                    th:field="*{username}"
-                            />
-
-
-                        </div>
-
-                        <div class="mt-15 flex h-12 w-1/2 items-center gap-2 overflow-hidden rounded-full border border-gray-200 bg-white pl-5 focus-within:border-gray-300 ">
-                            <svg width="18" height="18" fill="#000000" version="1.1" id="Layer_1"
-                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                 viewBox="0 0 494.72 494.72" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                <g id="SVGRepo_iconCarrier"> <g> <path
-                                        d="M323.191,4.266L171.522,47.394L4.86,0v443.062l166.662,47.394l151.669-43.128L489.86,494.72V51.659L323.191,4.266z M459.86,259.332l-65.917-65.917c6.283-11.664,9.662-24.816,9.662-38.141c0-20.534-7.747-39.287-20.458-53.513l38.352-38.352 l38.361,10.908V259.332z M198.79,286.118l70.046-70.046l54.355,68.339l52.862-66.461l34.238,34.238L287.576,374.904L198.79,286.118 z M34.86,220.863l82.798-82.799l33.057,33.057L34.86,286.978V220.863z M34.86,329.404l137.068-137.07l39.11,39.11L34.86,407.622 V329.404z M177.577,307.331l45.13,45.131l-94.49,94.49l-70.277-19.985L177.577,307.331z M373.605,155.274 c0,11.437-3.752,22.226-10.825,31.169l-39.589,49.774l-39.563-49.742c-7.099-8.976-10.851-19.766-10.851-31.202 c0-27.798,22.616-50.414,50.414-50.414S373.605,127.476,373.605,155.274z M388.466,54.016l-29.348,29.348 c-10.821-5.428-23.019-8.503-35.927-8.503c-44.34,0-80.414,36.073-80.414,80.414c0,12.481,2.963,24.812,8.51,35.921l-19.036,19.036 l-93.38-93.38l40.501-40.501l143.818-40.896L388.466,54.016z M142.864,70.434L34.86,178.438V39.721L142.864,70.434z M161.25,456.345l82.67-82.67l50.612,50.612l-123.011,34.979L161.25,456.345z M331.041,418.37l-22.253-22.253l122.716-122.716 l28.356,28.356V455L331.041,418.37z"></path>
-                                    <circle cx="323.191" cy="155.274" r="0.527"></circle>
-                                    <path d="M307.664,155.274c0,8.562,6.965,15.527,15.527,15.527c8.561,0,15.526-6.965,15.526-15.527s-6.965-15.526-15.526-15.526 C314.63,139.748,307.664,146.712,307.664,155.274z"></path> </g> </g></svg>
-                            <label for="idStreet"></label>
-                            <input
-                                    placeholder="street"
-                                    class="h-full  bg-white text-sm placeholder-black  text-black outline-none w-1/2"
-                                    required=""
-                                    type="text"
-                                    id="idStreet"
-                                    name="street"
-                                    th:field="*{street}"
-                            />
-
-
-                        </div>
-                    </div>
-                    <div class="flex gap-10">
-                        <div class="mt-15 flex h-12 w-1/2 items-center gap-2 overflow-hidden rounded-full border border-gray-200 bg-white pl-5 focus-within:border-gray-300 ">
-                            <svg height="18" width="18" version="1.1" id="_x32_"
-                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                 viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                <g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0 {
-                                    fill: #000000;
-                                } </style>
-                                    <g> <path class="st0"
-                                              d="M510.746,110.361c-2.128-10.754-6.926-20.918-13.926-29.463c-1.422-1.794-2.909-3.39-4.535-5.009 c-12.454-12.52-29.778-19.701-47.531-19.701H67.244c-17.951,0-34.834,7-47.539,19.708c-1.608,1.604-3.099,3.216-4.575,5.067 c-6.97,8.509-11.747,18.659-13.824,29.428C0.438,114.62,0,119.002,0,123.435v265.137c0,9.224,1.874,18.206,5.589,26.745 c3.215,7.583,8.093,14.772,14.112,20.788c1.516,1.509,3.022,2.901,4.63,4.258c12.034,9.966,27.272,15.45,42.913,15.45h377.51 c15.742,0,30.965-5.505,42.967-15.56c1.604-1.298,3.091-2.661,4.578-4.148c5.818-5.812,10.442-12.49,13.766-19.854l0.438-1.05 c3.646-8.377,5.497-17.33,5.497-26.628V123.435C512,119.06,511.578,114.649,510.746,110.361z M34.823,99.104 c0.951-1.392,2.165-2.821,3.714-4.382c7.689-7.685,17.886-11.914,28.706-11.914h377.51c10.915,0,21.115,4.236,28.719,11.929 c1.313,1.327,2.567,2.8,3.661,4.272l2.887,3.88l-201.5,175.616c-6.212,5.446-14.21,8.443-22.523,8.443 c-8.231,0-16.222-2.99-22.508-8.436L32.19,102.939L34.823,99.104z M26.755,390.913c-0.109-0.722-0.134-1.524-0.134-2.341V128.925 l156.37,136.411L28.199,400.297L26.755,390.913z M464.899,423.84c-6.052,3.492-13.022,5.344-20.145,5.344H67.244 c-7.127,0-14.094-1.852-20.142-5.344l-6.328-3.668l159.936-139.379l17.528,15.246c10.514,9.128,23.922,14.16,37.761,14.16 c13.89,0,27.32-5.032,37.827-14.16l17.521-15.253L471.228,420.18L464.899,423.84z M485.372,388.572 c0,0.803-0.015,1.597-0.116,2.304l-1.386,9.472L329.012,265.409l156.36-136.418V388.572z"></path> </g> </g></svg>
-                            <label for="idEmail"></label>
-                            <input
-                                    placeholder="email"
-                                    class="h-full  bg-white text-sm placeholder-black  text-black outline-none w-1/2"
-                                    required=""
-                                    type="text"
-                                    id="idEmail"
-                                    name="email"
-                                    th:field="*{email}"
-                            />
-
-
-                        </div>
-                        <div class="mt-15 flex h-12 w-1/2 items-center gap-2 overflow-hidden rounded-full border border-gray-200 bg-white pl-5 focus-within:border-gray-300 ">
-                            <svg height="18" width="18" viewBox="0 0 24 24" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                <g id="SVGRepo_iconCarrier">
-                                    <path d="M4.00655 7.93309C3.93421 9.84122 4.41713 13.0817 7.6677 16.3323C8.45191 17.1165 9.23553 17.7396 10 18.2327M5.53781 4.93723C6.93076 3.54428 9.15317 3.73144 10.0376 5.31617L10.6866 6.4791C11.2723 7.52858 11.0372 8.90532 10.1147 9.8278C10.1147 9.8278 10.1147 9.8278 10.1147 9.8278C10.1146 9.82792 8.99588 10.9468 11.0245 12.9755C13.0525 15.0035 14.1714 13.8861 14.1722 13.8853C14.1722 13.8853 14.1722 13.8853 14.1722 13.8853C15.0947 12.9628 16.4714 12.7277 17.5209 13.3134L18.6838 13.9624C20.2686 14.8468 20.4557 17.0692 19.0628 18.4622C18.2258 19.2992 17.2004 19.9505 16.0669 19.9934C15.2529 20.0243 14.1963 19.9541 13 19.6111"
-                                          stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path>
-                                </g>
-                            </svg>
-                            <label for="idPhone"></label>
-                            <input
-                                    placeholder="Phone"
-                                    class="h-full  bg-white text-sm placeholder-black  text-black outline-none w-1/2"
-                                    required=""
-                                    type="text"
-                                    id="idPhone"
-                                    name="numPhone"
-                                    th:field="*{numPhone}"
-                            />
-
-
-                        </div>
-                    </div>
-                    <div class="flex gap-10 mb-10">
-                        <div class="mt-15 flex h-12 w-1/2 items-center gap-2 overflow-hidden rounded-full border border-gray-200 bg-white pl-5 focus-within:border-gray-300 ">
-                            <svg height="18" width="18" viewBox="0 0 24 24" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                <g id="SVGRepo_iconCarrier">
-                                    <path d="M3 22V12C3 10.1144 3 9.17157 3.58579 8.58579C4.17157 8 5.11438 8 7 8C8.88562 8 9.82843 8 10.4142 8.58579C11 9.17157 11 10.1144 11 12"
-                                          stroke="#000000" stroke-width="1.5"></path>
-                                    <path d="M17 22V16C17 14.1144 17 13.1716 16.4142 12.5858C15.8284 12 14.8856 12 13 12H11C9.11438 12 8.17157 12 7.58579 12.5858C7 13.1716 7 14.1144 7 16V22"
-                                          stroke="#000000" stroke-width="1.5"></path>
-                                    <path d="M21 21.9999V7.77195C21 6.4311 21 5.76068 20.6439 5.24676C20.2877 4.73283 19.66 4.49743 18.4045 4.02663C15.9492 3.10591 14.7216 2.64555 13.8608 3.2421C13 3.83864 13 5.14974 13 7.77195V11.9999"
-                                          stroke="#000000" stroke-width="1.5"></path>
-                                    <path d="M4 8V6.5C4 5.55719 4 5.08579 4.29289 4.79289C4.58579 4.5 5.05719 4.5 6 4.5H8C8.94281 4.5 9.41421 4.5 9.70711 4.79289C10 5.08579 10 5.55719 10 6.5V8"
-                                          stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path>
-                                    <path d="M7 4V2" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path>
-                                    <path d="M22 22L2 22" stroke="#000000" stroke-width="1.5"
-                                          stroke-linecap="round"></path>
-                                    <path d="M10 15H14" stroke="#000000" stroke-width="1.5"
-                                          stroke-linecap="round"></path>
-                                    <path d="M10 18H14" stroke="#000000" stroke-width="1.5"
-                                          stroke-linecap="round"></path>
-                                </g>
-                            </svg>
-                            <label for="idCity"></label>
-                            <input
-                                    placeholder="City"
-                                    class="h-full  bg-white text-sm placeholder-black  text-black outline-none w-1/2"
-                                    required=""
-                                    type="text"
-                                    id="idCity"
-                                    name="city"
-                                    th:field="*{city}"
-                            />
-
-
-                        </div>
-                        <div class="mt-15 flex h-12 w-1/2 items-center gap-2 overflow-hidden rounded-full border border-gray-200 bg-white pl-5 focus-within:border-gray-300 ">
-                            <svg height="18" width="18" fill="#000000" viewBox="0 0 50 50" version="1.2"
-                                 baseProfile="tiny"
-                                 xmlns="http://www.w3.org/2000/svg" overflow="inherit">
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                <g id="SVGRepo_iconCarrier">
-                                    <path d="M25 0c-8.284 0-15 6.656-15 14.866 0 8.211 15 35.135 15 35.135s15-26.924 15-35.135c0-8.21-6.716-14.866-15-14.866zm-.049 19.312c-2.557 0-4.629-2.055-4.629-4.588 0-2.535 2.072-4.589 4.629-4.589 2.559 0 4.631 2.054 4.631 4.589 0 2.533-2.072 4.588-4.631 4.588z"></path>
-                                </g>
-                            </svg>
-                            <label for="idPostalCode"></label>
-                            <input
-                                    placeholder="Postal Code"
-                                    class="h-full  bg-white text-sm placeholder-black  text-black outline-none w-1/2"
-                                    required=""
-                                    type="text"
-                                    id="idPostalCode"
-                                    name="postalCode"
-                                    th:field="*{postalCode}"
-                            />
-
-
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between items-end gap-10">
-                            <div class="mt-6 flex h-12 w-1/2 items-center gap-2 overflow-hidden rounded-full bg-white border border-gray-200 pl-5 focus-within:border-gray-300">
-                                <svg height="18" width="18" viewBox="0 0 24 24" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                    <g id="SVGRepo_iconCarrier">
-                                        <path d="M9 12C9 12.5523 8.55228 13 8 13C7.44772 13 7 12.5523 7 12C7 11.4477 7.44772 11 8 11C8.55228 11 9 11.4477 9 12Z"
-                                              fill="#000000"></path>
-                                        <path d="M13 12C13 12.5523 12.5523 13 12 13C11.4477 13 11 12.5523 11 12C11 11.4477 11.4477 11 12 11C12.5523 11 13 11.4477 13 12Z"
-                                              fill="#000000"></path>
-                                        <path d="M15 2V22" stroke="#000000" stroke-width="1.5"
-                                              stroke-linecap="round"></path>
-                                        <path d="M22 12C22 15.7712 22 17.6569 20.8284 18.8284C19.7653 19.8915 18.1143 19.99 15 19.9991M12 4H10C6.22876 4 4.34315 4 3.17157 5.17157C2 6.34315 2 8.22876 2 12C2 15.7712 2 17.6569 3.17157 18.8284C4.34315 20 6.22876 20 10 20H12M15 4.00093C18.1143 4.01004 19.7653 4.10848 20.8284 5.17157C21.4816 5.82475 21.7706 6.69989 21.8985 8"
-                                              stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path>
-                                    </g>
-                                </svg>
-                                <label for="idPassword"></label>
-                                <input
-                                        placeholder="Password"
-                                        class="h-full bg-white  placeholder-black  text-black outline-none w-1/2"
-                                        required=""
-                                        type="password"
-                                        name="password"
-                                        id="idPassword"
-                                        th:field="*{password}"
-                                />
-                            </div>
-                            <button type="submit"
-                                    class="mt-8 h-7 w-1/2 cursor-pointer rounded-full bg-linear-to-b bg-white text-black transition hover:from-gray-200 hover:to-gray-400">
-                                Login
-                            </button>
-                        </div>
-
-                    </div>
-                    <div class="mt-8 flex w-full items-center justify-between">
-                    </div>
-                    <p class="mt-4 text-white">
-                        have an account?
-                        <a class="text-gray-800 underline" href="/login">
-                            Sign in
-                        </a>
-                    </p>
-                </form>
-                <img src="/img/figurineTest.png" alt="" srcset="">
+    <div class="relative z-10">
+        <div class="absolute top-0 left-0 w-full h-[120vh] overflow-hidden -z-10 pointer-events-none">
+            <div class="absolute top-1/2 right-0 w-[400px] h-[400px] md:w-[800px] md:h-[800px]"
+                 style="background: radial-gradient(circle, rgba(126, 34, 206, 0.4) 0%, rgba(0,0,0,0) 70%);
+                    transform: translate(30%, -30%);">
             </div>
+            <div class="absolute top-1/2 right-0 w-[400px] h-[400px] md:w-[800px] md:h-[800px]"
+                 style="background: radial-gradient(circle, rgba(238, 27, 136, 0.66) 0%, rgba(0,0,0,0) 70%);
+                    transform: translate(30%, -30%);">
+            </div>
+            <div class="absolute top-1/2 left-1/2 w-[400px] h-[400px] md:w-[800px] md:h-[800px]"
+                 style="background: radial-gradient(circle, rgba(30, 237, 251, 0.46) 0%, rgba(0,0,0,0) 50%);
+                    transform: translate(-90%, -60%);">
+            </div>
+        </div>
+
+        <section class="flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-6 md:py-10">
+
+            <form th:action="@{/singup}" method="post" th:object="${userOBJ}" class="w-full md:w-[45%] items-center">
+                <section class="flex flex-col items-center gap-10">
+                    <h1 class="flex justify-center md:justify-start text-4xl md:text-[5rem] font-medium text-white">
+                        Sign up
+                    </h1>
+                    <h2 class="text-xl md:text-[2.5rem] font-light text-white text-center">
+                        Welcome, Discover a new world
+                    </h2>
+                    <p class="hidden md:block w-full text-sm text-nowrap text-white text-center">
+                        connect with Google
+                    </p>
+
+                    <a th:href="@{/oauth2/authorization/google}"
+                       class="flex w-1/2 justify-center rounded-full bg-gray-200 border border-gray-200 py-2 hover:bg-gray-50 focus:border-gray-300 cursor-pointer">
+                        <button type="button">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_8755_1278)">
+                                    <path d="M12 9.81836V14.4656H18.4582C18.1746 15.9602 17.3236 17.2257 16.0472 18.0766L19.9417 21.0984C22.2108 19.0039 23.5199 15.9276 23.5199 12.273C23.5199 11.4221 23.4436 10.6039 23.3017 9.81849L12 9.81836Z" fill="#4285F4"/>
+                                    <path d="M5.27657 14.2842L4.3982 14.9566L1.28906 17.3783C3.2636 21.2947 7.31058 24.0002 12.0014 24.0002C15.2414 24.0002 17.9577 22.9311 19.9432 21.0984L16.0487 18.0765C14.9796 18.7965 13.6159 19.2329 12.0014 19.2329C8.88146 19.2329 6.23063 17.1275 5.28147 14.2911L5.27657 14.2842Z" fill="#34A853"/>
+                                    <path d="M1.28718 6.62207C0.469042 8.23655 0 10.0584 0 12.0002C0 13.942 0.469042 15.7638 1.28718 17.3783C1.28718 17.3891 5.27997 14.2801 5.27997 14.2801C5.03998 13.5601 4.89812 12.7965 4.89812 12.0001C4.89812 11.2036 5.03998 10.44 5.27997 9.72L1.28718 6.62207Z" fill="#FBBC05"/>
+                                    <path d="M12.0017 4.77818C13.769 4.77818 15.3399 5.38907 16.5944 6.56727L20.0307 3.13095C17.9471 1.18917 15.2417 0 12.0017 0C7.31082 0 3.2636 2.69454 1.28906 6.62183L5.28174 9.72001C6.23077 6.88362 8.88171 4.77818 12.0017 4.77818Z" fill="#EA4335"/>
+                                </g>
+                                <defs><clipPath id="clip0_8755_1278"><rect width="24" height="24" fill="white"/></clipPath></defs>
+                            </svg>
+                        </button>
+                    </a>
+
+                    <div class="flex w-full items-center">
+                        <div class="h-px w-full bg-gray-300/90"></div>
+                        <p class="w-full text-sm text-nowrap text-white text-center ">Or</p>
+                        <div class="h-px w-full bg-gray-300/90"></div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-11/12">
+                        <div class="md:col-span-2 flex h-12 items-center gap-2 overflow-hidden rounded-full border border-gray-200 bg-white pl-5 focus-within:border-gray-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock text-black"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg>
+                            <input placeholder="Username" class="h-full bg-white text-sm placeholder-black text-black outline-none w-full" required="" type="text" id="idUsername" th:field="*{username}"/>
+                        </div>
+
+                        <div class="md:col-span-2 flex h-12 items-center gap-2 overflow-hidden rounded-full bg-white border border-gray-200 pl-5 focus-within:border-gray-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock text-black"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                            <input placeholder="Password" class="h-full bg-white placeholder-black text-black outline-none w-full" required="" type="password" id="idPassword" th:field="*{password}"/>
+                        </div>
+
+                        <div class="flex h-12 items-center gap-2 overflow-hidden rounded-full bg-white border border-gray-200 pl-5 focus-within:border-gray-300">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#000000"><circle cx="9" cy="9" r="2" stroke="#000000" stroke-width="1.5"></circle><path d="M13 15C13 16.1046 13 17 9 17C5 17 5 16.1046 5 15C5 13.8954 6.79086 13 9 13C11.2091 13 13 13.8954 13 15Z" stroke="#000000" stroke-width="1.5"></path><path d="M2 12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12C22 15.7712 22 17.6569 20.8284 18.8284C19.6569 20 17.7712 20 14 20H10C6.22876 20 4.34315 20 3.17157 18.8284C2 17.6569 2 15.7712 2 12Z" stroke="#000000" stroke-width="1.5"></path><path d="M19 12H15" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path><path d="M19 9H14" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path><path d="M19 15H16" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path></svg>
+                            <input placeholder="First Name" class="h-full bg-white placeholder-black text-black outline-none w-full" required="" type="text" id="idFirstName" th:field="*{firstName}"/>
+                        </div>
+
+                        <div class="flex h-12 items-center gap-2 overflow-hidden rounded-full bg-white border border-gray-200 pl-5 focus-within:border-gray-300">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#000000"><circle cx="9" cy="9" r="2" stroke="#000000" stroke-width="1.5"></circle><path d="M13 15C13 16.1046 13 17 9 17C5 17 5 16.1046 5 15C5 13.8954 6.79086 13 9 13C11.2091 13 13 13.8954 13 15Z" stroke="#000000" stroke-width="1.5"></path><path d="M2 12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12C22 15.7712 22 17.6569 20.8284 18.8284C19.6569 20 17.7712 20 14 20H10C6.22876 20 4.34315 20 3.17157 18.8284C2 17.6569 2 15.7712 2 12Z" stroke="#000000" stroke-width="1.5"></path><path d="M19 12H15" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path><path d="M19 9H14" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path><path d="M19 15H16" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path></svg>
+                            <input placeholder="Last Name" class="h-full bg-white placeholder-black text-black outline-none w-full" required="" type="text" id="idLastName" th:field="*{lastName}"/>
+                        </div>
+
+                        <div class="md:col-span-2 flex h-12 items-center gap-2 overflow-hidden rounded-full bg-white border border-gray-200 pl-5 focus-within:border-gray-300">
+                            <svg height="18" width="18" viewBox="0 0 512 512" fill="#000000"><path d="M510.746,110.361c-2.128-10.754-6.926-20.918-13.926-29.463c-1.422-1.794-2.909-3.39-4.535-5.009 c-12.454-12.52-29.778-19.701-47.531-19.701H67.244c-17.951,0-34.834,7-47.539,19.708c-1.608,1.604-3.099,3.216-4.575,5.067 c-6.97,8.509-11.747,18.659-13.824,29.428C0.438,114.62,0,119.002,0,123.435v265.137c0,9.224,1.874,18.206,5.589,26.745 c3.215,7.583,8.093,14.772,14.112,20.788c1.516,1.509,3.022,2.901,4.63,4.258c12.034,9.966,27.272,15.45,42.913,15.45h377.51 c15.742,0,30.965-5.505,42.967-15.56c1.604-1.298,3.091-2.661,4.578-4.148c5.818-5.812,10.442-12.49,13.766-19.854l0.438-1.05 c3.646-8.377,5.497-17.33,5.497-26.628V123.435C512,119.06,511.578,114.649,510.746,110.361z M34.823,99.104 c0.951-1.392,2.165-2.821,3.714-4.382c7.689-7.685,17.886-11.914,28.706-11.914h377.51c10.915,0,21.115,4.236,28.719,11.929 c1.313,1.327,2.567,2.8,3.661,4.272l2.887,3.88l-201.5,175.616c-6.212,5.446-14.21,8.443-22.523,8.443 c-8.231,0-16.222-2.99-22.508-8.436L32.19,102.939L34.823,99.104z M26.755,390.913c-0.109-0.722-0.134-1.524-0.134-2.341V128.925 l156.37,136.411L28.199,400.297L26.755,390.913z M464.899,423.84c-6.052,3.492-13.022,5.344-20.145,5.344H67.244 c-7.127,0-14.094-1.852-20.142-5.344l-6.328-3.668l159.936-139.379l17.528,15.246c10.514,9.128,23.922,14.16,37.761,14.16 c13.89,0,27.32-5.032,37.827-14.16l17.521-15.253L471.228,420.18L464.899,423.84z M485.372,388.572 c0,0.803-0.015,1.597-0.116,2.304l-1.386,9.472L329.012,265.409l156.36-136.418V388.572z"></path></svg>
+                            <input placeholder="Email" class="h-full bg-white placeholder-black text-black outline-none w-full" required="" type="text" id="idEmail" th:field="*{email}"/>
+                        </div>
+
+                        <div class="flex h-12 items-center gap-2 overflow-hidden rounded-full bg-white border border-gray-200 pl-5 focus-within:border-gray-300">
+                            <svg height="18" width="18" viewBox="0 0 24 24" fill="none"><path d="M4.00655 7.93309C3.93421 9.84122 4.41713 13.0817 7.6677 16.3323C8.45191 17.1165 9.23553 17.7396 10 18.2327M5.53781 4.93723C6.93076 3.54428 9.15317 3.73144 10.0376 5.31617L10.6866 6.4791C11.2723 7.52858 11.0372 8.90532 10.1147 9.8278C10.1146 9.82792 8.99588 10.9468 11.0245 12.9755C13.0525 15.0035 14.1714 13.8861 14.1722 13.8853C14.1722 13.8853 14.1722 13.8853 14.1722 13.8853C15.0947 12.9628 16.4714 12.7277 17.5209 13.3134L18.6838 13.9624C20.2686 14.8468 20.4557 17.0692 19.0628 18.4622C18.2258 19.2992 17.2004 19.9505 16.0669 19.9934C15.2529 20.0243 14.1963 19.9541 13 19.6111" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path></svg>
+                            <input placeholder="Phone" class="h-full bg-white placeholder-black text-black outline-none w-full" required="" type="text" id="idPhone" th:field="*{numPhone}"/>
+                        </div>
+
+                        <div class="flex h-12 items-center gap-2 overflow-hidden rounded-full bg-white border border-gray-200 pl-5 focus-within:border-gray-300">
+                            <svg width="18" height="18" fill="#000000" viewBox="0 0 494.72 494.72"><path d="M323.191,4.266L171.522,47.394L4.86,0v443.062l166.662,47.394l151.669-43.128L489.86,494.72V51.659L323.191,4.266z M459.86,259.332l-65.917-65.917c6.283-11.664,9.662-24.816,9.662-38.141c0-20.534-7.747-39.287-20.458-53.513l38.352-38.352 l38.361,10.908V259.332z M198.79,286.118l70.046-70.046l54.355,68.339l52.862-66.461l34.238,34.238L287.576,374.904L198.79,286.118 z M34.86,220.863l82.798-82.799l33.057,33.057L34.86,286.978V220.863z M34.86,329.404l137.068-137.07l39.11,39.11L34.86,407.622 V329.404z M177.577,307.331l45.13,45.131l-94.49,94.49l-70.277-19.985L177.577,307.331z M373.605,155.274 c0,11.437-3.752,22.226-10.825,31.169l-39.589,49.774l-39.563-49.742c-7.099-8.976-10.851-19.766-10.851-31.202 c0-27.798,22.616-50.414,50.414-50.414S373.605,127.476,373.605,155.274z M388.466,54.016l-29.348,29.348 c-10.821-5.428-23.019-8.503-35.927-8.503c-44.34,0-80.414,36.073-80.414,80.414c0,12.481,2.963,24.812,8.51,35.921l-19.036,19.036 l-93.38-93.38l40.501-40.501l143.818-40.896L388.466,54.016z M142.864,70.434L34.86,178.438V39.721L142.864,70.434z M161.25,456.345l82.67-82.67l50.612,50.612l-123.011,34.979L161.25,456.345z M331.041,418.37l-22.253-22.253l122.716-122.716 l28.356,28.356V455L331.041,418.37z"></path></svg>
+                            <input placeholder="Street" class="h-full bg-white placeholder-black text-black outline-none w-full" required="" type="text" id="idStreet" th:field="*{street}"/>
+                        </div>
+
+                        <div class="flex h-12 items-center gap-2 overflow-hidden rounded-full bg-white border border-gray-200 pl-5 focus-within:border-gray-300">
+                            <svg height="18" width="18" fill="#000000" viewBox="0 0 50 50"><path d="M25 0c-8.284 0-15 6.656-15 14.866 0 8.211 15 35.135 15 35.135s15-26.924 15-35.135c0-8.21-6.716-14.866-15-14.866zm-.049 19.312c-2.557 0-4.629-2.055-4.629-4.588 0-2.535 2.072-4.589 4.629-4.589 2.559 0 4.631 2.054 4.631 4.589 0 2.533-2.072 4.588-4.631 4.588z"></path></svg>
+                            <input placeholder="Postal Code" class="h-full bg-white placeholder-black text-black outline-none w-full" required="" type="text" id="idPostalCode" th:field="*{postalCode}"/>
+                        </div>
+
+                        <div class="flex h-12 items-center gap-2 overflow-hidden rounded-full bg-white border border-gray-200 pl-5 focus-within:border-gray-300">
+                            <svg height="18" width="18" viewBox="0 0 24 24" fill="none"><path d="M3 22V12C3 10.1144 3 9.17157 3.58579 8.58579C4.17157 8 5.11438 8 7 8C8.88562 8 9.82843 8 10.4142 8.58579C11 9.17157 11 10.1144 11 12" stroke="#000000" stroke-width="1.5"></path><path d="M17 22V16C17 14.1144 17 13.1716 16.4142 12.5858C15.8284 12 14.8856 12 13 12H11C9.11438 12 8.17157 12 7.58579 12.5858C7 13.1716 7 14.1144 7 16V22" stroke="#000000" stroke-width="1.5"></path><path d="M21 21.9999V7.77195C21 6.4311 21 5.76068 20.6439 5.24676C20.2877 4.73283 19.66 4.49743 18.4045 4.02663C15.9492 3.10591 14.7216 2.64555 13.8608 3.2421C13 3.83864 13 5.14974 13 7.77195V11.9999" stroke="#000000" stroke-width="1.5"></path><path d="M4 8V6.5C4 5.55719 4 5.08579 4.29289 4.79289C4.58579 4.5 5.05719 4.5 6 4.5H8C8.94281 4.5 9.41421 4.5 9.70711 4.79289C10 5.08579 10 5.55719 10 6.5V8" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path><path d="M7 4V2" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path><path d="M22 22L2 22" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path><path d="M10 15H14" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path><path d="M10 18H14" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path></svg>
+                            <input placeholder="City" class="h-full bg-white placeholder-black text-black outline-none w-full" required="" type="text" id="idCity" th:field="*{city}"/>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col items-center w-full gap-2">
+                        <div class="flex h-12 w-11/12">
+                            <button type="submit" class="w-full cursor-pointer rounded-full bg-white text-black font-bold transition hover:from-gray-200 hover:to-gray-400">
+                                Sign up
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                <p class="mt-8 text-center text-white">Already have an account? <a class="text-white underline" href="/login">Sign in</a></p>
+            </form>
+
+            <div class="hidden md:flex md:w-[45%] justify-center">
+                <img src="/img/figurineTest.png" alt="Figurine" class="max-w-full h-auto object-contain drop-shadow-2xl rounded-3xl">
+            </div>
+
         </section>
     </div>
 </main>
-</body>
 </html>
