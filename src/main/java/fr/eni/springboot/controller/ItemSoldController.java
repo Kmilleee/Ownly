@@ -49,13 +49,12 @@ public class ItemSoldController {
 
         model.addAttribute("rarities", Rarity.values());
 
-        model.addAttribute("activePage", "sell");
-
         return "create-sale";
     }
 
     @PostMapping("/createSale")
     public String createSale(@RequestParam("imageFile") MultipartFile multipartFile, @ModelAttribute("article") ItemSold itemSold, BindingResult bindingResult, Principal principal) throws IOException {
+        System.out.println("Date reçue du formulaire : " + itemSold.getAuctionStartDate());
         if (bindingResult.hasErrors()) {
             return "create-sale";
         }

@@ -1,9 +1,6 @@
 package fr.eni.springboot.service;
 
-import fr.eni.springboot.bo.ItemSold;
-import fr.eni.springboot.bo.Rarity;
-import fr.eni.springboot.bo.User;
-import fr.eni.springboot.bo.Withdrawal;
+import fr.eni.springboot.bo.*;
 import fr.eni.springboot.repository.ItemSoldRepository;
 import fr.eni.springboot.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -83,7 +80,7 @@ public class ItemSoldServiceImpl implements ItemSoldService {
 
         ItemSold articleActuel = itemSoldRepository.readItemById(itemSold.getId());
 
-        if (!LocalDateTime.now().isBefore(articleActuel.getAuctionStartDate())) {
+        if (articleActuel.getStatus() != StatusSale.NOT_STARTED) {
             throw new RuntimeException("Impossible de modifier la vente car elle a déjà commencé");
         }
 
@@ -92,10 +89,6 @@ public class ItemSoldServiceImpl implements ItemSoldService {
 
         if (actualUserId != ownerId) {
             throw new RuntimeException("Impossible de modifier la vente : elle ne vous appartient pas");
-        }
-
-        if (!LocalDateTime.now().isBefore(articleActuel.getAuctionStartDate())) {
-            throw new RuntimeException("Impossible de modifier la vente car elle a déjà commencé");
         }
 
         if (file != null && !file.isEmpty()) {
