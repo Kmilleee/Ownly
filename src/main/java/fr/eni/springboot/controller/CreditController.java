@@ -28,7 +28,7 @@ public class CreditController {
             boolean success = userService.claimDailyReward(user.getUser_id());
 
             if (success) {
-                redirectAttributes.addFlashAttribute("successMessage", " Bravo ! Tu as reçu tes 50 crédits quotidiens.");
+                redirectAttributes.addFlashAttribute("successMessage", " Bravo ! Tu as reçu tes 500 crédits quotidiens.");
             } else {
                 redirectAttributes.addFlashAttribute("errorMessage", "Tu as déjà récupéré ton cadeau aujourd'hui. Reviens demain !");
             }

@@ -79,7 +79,7 @@ public class ItemSoldController {
     }
 
     @PostMapping("/edit-sale")
-    public String editSale(@RequestParam("imageFile") MultipartFile multipartFile,
+    public String editSale(@RequestParam(value = "imageFile", required = false) MultipartFile multipartFile,
                            @ModelAttribute("article") ItemSold itemSold,
                            BindingResult bindingResult, Principal principal, RedirectAttributes redirectAttributes) throws IOException {
 
@@ -92,7 +92,7 @@ public class ItemSoldController {
             redirectAttributes.addFlashAttribute("success", "L'article a été mis à jour !");
         } catch (RuntimeException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
-            return "redirect:/edit-sale?id=" + itemSold.getId();
+            return "redirect:/ventes/edit-sale?id=" + itemSold.getId();
         }
 
         return "redirect:/profile";
@@ -105,7 +105,14 @@ public class ItemSoldController {
             redirectAttributes.addFlashAttribute("success", "L'article a été supprimé avec succès.");
         } catch (RuntimeException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
+            System.out.println("probleme de delete");
         }
         return "redirect:/profile";
+    }
+
+    @GetMapping("/ItemsAdmin")
+    public String displayItemAdmin(Model model){
+        model.addAttribute("itemsList", itemSoldService.readItemSold());
+        return "/itemsAdmin";
     }
 }

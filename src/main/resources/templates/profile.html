@@ -69,6 +69,14 @@
                     </div>
                 </section>
 
+                <section>
+                    <a th:href="@{/collection}">
+                        <button class="border-2 bg-white text-black font-bold py-1.5 px-4 rounded-full hover:bg-gray-200 transition">
+                            See collection
+                        </button>
+                    </a>
+                </section>
+
                 <div class="flex w-full justify-between gap-10">
                     <section class="mt-15 w-full">
                         <h1>My Account</h1>
@@ -154,15 +162,16 @@
                         </div>
                     </section>
                 </div>
+
                 <section class="mt-15 w-full mb-10">
-                    <h1>Ventes</h1>
-                    <div class="border-1 border-white rounded-3xl p-5">
-                        <div th:each="vente : ${mesVentes}">
+                    <h1>Sell</h1>
+                    <div class="border-1 border-white rounded-3xl p-5 grid grid-cols-4 gap-4 ">
+                        <div th:each="vente : ${mesVentes}" class="flex flex-col items-center text-center">
                             <p th:text="${vente.articleName}"></p>
                             <img th:src="@{/images/{id}/{name}(id=${vente.id}, name=${vente.image})}"
                                  alt="Image de l'article"
                                  class="w-20 h-20 object-cover rounded">
-                            <p th:text="${vente.description}"></p>
+                            <!--                            <p th:text="${vente.description}"></p>-->
                             <p th:text="${vente.auctionStartDate}"></p>
                             <p th:text="${vente.auctionEndDate}"></p>
                             <p th:text="${vente.startingPrice}"></p>
@@ -181,6 +190,23 @@
                         </div>
                     </div>
                 </section>
+
+                <section class="mt-15 w-full mb-10">
+                    <h1>Auction</h1>
+                    <div class="border-1 border-white rounded-3xl p-5 grid grid-cols-4 gap-4 ">
+                        <div th:each="achat : ${mesAchats}" class="flex flex-col items-center text-center">
+                            <p th:text="${achat.getArticleName()}"></p>
+                            <img th:src="@{/images/{id}/{name}(id=${achat.id}, name=${achat.image})}"
+                                 alt="Image de l'article"
+                                 class="w-20 h-20 object-cover rounded">
+                            <p th:text="${achat.description}"></p>
+                            <p th:text="${achat.auctionStartDate}"></p>
+                            <p th:text="${achat.auctionEndDate}"></p>
+                            <p th:text="${achat.startingPrice}"></p>
+                        </div>
+                    </div>
+                </section>
+
             </div>
         </div>
     </section>

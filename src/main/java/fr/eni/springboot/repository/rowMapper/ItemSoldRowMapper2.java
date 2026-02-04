@@ -2,10 +2,11 @@ package fr.eni.springboot.repository.rowMapper;
 
 import fr.eni.springboot.bo.*;
 import org.springframework.jdbc.core.RowMapper;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ItemSoldRowMapper implements RowMapper<ItemSold> {
+public class ItemSoldRowMapper2 implements RowMapper<ItemSold> {
 
     @Override
     public ItemSold mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -32,22 +33,12 @@ public class ItemSoldRowMapper implements RowMapper<ItemSold> {
         cat.setName(rs.getString("name"));
 
         User user = new User();
-        user.setUsername(rs.getString("username"));
-        user.setAvatar(rs.getString("avatar"));
+        user.setUsername(rs.getString("username"));;
         user.setUser_id(rs.getLong("user_id"));
-
-        Withdrawal w = new Withdrawal();
-        w.setStreet(rs.getString("street"));
-        w.setPostalCode(rs.getString("postalCode")); //
-        w.setCity(rs.getString("city"));
-
-//        Auction a = new Auction();
-//        a.setAuctionDate();
 
 
         article.setSeller(user);
         article.setCategory(cat);
-        article.setWithdrawal(w);
 
         return article;
     }

@@ -161,6 +161,11 @@ public class ItemSoldServiceImpl implements ItemSoldService {
         return itemSoldRepository.readItemByCategory(cat);
     }
 
+    @Override
+    public List<ItemSold> findItemsWonByUser(long userId) {
+        return itemSoldRepository.findItemsWonByUser(userId);
+    }
+
     private void deleteDirectory(Path path) throws IOException {
         if (Files.exists(path)) {
             Files.walk(path)

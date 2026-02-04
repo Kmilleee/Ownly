@@ -100,6 +100,8 @@ public class UserController {
     @GetMapping("/profile")
     public String displayProfile(Principal principal, Model model, Authentication authentication) {
         model.addAttribute("activePage", "profile");
+        User user2 = userService.readUserByUsername(principal.getName());
+        model.addAttribute("mesAchats", itemSoldService.findItemsWonByUser(user2.getUser_id()));
 
 
         User user = null;
@@ -254,6 +256,13 @@ public class UserController {
 
         System.out.println("Nouvel avatar choisi : " + avatarName);
         return "redirect:/profile";
+    }
+
+
+    @GetMapping("/collection")
+    public String displayCollection(){
+        return "/collection";
+
     }
 
 
