@@ -2,26 +2,8 @@
 <html data-th-replace="~{fragment/layout :: frag_layout(content= ~{::main})}" lang="fr">
 
 <body>
-<main>
-
-    <div class="absolute top-0 left-0 w-full h-[120vh] overflow-hidden -z-10 pointer-events-none">
-
-        <div class="absolute top-1/2 right-0 w-[400px] h-[400px] md:w-[800px] md:h-[800px]"
-             style="background: radial-gradient(circle, rgba(126, 34, 206, 0.4) 0%, rgba(0,0,0,0) 70%);
-                    transform: translate(30%, -30%);">
-        </div>
-
-        <div class="absolute top-1/2 right-0 w-[400px] h-[400px] md:w-[800px] md:h-[800px]"
-             style="background: radial-gradient(circle, rgba(238, 27, 136, 0.66) 0%, rgba(0,0,0,0) 70%);
-                    transform: translate(30%, -30%);">
-        </div>
-
-        <div class="absolute top-1/2 left-1/2 w-[400px] h-[400px] md:w-[800px] md:h-[800px]"
-             style="background: radial-gradient(circle, rgba(30, 237, 251, 0.46) 0%, rgba(0,0,0,0) 50%);
-                    transform: translate(-90%, -60%);">
-        </div>
-
-    </div>
+<main class="relative">
+    <div th:replace="~{fragment/color :: color('')}"></div>
     <div class="relative z-10">
         <h1 class="text-[5rem] font-bold p-1 ms-15 ">Auction</h1>
         <h2 class="ms-15 text-[2rem] p-1 mt-5">Discover a new world, invest in your new world </h2>

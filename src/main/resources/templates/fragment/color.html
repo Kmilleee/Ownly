@@ -1,0 +1,24 @@
+<div th:fragment="color(extraClass)"
+     class="absolute top-0 left-0 w-full min-h-full overflow-hidden -z-10 pointer-events-none"
+     th:classappend="${extraClass}">
+
+  <div class="absolute top-0 right-0 w-[800px] h-[800px]"
+       style="background: radial-gradient(circle, rgba(126, 34, 206, 0.4) 0%, rgba(0,0,0,0) 70%);
+              transform: translate(30%, -00%);">
+  </div>
+
+  <div class="absolute top-[600px] left-0 w-[800px] h-[800px]"
+       style="background: radial-gradient(circle, rgba(30, 237, 251, 0.3) 0%, rgba(0,0,0,0) 70%);
+              transform: translate(-30%, 0);">
+  </div>
+
+  <div class="absolute bottom-0 right-0 w-[800px] h-[800px]"
+       style="background: radial-gradient(circle, rgba(30, 237, 251, 0.3) 0%, rgba(0,0,0,0) 70%);
+              transform: translate(0%, -60%);">
+  </div>
+
+  <div class="absolute bottom-0 right-0 w-[900px] h-[900px]"
+       style="background: radial-gradient(circle, rgba(219, 39, 119, 0.4) 0%, rgba(0,0,0,0) 70%);
+              transform: translate(40%, 0%);">
+  </div>
+</div>
