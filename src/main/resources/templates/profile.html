@@ -29,7 +29,7 @@
 
                 <section>
                     <div class="flex items-center w-full ">
-                        <img th:src="@{|/img/avatars/${UserCo.avatar != null ? UserCo.avatar : 'default.png'}|}"
+                        <img th:src="@{'/img/avatars/' + ${UserCo != null and UserCo.avatar != null ? UserCo.avatar : 'default.png'}}"
                              alt="Photo de profil"
                              class="rounded-full w-32 h-32 object-cover border-4 border-pink-800"/>
                         <div class="w-full">

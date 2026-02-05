@@ -5,7 +5,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDateTime;
 
 public class ItemSold {
-
     private long id;
     private String articleName;
     private String description;
@@ -17,7 +16,6 @@ public class ItemSold {
     private Long priceSale;
     private String image;
     private Rarity rarity;
-
     private User buyer;
     private User seller;
     private Category category;

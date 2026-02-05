@@ -27,20 +27,24 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
     @Transactional
     @Override
     public void createItemSold(ItemSold itemSold) {
-        String sql = "INSERT INTO ItemSold (articleName, image, description, auctionStartDate, auctionEndDate, startingPrice, priceSale, user_id, category_id, rarity) VALUES (:articleName, :image, :description, :auctionStartDate, :auctionEndDate, :startingPrice, :priceSale, :user_id, :category_id, :rarity)";
+        String sql = "INSERT INTO ItemSold (articleName, image, description, auctionStartDate, " +
+                "auctionEndDate, startingPrice, priceSale, user_id, category_id, rarity) " +
+                "VALUES (:articleName, :image, :description, :auctionStartDate, :auctionEndDate, :startingPrice, " +
+                " :priceSale, :user_id, :category_id, :rarity)";
 
         MapSqlParameterSource params = new MapSqlParameterSource();
 
         params.addValue("articleName", itemSold.getArticleName());
         params.addValue("image", itemSold.getImage());
         params.addValue("description", itemSold.getDescription());
-        params.addValue("auctionStartDate", itemSold.getAuctionStartDate() != null ? java.sql.Timestamp.valueOf(itemSold.getAuctionStartDate()) : null);
-        params.addValue("auctionEndDate", itemSold.getAuctionEndDate() != null ? java.sql.Timestamp.valueOf(itemSold.getAuctionEndDate()) : null);
+        params.addValue("auctionStartDate", itemSold.getAuctionStartDate() != null ?
+                java.sql.Timestamp.valueOf(itemSold.getAuctionStartDate()) : null);
+        params.addValue("auctionEndDate", itemSold.getAuctionEndDate() != null ?
+                java.sql.Timestamp.valueOf(itemSold.getAuctionEndDate()) : null);
         params.addValue("startingPrice", itemSold.getStartingPrice());
         params.addValue("priceSale", itemSold.getPriceSale());
         params.addValue("user_id", itemSold.getSeller() != null ? itemSold.getSeller().getUser_id() : null);
         params.addValue("category_id", itemSold.getCategory() != null ? itemSold.getCategory().getCategory_id() : null);
-        // Envoie le nom de la rareté en String, pas l'objet Enum
         params.addValue("rarity", itemSold.getRarity() != null ? itemSold.getRarity().name() : "COMMON");
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
@@ -75,7 +79,6 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
                 "left JOIN CATEGORY c ON a.category_id = c.category_id\n" +
                 "left JOIN USERS u ON a.user_id = u.user_id\n" +
                 "LEFT JOIN WITHDRAWAL w ON a.article_id = w.article_id ";
-
 
 
         return jdbcTemplate.query(sql, new ItemSoldRowMapper());
@@ -173,43 +176,43 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("rarity", rarity.name());
 
-        return namedParameterJdbcTemplate.query(sql,map, new ItemSoldRowMapper());
+        return namedParameterJdbcTemplate.query(sql, map, new ItemSoldRowMapper());
     }
 
     @Override
     public List<ItemSold> readItemsByBetterSel() {
         String sql = "SELECT TOP 4" +
-      "  MAX(a.article_id) as article_id, " +
-       " MAX(a.rarity) as rarity, "+
-      "  MAX(a.articleName) as articleName, "+
-      "  MAX(a.startingPrice) as startingPrice, "+
-       " MAX(a.priceSale) as priceSale, "+
-       " MAX(a.auctionStartDate) as auctionStartDate, "+
-       " MAX(a.auctionEndDate) as auctionEndDate, "+
-        "MAX(a.description) as description, "+
-       " MAX(a.category_id) as category_id, "+
-        "MAX(a.image) as image, "+
-       " MAX(c.name) as name, "+
-      "  a.user_id, "+
-              "  u.username, "+
-               " u.avatar, "+
-                "MAX(w.postalCode) as postalCode, "+
-      "  MAX(w.street) as street, "+
-       " MAX(w.city) as city "+
-        "FROM ItemSold a "+
-        "LEFT JOIN CATEGORY c ON a.category_id = c.category_id "+
-        "LEFT JOIN USERS u ON a.user_id = u.user_id "+
-        "LEFT JOIN WITHDRAWAL w ON a.article_id = w.article_id "+
-        "GROUP BY a.user_id, u.username, u.avatar "+
-        "ORDER BY a.user_id DESC";
+                "  MAX(a.article_id) as article_id, " +
+                " MAX(a.rarity) as rarity, " +
+                "  MAX(a.articleName) as articleName, " +
+                "  MAX(a.startingPrice) as startingPrice, " +
+                " MAX(a.priceSale) as priceSale, " +
+                " MAX(a.auctionStartDate) as auctionStartDate, " +
+                " MAX(a.auctionEndDate) as auctionEndDate, " +
+                "MAX(a.description) as description, " +
+                " MAX(a.category_id) as category_id, " +
+                "MAX(a.image) as image, " +
+                " MAX(c.name) as name, " +
+                "  a.user_id, " +
+                "  u.username, " +
+                " u.avatar, " +
+                "MAX(w.postalCode) as postalCode, " +
+                "  MAX(w.street) as street, " +
+                " MAX(w.city) as city " +
+                "FROM ItemSold a " +
+                "LEFT JOIN CATEGORY c ON a.category_id = c.category_id " +
+                "LEFT JOIN USERS u ON a.user_id = u.user_id " +
+                "LEFT JOIN WITHDRAWAL w ON a.article_id = w.article_id " +
+                "GROUP BY a.user_id, u.username, u.avatar " +
+                "ORDER BY a.user_id DESC";
 
 
         return jdbcTemplate.query(sql, new ItemSoldRowMapper());
     }
 
     @Override
-    public List<ItemSold> readItemBySearch(String query){
-        String sql ="SELECT a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, a.user_id as user_id, u.username as username, u.avatar as avatar, w.postalCode as postalCode, w.street as street,w.city as city \n" +
+    public List<ItemSold> readItemBySearch(String query) {
+        String sql = "SELECT a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, a.user_id as user_id, u.username as username, u.avatar as avatar, w.postalCode as postalCode, w.street as street,w.city as city \n" +
                 "FROM ItemSold a\n" +
                 "left JOIN CATEGORY c ON a.category_id = c.category_id\n" +
                 "left JOIN USERS u ON a.user_id = u.user_id\n" +
@@ -219,13 +222,13 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("query", "%" + query + "%");
 
-         return namedParameterJdbcTemplate.query(sql, map, new ItemSoldRowMapper());
+        return namedParameterJdbcTemplate.query(sql, map, new ItemSoldRowMapper());
 
     }
 
     @Override
-    public List<ItemSold> readItemByCategory(String cat){
-        String sql ="SELECT a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, a.user_id as user_id, u.username as username, u.avatar as avatar, w.postalCode as postalCode, w.street as street,w.city as city \n" +
+    public List<ItemSold> readItemByCategory(String cat) {
+        String sql = "SELECT a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, a.user_id as user_id, u.username as username, u.avatar as avatar, w.postalCode as postalCode, w.street as street,w.city as city \n" +
                 "FROM ItemSold a\n" +
                 "left JOIN CATEGORY c ON a.category_id = c.category_id\n" +
                 "left JOIN USERS u ON a.user_id = u.user_id\n" +

@@ -81,7 +81,7 @@ public class SecurityController {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom("antonin.mrtl.pr@gmail.com");
             message.setTo(email);
-            message.setSubject("Réinitialisation mot de passe - POCOYO");
+            message.setSubject("Réinitialisation mot de passe - OWNLY");
             message.setText("Cliquez ici pour changer votre mot de passe : " + resetLink);
 
             javaMailSender.send(message);
