@@ -261,13 +261,6 @@ public class UserController {
     }
 
 
-    @GetMapping("/collection")
-    public String displayCollection(){
-        return "/collection";
-
-    }
-
-
 
 
 }
