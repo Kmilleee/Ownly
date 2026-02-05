@@ -103,6 +103,7 @@ public class SecurityConfiguration {
                             .requestMatchers(HttpMethod.POST, "/creditReward").permitAll()
                             .requestMatchers(HttpMethod.GET, "/ventes/edit-sale").authenticated()
                             .requestMatchers(HttpMethod.POST, "/ventes/edit-sale").authenticated()
+                            .requestMatchers(HttpMethod.POST, "/ventes/delete-sale").permitAll()
                             .requestMatchers("/.well-know/**").permitAll()
 
 

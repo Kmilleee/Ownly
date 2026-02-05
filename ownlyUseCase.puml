@@ -1,0 +1,90 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam usecase {
+    BackgroundColor<<Pink>> #FF88CC
+    BackgroundColor<<Blue>> #8888FF
+    BackgroundColor<<DarkBlue>> #6666FF
+    BackgroundColor<<Yellow>> #FFFF88
+    BackgroundColor<<Green>> #88FF88
+    BorderColor Black
+    ArrowColor Black
+}
+
+actor "Utilisateur" as u
+actor "Acquéreur" as a
+actor "Vendeur" as v
+actor "Administrateur" as admin
+
+rectangle "System" {
+
+  ' --- GROUPE UTILISATEUR (Rose) ---
+  usecase "Créer un compte" as create <<Pink>>
+  usecase "Se connecter" as login <<Pink>>
+  usecase "Se déconnecter" as logout <<Pink>>
+  usecase "Gérer son profil" as profile <<Pink>>
+  usecase "Voir le profil\nd'un autre utilisateur" as view_profile <<Pink>>
+
+  ' Extensions Utilisateur
+  usecase "Mot de passe oublié" as forgot <<Pink>>
+  usecase "Se souvenir de moi" as remember <<Pink>>
+  usecase "Supprimer le compte" as delete_acc <<Pink>>
+  usecase "Consulter son compte\nde points" as points <<Pink>>
+
+  ' Lien Utilisateur vers Enchères (Bleu Clair)
+  usecase "Consulter les enchères\nen cours" as list_auctions <<Blue>>
+
+  ' --- GROUPE ACQUÉREUR (Bleu Foncé) ---
+  usecase "Faire une enchère" as bid <<DarkBlue>>
+  usecase "Acheter un article" as buy <<DarkBlue>>
+
+  ' --- GROUPE VENDEUR (Bleu/Violet) ---
+  usecase "Lister ses ventes" as list_sales <<Blue>>
+  usecase "Vendre un article" as sell <<Blue>>
+  usecase "Annuler une vente" as cancel <<Blue>>
+
+  ' Extension Vendeur
+  usecase "télécharger une photo\nde l'article" as photo <<Blue>>
+
+  ' --- GROUPE ADMIN (Jaune) ---
+  usecase "Désactiver un compte\nutilisateur" as disable <<Yellow>>
+  usecase "Supprimer des\ncomptes" as admin_del <<Yellow>>
+  usecase "Gérer les catégories\nd'articles" as cats <<Yellow>>
+
+  ' --- FONCTIONNEL (Vert) ---
+  usecase "Rendre le système accessible\nà des petites et grandes tailles\nd'écran" as responsive <<Green>>
+
+  ' === RELATIONS ===
+
+  ' Utilisateur
+  u -- create
+  u -- login
+  u -- logout
+  u -- profile
+  u -- view_profile
+  u -- list_auctions
+
+  ' Extensions Login
+  login <.. forgot : <<extends>>
+  login <.. remember : <<extends>>
+
+  ' Extensions Profil
+  profile <.. delete_acc : <<extends>>
+  profile <.. points : <<extends>>
+
+  ' Acquéreur
+  a -- bid
+  a -- buy
+
+  ' Vendeur
+  v -- list_sales
+  v -- sell
+  v -- cancel
+  sell <.. photo : <<extends>>
+
+  ' Admin
+  disable -- admin
+  admin_del -- admin
+  cats -- admin
+}
+@enduml
