@@ -177,9 +177,11 @@
                                                 </button>
                                             </a>
 
-                                            <form th:action="@{/ventes/delete-sale}" method="post"
-                                                  onsubmit="return confirm('Voulez-vous vraiment supprimer cette vente ?')">
-                                                <input type="hidden" name="id" th:value="${vente.id}"/>
+                                            <form th:action="@{/ventes/delete-sale(id=${vente.id})}" method="post">
+                                                <input type="hidden" name="_method" value="delete"/>
+
+                                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
                                                 <button type="submit" class="text-red-500 text-sm hover:underline">
                                                     Delete
                                                 </button>

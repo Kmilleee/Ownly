@@ -114,13 +114,14 @@ public class ItemSoldServiceImpl implements ItemSoldService {
         }
 
         long actualUserId = userRepository.readUserByUsername(principal.getName()).getUser_id();
+        User test = userRepository.readUserById(actualUserId);
         long ownerId = articleActuel.getSeller().getUser_id();
 
-        if (actualUserId != ownerId) {
+        if (actualUserId != ownerId && !test.isAdmin()) {
             throw new RuntimeException("Impossible de supprimer la vente : elle ne vous appartient pas");
         }
 
-        if (!LocalDateTime.now().isBefore(articleActuel.getAuctionStartDate())) {
+        if (!LocalDateTime.now().isBefore(articleActuel.getAuctionStartDate()) && !test.isAdmin()) {
             throw new RuntimeException("Impossible d'annuler la vente car elle a déjà commencé");
         }
         String folderPath = "itemsSold-photos/" + id;
