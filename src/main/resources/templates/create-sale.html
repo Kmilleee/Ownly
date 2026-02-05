@@ -153,11 +153,11 @@
 
                 <div class="grid grid-cols-2 gap-4 mb-5 items-center">
 
-                <div class="mb-5">
-                    <label for="price" class='mt-4 block text-white text-sm mb-2'>Price</label>
-                    <input id="price" type="number" required placeholder=" " th:field="*{startingPrice}"
-                           class='w-full bg-white border border-white rounded-lg px-3 py-2 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'>
-                </div>
+                    <div class="mb-5">
+                        <label for="price" class='mt-4 block text-white text-sm mb-2'>Price</label>
+                        <input id="price" type="number" required placeholder=" " th:field="*{startingPrice}"
+                               class='w-full bg-white border border-white rounded-lg px-3 py-2 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'>
+                    </div>
                     <div class="mb-5">
                         <label for="rarity" class='mt-4 block text-white text-sm mb-2'>Rarity</label>
 
@@ -178,13 +178,15 @@
                 <div class="mb-5">
                     <label class='mt-4 block text-white text-sm mb-2' for="start">start</label>
                     <input id="start" type="datetime-local" required placeholder=" " th:field="*{auctionStartDate}"
-                           class='w-full bg-white border border-white rounded-lg px-3 py-2 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'>
+                           class='w-full bg-white border border-white rounded-lg px-3 py-2 text-black
+                           placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'>
                 </div>
 
                 <div class="mb-5">
                     <label class='mt-4 block text-white text-sm mb-2' for="end">End</label>
                     <input id="end" type="datetime-local" required placeholder=" " th:field="*{auctionEndDate}"
-                           class='w-full bg-white border border-white rounded-lg px-3 py-2 text-black placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'>
+                           class='w-full bg-white border border-white rounded-lg px-3 py-2 text-black
+                           placeholder:text-black placeholder:text-sm focus:outline-none focus:border-stone-50 transition'>
                 </div>
                 <div>
                     <label for="fileImage_Desktop" class='mt-4 block text-white text-sm mb-2'>Image</label>
@@ -201,18 +203,18 @@
             <div class="rounded-3xl p-10 relative h-full min-h-[500px] w-full hidden md:flex flex-col justify-between overflow-hidden">
                 <img src="#" alt="" id="thumbnail_Desktop" class="absolute inset-0 w-full h-full object-cover "/>
 
-<!--                <div class="relative z-10 mt-auto">-->
-<!--                    <p class="text-sm/6 text-white mb-5 max-w-[400px]">-->
-<!--                        Stop spending hours recreating layouts - with <strong>PrebuiltUI</strong> you can copy,-->
-<!--                        customize and launch stunning UIs in minutes.-->
-<!--                    </p>-->
-<!--                    <p class="text-sm text-white mb-4 text-right">━ Emily Rodriguez</p>-->
-<!--                    <div class="flex justify-end gap-2 items-center">-->
-<!--                        <div class="w-2.5 h-2.5 rounded-full bg-white"></div>-->
-<!--                        <div class="w-2.5 h-2.5 rounded-full bg-white"></div>-->
-<!--                        <div class="w-2.5 h-2.5 rounded-full bg-gray-400"></div>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <!--                <div class="relative z-10 mt-auto">-->
+                <!--                    <p class="text-sm/6 text-white mb-5 max-w-[400px]">-->
+                <!--                        Stop spending hours recreating layouts - with <strong>PrebuiltUI</strong> you can copy,-->
+                <!--                        customize and launch stunning UIs in minutes.-->
+                <!--                    </p>-->
+                <!--                    <p class="text-sm text-white mb-4 text-right">━ Emily Rodriguez</p>-->
+                <!--                    <div class="flex justify-end gap-2 items-center">-->
+                <!--                        <div class="w-2.5 h-2.5 rounded-full bg-white"></div>-->
+                <!--                        <div class="w-2.5 h-2.5 rounded-full bg-white"></div>-->
+                <!--                        <div class="w-2.5 h-2.5 rounded-full bg-gray-400"></div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
             </div>
 
             <div class="mb-5 md:col-span-2 w-full p-5">

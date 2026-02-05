@@ -20,7 +20,7 @@ public class ControllerAdvice {
     }
 
     @ExceptionHandler(TestException.class)
-    public ModelAndView handleException(Exception ex){
+    public ModelAndView handleException(Exception ex) {
         ModelAndView model = new ModelAndView();
         model.addObject("status", "1000");
         model.addObject("errorMessage", ex.getMessage());
@@ -33,15 +33,32 @@ public class ControllerAdvice {
         if (authentication == null || !authentication.isAuthenticated()) return;
 
         User user = null;
-        if (authentication.getPrincipal() instanceof OAuth2User) {
-            OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
-            user = userService.findByEmail(oauth2User.getAttribute("email"));
+        if (authentication.getPrincipal() instanceof OAuth2User oauth2User) {
+            String email = oauth2User.getAttribute("email");
+            user = userService.findByEmail(email);
+            if (user == null) {
+                user = new User();
+                user.setEmail(email);
+                user.setUsername(oauth2User.getAttribute("name"));
+                user.setFirstName(oauth2User.getAttribute("given_name"));
+                user.setLastName(oauth2User.getAttribute("family_name"));
+                user.setAvatar("default.png");
+                user.setPassword("OAUTH2_USER");
+
+                user.setStreet("À renseigner");
+                user.setCity("À renseigner");
+                user.setPostalCode("00000");
+                user.setNumPhone("0000000000");
+                user.setCredit(0);
+                user.setAdmin(false);
+                user.setActive(true);
+                userService.createUser(user);
+                user = userService.findByEmail(email);
+            }
         } else {
             user = userService.readUserByUsername(authentication.getName());
         }
 
-        if (user != null) {
-            model.addAttribute("UserCo", user);
-        }
+        model.addAttribute("UserCo", user);
     }
 }

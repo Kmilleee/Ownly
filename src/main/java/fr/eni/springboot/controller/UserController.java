@@ -99,53 +99,44 @@ public class UserController {
     @GetMapping("/profile")
     public String displayProfile(Principal principal, Model model, Authentication authentication) {
         model.addAttribute("activePage", "profile");
-        User user2 = userService.readUserByUsername(principal.getName());
-        model.addAttribute("mesAchats", itemSoldService.findItemsWonByUser(user2.getUser_id()));
-        model.addAttribute("mesAchatsEnCours", itemSoldService.findItemsInProgressByUser(user2.getUser_id()));
-
-
 
         User user = null;
-
-
-        List<ItemSold> mesVentes = new ArrayList<>();
-
-        if (authentication.getPrincipal() instanceof OAuth2User) {
-            OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
+        if (authentication != null && authentication.getPrincipal() instanceof OAuth2User oauth2User) {
             String email = oauth2User.getAttribute("email");
             user = userService.findByEmail(email);
-        } else {
+        } else if (principal != null) {
             user = userService.readUserByUsername(principal.getName());
         }
-        if (user != null) {
-            mesVentes = itemSoldService.readItemsBySeller(user.getUser_id());
-        } else {
+
+        if (user == null) {
             user = new User();
-            if (authentication.getPrincipal() instanceof OAuth2User) {
-                OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
-                user.setUsername(oauth2User.getAttribute("name"));
-                user.setEmail(oauth2User.getAttribute("email"));
-                user.setFirstName("Compte Google");
-            } else {
-                user.setUsername(principal.getName());
-            }
+            user.setUsername("Utilisateur Google");
+            user.setAvatar("default.png");
+            user.setFirstName("Compte");
+            user.setLastName("Invité");
         }
+        if (user.getUser_id() != 0) {
+            model.addAttribute("mesAchats", itemSoldService.findItemsWonByUser(user.getUser_id()));
+            model.addAttribute("mesAchatsEnCours", itemSoldService.findItemsInProgressByUser(user.getUser_id()));
+            model.addAttribute("mesVentes", itemSoldService.readItemsBySeller(user.getUser_id()));
 
-        user = userService.readUserByUsername(principal.getName());
-
-        boolean isAvailable = true;
-        if (user.getLastDailyReward() != null) {
-            if (user.getLastDailyReward().equals(LocalDate.now())) {
+            // Gestion de la récompense
+            boolean isAvailable = true;
+            if (user.getLastDailyReward() != null && user.getLastDailyReward().equals(LocalDate.now())) {
                 isAvailable = false;
             }
+            model.addAttribute("isRewardAvailable", isAvailable);
+        } else {
+            model.addAttribute("mesAchats", new ArrayList<>());
+            model.addAttribute("mesAchatsEnCours", new ArrayList<>());
+            model.addAttribute("mesVentes", new ArrayList<>());
+            model.addAttribute("isRewardAvailable", false);
         }
 
-        model.addAttribute("isRewardAvailable", isAvailable);
-
-        model.addAttribute("mesVentes", mesVentes);
         model.addAttribute("UserCo", user);
         return "/profile";
     }
+
 
     @GetMapping("/profileOther")
     public String displayProfileOther(@RequestParam("id")long user_id, Model model, Authentication authentication) {
@@ -244,6 +235,7 @@ public class UserController {
                 "militaire.png",
                 "peintre.png"
         );
+
 
         model.addAttribute("avatarList", avatars);
 
