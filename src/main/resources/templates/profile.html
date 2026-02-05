@@ -171,19 +171,11 @@
                                         </div>
 
                                         <div class="flex gap-2">
-                                            <a th:href="@{/ventes/edit-sale(id=${vente.id})}">
+                                            <a th:href="@{/ventes/edit-sale(id=${vente.getId()})}">
                                                 <button class="bg-white text-black text-sm font-bold py-1 px-3 rounded-full hover:bg-gray-200 transition">
                                                     Change
                                                 </button>
                                             </a>
-
-                                            <form th:action="@{/ventes/delete-sale}" method="post"
-                                                  onsubmit="return confirm('Voulez-vous vraiment supprimer cette vente ?')">
-                                                <input type="hidden" name="id" th:value="${vente.id}"/>
-                                                <button type="submit" class="text-red-500 text-sm hover:underline">
-                                                    Delete
-                                                </button>
-                                            </form>
                                         </div>
                                     </div>
                                 </th:block>
@@ -253,11 +245,12 @@
                                             </button>
                                         </a>
 
-                                        <form th:action="@{/ventes/delete-sale}" method="post"
+                                        <form th:action="@{/ventes/delete-sale(id=${vente.id})}" method="post"
                                               onsubmit="return confirm('Voulez-vous vraiment supprimer cette vente ?')">
+                                            <input type="hidden" name="_method" value="delete"/>
                                             <input type="hidden" name="id" th:value="${vente.id}"/>
                                             <button type="submit" class="text-red-500 text-sm hover:underline">
-                                                Delete
+                                                Deletee
                                             </button>
                                         </form>
                                     </div>

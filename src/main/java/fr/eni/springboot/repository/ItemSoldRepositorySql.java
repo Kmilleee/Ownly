@@ -178,12 +178,30 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
 
     @Override
     public List<ItemSold> readItemsByBetterSel() {
-        String sql = "SELECT TOP 4 a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, a.user_id as user_id, u.username as username, u.avatar as avatar, w.postalCode as postalCode, w.street as street,w.city as city \n" +
-                "FROM ItemSold a\n" +
-                "left JOIN CATEGORY c ON a.category_id = c.category_id\n" +
-                "left JOIN USERS u ON a.user_id = u.user_id\n" +
-                "LEFT JOIN WITHDRAWAL w ON a.article_id = w.article_id " +
-                "ORDER BY a.user_id DESC ";
+        String sql = "SELECT TOP 4" +
+      "  MAX(a.article_id) as article_id, " +
+       " MAX(a.rarity) as rarity, "+
+      "  MAX(a.articleName) as articleName, "+
+      "  MAX(a.startingPrice) as startingPrice, "+
+       " MAX(a.priceSale) as priceSale, "+
+       " MAX(a.auctionStartDate) as auctionStartDate, "+
+       " MAX(a.auctionEndDate) as auctionEndDate, "+
+        "MAX(a.description) as description, "+
+       " MAX(a.category_id) as category_id, "+
+        "MAX(a.image) as image, "+
+       " MAX(c.name) as name, "+
+      "  a.user_id, "+
+              "  u.username, "+
+               " u.avatar, "+
+                "MAX(w.postalCode) as postalCode, "+
+      "  MAX(w.street) as street, "+
+       " MAX(w.city) as city "+
+        "FROM ItemSold a "+
+        "LEFT JOIN CATEGORY c ON a.category_id = c.category_id "+
+        "LEFT JOIN USERS u ON a.user_id = u.user_id "+
+        "LEFT JOIN WITHDRAWAL w ON a.article_id = w.article_id "+
+        "GROUP BY a.user_id, u.username, u.avatar "+
+        "ORDER BY a.user_id DESC";
 
 
         return jdbcTemplate.query(sql, new ItemSoldRowMapper());
