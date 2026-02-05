@@ -101,6 +101,8 @@ public class UserController {
         model.addAttribute("activePage", "profile");
         User user2 = userService.readUserByUsername(principal.getName());
         model.addAttribute("mesAchats", itemSoldService.findItemsWonByUser(user2.getUser_id()));
+        model.addAttribute("mesAchatsEnCours", itemSoldService.findItemsInProgressByUser(user2.getUser_id()));
+
 
 
         User user = null;
@@ -148,6 +150,8 @@ public class UserController {
     @GetMapping("/profileOther")
     public String displayProfileOther(@RequestParam("id")long user_id, Model model, Authentication authentication) {
         model.addAttribute("activePage", "profile");
+        model.addAttribute("mesAchats", itemSoldService.findItemsWonByUser(user_id));
+        model.addAttribute("mesAchatsEnCours", itemSoldService.findItemsInProgressByUser(user_id));
 
         userService.readUserById(user_id);
 

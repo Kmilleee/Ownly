@@ -30,4 +30,6 @@ public interface ItemSoldRepository {
 
     @Transactional
     void deleteItemsBySellerId(long sellerId);
+
+    List<ItemSold> findItemsInProgressByUser(long userId);
 }

@@ -34,4 +34,6 @@ public interface ItemSoldService {
     List<ItemSold> readItemByCategory(String cat);
 
     List<ItemSold> findItemsWonByUser(long userId);
+
+    List<ItemSold> findItemsInProgressByUser(long userId);
 }
