@@ -249,9 +249,9 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
                 "i.user_id, i.category_id, i.description, i.startingPrice, i.rarity, " +
                 "c.name as name, u.username as username " +
                 "FROM ItemSold i " +
-                "INNER JOIN AUCTION a ON i.article_id = a.article_id " +
-                "INNER JOIN CATEGORY c ON i.category_id = c.category_id " +
-                "INNER JOIN USERS u ON i.user_id = u.user_id " +
+                "LEFT JOIN AUCTION a ON i.article_id = a.article_id " +
+                "LEFT JOIN CATEGORY c ON i.category_id = c.category_id " +
+                "LEFT JOIN USERS u ON i.user_id = u.user_id " +
                 "WHERE a.user_id = :userId " +
                 "AND i.auctionEndDate < GETDATE() " +
                 "AND a.auctionAmount = (" +

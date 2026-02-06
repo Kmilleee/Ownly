@@ -22,6 +22,8 @@ public class ItemSold {
     private Withdrawal withdrawal;
     private StatusSale status;
 
+
+
     public ItemSold(long id, String articleName, String description, LocalDateTime auctionStartDate, LocalDateTime auctionEndDate, Long startingPrice, Long priceSale, String image, Rarity rarity, User buyer, User seller, Category category, Withdrawal withdrawal, StatusSale status) {
         this.id = id;
         this.articleName = articleName;
