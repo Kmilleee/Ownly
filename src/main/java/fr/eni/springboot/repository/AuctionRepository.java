@@ -20,4 +20,6 @@ public interface AuctionRepository {
     void deleteAuctionsByUserId(long userId);
 
     void deleteAuctionsBySellerId(long sellerId);
+
+    void deleteAuctionsByItemId(long itemId);
 }

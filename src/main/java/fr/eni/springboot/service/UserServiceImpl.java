@@ -2,6 +2,7 @@ package fr.eni.springboot.service;
 
 import fr.eni.springboot.bo.Auction;
 import fr.eni.springboot.bo.ItemSold;
+import fr.eni.springboot.bo.StatusSale;
 import fr.eni.springboot.bo.User;
 import fr.eni.springboot.repository.AuctionRepository;
 import fr.eni.springboot.repository.ItemSoldRepository;
@@ -78,10 +79,29 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Transactional
     @Override
-    public void deleteUser(long user_id) {
-        dao.deleteUser(user_id);
+    public void deleteUser(long id) {
+        // 1. Récupérer les ventes de l'utilisateur
+        List<ItemSold> items = itemSoldRepository.readItemsBySeller(id);
 
+        for (ItemSold item : items) {
+            if (item.getStatus() == StatusSale.IN_PROGRESS) {
+                Auction bestAuction = auctionRepository.findBestAuctionByItemId(item.getId());
+                if (bestAuction != null) {
+                    User bidder = bestAuction.getBidder();
+                    bidder.setCredit(bidder.getCredit() + bestAuction.getAuctionAmount());
+                    dao.updateUser(bidder);
+                }
+            }
+
+            auctionRepository.deleteAuctionsByItemId(item.getId());        }
+
+        auctionRepository.deleteAuctionsByUserId(id);
+
+        itemSoldRepository.deleteItemsBySellerId(id);
+
+        dao.deleteUser(id);
     }
 
     @Override
@@ -116,15 +136,17 @@ public class UserServiceImpl implements UserService {
 
             //Pour toutes les ventes on récup le user qui a la meilleure enchère
             for (ItemSold itemSold : itemSoldList) {
-                Auction bestAuction = auctionRepository.findBestAuctionByItemId(itemSold.getId());
+                if (itemSold.getStatus() == StatusSale.IN_PROGRESS) {
+                    Auction bestAuction = auctionRepository.findBestAuctionByItemId(itemSold.getId());
 
-                if (bestAuction != null) {
-                    // On le rembourse
-                    User bidder = bestAuction.getBidder();
-                    bidder.setCredit(bidder.getCredit() + bestAuction.getAuctionAmount());
-                    dao.updateUser(bidder);
+                    if (bestAuction != null) {
+                        // On le rembourse
+                        User bidder = bestAuction.getBidder();
+                        bidder.setCredit(bidder.getCredit() + bestAuction.getAuctionAmount());
+                        dao.updateUser(bidder);
+                    }
+
                 }
-
             }
 
             //Et après on supprime (ventes et enchères)

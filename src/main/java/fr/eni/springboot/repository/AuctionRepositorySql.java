@@ -125,5 +125,11 @@ public class AuctionRepositorySql implements AuctionRepository {
         namedParameterJdbcTemplate.update(sql, params);
     }
 
+    @Override
+    public void deleteAuctionsByItemId(long itemId) {
+        String sql = "DELETE FROM AUCTION WHERE article_id = ?";
+        jdbcTemplate.update(sql, itemId);
+    }
+
 
 }

@@ -211,7 +211,7 @@ public class UserController {
     public String deleteUser(@RequestParam("id") long id) {
         userService.deleteUser(id);
 
-        return "redirect:/admin/all-users";
+        return "redirect:/user";
     }
 
     @PostMapping("/disable-user")
