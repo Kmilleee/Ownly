@@ -208,16 +208,10 @@ public class UserController {
     }
 
     @DeleteMapping("/deleteUser")
-    public String deleteUser(@RequestParam("id") long id, HttpServletRequest request) {
+    public String deleteUser(@RequestParam("id") long id) {
         userService.deleteUser(id);
 
-        SecurityContextHolder.clearContext();
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
-
-        return "redirect:/";
+        return "redirect:/admin/all-users";
     }
 
     @PostMapping("/disable-user")
