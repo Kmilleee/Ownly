@@ -109,36 +109,34 @@ public class SecurityConfiguration {
                             .requestMatchers("/.well-know/**").permitAll()
 
 
-                    /* *********************************************                     jusqu'à là */
-                    //donne à tous la permission sur la page d'accueil
-                    .requestMatchers("/*").permitAll()
-                    //donner acces au css
-                    .requestMatchers("/css/*").permitAll()
-                    //donner acces au image
-                    .requestMatchers("/img/*").permitAll()
+                            /* *********************************************                     jusqu'à là */
+                            //donne à tous la permission sur la page d'accueil
+                            .requestMatchers("/*").permitAll()
+                            //donner acces au css
+                            .requestMatchers("/css/*").permitAll()
+                            //donner acces au image
+                            .requestMatchers("/img/*").permitAll()
                             .requestMatchers("/img/**").permitAll()
-                    .requestMatchers("/images/**").permitAll()
-                    .requestMatchers("/js/**").permitAll()
-                    .requestMatchers("/font/**").permitAll()
-                    .requestMatchers("/itemsSold-photos/**").permitAll()
+                            .requestMatchers("/images/**").permitAll()
+                            .requestMatchers("/js/**").permitAll()
+                            .requestMatchers("/font/**").permitAll()
+                            .requestMatchers("/itemsSold-photos/**").permitAll()
                             .requestMatchers("/changeProfile/**").authenticated()
                             .requestMatchers("/changeProfile/**").authenticated()
-
-
-                    .requestMatchers("/admin/**").hasRole("ADMIN")
-                    .requestMatchers("/ventes/**").hasAnyRole("USER", "ADMIN")
+                            .requestMatchers("/admin/**").hasRole("ADMIN")
+                            .requestMatchers("/ventes/**").hasAnyRole("USER", "ADMIN")
                             .requestMatchers("/chercheCat").permitAll()
-                    .requestMatchers("/ventes/createSale").hasRole("ADMIN")
-                    .requestMatchers("/admin/addUser").hasRole("ADMIN")
-                    .requestMatchers("/admin/addWithdrawal").hasRole("ADMIN")
-                    .requestMatchers("/admin/admin").hasRole("ADMIN")
-                    .requestMatchers("/admin/createCat").hasRole("ADMIN")
-                    .requestMatchers("/admin/categoryList").hasRole("ADMIN")
+                            .requestMatchers("/ventes/createSale").hasRole("ADMIN")
+                            .requestMatchers("/admin/addUser").hasRole("ADMIN")
+                            .requestMatchers("/admin/addWithdrawal").hasRole("ADMIN")
+                            .requestMatchers("/admin/admin").hasRole("ADMIN")
+                            .requestMatchers("/admin/createCat").hasRole("ADMIN")
+                            .requestMatchers("/admin/categoryList").hasRole("ADMIN")
 
 
-                    //tous ce qui n'est pas spécifié n'est pas accessible
-                    .anyRequest().denyAll();
-        });
+                            //tous ce qui n'est pas spécifié n'est pas accessible
+                            .anyRequest().denyAll();
+                });
         //gestion automatique du login
         http.formLogin(withDefaults());
 

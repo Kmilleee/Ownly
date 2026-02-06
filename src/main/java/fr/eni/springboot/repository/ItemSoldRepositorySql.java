@@ -228,7 +228,11 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
 
     @Override
     public List<ItemSold> readItemByCategory(String cat) {
-        String sql = "SELECT a.article_id as article_id,rarity as rarity, a.articleName as articleName, a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image, c.name as name, a.user_id as user_id, u.username as username, u.avatar as avatar, w.postalCode as postalCode, w.street as street,w.city as city \n" +
+        String sql = "SELECT a.article_id as article_id,rarity as rarity, a.articleName as articleName, " +
+                "a.startingPrice as startingPrice, a.priceSale as priceSale, a.auctionStartDate as auctionStartDate, " +
+                "a.auctionEndDate as auctionEndDate, a.description as description,a.category_id as category_id, a.image as image," +
+                " c.name as name, a.user_id as user_id, u.username as username, u.avatar as avatar, w.postalCode as postalCode, " +
+                "w.street as street,w.city as city \n" +
                 "FROM ItemSold a\n" +
                 "left JOIN CATEGORY c ON a.category_id = c.category_id\n" +
                 "left JOIN USERS u ON a.user_id = u.user_id\n" +
@@ -249,9 +253,9 @@ public class ItemSoldRepositorySql implements ItemSoldRepository {
                 "i.user_id, i.category_id, i.description, i.startingPrice, i.rarity, " +
                 "c.name as name, u.username as username " +
                 "FROM ItemSold i " +
-                "INNER JOIN AUCTION a ON i.article_id = a.article_id " +
-                "INNER JOIN CATEGORY c ON i.category_id = c.category_id " +
-                "INNER JOIN USERS u ON i.user_id = u.user_id " +
+                "LEFT JOIN AUCTION a ON i.article_id = a.article_id " +
+                "LEFT JOIN CATEGORY c ON i.category_id = c.category_id " +
+                "LEFT JOIN USERS u ON i.user_id = u.user_id " +
                 "WHERE a.user_id = :userId " +
                 "AND i.auctionEndDate < GETDATE() " +
                 "AND a.auctionAmount = (" +

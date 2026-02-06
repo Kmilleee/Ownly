@@ -23,7 +23,6 @@ public class UserRepositorySql implements UserRepository {
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 
-
     public UserRepositorySql(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
@@ -38,7 +37,7 @@ public class UserRepositorySql implements UserRepository {
         String sql = "INSERT INTO USERS (username, lastName, firstName, email, numPhone, street, postalCode, city,password,credit,admin, active) values(:username,:lastName,:firstName,:email,:numPhone,:street,:postalCode,:city,:password,:credit,:admin,:active)";
 
 
-        if("jermie".equalsIgnoreCase(user.getFirstName())){
+        if ("jermie".equalsIgnoreCase(user.getFirstName())) {
             throw new TestException("impossible que le nom soit jeremie");
         }
 
@@ -66,7 +65,7 @@ public class UserRepositorySql implements UserRepository {
     public List<User> readUser() {
         String sql = "SELECT user_id, username, lastname, firstname, email, numPhone, street, postalCode, city,password,credit,admin, active, avatar from USERS";
 
-       return jdbcTemplate.query(sql, new UtilisateurRowMapper());
+        return jdbcTemplate.query(sql, new UtilisateurRowMapper());
     }
 
     @Override
@@ -74,17 +73,16 @@ public class UserRepositorySql implements UserRepository {
         String sql = "SELECT user_id, username, lastname, firstname, email, numPhone, street, postalCode, city,password,credit,admin, active, avatar from USERS where user_id=:user_id";
 
         MapSqlParameterSource map = new MapSqlParameterSource();
-        map.addValue("user_id",user_id);
+        map.addValue("user_id", user_id);
 
 
-
-        return namedParameterJdbcTemplate.queryForObject(sql,map, new UtilisateurRowMapper());
+        return namedParameterJdbcTemplate.queryForObject(sql, map, new UtilisateurRowMapper());
     }
 
     @Override
-    public void updateUser(User user){
+    public void updateUser(User user) {
 
-        String sql =" update users set username=:username, lastName=:LastName, firstName=:firstName, email=:email, numPhone=:numPhone, street=:street, postalCode=:postalCode, city=:city,password=:password, active=:active where user_id=:user_id";
+        String sql = " update users set username=:username, lastName=:LastName, firstName=:firstName, email=:email, numPhone=:numPhone, street=:street, postalCode=:postalCode, city=:city,password=:password, active=:active where user_id=:user_id";
 
         BeanPropertySqlParameterSource map = new BeanPropertySqlParameterSource(user);
 
@@ -107,7 +105,7 @@ public class UserRepositorySql implements UserRepository {
 
     @Override
     @Transactional
-    public void deleteUser(long user_id){
+    public void deleteUser(long user_id) {
         String sql = "delete from USERS where user_id=:user_id";
 
         MapSqlParameterSource map = new MapSqlParameterSource();
@@ -137,18 +135,19 @@ public class UserRepositorySql implements UserRepository {
     @Override
     public User findByEmail(String email) {
 
-            String sql = "SELECT * FROM USERS WHERE email = :email";
+        String sql = "SELECT * FROM USERS WHERE email = :email";
 
-            MapSqlParameterSource map = new MapSqlParameterSource();
-            map.addValue("email", email);
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("email", email);
 
-            try {
-                return namedParameterJdbcTemplate.queryForObject(sql,map, new BeanPropertyRowMapper<>(User.class));
-            } catch (EmptyResultDataAccessException e) {
-                return null;
-            }
+        try {
+            return namedParameterJdbcTemplate.queryForObject(sql, map, new BeanPropertyRowMapper<>(User.class));
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
 
     }
+
     @Override
     public void updatePassword(String email, String encodedPassword) {
         String sql = "UPDATE USERS SET password = :password WHERE email = :email";
@@ -158,7 +157,7 @@ public class UserRepositorySql implements UserRepository {
         map.addValue("email", email);
 
 
-        namedParameterJdbcTemplate.update(sql,map);
+        namedParameterJdbcTemplate.update(sql, map);
     }
 
     @Override
@@ -169,7 +168,7 @@ public class UserRepositorySql implements UserRepository {
         map.addValue("avatar", imageName);
         map.addValue("user_id", userId);
 
-        namedParameterJdbcTemplate.update(sql,map);
+        namedParameterJdbcTemplate.update(sql, map);
     }
 
     @Override
