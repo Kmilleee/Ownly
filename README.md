@@ -1,7 +1,7 @@
 # OWNLY - Plateforme d'Enchères de Figurines 
 
 
-**OWNLY** est une application web d'enchères spécialisée dans l'achat et la vente de cartes de collection de figurines (**FIGZ**).
+**OWNLY** est une application web d'enchères spécialisée dans l'achat et la vente de cartes de collection de figurines.
 
 Ce projet a été réalisé dans le cadre de ma formation **Développeur Web et Web Mobile (DWWM)** à l'**ENI École Informatique**. L'objectif était de concevoir une solution complète, du backend robuste au frontend responsive, permettant aux utilisateurs d'acquérir des objets de collection uniques via un système de crédits.
 
