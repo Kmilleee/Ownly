@@ -7,6 +7,31 @@ Ce projet a été réalisé dans le cadre de ma formation **Développeur Web et 
 
 ---
 
+## 🚀 Installation et Lancement
+
+### 1. Prérequis
+* **Java 17** ou supérieur.
+* Un serveur de base de données (SQL Server par défaut).
+
+### 2. Configuration
+Pour des raisons de sécurité, le fichier `src/main/resources/application.properties` contient des valeurs génériques sur ce dépôt.
+1. Localisez le fichier `application.properties`.
+2. Remplacez les balises `[VOTRE_...]` par vos propres identifiants (Base de données, Google OAuth2, SMTP Gmail).
+
+### 3. Build et Dépendances
+Avant de lancer, téléchargez les bibliothèques et compilez le projet :
+```bash
+./gradlew build
+```
+
+### 4. Lancer l'application
+* **Via IntelliJ (Recommandé) :** Ouvrez le projet, laissez Gradle importer les dépendances et lancez la classe `OwnlyApplication`.
+* **Via le Terminal :** Exécutez `./gradlew bootRun` (nécessite Java 17 configuré dans votre terminal).
+
+L'application sera disponible sur `http://localhost:8080`.
+
+---
+
 ## Fonctionnalités Clés
 
 ### Pour les Utilisateurs
